@@ -16,7 +16,7 @@ NEVENTS=100100
 # XF="rfast106"
 # DIR=/netapp/data/hepsim/events/pp/13tev/pythia8_qcd_jz/JZ7/$XF
 
-XF="rfast006"
+XF="rfast004"
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 
 # remove all ANN files if you start a new ANN training
@@ -30,7 +30,7 @@ mv Analysis.root out_root/$XF.root
 cp -r out_ann out_ann_$XF
 
 
-XF="rfast004"
+XF="rfast006"
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 # remove all ANN files if you start a new ANN training
 rm -f out_ann/*

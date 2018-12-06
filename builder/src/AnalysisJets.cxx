@@ -140,35 +140,20 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
 					float ptIN=(((eeT-ptT)/width)-1);
 
-					/*
-					float norm=(1.0/DeltaR);
-					float ptOUT=(pt/ptT)-0.5; // center at 0.5; Lost: 0
-					float etaOUT=(norm*(eta/etaT) + 0.5 - norm);
-					float phiOUT=(norm*(phi/phiT) + 0.5 - norm);
-					float eeOUT=(ee/eeT)-0.5;
-					*/
-
-					//float ptOUT=abs(pt-ptT)/dmin;
 					// assume -1 - 1 range.
 					// scale to avoid sharp behaviour near 0
-					//float norm=(4.0/DeltaR);
-
 					// for pileup we make the distribution narrower and shift to -0.5 to fit to [-1,1]
-					double escale=1.0;
-					double eshift=0.0;
-					if (MuPileup>100) {escale=0.5; eshift=-0.5;}
-
-					float ptOUT= escale*((pt/ptT)-1) + eshift;
+					float ptOUT= jet_escale*((pt/ptT)-1) + jet_eshift;
 					//float etaOUT=norm*(eta-etaT);
 					float etaOUT=0;
 					// make broader rescale for a better efficiency for -1 and 1 range
-					if (etaT !=0) etaOUT=2*abs(eta/etaT)-2.0;
+					if (etaT !=0) etaOUT=jet_etascale*(abs(eta/etaT)-1) + jet_etashift;
 					//float phiOUT=norm*(phi-phiT);
 					float  phiOUT=0;
-					if (phiT !=0) phiOUT=2*abs(phi/phiT)-2.0;
+					if (phiT !=0) phiOUT=jet_etascale*(abs(phi/phiT)-1) +  jet_etashift; 
 					//float eeOUT=abs(ee-eeT)/dmax;
 					// shrink pT (important for pileup!)
-					float eeOUT=escale*((ee/eeT) -1) + eshift;
+					float eeOUT=jet_escale*((ee/eeT) -1) + jet_escale;
 					//float shiftOUT=0.0f;
 					//if (ee-eeT>0) shiftOUT=1.0f; // gain or positive shift
 

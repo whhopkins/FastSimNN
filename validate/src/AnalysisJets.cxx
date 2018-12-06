@@ -157,11 +157,6 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				if (prob_efficiency<-0.5) continue; // skip event since low efficiency
 
 
-				double escale=1.0;
-				double eshift=0.0;
-			        if (MuPileup>100) {escale=0.5; eshift=-0.5;}
-
-
 				double scale=0;
 				// output of NN can have negaive values. So we add scale to fix those.
 				int freqPT[nBinsNN];
@@ -176,8 +171,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				// this bin defines PT(reco)/PT(true)
 				// take into account 0.25 in the ratio when created ratio -> 4 factor
 				double recoOvertrue=-1+BinSelected*delta;
-				//double ptcor=( (1/escale)*recoOvertrue +1);
-				double ptcor= ( (recoOvertrue - eshift)/escale ) +1;
+				double ptcor= ( (recoOvertrue - jet_eshift)/jet_escale )+1.0;
 				pt =  ptT *ptcor; // gain
 				//cout << "true=" << ptT << " reco=" << pt <<  " Corr=" << ptcor << " selected bin=" << BinSelected << endl;
 				h_ptcor->Fill( ptcor );
@@ -200,14 +194,13 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				for (int jjj=0; jjj<nBinsNN; jjj++) freqETA[jjj]=int((scale+output[jjj+nBinsNN])*intmove);
 				BinSelected=myRand(BinOverTrue, freqETA, nBinsNN); // select random value (bin) assuming frequencies
 				recoOvertrue=-1+BinSelected*delta;
-				double etacor=(0.5*recoOvertrue +1);
+                                double etacor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_etacor->Fill( etacor );
-				eta =  etaT * etacor; // gain. Factor 0.5 is due to factor 2 used to buld the ratio in training
+				eta =  etaT * etacor; 
 				int iii=0;
 				for (int jjj=nBinsNN; jjj<2*nBinsNN; jjj++) {
 					double d1=-1.0+iii*delta;
 					//double d2=-1.0+(iii+1)*delta;
-					//if (ptIN>d1 && ptIN<d2) ptout[jjj]= output[jjj];
 					//cout << iii << " " << output[jjj] << endl;
 					h_out2->Fill( d1+delta, output[jjj]);
 					iii++;
@@ -218,14 +211,13 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				for (int jjj=0; jjj<nBinsNN; jjj++) freqPHI[jjj]=int( (scale+output[jjj+2*nBinsNN])*intmove);
 				BinSelected=myRand(BinOverTrue, freqPHI, nBinsNN); // select random value (bin) assuming frequencies
 				recoOvertrue=-1+BinSelected*delta;
-				double phicor=(0.5*recoOvertrue +1);
+				double phicor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_phicor->Fill( phicor );
-				phi =  phiT * phicor; // gain. Factor 0.5 is due to factor 2 used to buld the ratio in training
+				phi =  phiT * phicor; 
 				iii=0;
 				for (int jjj=2*nBinsNN; jjj<3*nBinsNN; jjj++) {
 					double d1=-1.0+iii*delta;
 					//double d2=-1.0+(iii+1)*delta;
-					//if (ptIN>d1 && ptIN<d2) ptout[jjj]= output[jjj];
 					//cout << iii << " " << output[jjj] << endl;
 					h_out3->Fill( d1+delta, output[jjj]);
 					iii++;
@@ -238,21 +230,17 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				for (int jjj=0; jjj<nBinsNN; jjj++) freqE[jjj]=int( (scale+output[jjj+3*nBinsNN])*intmove);
 				BinSelected=myRand(BinOverTrue, freqE, nBinsNN); // select random value (bin) assuming frequencies
 				recoOvertrue=-1+BinSelected*delta;
-
 				// correction
-				double ecorr=( (recoOvertrue - eshift)/escale ) +1;
-
+				double ecorr=( (recoOvertrue -  jet_eshift)/jet_escale ) +1;
 				ee =  eeT * ecorr; // gain
 				iii=0;
 				for (int jjj=3*nBinsNN; jjj<4*nBinsNN; jjj++) {
 					double d1=-1.0+iii*delta;
 					//double d2=-1.0+(iii+1)*delta;
-					//if (ptIN>d1 && ptIN<d2) ptout[jjj]= output[jjj];
 					//cout << iii << " " << output[jjj] << endl;
 					h_out4->Fill( d1+delta, output[jjj]);
 					iii++;
 				}
-
 
 
 				h_in1->Fill(ptIN);

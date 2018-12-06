@@ -111,16 +111,16 @@ Int_t Ana::Init() {
 	h_dR = new TH1D("jet_dR", "truth-jet distance", 500, 0, 7);
 
 
-	h_in1 = new TH1D("in1", "in1", 140, -1.2, 1.2);
-	h_in2 = new TH1D("in2", "in2", 140, -1.2, 1.2);
-	h_in3 = new TH1D("in3", "in3", 140, -1.2, 1.2);
-	h_in4 = new TH1D("in4", "in4", 140, -1.2, 1.2);
+	h_in1 = new TH1D("in1", "in1", nBinsNN, -1.2, 1.2);
+	h_in2 = new TH1D("in2", "in2", nBinsNN, -1.2, 1.2);
+	h_in3 = new TH1D("in3", "in3", nBinsNN, -1.2, 1.2);
+	h_in4 = new TH1D("in4", "in4", nBinsNN, -1.2, 1.2);
 
-	h_out1 = new TH1D("out1", "out1", 140, -1.2, 1.2);
-	h_out2 = new TH1D("out2", "out2", 140, -1.2, 1.2);
-	h_out3 = new TH1D("out3", "out3", 140, -1.2, 1.2);
-	h_out4 = new TH1D("out4", "out4", 140, -1.2, 1.2);
-	h_out5 = new TH1D("out5_eff", "out5_eff", 140, -1.2, 1.2);
+	h_out1 = new TH1D("out1", "out1", nBinsNN, -1.2, 1.2);
+	h_out2 = new TH1D("out2", "out2", nBinsNN, -1.2, 1.2);
+	h_out3 = new TH1D("out3", "out3", nBinsNN, -1.2, 1.2);
+	h_out4 = new TH1D("out4", "out4", nBinsNN, -1.2, 1.2);
+	h_out5 = new TH1D("out5_eff", "out5_eff", nBinsNN, -1.2, 1.2);
 
 
 
@@ -158,6 +158,24 @@ Int_t Ana::Init() {
 	for (unsigned int i=0; i<ntup.size(); i++) {
 		cout << i << " file to analyse="+ntup[i] << endl;
 	}
+
+
+
+
+      // energy and eta scaling factors 
+      jet_escale=1.5;
+      jet_eshift=0.0;
+      jet_etascale=2.0;
+      jet_etashift=0.0;
+      if (MuPileup>100) { // shrink to fit to -1 - 1 
+                          jet_escale=0.5;
+                          jet_eshift=-0.5;
+                          jet_etascale=2.0;
+                          jet_etashift=0.0;
+                         }
+
+
+
 
 
 	return 0;

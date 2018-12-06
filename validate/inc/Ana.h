@@ -72,6 +72,11 @@ class Ana  {
    struct fann **ann_jets_eff;
    string *ann_jets_name;
    string *ann_jets_eff_name;
+   // to deal with scale extensions
+   float jet_escale;
+   float jet_eshift;
+   float jet_etascale;
+   float jet_etashift;
 
    
    int *BinOverTrue; // bins for reco/true distributions 

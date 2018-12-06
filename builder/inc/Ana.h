@@ -53,7 +53,7 @@ class Ana  {
    static const int num_threads = 16; // number of threads 
    static const int nBins=16;
    static const int nBatch=100000;  // number of events in batches for training
-   static const int nEpoch=100;    // max number of epochs 
+   static const int nEpoch=200;    // max number of epochs 
    static const int nBinsNN=400;   // number of bins for resolution plots
    static const int MinEntries=10; // min nr of entries in pT for NN training (per bunch);
 
@@ -83,6 +83,11 @@ class Ana  {
    string ann_jets_name[nBins-1];
    struct fann *ann_jets_eff[nBins-1];
    string ann_jets_eff_name[nBins-1];
+   // to deal with scale extensions
+   float jet_escale;
+   float jet_eshift;
+   float jet_etascale;
+   float jet_etashift;
 
    static const int num_layers = 3;
    //number in hidden layer 1

@@ -49,10 +49,14 @@ Int_t Ana::Init() {
 	}
 
 	Setting &njets = root["Jets"];
-	if (!(njets.lookupValue("JetEnergyBinsNr", nBins)
-	                && njets.lookupValue("JetMinPT", minPT)
-	                && njets.lookupValue("JetMaxEta", maxEta)
-	                && njets.lookupValue("JetEnergyBinsForResolution", nBinsNN))
+	if (!(njets.lookupValue("EnergyBinsNr", nBins)
+	                && njets.lookupValue("MinPT", minPT)
+	                && njets.lookupValue("MaxEta", maxEta)
+	                && njets.lookupValue("EnergyBinsForResolution", nBinsNN)
+                        && njets.lookupValue("EnergyScale",jet_escale)
+                        && njets.lookupValue("EnergyShift",jet_eshift)
+                        && njets.lookupValue("EtaScale",jet_etascale)
+                        && njets.lookupValue("EtaShift",jet_etashift))
 
 	   ) {
 		cout << "Error: some values are not in Jet configuration!" << endl;
@@ -61,7 +65,7 @@ Int_t Ana::Init() {
 
 
 	eBins = new double[nBinsNN];
-	const Setting &bin_settings = njets.lookup("JetEnergyBins");
+	const Setting &bin_settings = njets.lookup("EnergyBins");
 	for (unsigned int n = 0; n < bin_settings.getLength(); ++n) eBins[n]=bin_settings[n];
 	if (bin_settings.getLength() != (unsigned int)nBins) {
 		cout << "getLength() =" << bin_settings.getLength() << "  nBinsNN=" << nBins << endl;

@@ -44,11 +44,16 @@ Int_t Ana::Finish() {
 
    // configuration for jets
    Setting &njet = root.add("Jets", Setting::TypeGroup);
-   njet.add("JetMinPT", Setting::TypeFloat) = minPT;
-   njet.add("JetMaxEta", Setting::TypeFloat) = maxEta;
-   njet.add("JetEnergyBinsForResolution", Setting::TypeInt) = nBinsNN;
-   njet.add("JetEnergyBinsNr", Setting::TypeInt) = nBins;
-   Setting &array = njet.add("JetEnergyBins", Setting::TypeArray);
+   njet.add("MinPT", Setting::TypeFloat) = minPT;
+   njet.add("MaxEta", Setting::TypeFloat) = maxEta;
+   njet.add("EnergyBinsForResolution", Setting::TypeInt) = nBinsNN;
+   njet.add("EnergyBinsNr", Setting::TypeInt) = nBins;
+   njet.add("EnergyScale", Setting::TypeFloat) = jet_escale;
+   njet.add("EnergyShift", Setting::TypeFloat) = jet_eshift;
+   njet.add("EtaScale", Setting::TypeFloat) = jet_etascale;
+   njet.add("EtaShift", Setting::TypeFloat) = jet_etashift;
+   // bins
+   Setting &array = njet.add("EnergyBins", Setting::TypeArray);
    for(int i = 0; i <  nBins; ++i) array.add(Setting::TypeFloat) = eBins[i]; 
 
     
