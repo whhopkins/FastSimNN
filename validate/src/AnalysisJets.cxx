@@ -16,7 +16,11 @@ int findCeil(int  arr[], int r, int l, int h)
 		mid = l + ((h - l) >> 1); // Same as mid = (l+h)/2
 		(r > arr[mid]) ? (l = mid + 1) : (h = mid);
 	}
-	return (arr[l] >= r) ? l : -1;
+        int va=(arr[l] >= r) ? l : -1;
+        // if negative, assume no correction (center) 
+        if (va<0) va=(int)(h/2.0);
+        return va;
+
 }
 
 // The main function that returns a random number from arr[] according to
@@ -31,11 +35,15 @@ int myRand(int arr[], int freq[], int n)
 
 	// prefix[n-1] is sum of all frequencies. Generate a random number
 	// with value from 1 to this sum
-	int r = (rand() % prefix[n - 1]) + 1;
+        if (prefix[n - 1] != 0) {
+	    int r = (rand() % prefix[n - 1]) + 1;
+	    // Find index of ceiling of r in prefix arrat
+	     int indexc = findCeil(prefix, r, 0, n - 1);
+	    return arr[indexc];
+       } 
 
-	// Find index of ceiling of r in prefix arrat
-	int indexc = findCeil(prefix, r, 0, n - 1);
-	return arr[indexc];
+        return (int)(n/2.0); // assume no correction when error 
+          
 }
 
 
@@ -69,7 +77,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 
 	// fill RECO jets
-	for(int j = 0; j<JetsReco.size(); j++){
+	for(unsigned int j = 0; j<JetsReco.size(); j++){
 		LParticle tjet = (LParticle)JetsReco.at(j);
 		TLorentzVector L2 = tjet.GetP();
 		double phi = L2.Phi();
@@ -85,7 +93,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 	}
 
 
-	for(int j = 0; j<JetsTrue.size(); j++){
+	for(unsigned int j = 0; j<JetsTrue.size(); j++){
 		LParticle tjet = (LParticle)JetsTrue.at(j);
 		TLorentzVector L2 = tjet.GetP();
 

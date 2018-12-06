@@ -62,8 +62,8 @@ Int_t Ana::Init() {
 
 	eBins = new double[nBinsNN];
 	const Setting &bin_settings = njets.lookup("JetEnergyBins");
-	for (int n = 0; n < bin_settings.getLength(); ++n) eBins[n]=bin_settings[n];
-	if (bin_settings.getLength() != nBins) {
+	for (unsigned int n = 0; n < bin_settings.getLength(); ++n) eBins[n]=bin_settings[n];
+	if (bin_settings.getLength() != (unsigned int)nBins) {
 		cout << "getLength() =" << bin_settings.getLength() << "  nBinsNN=" << nBins << endl;
 		cout << "Error: Bin sizes for jets cannot be read!" << endl;
 		exit(0);
@@ -85,7 +85,7 @@ Int_t Ana::Init() {
 	BinOverTrue = new int[nBinsNN];
 	ann_jets = new fann*[nBinsNN-1];
 	ann_jets_eff = new fann*[nBinsNN-1];
-	for (unsigned int jjj=0; jjj<nBinsNN; jjj++) BinOverTrue[jjj]=jjj;
+	for (int jjj=0; jjj<nBinsNN; jjj++) BinOverTrue[jjj]=jjj;
 
 	//eBins = new double[nBins];
 	for (int m=0; m<nBins; m++){
