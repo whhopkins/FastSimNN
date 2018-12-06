@@ -1,0 +1,8 @@
+*~
+*.o
+main
+*list*root
+*.log 
+*_dict*
+
+
