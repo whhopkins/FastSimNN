@@ -1,7 +1,8 @@
+analysis
+*.net
 *~
 *.o
-main
-*list*root
+*.root
 *.log 
 *_dict*
 
