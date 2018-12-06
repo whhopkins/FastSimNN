@@ -51,9 +51,9 @@ class Ana  {
 
    int  MuPileup; // number of pileup (mu)
    static const int nBins=16;
-   static const int nBatch=50000; // number of events in batches for training
-   static const int nEpoch=100; // max number of epochs 
-   static const int nBinsNN=100;  // number of bins for resolution plots
+   static const int nBatch=50000;  // number of events in batches for training
+   static const int nEpoch=100;    // max number of epochs 
+   static const int nBinsNN=200;   // number of bins for resolution plots
    static const int MinEntries=10; // min nr of entries in pT for NN training (per bunch);
 
    double DeltaR;  // parameter used to match true jets with reco
@@ -106,7 +106,6 @@ protected:
    TH1D *h_out2;
    TH1D *h_out3;
    TH1D *h_out4;
-
    TH1D *h_out5;
 
    string ffile; 
