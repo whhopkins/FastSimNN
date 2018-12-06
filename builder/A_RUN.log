@@ -1,0 +1,3684 @@
+/users/chekanov/work/FastSim4ATLAS/delphes/FastNNdelphes/builder
+Setting up FastHepSim..
+ln: failed to create symbolic link ‘delphes/delphes’: File exists
+Clear..
+Generating dictionary for CParticle
+Generating dictionary for LParticle
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o analysis.o -c analysis.cxx
+analysis.cxx: In function ‘int main(int, char**)’:
+analysis.cxx:103:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(unsigned int m=0; m < Nfiles; m++){
+                            ^
+analysis.cxx:118:17: warning: unused variable ‘branchElectron’ [-Wunused-variable]
+   TClonesArray *branchElectron = treeReader->UseBranch("Electron");
+                 ^
+analysis.cxx:76:7: warning: unused variable ‘appName’ [-Wunused-variable]
+  char appName[] = "analysis";
+       ^
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/Ana.o -c src/Ana.cxx
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/AnalysisEnd.o -c src/AnalysisEnd.cxx
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/CParticle.o -c src/CParticle.cxx
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/CParticle_dict.o -c src/CParticle_dict.cxx
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/Finish.o -c src/Finish.cxx
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/Init.o -c src/Init.cxx
+src/Init.cxx: In member function ‘Int_t Ana::Init()’:
+src/Init.cxx:25:14: warning: unused variable ‘nxBins’ [-Wunused-variable]
+    const int nxBins=sizeof(xBins)/sizeof(double);
+              ^
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/LParticle.o -c src/LParticle.cxx
+c++ -O -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -pthread -std=c++11 -m64 -I/users/admin/share/sl7/root/include -I./inc -I. -I../../Processing/delphes -I../../Processing/delphes/external -I./src -I./fann/src//include -I../lib/libconfig/lib  -o src/LParticle_dict.o -c src/LParticle_dict.cxx
+c++ -O2 -m64 analysis.o src/Ana.o src/AnalysisEnd.o src/CParticle.o src/CParticle_dict.o src/Finish.o src/Init.o src/LParticle.o src/LParticle_dict.o -L/users/admin/share/sl7/root/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -lm -ldl -rdynamic  -L/users/admin/share/sl7/root/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -lm -ldl -rdynamic -lEG -Wl,-rpath,../../Processing/delphes -L../../Processing/delphes -lDelphes -L./fann/src//  -lfloatfann -lfixedfann -ldoublefann -lfann -L../lib/libconfig/lib/.libs -lconfig -lconfig++  -o analysis
+Generate files from:  /netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/
+data.in is done!
+Run rfast006
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTreeReader.h
+   requested to autoload type ExRootTreeReader
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTreeWriter.h
+   requested to autoload type ExRootTreeWriter
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTreeBranch.h
+   requested to autoload type ExRootTreeBranch
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootResult.h
+   requested to autoload type ExRootResult
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootClassifier.h
+   requested to autoload type ExRootClassifier
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootFilter.h
+   requested to autoload type ExRootFilter
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootProgressBar.h
+   requested to autoload type ExRootProgressBar
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootConfReader.h
+   requested to autoload type ExRootConfParam
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootConfReader.h
+   requested to autoload type ExRootConfReader
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTask.h
+   requested to autoload type ExRootTask
+Error in <TCling::RegisterModule>: cannot find dictionary module CParticle_dict_rdict.pcm
+Error in <TCling::RegisterModule>: cannot find dictionary module LParticle_dict_rdict.pcm
+ ###  Initialize ANN in Nr bins=15
+   - Create new ANN Nr out_ann/ann_jet_0.net
+   - Create new ANN Nr out_ann/ann_jet_1.net
+   - Create new ANN Nr out_ann/ann_jet_2.net
+   - Create new ANN Nr out_ann/ann_jet_3.net
+   - Create new ANN Nr out_ann/ann_jet_4.net
+   - Create new ANN Nr out_ann/ann_jet_5.net
+   - Create new ANN Nr out_ann/ann_jet_6.net
+   - Create new ANN Nr out_ann/ann_jet_7.net
+   - Create new ANN Nr out_ann/ann_jet_8.net
+   - Create new ANN Nr out_ann/ann_jet_9.net
+   - Create new ANN Nr out_ann/ann_jet_10.net
+   - Create new ANN Nr out_ann/ann_jet_11.net
+   - Create new ANN Nr out_ann/ann_jet_12.net
+   - Create new ANN Nr out_ann/ann_jet_13.net
+   - Create new ANN Nr out_ann/ann_jet_14.net
+# Structure this ANN
+Layer / Neuron 0123456789012345678901234567890123456789012345
+L   1 / N    5 BBBAb.........................................
+L   1 / N    6 AaBBb.........................................
+L   1 / N    7 AAAaa.........................................
+L   1 / N    8 AbaAa.........................................
+L   1 / N    9 AAAbB.........................................
+L   1 / N   10 bBbaa.........................................
+L   1 / N   11 babbB.........................................
+L   1 / N   12 bBabA.........................................
+L   1 / N   13 aAabb.........................................
+L   1 / N   14 AAaba.........................................
+L   1 / N   15 AABaA.........................................
+L   1 / N   16 BaABB.........................................
+L   1 / N   17 bbbbb.........................................
+L   1 / N   18 baBaA.........................................
+L   1 / N   19 aAaBA.........................................
+L   1 / N   20 aAaAA.........................................
+L   1 / N   21 BabAB.........................................
+L   1 / N   22 Baaaa.........................................
+L   1 / N   23 baabA.........................................
+L   1 / N   24 aabaA.........................................
+L   1 / N   25 ABbBA.........................................
+L   1 / N   26 BabaB.........................................
+L   1 / N   27 AbbBB.........................................
+L   1 / N   28 bAaab.........................................
+L   1 / N   29 AaabA.........................................
+L   1 / N   30 bABaB.........................................
+L   1 / N   31 aBBAB.........................................
+L   1 / N   32 aAbAB.........................................
+L   1 / N   33 bbBaB.........................................
+L   1 / N   34 BaAbA.........................................
+L   1 / N   35 ABBbB.........................................
+L   1 / N   36 AbaAa.........................................
+L   1 / N   37 aBabA.........................................
+L   1 / N   38 aAbab.........................................
+L   1 / N   39 BAaBB.........................................
+L   1 / N   40 bAbBA.........................................
+L   1 / N   41 AaaAa.........................................
+L   1 / N   42 aaABB.........................................
+L   1 / N   43 bbBaa.........................................
+L   1 / N   44 aAbab.........................................
+L   1 / N   45 ..............................................
+L   2 / N   46 .....baAabaABAaAaBBBbaaBbbBaBbBbBBABBbAabbBbAa
+L   2 / N   47 .....AbbABaBabbaBaaBaaAbbAbbaaaaaabAbbAAbBaaBa
+L   2 / N   48 .....BBBbAbAaaBbaBaBaBbBbBBaaaAaBbaaBbabBAAbBa
+L   2 / N   49 .....aaaBbBAbABbabaBBBBbabbAabaBBABaBbBAbAaaba
+L   2 / N   50 .....aAABAaBaabaaABAbBaBABBAAAAbbbaaabBbAbBbAb
+L   2 / N   51 .....aBBaAbbBBBAAababaabAAAAaBaABabBBbAaABAAAa
+L   2 / N   52 .....baBaABBBbAaBaBAAaabAbBABbaAABabbABAaBabbB
+L   2 / N   53 .....ABbAaBbABABAbABAaAaAAAaAbAaABaaAbAbAabbbB
+L   2 / N   54 .....BBbABABabAbBBABabAaAbbBAaabaaaaabaBBBAabb
+L   2 / N   55 .....ABbaBAAaBbaBBbbabAAabBAaBAaAbaBAaBBbaaAaA
+L   2 / N   56 .....BaabAAbbaAbabAbABBAaAaAaaBBAabbaaAaBaAbBa
+L   2 / N   57 .....aaaBAbBaBbBaBaABbbabaAAbbAABAAbbBABaABBAb
+L   2 / N   58 .....ABbBaBbAbabBBaBabBbABaAaabbbBBbABbAabAbbB
+L   2 / N   59 .....aBBABaAAAaABBbbBabBaaabABaAAABABBaaBAbabA
+L   2 / N   60 .....bbAabaAaaBBAbAAAbbbbABBbaABAbBbaBAAbbaAaa
+L   2 / N   61 .....abaBABbBbaAbbBABAabaaAabbAaabBAABbaAbAAbB
+L   2 / N   62 .....aabbBbAbabABABBaaaAbbbbbABbbAabBBbbAaBBAB
+L   2 / N   63 .....AaAAaBBBabBAabbbaaBAaAAABbBAbaaBBbabBbBaa
+L   2 / N   64 .....BBABBAbbABAbabBAbABABAabBABbaaaabBbbAaabb
+L   2 / N   65 .....baAbaaaBbBBBaBBBBBabaAaaBAbbBaabBbbbaAbAa
+L   2 / N   66 .....bAABaABaBBBAabaBaaBBABAAbBbBBBbbaBBAaBbaB
+L   2 / N   67 .....BBbbbbAababbBBbBBbBBbBbbBBAABbaBBabbAAAAB
+L   2 / N   68 .....AABABAABaabaaabbBAbBBbBabBBAaAAbaaAabaaAA
+L   2 / N   69 .....aBBBBbAaaAaaAAaAAbbbAbAbBBabbBAABAaABbbbA
+L   2 / N   70 .....AaabBBBBBbabAAbaBbABBbAAabaaaAbBBabBabAbb
+L   2 / N   71 .....baBAaaAABaaBBbbbaAAbAAbbABaAAABABAabBbABa
+L   2 / N   72 .....bAabBAAabAbAAbaaabBBbABBbBBbAAaAaBBbAaABb
+L   2 / N   73 .....AAABBbbbbbaBBbBBBBaAabBaBBBaAAaabBbbbabaA
+L   2 / N   74 .....abaABaaABBbBAaBAbbaAaAAaAAaBBAaaBBBAaaaba
+L   2 / N   75 .....aBbABBABbabAbabBBbAAAbaabBAaaBBABBbAABaAb
+L   2 / N   76 .....aabBABAAAabAAABAbaBbbaBBAaAABaAbABbbBBBab
+L   2 / N   77 .....BbAaBbAbbAaAAaabBBBaAbbababBbABbBaAAAbBBB
+L   2 / N   78 .....aaaAAAAaaBbabaaAAaAabBbAaBaABbAbAbAbAbABb
+L   2 / N   79 .....AbabABBbAbbabBBbaaBabBbbAbABBAbABaAabaABA
+L   2 / N   80 .....AbBAbBBAAaAAaAbAaBABBbBbBaaaBbBAaBbaAbBbA
+L   2 / N   81 .....aAbbBBAAaAaAaAAAbBabBBAAbBabBaBabBABAbABA
+L   2 / N   82 .....BAbAbAAbbBbBaAbabababaABBAabbaBbBBAbAabAa
+L   2 / N   83 .....bABBAbBBaaBBBBBAbbAABAAAaAaBABaBabBbaABBb
+L   2 / N   84 .....BAbAAABAbAaBbbaAabaaaaAAbAbBABBaABbbAbBBA
+L   2 / N   85 .....aBAabaBaBbBbBabaaBbaBABBAbaBBbabBbAbAaaaA
+L   2 / N   86 .....baaAABbaBabaabbaaBbAaaAABAbabABaBaBAbbBbA
+L   2 / N   87 .....bABbAaAAAbbBAABaBbaABAAaAbaBbAaabaaBBbAab
+L   2 / N   88 .....AaBabaabBBbaAabABbAAABABaAAabbABaAaabAABA
+L   2 / N   89 .....AabbaBbAaAbabBBBAaBAbBbAbaABBaAAAAAbAAAbb
+L   2 / N   90 .....AaaAabaAbbABbababBaAaBabAaAbbAaBbAAABBbbB
+L   2 / N   91 .....BbBabaabABaAaAbBabBbaBabaBbbbbbBbBbbaAbBA
+L   2 / N   92 .....AaBaAAAAABbabaABaBbabBaBbAaBBbaAAbBbBABaa
+L   2 / N   93 .....bAAaaABaAbaAAaBaAAbBbAabAABaAbBBBaabbbaAa
+L   2 / N   94 .....BabbbaABAaBaBbBAbababbbAaaAaBaAABBAbbaBAA
+L   2 / N   95 .....BbABbbBaabaaabAABbAbBbbABbBbBABAAAAAAABbB
+L   2 / N   96 .....aAbAaBaAAAaAAbAABAAAAabbbBBABbaaAABbAbAbB
+L   2 / N   97 .....BBaBabBbBaAbABbaABaAaAabaaAABBaBBBBbbAaBb
+L   2 / N   98 .....bbBBaaAbAaAbBAababbaABbAAaAaAAAAAaAbAaabA
+L   2 / N   99 .....BbAaAABBBbaBbbAAAbbbABBBABABbAAbBbAABaAAa
+L   2 / N  100 .....bAAbbbAbaBBaBABBaAbbbbbaABbBaBaaabAaaaAAa
+L   2 / N  101 .....aBbbBbaabaAbABBaBBBAaaBaBaBbBAaaAAaaABAAa
+L   2 / N  102 .....bBBbBbBBBAbbaAbBabBBAbaaAABaaAAAAaAAAAaAb
+L   2 / N  103 .....aAABAaaBbbAaABBaAbBaBabbbABABaAbBbbAAaABA
+L   2 / N  104 .....bbbBBAAbabBBbbBABAabbabaaBBBaAaaBAaAabBAb
+L   2 / N  105 .....BAbBAAAbBBbaBABAaAbbbaBABABBaABbaBbBaBBaA
+L   2 / N  106 .....bAAAabbbaabAbBABBaaAaABaABBaAbbBBAabBAabB
+L   2 / N  107 .....aBbaaBbBbAaAAAaaaABaBBbaaaaBBaAabBAAABAAa
+L   2 / N  108 .....BabaAaAaabbbaAaBBaAabBaBAbaaAbBAABBbbAAAB
+L   2 / N  109 .....BAbAbBaaAAaabaBaBbbBbAaBAABbaABabbBaBbBaB
+L   2 / N  110 .....aBbABaabaabbBBAABBBaAbABBBAbBbbbbbBBabBBA
+L   2 / N  111 .....bBaBaBAbAbBBAABAabAAbAAbaAAAaababaaAabBbb
+L   2 / N  112 .....ABBaBABBbaBBbbaAABbBbabABBBBABbaBbABAaABB
+L   2 / N  113 .....AABABaaBaaBBaaBaaABbBbbBBBAaAAbbabBaabbBa
+L   2 / N  114 .....bBBAAbBabbbaabbbBaAAABBAAbbBaBaaBabaABAAb
+L   2 / N  115 .....BBabBababABBAAABAAbABAabABAAAaAabbAbAAAAa
+L   2 / N  116 .....AABbaABBBaAaBBbBABaBABBAabbbAAabaaaAbbaBA
+L   2 / N  117 .....baAbaaAaBaBAaabaabbbAbaBabBAAAbBbBBAbaBBA
+L   2 / N  118 .....AABBAaaAaaaaBbBbbAABBaBAaaBAbBaAaaAbABBBa
+L   2 / N  119 .....baabaabBbBBABaBbaaabBbAbABAAAAbABaBaBbaBb
+L   2 / N  120 .....baBAbBbAabaaBabAbAbABBAaABbAbbBaaABAABaBb
+L   2 / N  121 .....AabbaBbbbABBbbAbaabAbaBBaAaaBaaAAAABaBBaa
+L   2 / N  122 .....BaAbBAaaBbaabbAAABABabAbBaaAaBbbbBbbAAaaA
+L   2 / N  123 .....BAAbaaAabABabBbAbBBbbbaBaAabbBBBaAbBBAbba
+L   2 / N  124 .....baABabbabaaaAbAbABbaAbBbbAbBBbaBaBBBBbbba
+L   2 / N  125 .....aaBAbbbBaaaaaAABAABBBBbAAbAAbABabBbbBbbbA
+L   2 / N  126 .....aABbbBABAAAaAbbAAABaAaAaaBaABabaBbabBbBaA
+L   2 / N  127 .....aBaABbaABBbbaAabBbBbbabbAabAbAaAAAaaABbaA
+L   2 / N  128 .....bABBbbAbbBaabABaAAAaBaBAAbbaaAbabbaabBaaB
+L   2 / N  129 .....AABbAbBaBbabBBBbbbaAaBBabbAbaBBbaAabBbaAb
+L   2 / N  130 .....AABAaBAAbbBBbabbBbAABBbAbbabAbbaAbBbBaBbA
+L   2 / N  131 .....AbBBbbAaAabAaBAAbAaaBABBabBBBbAAbaaaabAbA
+L   2 / N  132 .....BAbAbABBbbAAbAbbaBbAaAABbbbaAaBaBBbbABbAB
+L   2 / N  133 .....BabaabBaaaBBbABbBbAbbbbBbaAbaaBbAbaBaaaAA
+L   2 / N  134 .....baBAaBAaABaABaBbbBaaBABBBBbaaAbabBbaAABaa
+L   2 / N  135 .....aBaBBaBABbAabAabAAaaABAABBbaBaBbabBaABbAB
+L   2 / N  136 .....AbbbAbBbAaBaBabBAAAbABAABBaABbAAbABABBBAb
+L   2 / N  137 .....ABbbbBABAAaAabAbAbbABBBAAaAaabAbbAbaaBbba
+L   2 / N  138 .....AABAaBbAbBaBABabaBaAaaABababaaABbaAaaBBaA
+L   2 / N  139 .....abaaAaAaAaABbaabBAabaaaBBBbAAAabAAaaBbAAa
+L   2 / N  140 .....baAABAaabAAaBAaBAbaaaABbBabBBAbbBAABabbAA
+L   2 / N  141 .....BbAaaabABabaabaAbbaBaABbbAAaBbbAbAbAbaabA
+L   2 / N  142 .....aAbABABbbAaBaaBBBaAbaaabABaBbaAABAbBabBAA
+L   2 / N  143 .....baBAaBAAAABBbbABaabAbBAABAbBaAAAbAaaabBbB
+L   2 / N  144 .....BbBbAAabBbbAABAaBAAAbaAAABbBBbABaaBBBbBBa
+L   2 / N  145 .....bABBbaBAbaBaBAbBBBBbaAaAAaABaAbabbababBaA
+L   2 / N  146 .....BAaaBaaAbabBBBababaBaABabbAbbbABAbaAABaBb
+L   2 / N  147 .....aAbbbbAaaAAbaBbAAaBABBababAbaAaBbaBaaAABb
+L   2 / N  148 .....aBAabbbabAaBbabbbbAAaaBBbabBBBBaBaABAAaAa
+L   2 / N  149 .....AaAbAAbAbBbABBBbbAbbaABBbBaBbBaAaBABABABB
+L   2 / N  150 .....BaAAbBABbBbAABBaaAAbbbAbBABBbAABbaAababbb
+L   2 / N  151 .....aABbAaAbBBabaaBbaAaBabbABABaABabAbabaBaaA
+L   2 / N  152 .....BaBaabABaAbaABabAABAbBabaaAbBBAAaAbAAAaBb
+L   2 / N  153 .....AaBAAbbabAabBAaabaabBbaAbBbAabBbaAAbAAABa
+L   2 / N  154 .....BBbAbABaBBaBabBbbAAaaABbbbBBAAbAaabaBBBBB
+L   2 / N  155 .....aAbaAaAaBBAAAABBAAabBBaabBabAbBbBBaabBAbB
+L   2 / N  156 .....aAAbaaAbAABAbbBbaBAaAAaabAAbaABAaaBABaAAb
+L   2 / N  157 .....AbaAbabBbAaBBBBaABBaAAAbabBABaBaAbbAAbAAA
+L   2 / N  158 .....BaaBbBABABAbaAaAAbAbbBAbBaBBBaABABBBAaAaa
+L   2 / N  159 .....aaBbBaAbBBbBaaABbAAabABbaABBabbBABBaaAaaa
+L   2 / N  160 .....AbBBBABaabABbAaBAbaAabaabAAAbBBAbAaBaaaAA
+L   2 / N  161 .....BAAABAabbBAbbBbBABbAABAaaaAABabBBBABaBbaA
+L   2 / N  162 .....AABABBbABAaBbBbAaAaBAbAaAaBaAabbBbABbBAba
+L   2 / N  163 .....BBAABbbaABBBAaAbbbAabBaaaaabBAABababaAabA
+L   2 / N  164 .....aBbBabbaBAAABbBaAbbbBBAbaAABbAAAAAAbBAAAb
+L   2 / N  165 .....abbAbabaAaaaBaAABAAAbabBBaAABaBbABABaBaBa
+L   2 / N  166 .....AabBbABAaABBABAbabBBBbaBBaaAAaBbAbbBBbAaA
+L   2 / N  167 .....abaaBaAbaAbabbaaabbBbaabaabABaaaAAAabaaAB
+L   2 / N  168 .....abBaaaBaaAAAbBbaBBaabABBbabAAAabAaABBAabb
+L   2 / N  169 .....BBaBBAAABbBABABbAaBbBbBbBBbabbabbABBaAAaA
+L   2 / N  170 .....ABAbABBBBbBBBbBAbbBaAbabBbAABBaaAbAaBAaBA
+L   2 / N  171 .....bBAbAaaAbAbbBabbbBBBbaAbbbbAabbABBBAbbabA
+L   2 / N  172 .....AaaBAaBaaBAAABAAbaBbAAbaaAaaBAbAbaaAAabBa
+L   2 / N  173 .....AABaaaaAaAbBAaaaBBaABBAbaaBBaBbbaBABabaAA
+L   2 / N  174 .....AAabBAbABAaAaAbAaBbaBaBBBAaBbbAAABBAaBaaA
+L   2 / N  175 .....BbBabABBAbBbBBBabBAaaaBbbAAbBBABBabBBBBAb
+L   2 / N  176 .....ABBAAaBaBbBbbBaAAaAaBabaAbbABBAaAAbabBBBb
+L   2 / N  177 .....AbbAABbBAaBbAbAAaaaabBbABaBBbABBBBAABAaab
+L   2 / N  178 .....aaAabaBaAbaAbbaABaBAbAAbbbBBAbBBAAaAbbBAa
+L   2 / N  179 .....aaaaBBabABbaAaAAbabaabBbaAbAABBBbbaBbABBA
+L   2 / N  180 .....bbbaBBAbBbAbbAaABBbAABABaABbaBAAbBbBABBAB
+L   2 / N  181 .....AABbbaBBAAAaaABBaBaaABaaBbbAbAAAbaAaBAbaa
+L   2 / N  182 .....BBAaAaBaAbbAAaAAaaAbBbbbBabAAaBAbabABBbAb
+L   2 / N  183 .....bbAAAbbBBbBBabBBbaAabbaAbbabbBbabBbAbbAbb
+L   2 / N  184 .....aBaABaAbBBababbaaaAaABAaBaAbBAbaAAbaBAABA
+L   2 / N  185 .....BBBBbbaaBBBAAaABBABABabAaAABbaabbbbbaaAba
+L   2 / N  186 .....aBBAABAaAbbBaAaBbbbAAbABbBbAaabBabABBbbaa
+L   2 / N  187 .....aaBbABbBBBababaaaBBBbAbbbbBaaaAAAAAaaBbaA
+L   2 / N  188 .....AabAAAbAabABaAbaaaBBbaaAbABbBbBaAbbbAbBBa
+L   2 / N  189 .....aBABBBabAbbbABaaAabBbAabAABBaBbBAAAAAbBaa
+L   2 / N  190 .....BABBBaAaaaabBAAAAabaABBaAABAaabaBbbBaAbBb
+L   2 / N  191 .....ABBaAABbAbAabBBABABbAabBaBbBbbBABBBaaBABb
+L   2 / N  192 .....bbbbbBbABbababaaaaaabBaBBBaAabBAaBAaBAbBB
+L   2 / N  193 .....aBbAaABABaBBABAabaBbbaabBBbABBAbBBBbaBAbb
+L   2 / N  194 .....ABBaAaabbAaabAaBABAAaBabAaAAbAAAAAbbBAaBb
+L   2 / N  195 .....AabbABBAaabbAaBBBababBbABbAaAAAbBAbAabbBa
+L   2 / N  196 .....bbBaBBbaBAaAAbABBbaaAAabBbABbAbaABBABBbAA
+L   2 / N  197 .....AaaAbbAbAbAaABbAaBBbbbBbBaBBaAabBAABBabAa
+L   2 / N  198 .....ABBabABBaBBaAbabBbAaAAbaabbBbBbBBbaBAaBBa
+L   2 / N  199 .....AabAAaAABBbAbabaABAAbaabBaBbbBABbAaABbaBB
+L   2 / N  200 .....AAbbAaBABaAaBBbbAabaBBaAabaaAaabBabAABbaa
+L   2 / N  201 .....ABbaBbBaaaabBBaBaBaAbAAaAbbAbaBAaBbbbBAaa
+L   2 / N  202 .....BabABbbBABBbaaBAaaABaabbaaaaBAABbAabAABaa
+L   2 / N  203 .....AaBbbaaAbaBaAbABabBBAAbabbbABabABBABabAaa
+L   2 / N  204 .....aBBaABAAAAabABbABBAaBbbBAbbAAAbBabbbBBAAa
+L   2 / N  205 .....bABBBAAAbbabbaBbAaAbAAAAAAAAabBaBBaAaBbab
+L   2 / N  206 .....AAbBaaaBbAAAabaBBBaBABBabaBbAabbBabaAAbAa
+L   2 / N  207 .....AaABAABaBBbBAABBaBaAbAAaBBbabBABbaBABAbBa
+L   2 / N  208 .....aAbBABaaabABABBAbbBBBBBaAAbaAbBbBBBaAaBba
+L   2 / N  209 .....abbaBBabAbbaBabAAaaAbaabaAAAaBbBBbbABaBAA
+L   2 / N  210 .....BbababAAabBAABBbAAAaAaaBAbABBaaAABBBBaAbA
+L   2 / N  211 .....aBbaAaBabaBaBABBaBABaaabbabABabbbaABAAbBb
+L   2 / N  212 .....bbBAbAbbaBaBbABAAAabAAbBbBAAbaAbAABBbBbAA
+L   2 / N  213 .....aaBbaaABAAAaBAaBabBBBbaaBaAAabaBAbBbAAbaa
+L   2 / N  214 .....AAbbBbAbbaBbBabbBBAbbaBabBbABaBaBbABbbbba
+L   2 / N  215 .....BabbaabaBbabBBaABbAabbbbBbaBaaabBAaabaABA
+L   2 / N  216 .....BbaBAbAAABABbBAabAAABBaAbAAAbAbbBABAAabaa
+L   2 / N  217 .....BbAAABAbAbbaaBABAbbaabbBBAAaBBBAbabAaBBBB
+L   2 / N  218 .....bbaBAaaBaBbABbaAABAAAbAbababbbbbaabBAABba
+L   2 / N  219 .....bAabbbBBAaABBBbbbabaaaABAAabaaAaBBAbbaBAA
+L   2 / N  220 .....AaaaAaABABabAbAbABAbaBbaAbaBBBAAaBbBaBBbB
+L   2 / N  221 .....aaaaBabBBbbBbAabBabBBBbBBbaBbAAaBBBBaBAab
+L   2 / N  222 .....AbabAabBABBabBaabbaBABAABaBBbbBAabBBAbBbb
+L   2 / N  223 .....BAbABABbbABBbaBAaAAaaaBAaAaAAaAaBBBBaABaa
+L   2 / N  224 .....BaabbbaBBBabABAabbBAAaAAaaBbaaabBBabBBBBA
+L   2 / N  225 .....bbabAAbBABabaBaBBaaaAAbaBaaAbbaabAaBaAAbA
+L   2 / N  226 .....bbBBABBBbbAAaBaBabbAaaBbBAAAbBbbbBbAAbaBa
+L   2 / N  227 .....BaBBBAabABAbABBaaaAaaBaaBBbbaBaaaabaBAAAa
+L   2 / N  228 .....bAbBaaaBbAaBBABABBbBaaaAaAAbbbaaAAbbbAbbb
+L   2 / N  229 .....aBBbBABAABBBbAaBbabbBaBAAbBbbBbABbAABAaaA
+L   2 / N  230 .....aaABBAbaAabbbBAbABaAbBAbAaBaAaBbBAbAbbBAa
+L   2 / N  231 .....bBABABAabbAbBBBbAbBbBBBABaABaaaabBaAABbBb
+L   2 / N  232 .....AbBaBbbBBaBAbaAABaBaBaaAAbaabaABaAbbAbbaa
+L   2 / N  233 .....BbAaAaabbABaBAbBbAbabBAAbBbbBAABAabaAaABB
+L   2 / N  234 .....aaBbaBbBbAbBbABbBbBaBAbaAaBbbBbabBAABBABa
+L   2 / N  235 .....ABAaBAbBAABbAbBbbBbBbAbbaABbbBABAabaBbaAB
+L   2 / N  236 .....aAAaAAAaBAAAAAbbabaaBbbbaAbaBAaabBABAaaAB
+L   2 / N  237 .....BbaabABabbbabaAAabABaBbbABABbbAbabaABbBBa
+L   2 / N  238 .....bbaABbBBABbAbabbBbabBaAbAbBBbAbaBaBAABabB
+L   2 / N  239 .....ABBBbBBbbBBaABbABBBABbaabbBBAbAbbABbABbAB
+L   2 / N  240 .....bbabbbBbBabbBabBabaAAAAaAABaBAbBAabBABbaa
+L   2 / N  241 .....baaAabBaAAbabABBabABaAABAaaAaBbAbabAAbbaA
+L   2 / N  242 .....aAABaAbAbBbBaBaBababbBbabBBbBaAbBaBaBBBbB
+L   2 / N  243 .....bBaBabbaAaaaaBAbBAbbbbBABbaBbAAaAbbBbaaBB
+L   2 / N  244 .....BabABaaaAaAAabAAAABabbBaaAAAbaABAAaabBBAb
+L   2 / N  245 .....aaaAbbbABaBBabbbABbBaBAbababBbbaaABaAbBAA
+L   2 / N  246 .....AaBBABaaBaBBBBbBabBaabBbbaBbaaBbBABaAaAAA
+L   2 / N  247 .....AaaaAaBBbbbaBaaabaAAbAaBAAaBabaBaBabbbBaa
+L   2 / N  248 .....bAaaBAAabbABaaabBbaBaaaaBAaBaBaAAAbAbBBbB
+L   2 / N  249 .....AbabaABabBBaabbBAbaAaBbBBAbAAaAbabbAAbbAB
+L   2 / N  250 .....bBaabbBaaAAbAAbaBBBbABaABbbBaBBaBbAbaAaAb
+L   2 / N  251 .....bBBBbbAbBAAABaAbAAaaAAbBaabBABbABBabBbbBA
+L   2 / N  252 .....BAAbbABBbbABaabAAbaAbBabaAbaBBbAAABBaAAaB
+L   2 / N  253 .....bbaAbbbaaAAabBBABaABababbaaBBBBbBaBbaBABA
+L   2 / N  254 .....baBBbABAbAbabbaaAaaAaAaAaAbbaBBabAaabbbbB
+L   2 / N  255 .....bABababaBAAabaABaBbaAAaaBBABBABbaAaabAABb
+L   2 / N  256 .....abaBBbbAaaaBBBAAaAAbaBabaAaBabbBaaAaAABBb
+L   2 / N  257 .....aABbaAaBaAabBaaaAaBBaAaBbAaBAaBBbBbAaAaBb
+L   2 / N  258 .....BBbaaaBAaBbBbBBAbAbAabAbbaABAaBAaBBBaBaAA
+L   2 / N  259 .....aABaaAABBbaBBAbbaBBBBabBabababBBABbBaABbB
+L   2 / N  260 .....abAbaBaaBbbbabAaaBBaAAbaBBBABBAbbbbabAABA
+L   2 / N  261 .....BbBbAaAabbbAbAAbaaBaBbAbaBbBAbaAaaAbAbaAb
+L   2 / N  262 .....AababbAabbbbAbaaaabaBAAbbABabAaBbAbbABaAB
+L   2 / N  263 .....ABaBaBbABAaAaaAbaBbBabBBbBAbaaBbbbBabBBbA
+L   2 / N  264 .....bABAaBBbbBAaAaAAbAbaabaAbBAbBAAbaAAAaABAa
+L   2 / N  265 .....aBbBaBBBbbaaABaAAaaaBaAabbBABAbaaabBaBBab
+L   2 / N  266 .....aABbbaBaBbbaBAaBAbBbabABaAbaaAaBaaBaBBAAB
+L   2 / N  267 .....BbBAaBbAAaBBBAaABAbAbBBaBaaAbbAbbaAabBBBa
+L   2 / N  268 .....BBaAbBaBBBBABaabBbbBAbBBBabBbbbbBAAbabBab
+L   2 / N  269 .....BBBaabbAaBbABbabaaaaAabbbaabbAabAaabaAAAA
+L   2 / N  270 .....BbaBAabBAAabAabBBabaBbbbAbAaAaBaAaabAAbab
+L   2 / N  271 .....AaBbAABbBaBbabAAAbbBBAabbABABaBABAAaaAAbb
+L   2 / N  272 .....aaaAbbbbabBBAbbbbBbaAAbabABBbbBAaaaaaaaAA
+L   2 / N  273 .....aAbABaAAaBaBbBbBAbbABBbabaBaBABbabAbaaBAa
+L   2 / N  274 .....aAabAbBBbAABAbbbBabAabBaBbBbBaaaBBAAbaaab
+L   2 / N  275 .....baBbabbBbAbbaAbaaaaBBABAbaAABbABaabAabaAB
+L   2 / N  276 .....AAaaBBBbaABBaAbBaAAaaaABAbaBABAbAbAaBaAbB
+L   2 / N  277 .....AbabbbaBABababBAaAbbaaBaBbabBAbaBaAbabBbB
+L   2 / N  278 .....bbaabBAABBBaAabBBaAaabbBAbaBbaAaABAABaaAb
+L   2 / N  279 .....bbAAaAaAbBbbbbBaaBABaBaaAbbBaBBAbAbaaAbaA
+L   2 / N  280 .....aAAaAbBaAABAbabaaBAaBaaAAABbBaBbbaAAAabbb
+L   2 / N  281 .....BAbbBAABabBAaabbaaBBbBBAaAbBAaBAbbBBAABbA
+L   2 / N  282 .....AABBBBabBbaABbbabbbAbBAbAABbaBABAABaabAba
+L   2 / N  283 .....BBbBbAbaBBaAAAbbAaAABAbaAABBbbbbbabaBaAAb
+L   2 / N  284 .....baAAaBaAABAbBbBaBAAbAAbBAaBBbAbbBABaAbbbB
+L   2 / N  285 .....BaBBbaBABBaABaaabaABaAAbabAAbBaBaaBaAAbAa
+L   2 / N  286 .....AbaBABBBaAbbaaAaBbABAAbBaAaBBbaabAbAAbABB
+L   2 / N  287 .....ABbBaABabBBBbBbBbbAaabababBaAAbaAaaBBaabb
+L   2 / N  288 .....aBbbBbabBAaBbAaaaAbbBaAbBAbbBbbaBaaAABAaa
+L   2 / N  289 .....bbABaBabBAbababAaaAaABbbaBAbABABbbBABbABA
+L   2 / N  290 .....BaBbAAaBbAabBAaAbAabbbbaBAbbabBbaBaBaAAaa
+L   2 / N  291 .....babBBBBabBAabBaAbAbbAaaaAaAbbbaaAAbaAbBBb
+L   2 / N  292 .....abbbABabBaAaBbBbABaBaAabAAAAaaABAAbbAaaAB
+L   2 / N  293 .....bBAbABBAbAbABbbABBbaaBBbbbBaaabAbBABAAaBb
+L   2 / N  294 .....aabAAAAaBBBBBbBbBbAaababBbBaAAABbAAAaabba
+L   2 / N  295 .....bBaaBabbBaabBAbbAaAbBAaAbbbAbbBabbAbaBbaa
+L   2 / N  296 .....AAaaAaBBBbBaaAAAAbBBBbBBBbaAbBbAaabBABBab
+L   2 / N  297 .....BBAaAbBABAAbAABAbaABaabAAbaABBABAabbABBaA
+L   2 / N  298 .....AabbaBbBAbbbaBAabbabBbAabBBbBaBaBbAbBBBAB
+L   2 / N  299 .....bAbbaAaABaAbBBbBBaAbbbBaBBbABBaBaABAbbabA
+L   2 / N  300 .....BbAAaaaAbABaabbaaAabbbAAbaBaABBababaBABBa
+L   2 / N  301 .....BaAbababaAbAbBBAAbbAbAAABbaABaBBAABBBaBab
+L   2 / N  302 .....bbaBBBAbbabAbBAbbbbabBbABBAaBBaBBABAAABAB
+L   2 / N  303 .....babBBbBbbabbaBbaaaaaAabaaBBBAABABBAABABbB
+L   2 / N  304 .....BaaBaBaAaAaBABbaABbbBAbAbAAAAAAabbaabAbab
+L   2 / N  305 .....abBbbbBbbbbBbAbBbBaBABBAbaABabBAbABaBBAbB
+L   2 / N  306 .....AbbabBABaAAbabaBBbbBbBbBAAAAaAabAAaBaBBBa
+L   2 / N  307 .....aBBAaAaaBbAAaaabBBaAbaaBBaaAbbbAbbbaBaBAA
+L   2 / N  308 .....abbAAbAaaaAABaAbAbaAaBAABbaaBbbaabBBbAbaB
+L   2 / N  309 .....AbAbABABbaaBbBBbaabAaaBaaBabBABABABaaaaAB
+L   2 / N  310 .....AaBAabBAaabBaaabAabaaBbbAAAbbbBAABbbbbBAA
+L   2 / N  311 .....BaBbBbBabaABABAbaAbaaBbabbAbBbAAAABaAAABB
+L   2 / N  312 .....aAabbAaBBBaBBABbbbBbBABaabbBABBBaaBAbaaBb
+L   2 / N  313 .....AAbaAbAAbBaAABBABBaABabbbAbAbbBBBBaabBBbA
+L   2 / N  314 .....aAbbABBAbAaaAaAaAaABbaAbBBbABaabbAbAabaaA
+L   2 / N  315 .....ABbbAaBBbABabBbBbBBAbBAAbabbAaBbaBaBabAAA
+L   2 / N  316 .....ABAabAAbabaaBBaaBABaabBaaABAaabBaBaAaBABb
+L   2 / N  317 .....BbbBaaBBbaaabABBAabBaBabaBAbAaaaaaaBAbABa
+L   2 / N  318 .....baaBbaaAaaBaAbAABBbbbaAABaaBbaabABBBbaaaB
+L   2 / N  319 .....aBaAababbAaAbbaaAaaBAAAaAaaBBBAbAbAbbbbaA
+L   2 / N  320 .....ABBBabaAAbbaAABbBBBBAbaAAaBBAbAababaAAbaB
+L   2 / N  321 .....bAaBAABaAABAbAaAabaAAAAbBbAabBbaaAbbaBaBA
+L   2 / N  322 .....baABAbbBaBabaabAbABBBbaAaaBaBABbbABBAbAbB
+L   2 / N  323 .....baaAaBABAAABBbaabAbBAbBbBBBBaBBAbbbAbBaBa
+L   2 / N  324 .....bBaabBaBBbabbABBaBbaBAABBbbBABbBAAbAaaAaA
+L   2 / N  325 .....BaAAaaBaAabaBbabbbBBaAABAaabBABBBAabBaAAA
+L   2 / N  326 .....AbAAaABaaABbaABABBAaBaaaBAabbBBBBaaabbBAB
+L   2 / N  327 .....AAabaBbaaAbBbAAABBBABAAabbaaBbbaBAAbaBABa
+L   2 / N  328 .....BBaaAbbABBaaAAaAbAAbBBBaAbBaBBBAAabbabAab
+L   2 / N  329 .....bBBAbaBBbbBBbaAbabbbbAAaBBBBAbbBBBAbaabaa
+L   2 / N  330 .....baaabAAbABbaAAbAabbAbbAbABABbbbbAAAAbaABb
+L   2 / N  331 .....BbBabaBaAAaAbAbbaBbabaBBBAbbaBabBbAbaAaBb
+L   2 / N  332 .....BaaAAABAAaABaABBAbbaaaaAbABAbBBBaaABBaAAB
+L   2 / N  333 .....aAbBabaaaBBBaaBBbABbABABaaBBbaBaBBbbbAAaa
+L   2 / N  334 .....aaAAbABBABaaAaBbbBbaAabAaaABBbababBAAAaaA
+L   2 / N  335 .....BAbbAbbabaBaAaBBbABbBBabAbAaaBBaAbaabAAbb
+L   2 / N  336 .....AAABaABbAbbAAbaAAAbAAaaABAAaaBaBabABBABaA
+L   2 / N  337 .....BBaBbBAABabaABbaaaAaBaBbbABAAbaaBAabAbBaa
+L   2 / N  338 .....BAbBBabaBAbbababBbAbabbbabAaBbABBBAAbBBBa
+L   2 / N  339 .....bbBaaBbaaaBaabBAAbABBaAAbaAbaAaaBaAabBBab
+L   2 / N  340 .....ABABAaABBaAabaaabaABBBAbABbaBAAAaaabABBab
+L   2 / N  341 .....aAbBbABAbAabaABaBbbaBABabBBBAabbBabbBBAbA
+L   2 / N  342 .....BbBABbabbBbBAaBAbBaaBAabAabaBbbBaBabbBaaA
+L   2 / N  343 .....abaBbBbBaaBBBbaabBbbBbABAABabbbAaaaAaaaAB
+L   2 / N  344 .....baAbBBaBbABabABBAaBBaAaABBBabAbabBABBBABA
+L   2 / N  345 .....AaAbbABaABBbbAbBaabbaAbbbbbbBBBabaAabaBAb
+L   2 / N  346 .....AAabBbAbaBaBBABBAbBABbBaAaabbbaBBAbABBAbA
+L   2 / N  347 .....bBABBAABaaBabbbAaaBaBAaABBaAaAaAaBaaaBbAb
+L   2 / N  348 .....BbabaBAAAbAaababaBABababaAaaBbABbBBaBabAa
+L   2 / N  349 .....AbBBaBbaabAaAABbbabbBBbBBAAbBaAAaaaBaAbAB
+L   2 / N  350 .....AbaabAaaAAaABbaABAaabbAAAABaAAbaBAAbabAbA
+L   2 / N  351 .....BAAbBbbAaaAAbabAaabbAAbbabaaBAbAbBBbBBAab
+L   2 / N  352 .....aBbBBBbaBaBAabBAAaabAbbaBabBbaBabbabBaaBB
+L   2 / N  353 .....aaaabBBaabBaaaaAabAAbbBbabbBABABaBaaBaBba
+L   2 / N  354 .....BAAbbaAaBaabbAabAbAABAbBBaAbaBAaabAAabBaa
+L   2 / N  355 .....baABBBABabBbbABAbbbbAAABbbaaBBBbbABbaABBA
+L   2 / N  356 .....BBBaBAAbBABabAAabbbBbabAabbBbbABbAaBabbbA
+L   2 / N  357 .....BABAabAaaAaBAbbBabBaBBaaaaAaaBbbaBAAbabAB
+L   2 / N  358 .....AaABAAbAAaAAABBBAbbAaaBbbAaABBAabbbBBbAaA
+L   2 / N  359 .....bBbbAbBBaabBbaBBBaAABbBbbABaaaBabbaBbbBaa
+L   2 / N  360 .....bbAAbAaaabaaBaAAaBBAAaBBABBBAaaBAbaAAAbbA
+L   2 / N  361 .....AaABBaaBbbAAbabBbbAAAabABBaABaaaBBaBaBAab
+L   2 / N  362 .....bBbAbBBaAaBbAABabaaAABaAaaBaBaabaaAAaABbB
+L   2 / N  363 .....BbAABbAaaabaAAAbAbBBabaBBBaaBaaAaBbaBBBab
+L   2 / N  364 .....BABAaBbABbBBaAAaBbbaaAAaBbaBBAbAaBaBBaaAA
+L   2 / N  365 .....aAbbaabaaaBbbabbABBaBABBbAAAbababaaaAABbB
+L   2 / N  366 .....BbBbbBBBBbBABAAAabBAabAAAbabBabAaBBABAaBB
+L   2 / N  367 .....aABBbAaaaBBAAAaABAAbAaAAabaBAaBBBABbbbAAb
+L   2 / N  368 .....abAbaaBBbBaAaBBAaBbBBBAaBBABabbBbBBAbAaaA
+L   2 / N  369 .....BbbBBAaBBbAABbAAAabBabbbBAaAbBaBBAABaBAbb
+L   2 / N  370 .....bBBaaAbBBBbBbaBABAAABAAAaaBbbBaaAaABbAABA
+L   2 / N  371 .....BBAaBbbaBBaAABBBAbbAaabBBbBAABbABABABbBBb
+L   2 / N  372 .....aaAaaABaAABBAAAAAaaaabbBBAAbAAbbBAabbaAAB
+L   2 / N  373 .....aAababAAABBAbAABaAabAABaBbabAbBbAabBAAaaA
+L   2 / N  374 .....bbBBAAaabaBAabaAAAaAaaaBAbAaABbBBBAaabBaA
+L   2 / N  375 .....AbBBaAAbBaabAaBBBbaAbbabBBabBBAAbAAAbbABA
+L   2 / N  376 .....BbbabbbbaBaAaaAaBAbBaABBbabbBBABbBbbBaaab
+L   2 / N  377 .....AbabBABaBAAaaAaAAAAAaaBaaBaAaBBbBabBbbbBA
+L   2 / N  378 .....BbbaABbaaAAAAbbaaBBbABbBBBbBbBAbbAaAAAbBa
+L   2 / N  379 .....BABBBaaAbAaBAaBAaBBbaBabaBBBbAaBabAbaBBaa
+L   2 / N  380 .....babaaBBbAbAAaBBaABabbbAbBAABabaAaabBaBBbb
+L   2 / N  381 .....aAaaaABabbabAabaBBBBbaaAabbabbaABABbaAaaA
+L   2 / N  382 .....BAabBAbAabBAAAbBBaBbBaBAabBBAaAabbABAAAbB
+L   2 / N  383 .....ABaaBbbabbaABBBbBBAbABaAabbbBababABbAbaBb
+L   2 / N  384 .....BabAaaabBAAABaBBAbABbbBABBabababAABBBbbAA
+L   2 / N  385 .....BbabbaAbbaababbaabBAABbbAbBBbaaBABBAbABab
+L   2 / N  386 .....bAaaABABAaAaAAbAabABAAaaABAbBBbbaAabaBbbb
+L   2 / N  387 .....AaAaAaABbaaAABbAaaaaAaBbAbAAaABbbAaBBbAbA
+L   2 / N  388 .....BAaABBbaaABBabAABbBabbAAAAAAbAbbaABaabABA
+L   2 / N  389 .....AAbAbAaaABaAAbbbBBaAbabAaababbbAAbbBAAbaa
+L   2 / N  390 .....AbBBabBbaaaBAbabbAbbABBBBAAABBbABBAabaAaB
+L   2 / N  391 .....BaaBAabbAaBabAaBaBBbBabBBaBababBAABbbBbAb
+L   2 / N  392 .....bbbBabbaBabaabaBbABaBBBAABAabaAaaAbABaBAA
+L   2 / N  393 .....bbbaababbAbBAAAaaBAAaBBbbAbaABbABbbabaAab
+L   2 / N  394 .....AbAaAbAAAbbaBbaAbBbbBABbBbabBAaaABBaBabaA
+L   2 / N  395 .....bBAaabAabAbBabAAaBabbBBBAbBbbaAaabAAabBaA
+L   2 / N  396 .....bbbaABBaaBabAaBBabBAAaBBBAbBAaABABbbAbABB
+L   2 / N  397 .....bbAAbaBbaABAABAbbaBAbAbBBaABbABbAaBBBBbba
+L   2 / N  398 .....BBbBabBBbaBAABaBaaBBbbAaBaaBAAbaabaBabAaA
+L   2 / N  399 .....AbbAABBBBBBbAaBbAAAbBbAbaAAAaBbbbaABaAAbA
+L   2 / N  400 .....AbbbbbBBAbBABBbaaAAaBAAaaaABbBaBbaBaABbbb
+L   2 / N  401 .....bBBbbbABBBBAAbBBAAbabBaaBAbBBbBbbAbaBAbBA
+L   2 / N  402 .....BabBbbaBbBBbaabbaBBAABBabbaAbbbbabBAbaAaa
+L   2 / N  403 .....AaAbaAaaAbBABaAbAbaAbabaaBABaBbbaBbBaAbbA
+L   2 / N  404 .....bAAabBbabAaABBbAaBbbbbABaabBAbaABbbBBbaBB
+L   2 / N  405 .....AAAaAaBaaBaAAaBbaAAAbaaaAabBAbAaAaBaAAAbA
+L   2 / N  406 .....bBaaAaBaBAAabBBAbAabbABAAbaaBabbaaAbBAaAb
+L   2 / N  407 .....bBbBAAbaBbAAbbaaaAaBBababbbAABAAABAaAAAAB
+L   2 / N  408 .....baBaAaAaAAaBAAbBAAaAabbaBABaaAaABbBAaAbBb
+L   2 / N  409 .....aBAbBaBABabBAaAbabaBaBBABAbaABabBbbBabAaa
+L   2 / N  410 .....AaBBbBbbabAabbbBbAAbBAbBBBaBAAabbbBbbbbAa
+L   2 / N  411 .....BbABbabABbAAaaAaBaBABBABBAbBBAaABBABaAAaB
+L   2 / N  412 .....aBbBaaABbbAbAABaBBbAbAabbbaBBAAbABbbbABaB
+L   2 / N  413 .....AAaaaBbaBAaABABbBABAababaaaBaBABabaBBabBB
+L   2 / N  414 .....AABbaBbbBAAbBAaabbABBAabBabbaBbbaBbBAbbAB
+L   2 / N  415 .....AABaBbAbBAbaBbaabABbABAAbaaaABbaAbAaabAbA
+L   2 / N  416 .....AAABBBBaAbbAAAAbBBABbBaaABAAABaaaBbaBbAAb
+L   2 / N  417 .....BbAaBAaAaaBaAbBABAbABAbBAaBAbaBBaaabbABaB
+L   2 / N  418 .....BAABAaBbAABbABBbAaaBbbaAaABbAbbaBBaabbaBA
+L   2 / N  419 .....ababBAAaBaABBbaaBABbBabAAABABBaaBBaAaBBba
+L   2 / N  420 .....abaAABAbBBbbBAAaAaaaAAaabBAbBBAaBBBaAAAaa
+L   2 / N  421 .....AababAbaBABABaAABAAAaBAbAbBbAbAaAABAaBbaa
+L   2 / N  422 .....BBbbABbaaBAbAABAAbbBAAaaabAabBAbABaaBaAba
+L   2 / N  423 .....baBBaaaaAbBaAbABBBBAAbaaaAbAbabaBBabaBabB
+L   2 / N  424 .....aaAAbaaBaBAabbABbaBAAaaAAaBaBbaaabBaabaBb
+L   2 / N  425 .....BaaBbbbabBbAbAbAAAAABBBBAaaBAabAAaAAABbBA
+L   2 / N  426 .....baBAaAbbbABBABABaaABaaaBbbaBabAaAabbBabbb
+L   2 / N  427 .....bBABaAaBabaBaaBAABBBaaABaAAAAAAAAaAbbBbaB
+L   2 / N  428 .....abaAbbaBBabbBBAAAbbaBABaababbBbAbabbAABab
+L   2 / N  429 .....bAbbbABaAbbabAAbBBaBBBBabbBBBaBbBBaBaabba
+L   2 / N  430 .....aaABbBBBbBBbAbbAbBAaABbAabbAbbbAAAAAAAABa
+L   2 / N  431 .....aBbABBABabAabbAbaaaaabBbAAAbaaAAaAabaBbBB
+L   2 / N  432 .....AbbBBabaAAABAAaaaAAAbbBAabBaaBaBbaBBAbaaB
+L   2 / N  433 .....BbaAAABbbAaaABBABbBAaBBBBBAbbBBBbaaBbbbaB
+L   2 / N  434 .....aAaaABbBBBaBAbBAABAABaAbBAbbAaBBbbbAbaaba
+L   2 / N  435 .....AbbABAaBbBAAAAabBABbaAbABABabBAAbBaBAABBA
+L   2 / N  436 .....aabbBaBabBBBbaAAabAbBabAAbaabbBaabaaAaBBb
+L   2 / N  437 .....AAbbaBaaAAbBBBAbbBbbBAAbBBAaAaaaBAaaABAba
+L   2 / N  438 .....BbaABaBBabABAABAbbaAAAAbbBBBABaAbAaBBbBab
+L   2 / N  439 .....aaBbbaaaABBbabbaBbBBaAbBBbBBBbbbaBaAbAbAa
+L   2 / N  440 .....BBBbbbbbbbaAbaabaabAaabaAAabAbaABaBBabbAb
+L   2 / N  441 .....AbaBAAabABABBBaAaaaaBbabBaABabbbaaBbBbbab
+L   2 / N  442 .....BaBAAabbBABBbbAaAABABBbbBbbbaAbbBBBAabAbA
+L   2 / N  443 .....ABAAAbbabBbBBaBbaBaBbAABAaaABaaaabBbbbAbB
+L   2 / N  444 .....AbABBBaBabBBBBAbbabABabBabBaAbbabBabAABBB
+L   2 / N  445 .....BBAAABBbBABbAAaBAAAABBAAaBaBBaAAbaaBbaBBB
+L   2 / N  446 ..............................................
+Input layer                          :   4 neurons, 1 bias
+  Hidden layer                       :  40 neurons, 1 bias
+Output layer                         : 400 neurons
+Total neurons and biases             : 446
+Total connections                    :16600
+Connection rate                      :   1.000
+Network type                         :   FANN_NETTYPE_LAYER
+Training algorithm                   :   FANN_TRAIN_RPROP
+Training error function              :   FANN_ERRORFUNC_TANH
+Training stop function               :   FANN_STOPFUNC_MSE
+Bit fail limit                       :   0.350
+Learning rate                        :   0.700
+Learning momentum                    :   0.000
+Quickprop decay                      :  -0.000100
+Quickprop mu                         :   1.750
+RPROP increase factor                :   1.200
+RPROP decrease factor                :   0.500
+RPROP delta min                      :   0.000
+RPROP delta max                      :  50.000
+Cascade output change fraction       :   0.010000
+Cascade candidate change fraction    :   0.010000
+Cascade output stagnation epochs     :  12
+Cascade candidate stagnation epochs  :  12
+Cascade max output epochs            : 150
+Cascade min output epochs            :  50
+Cascade max candidate epochs         : 150
+Cascade min candidate epochs         :  50
+Cascade weight multiplier            :   0.400
+Cascade candidate limit              :1000.000
+Cascade activation functions[0]      :   FANN_SIGMOID
+Cascade activation functions[1]      :   FANN_SIGMOID_SYMMETRIC
+Cascade activation functions[2]      :   FANN_GAUSSIAN
+Cascade activation functions[3]      :   FANN_GAUSSIAN_SYMMETRIC
+Cascade activation functions[4]      :   FANN_ELLIOT
+Cascade activation functions[5]      :   FANN_ELLIOT_SYMMETRIC
+Cascade activation functions[6]      :   FANN_SIN_SYMMETRIC
+Cascade activation functions[7]      :   FANN_COS_SYMMETRIC
+Cascade activation functions[8]      :   FANN_SIN
+Cascade activation functions[9]      :   FANN_COS
+Cascade activation steepnesses[0]    :   0.250
+Cascade activation steepnesses[1]    :   0.500
+Cascade activation steepnesses[2]    :   0.750
+Cascade activation steepnesses[3]    :   1.000
+Cascade candidate groups             :   2
+Cascade no. of candidates            :  80
+
+ -> Output file is =Analysis.root
+-> Read data file=data.in
+-> Number of files=22
+0 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_001.root
+1 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_002.root
+2 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_003.root
+3 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_004.root
+4 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_005.root
+5 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_006.root
+6 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_007.root
+7 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_008.root
+8 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_009.root
+9 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_010.root
+10 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_011.root
+11 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_012.root
+12 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_013.root
+13 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_014.root
+14 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_015.root
+15 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_016.root
+16 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_017.root
+17 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_018.root
+18 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_019.root
+19 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_020.root
+20 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_021.root
+21 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_022.root
+ -> No of files to read:22
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_001.root
+Event=1
+Event=2
+Event=3
+Event=4
+Event=5
+Event=6
+Event=7
+Event=8
+Event=9
+Event=10
+Event=11
+Event=12
+Event=13
+Event=14
+Event=15
+Event=16
+Event=17
+Event=18
+Event=19
+Event=20
+Event=21
+Event=22
+Event=23
+Event=24
+Event=25
+Event=26
+Event=27
+Event=28
+Event=29
+Event=30
+Event=31
+Event=32
+Event=33
+Event=34
+Event=35
+Event=36
+Event=37
+Event=38
+Event=39
+Event=40
+Event=41
+Event=42
+Event=43
+Event=44
+Event=45
+Event=46
+Event=47
+Event=48
+Event=49
+Event=50
+Event=51
+Event=52
+Event=53
+Event=54
+Event=55
+Event=56
+Event=57
+Event=58
+Event=59
+Event=60
+Event=61
+Event=62
+Event=63
+Event=64
+Event=65
+Event=66
+Event=67
+Event=68
+Event=69
+Event=70
+Event=71
+Event=72
+Event=73
+Event=74
+Event=75
+Event=76
+Event=77
+Event=78
+Event=79
+Event=80
+Event=81
+Event=82
+Event=83
+Event=84
+Event=85
+Event=86
+Event=87
+Event=88
+Event=89
+Event=90
+Event=91
+Event=92
+Event=93
+Event=94
+Event=95
+Event=96
+Event=97
+Event=98
+Event=99
+Event=100
+Event=200
+Event=300
+Event=400
+Event=500
+Event=600
+Event=700
+Event=800
+Event=900
+Event=1000
+Event=1100
+Event=1200
+Event=1300
+Event=1400
+Event=1500
+Event=1600
+Event=1700
+Event=1800
+Event=1900
+Event=2000
+Event=2100
+Event=2200
+Event=2300
+Event=2400
+Event=2500
+Event=2600
+Event=2700
+Event=2800
+Event=2900
+Event=3000
+Event=3100
+Event=3200
+Event=3300
+Event=3400
+Event=3500
+Event=3600
+Event=3700
+Event=3800
+Event=3900
+Event=4000
+Event=4100
+Event=4200
+Event=4300
+Event=4400
+Event=4500
+Event=4600
+Event=4700
+Event=4800
+Event=4900
+Event=5000
+Event=5100
+Event=5200
+Event=5300
+Event=5400
+Event=5500
+Event=5600
+Event=5700
+Event=5800
+Event=5900
+Event=6000
+Event=6100
+Event=6200
+Event=6300
+Event=6400
+Event=6500
+Event=6600
+Event=6700
+Event=6800
+Event=6900
+Event=7000
+Event=7100
+Event=7200
+Event=7300
+Event=7400
+Event=7500
+Event=7600
+Event=7700
+Event=7800
+Event=7900
+Event=8000
+Event=8100
+Event=8200
+Event=8300
+Event=8400
+Event=8500
+Event=8600
+Event=8700
+Event=8800
+Event=8900
+Event=9000
+Event=9100
+Event=9200
+Event=9300
+Event=9400
+Event=9500
+Event=9600
+Event=9700
+Event=9800
+Event=9900
+Event=10000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_002.root
+Event=10100
+Event=10200
+Event=10300
+Event=10400
+Event=10500
+Event=10600
+Event=10700
+Event=10800
+Event=10900
+Event=11000
+Event=11100
+Event=11200
+Event=11300
+Event=11400
+Event=11500
+Event=11600
+Event=11700
+Event=11800
+Event=11900
+Event=12000
+Event=12100
+Event=12200
+Event=12300
+Event=12400
+Event=12500
+Event=12600
+Event=12700
+Event=12800
+Event=12900
+Event=13000
+Event=13100
+Event=13200
+Event=13300
+Event=13400
+Event=13500
+Event=13600
+Event=13700
+Event=13800
+Event=13900
+Event=14000
+Event=14100
+Event=14200
+Event=14300
+Event=14400
+Event=14500
+Event=14600
+Event=14700
+Event=14800
+Event=14900
+Event=15000
+Event=15100
+Event=15200
+Event=15300
+Event=15400
+Event=15500
+Event=15600
+Event=15700
+Event=15800
+Event=15900
+Event=16000
+Event=16100
+Event=16200
+Event=16300
+Event=16400
+Event=16500
+Event=16600
+Event=16700
+Event=16800
+Event=16900
+Event=17000
+Event=17100
+Event=17200
+Event=17300
+Event=17400
+Event=17500
+Event=17600
+Event=17700
+Event=17800
+Event=17900
+Event=18000
+Event=18100
+Event=18200
+Event=18300
+Event=18400
+Event=18500
+Event=18600
+Event=18700
+Event=18800
+Event=18900
+Event=19000
+Event=19100
+Event=19200
+Event=19300
+Event=19400
+Event=19500
+Event=19600
+Event=19700
+Event=19800
+Event=19900
+Event=20000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_003.root
+Event=20100
+Event=20200
+Event=20300
+Event=20400
+Event=20500
+Event=20600
+Event=20700
+Event=20800
+Event=20900
+Event=21000
+Event=21100
+Event=21200
+Event=21300
+Event=21400
+Event=21500
+Event=21600
+Event=21700
+Event=21800
+Event=21900
+Event=22000
+Event=22100
+Event=22200
+Event=22300
+Event=22400
+Event=22500
+Event=22600
+Event=22700
+Event=22800
+Event=22900
+Event=23000
+Event=23100
+Event=23200
+Event=23300
+Event=23400
+Event=23500
+Event=23600
+Event=23700
+Event=23800
+Event=23900
+Event=24000
+Event=24100
+Event=24200
+Event=24300
+Event=24400
+Event=24500
+Event=24600
+Event=24700
+Event=24800
+Event=24900
+Event=25000
+Event=25100
+Event=25200
+Event=25300
+Event=25400
+Event=25500
+Event=25600
+Event=25700
+Event=25800
+Event=25900
+Event=26000
+Event=26100
+Event=26200
+Event=26300
+Event=26400
+Event=26500
+Event=26600
+Event=26700
+Event=26800
+Event=26900
+Event=27000
+Event=27100
+Event=27200
+Event=27300
+Event=27400
+Event=27500
+Event=27600
+Event=27700
+Event=27800
+Event=27900
+Event=28000
+Event=28100
+Event=28200
+Event=28300
+Event=28400
+Event=28500
+Event=28600
+Event=28700
+Event=28800
+Event=28900
+Event=29000
+Event=29100
+Event=29200
+Event=29300
+Event=29400
+Event=29500
+Event=29600
+Event=29700
+Event=29800
+Event=29900
+Event=30000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_004.root
+Event=30100
+Event=30200
+Event=30300
+Event=30400
+Event=30500
+Event=30600
+Event=30700
+Event=30800
+Event=30900
+Event=31000
+Event=31100
+Event=31200
+Event=31300
+Event=31400
+Event=31500
+Event=31600
+Event=31700
+Event=31800
+Event=31900
+Event=32000
+Event=32100
+Event=32200
+Event=32300
+Event=32400
+Event=32500
+Event=32600
+Event=32700
+Event=32800
+Event=32900
+Event=33000
+Event=33100
+Event=33200
+Event=33300
+Event=33400
+Event=33500
+Event=33600
+Event=33700
+Event=33800
+Event=33900
+Event=34000
+Event=34100
+Event=34200
+Event=34300
+Event=34400
+Event=34500
+Event=34600
+Event=34700
+Event=34800
+Event=34900
+Event=35000
+Event=35100
+Event=35200
+Event=35300
+Event=35400
+Event=35500
+Event=35600
+Event=35700
+Event=35800
+Event=35900
+Event=36000
+Event=36100
+Event=36200
+Event=36300
+Event=36400
+Event=36500
+Event=36600
+Event=36700
+Event=36800
+Event=36900
+Event=37000
+Event=37100
+Event=37200
+Event=37300
+Event=37400
+Event=37500
+Event=37600
+Event=37700
+Event=37800
+Event=37900
+Event=38000
+Event=38100
+Event=38200
+Event=38300
+Event=38400
+Event=38500
+Event=38600
+Event=38700
+Event=38800
+Event=38900
+Event=39000
+Event=39100
+Event=39200
+Event=39300
+Event=39400
+Event=39500
+Event=39600
+Event=39700
+Event=39800
+Event=39900
+Event=40000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_005.root
+Event=40100
+Event=40200
+Event=40300
+Event=40400
+Event=40500
+Event=40600
+Event=40700
+Event=40800
+Event=40900
+Event=41000
+Event=41100
+Event=41200
+Event=41300
+Event=41400
+Event=41500
+Event=41600
+Event=41700
+Event=41800
+Event=41900
+Event=42000
+Event=42100
+Event=42200
+Event=42300
+Event=42400
+Event=42500
+Event=42600
+Event=42700
+Event=42800
+Event=42900
+Event=43000
+Event=43100
+Event=43200
+Event=43300
+Event=43400
+Event=43500
+Event=43600
+Event=43700
+Event=43800
+Event=43900
+Event=44000
+Event=44100
+Event=44200
+Event=44300
+Event=44400
+Event=44500
+Event=44600
+Event=44700
+Event=44800
+Event=44900
+Event=45000
+Event=45100
+Event=45200
+Event=45300
+Event=45400
+Event=45500
+Event=45600
+Event=45700
+Event=45800
+Event=45900
+Event=46000
+Event=46100
+Event=46200
+Event=46300
+Event=46400
+Event=46500
+Event=46600
+Event=46700
+Event=46800
+Event=46900
+Event=47000
+Event=47100
+Event=47200
+Event=47300
+Event=47400
+Event=47500
+Event=47600
+Event=47700
+Event=47800
+Event=47900
+Event=48000
+Event=48100
+Event=48200
+Event=48300
+Event=48400
+Event=48500
+Event=48600
+Event=48700
+Event=48800
+Event=48900
+Event=49000
+Event=49100
+Event=49200
+Event=49300
+Event=49400
+Event=49500
+Event=49600
+Event=49700
+Event=49800
+Event=49900
+Event=50000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast006/mg5_ttbar_jet_006.root
+### Reset MSE after =50000 training 100 epoches 
+-> Start training for energy bin = 0
+bin=0 epoch=0 MSE=0.0691897
+bin=0 epoch=1 MSE=0.033985
+bin=0 epoch=2 MSE=0.0223927
+bin=0 epoch=3 MSE=0.0150885
+bin=0 epoch=4 MSE=0.00946699
+bin=0 epoch=5 MSE=0.0102721
+bin=0 epoch=6 MSE=0.00609597
+bin=0 epoch=7 MSE=0.00546392
+bin=0 epoch=8 MSE=0.00442782
+bin=0 epoch=9 MSE=0.00451986
+bin=0 epoch=20 MSE=0.00162492
+bin=0 epoch=40 MSE=0.00160029
+bin=0 epoch=60 MSE=0.00159989
+bin=0 epoch=80 MSE=0.00159981
+  Bin=0 with 56565 events has MSE=0.00159898 after epoch Nr=100
+-> Start training for energy bin = 1
+bin=1 epoch=0 MSE=0.0813089
+bin=1 epoch=1 MSE=0.0420858
+bin=1 epoch=2 MSE=0.027073
+bin=1 epoch=3 MSE=0.0168344
+bin=1 epoch=4 MSE=0.0142589
+bin=1 epoch=5 MSE=0.00992571
+bin=1 epoch=6 MSE=0.00691764
+bin=1 epoch=7 MSE=0.00562379
+bin=1 epoch=8 MSE=0.0049557
+bin=1 epoch=9 MSE=0.00427943
+bin=1 epoch=20 MSE=0.00191508
+bin=1 epoch=40 MSE=0.00187899
+bin=1 epoch=60 MSE=0.00187879
+bin=1 epoch=80 MSE=0.00187881
+  Bin=1 with 40944 events has MSE=0.0018794 after epoch Nr=100
+-> Start training for energy bin = 2
+bin=2 epoch=0 MSE=0.0776282
+bin=2 epoch=1 MSE=0.0348296
+bin=2 epoch=2 MSE=0.0231018
+bin=2 epoch=3 MSE=0.014136
+bin=2 epoch=4 MSE=0.0112018
+bin=2 epoch=5 MSE=0.0100623
+bin=2 epoch=6 MSE=0.00706001
+bin=2 epoch=7 MSE=0.0054725
+bin=2 epoch=8 MSE=0.00471499
+bin=2 epoch=9 MSE=0.00379878
+bin=2 epoch=20 MSE=0.00200595
+bin=2 epoch=40 MSE=0.00197419
+bin=2 epoch=60 MSE=0.0019736
+bin=2 epoch=80 MSE=0.00197293
+  Bin=2 with 46990 events has MSE=0.00197255 after epoch Nr=100
+-> Start training for energy bin = 3
+bin=3 epoch=0 MSE=0.0785251
+bin=3 epoch=1 MSE=0.0355322
+bin=3 epoch=2 MSE=0.0241708
+bin=3 epoch=3 MSE=0.0161412
+bin=3 epoch=4 MSE=0.0114491
+bin=3 epoch=5 MSE=0.00890094
+bin=3 epoch=6 MSE=0.00710377
+bin=3 epoch=7 MSE=0.00534233
+bin=3 epoch=8 MSE=0.00436417
+bin=3 epoch=9 MSE=0.00394707
+bin=3 epoch=20 MSE=0.00207301
+bin=3 epoch=40 MSE=0.00203754
+bin=3 epoch=60 MSE=0.00203718
+bin=3 epoch=80 MSE=0.00203685
+  Bin=3 with 27998 events has MSE=0.00203615 after epoch Nr=100
+-> Start training for energy bin = 4
+bin=4 epoch=0 MSE=0.0938439
+bin=4 epoch=1 MSE=0.0501526
+bin=4 epoch=2 MSE=0.0384505
+bin=4 epoch=3 MSE=0.0251245
+bin=4 epoch=4 MSE=0.0189425
+bin=4 epoch=5 MSE=0.0162802
+bin=4 epoch=6 MSE=0.0105756
+bin=4 epoch=7 MSE=0.00925821
+bin=4 epoch=8 MSE=0.00707651
+bin=4 epoch=9 MSE=0.00594807
+bin=4 epoch=20 MSE=0.00216232
+bin=4 epoch=40 MSE=0.00205289
+bin=4 epoch=60 MSE=0.00205047
+bin=4 epoch=80 MSE=0.0020497
+  Bin=4 with 20353 events has MSE=0.00204876 after epoch Nr=100
+-> Start training for energy bin = 5
+bin=5 epoch=0 MSE=0.0962911
+bin=5 epoch=1 MSE=0.0631162
+bin=5 epoch=2 MSE=0.0462356
+bin=5 epoch=3 MSE=0.0333642
+bin=5 epoch=4 MSE=0.0263187
+bin=5 epoch=5 MSE=0.0196732
+bin=5 epoch=6 MSE=0.0153366
+bin=5 epoch=7 MSE=0.0140103
+bin=5 epoch=8 MSE=0.00861006
+bin=5 epoch=9 MSE=0.00786695
+bin=5 epoch=20 MSE=0.00222734
+bin=5 epoch=40 MSE=0.00205883
+bin=5 epoch=60 MSE=0.00205374
+bin=5 epoch=80 MSE=0.0020486
+  Bin=5 with 15283 events has MSE=0.00204647 after epoch Nr=100
+-> Start training for energy bin = 6
+bin=6 epoch=0 MSE=0.104664
+bin=6 epoch=1 MSE=0.0807961
+bin=6 epoch=2 MSE=0.0652797
+bin=6 epoch=3 MSE=0.0483602
+bin=6 epoch=4 MSE=0.0377678
+bin=6 epoch=5 MSE=0.0290847
+bin=6 epoch=6 MSE=0.02124
+bin=6 epoch=7 MSE=0.0150485
+bin=6 epoch=8 MSE=0.010142
+bin=6 epoch=9 MSE=0.0130727
+bin=6 epoch=20 MSE=0.00263842
+bin=6 epoch=40 MSE=0.0020496
+bin=6 epoch=60 MSE=0.00204244
+bin=6 epoch=80 MSE=0.00203885
+  Bin=6 with 11465 events has MSE=0.00203693 after epoch Nr=100
+-> Start training for energy bin = 7
+bin=7 epoch=0 MSE=0.106917
+bin=7 epoch=1 MSE=0.0939823
+bin=7 epoch=2 MSE=0.0827501
+bin=7 epoch=3 MSE=0.0579835
+bin=7 epoch=4 MSE=0.0506269
+bin=7 epoch=5 MSE=0.0406345
+bin=7 epoch=6 MSE=0.0280361
+bin=7 epoch=7 MSE=0.0288525
+bin=7 epoch=8 MSE=0.0182664
+bin=7 epoch=9 MSE=0.0145489
+bin=7 epoch=20 MSE=0.00286627
+bin=7 epoch=40 MSE=0.00206712
+bin=7 epoch=60 MSE=0.00204689
+bin=7 epoch=80 MSE=0.00203827
+  Bin=7 with 8870 events has MSE=0.00203475 after epoch Nr=100
+-> Start training for energy bin = 8
+bin=8 epoch=0 MSE=0.114758
+bin=8 epoch=1 MSE=0.0913961
+bin=8 epoch=2 MSE=0.0697711
+bin=8 epoch=3 MSE=0.0572124
+bin=8 epoch=4 MSE=0.0529207
+bin=8 epoch=5 MSE=0.040183
+bin=8 epoch=6 MSE=0.0369257
+bin=8 epoch=7 MSE=0.0287682
+bin=8 epoch=8 MSE=0.0215365
+bin=8 epoch=9 MSE=0.0154987
+bin=8 epoch=20 MSE=0.00265014
+bin=8 epoch=40 MSE=0.00202427
+bin=8 epoch=60 MSE=0.00201995
+bin=8 epoch=80 MSE=0.00201724
+  Bin=8 with 7143 events has MSE=0.00201518 after epoch Nr=100
+-> Start training for energy bin = 9
+bin=9 epoch=0 MSE=0.121016
+bin=9 epoch=1 MSE=0.10713
+bin=9 epoch=2 MSE=0.0949542
+bin=9 epoch=3 MSE=0.0743893
+bin=9 epoch=4 MSE=0.0768572
+bin=9 epoch=5 MSE=0.0660391
+bin=9 epoch=6 MSE=0.0563988
+bin=9 epoch=7 MSE=0.0488334
+bin=9 epoch=8 MSE=0.0350069
+bin=9 epoch=9 MSE=0.0366968
+bin=9 epoch=20 MSE=0.00269233
+bin=9 epoch=40 MSE=0.00204639
+bin=9 epoch=60 MSE=0.00202529
+bin=9 epoch=80 MSE=0.00201636
+  Bin=9 with 5916 events has MSE=0.00201064 after epoch Nr=100
+-> Start training for energy bin = 10
+bin=10 epoch=0 MSE=0.119807
+bin=10 epoch=1 MSE=0.105168
+bin=10 epoch=2 MSE=0.0869874
+bin=10 epoch=3 MSE=0.0770909
+bin=10 epoch=4 MSE=0.0646822
+bin=10 epoch=5 MSE=0.0544695
+bin=10 epoch=6 MSE=0.0452961
+bin=10 epoch=7 MSE=0.0379546
+bin=10 epoch=8 MSE=0.0276669
+bin=10 epoch=9 MSE=0.0226835
+bin=10 epoch=20 MSE=0.00285909
+bin=10 epoch=40 MSE=0.00203359
+bin=10 epoch=60 MSE=0.00200542
+bin=10 epoch=80 MSE=0.00199451
+  Bin=10 with 4771 events has MSE=0.00198955 after epoch Nr=100
+-> Start training for energy bin = 11
+bin=11 epoch=0 MSE=0.131892
+bin=11 epoch=1 MSE=0.114124
+bin=11 epoch=2 MSE=0.115139
+bin=11 epoch=3 MSE=0.0871172
+bin=11 epoch=4 MSE=0.0825669
+bin=11 epoch=5 MSE=0.0727647
+bin=11 epoch=6 MSE=0.066081
+bin=11 epoch=7 MSE=0.0496082
+bin=11 epoch=8 MSE=0.0456863
+bin=11 epoch=9 MSE=0.0382491
+bin=11 epoch=20 MSE=0.00386888
+bin=11 epoch=40 MSE=0.00215946
+bin=11 epoch=60 MSE=0.0020409
+bin=11 epoch=80 MSE=0.00200465
+  Bin=11 with 3997 events has MSE=0.00199068 after epoch Nr=100
+-> Start training for energy bin = 12
+bin=12 epoch=0 MSE=0.121907
+bin=12 epoch=1 MSE=0.108631
+bin=12 epoch=2 MSE=0.0943516
+bin=12 epoch=3 MSE=0.0809215
+bin=12 epoch=4 MSE=0.078137
+bin=12 epoch=5 MSE=0.0643835
+bin=12 epoch=6 MSE=0.0625999
+bin=12 epoch=7 MSE=0.0528494
+bin=12 epoch=8 MSE=0.0386988
+bin=12 epoch=9 MSE=0.0351532
+bin=12 epoch=20 MSE=0.00395377
+bin=12 epoch=40 MSE=0.00196586
+bin=12 epoch=60 MSE=0.00195455
+bin=12 epoch=80 MSE=0.00194889
+  Bin=12 with 3329 events has MSE=0.00194583 after epoch Nr=100
+-> Start training for energy bin = 13
+bin=13 epoch=0 MSE=0.128016
+bin=13 epoch=1 MSE=0.112773
+bin=13 epoch=2 MSE=0.103046
+bin=13 epoch=3 MSE=0.0891791
+bin=13 epoch=4 MSE=0.0846686
+bin=13 epoch=5 MSE=0.0881532
+bin=13 epoch=6 MSE=0.0783716
+bin=13 epoch=7 MSE=0.060637
+bin=13 epoch=8 MSE=0.0485702
+bin=13 epoch=9 MSE=0.0457671
+bin=13 epoch=20 MSE=0.00549953
+bin=13 epoch=40 MSE=0.00228257
+bin=13 epoch=60 MSE=0.00202332
+bin=13 epoch=80 MSE=0.00195674
+  Bin=13 with 2788 events has MSE=0.00192774 after epoch Nr=100
+-> Start training for energy bin = 14
+bin=14 epoch=0 MSE=0.132912
+bin=14 epoch=1 MSE=0.11821
+bin=14 epoch=2 MSE=0.106438
+bin=14 epoch=3 MSE=0.0846028
+bin=14 epoch=4 MSE=0.0844719
+bin=14 epoch=5 MSE=0.0739776
+bin=14 epoch=6 MSE=0.0738534
+bin=14 epoch=7 MSE=0.0666857
+bin=14 epoch=8 MSE=0.0545403
+bin=14 epoch=9 MSE=0.0503971
+bin=14 epoch=20 MSE=0.00512137
+bin=14 epoch=40 MSE=0.00208207
+bin=14 epoch=60 MSE=0.00199004
+bin=14 epoch=80 MSE=0.00195568
+  Bin=14 with 2522 events has MSE=0.00193753 after epoch Nr=100
+### MSE for this batch after 50000
+Event=50000 Bin=0  MSE=0.00159898
+Event=50000 Bin=1  MSE=0.0018794
+Event=50000 Bin=2  MSE=0.00197255
+Event=50000 Bin=3  MSE=0.00203615
+Event=50000 Bin=4  MSE=0.00204876
+Event=50000 Bin=5  MSE=0.00204647
+Event=50000 Bin=6  MSE=0.00203693
+Event=50000 Bin=7  MSE=0.00203475
+Event=50000 Bin=8  MSE=0.00201518
+Event=50000 Bin=9  MSE=0.00201064
+Event=50000 Bin=10  MSE=0.00198955
+Event=50000 Bin=11  MSE=0.00199068
+Event=50000 Bin=12  MSE=0.00194583
+Event=50000 Bin=13  MSE=0.00192774
+Event=50000 Bin=14  MSE=0.00193753
+## Total MSE for all bins for this batch 0.0294712
+Event=50100
+
+
+-- Write output file=Analysis.root
+
+
+TFile: name=Analysis.root, title=Histogram file, option=CREATE
+TH1.Print Name  = debug, Entries= 0, Total sum= 0
+TH1.Print Name  = jet_PT, Entries= 6505426, Total sum= 6.50519e+06
+TH1.Print Name  = jet_truth_PT, Entries= 299078, Total sum= 298888
+TH1.Print Name  = jet_dR, Entries= 38853647, Total sum= 3.81548e+07
+TH1.Print Name  = in1, Entries= 216603, Total sum= 147702
+TH1.Print Name  = in2, Entries= 216603, Total sum= 213751
+TH1.Print Name  = in3, Entries= 216603, Total sum= 216603
+TH1.Print Name  = in4, Entries= 216603, Total sum= 216603
+TH1.Print Name  = out1, Entries= 216603, Total sum= 209696
+TH1.Print Name  = out2, Entries= 216603, Total sum= 208920
+TH1.Print Name  = out3, Entries= 216603, Total sum= 210473
+TH1.Print Name  = out4, Entries= 216603, Total sum= 209088
+******************************************************************************
+*Tree    :Ntuple    : Ntuple                                                 *
+*Entries :        0 : Total =            1360 bytes  File  Size =        406 *
+*        :          : Tree compression factor =   1.00                       *
+******************************************************************************
+*Br    0 :RunNumber : RunNumber/I                                            *
+*Entries :        0 : Total  Size=        501 bytes  One basket in memory    *
+*Baskets :        0 : Basket Size=      32000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br    1 :EventNumber : EventNumber/I                                        *
+*Entries :        0 : Total  Size=        509 bytes  One basket in memory    *
+*Baskets :        0 : Basket Size=      32000 bytes  Compression=   1.00     *
+*............................................................................*
+New configuration successfully written to: out_ann/config.cfg
+Saving ANN results 
+0 Save out_ann/ann_jet_0.net with RME=0.00159898
+1 Save out_ann/ann_jet_1.net with RME=0.0018794
+2 Save out_ann/ann_jet_2.net with RME=0.00197255
+3 Save out_ann/ann_jet_3.net with RME=0.00203615
+4 Save out_ann/ann_jet_4.net with RME=0.00204876
+5 Save out_ann/ann_jet_5.net with RME=0.00204647
+6 Save out_ann/ann_jet_6.net with RME=0.00203693
+7 Save out_ann/ann_jet_7.net with RME=0.00203475
+8 Save out_ann/ann_jet_8.net with RME=0.00201518
+9 Save out_ann/ann_jet_9.net with RME=0.00201064
+10 Save out_ann/ann_jet_10.net with RME=0.00198955
+11 Save out_ann/ann_jet_11.net with RME=0.00199068
+12 Save out_ann/ann_jet_12.net with RME=0.00194583
+13 Save out_ann/ann_jet_13.net with RME=0.00192774
+14 Save out_ann/ann_jet_14.net with RME=0.00193753
+Total MSE for all bins for this run is 0.0294712
+Generate files from:  /netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/
+data.in is done!
+Run rfast004
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTreeReader.h
+   requested to autoload type ExRootTreeReader
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTreeWriter.h
+   requested to autoload type ExRootTreeWriter
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTreeBranch.h
+   requested to autoload type ExRootTreeBranch
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootResult.h
+   requested to autoload type ExRootResult
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootClassifier.h
+   requested to autoload type ExRootClassifier
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootFilter.h
+   requested to autoload type ExRootFilter
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootProgressBar.h
+   requested to autoload type ExRootProgressBar
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootConfReader.h
+   requested to autoload type ExRootConfParam
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootConfReader.h
+   requested to autoload type ExRootConfReader
+Error in cling::AutoloadingVisitor::InsertIntoAutoloadingState:
+   Missing FileEntry for ExRootAnalysis/ExRootTask.h
+   requested to autoload type ExRootTask
+Error in <TCling::RegisterModule>: cannot find dictionary module CParticle_dict_rdict.pcm
+Error in <TCling::RegisterModule>: cannot find dictionary module LParticle_dict_rdict.pcm
+ ###  Initialize ANN in Nr bins=15
+   - Create new ANN Nr out_ann/ann_jet_0.net
+   - Create new ANN Nr out_ann/ann_jet_1.net
+   - Create new ANN Nr out_ann/ann_jet_2.net
+   - Create new ANN Nr out_ann/ann_jet_3.net
+   - Create new ANN Nr out_ann/ann_jet_4.net
+   - Create new ANN Nr out_ann/ann_jet_5.net
+   - Create new ANN Nr out_ann/ann_jet_6.net
+   - Create new ANN Nr out_ann/ann_jet_7.net
+   - Create new ANN Nr out_ann/ann_jet_8.net
+   - Create new ANN Nr out_ann/ann_jet_9.net
+   - Create new ANN Nr out_ann/ann_jet_10.net
+   - Create new ANN Nr out_ann/ann_jet_11.net
+   - Create new ANN Nr out_ann/ann_jet_12.net
+   - Create new ANN Nr out_ann/ann_jet_13.net
+   - Create new ANN Nr out_ann/ann_jet_14.net
+# Structure this ANN
+Layer / Neuron 0123456789012345678901234567890123456789012345
+L   1 / N    5 BAaaa.........................................
+L   1 / N    6 BbbAA.........................................
+L   1 / N    7 baBBA.........................................
+L   1 / N    8 baBbB.........................................
+L   1 / N    9 baaaB.........................................
+L   1 / N   10 BaBaA.........................................
+L   1 / N   11 aaaAB.........................................
+L   1 / N   12 AABBb.........................................
+L   1 / N   13 ababB.........................................
+L   1 / N   14 babbA.........................................
+L   1 / N   15 baBaA.........................................
+L   1 / N   16 BbBBa.........................................
+L   1 / N   17 abBAB.........................................
+L   1 / N   18 Aaaaa.........................................
+L   1 / N   19 AAabB.........................................
+L   1 / N   20 abaAb.........................................
+L   1 / N   21 BAaBB.........................................
+L   1 / N   22 bABBA.........................................
+L   1 / N   23 aaBbb.........................................
+L   1 / N   24 AAabb.........................................
+L   1 / N   25 BABaA.........................................
+L   1 / N   26 BABbb.........................................
+L   1 / N   27 bBBaA.........................................
+L   1 / N   28 AAaAa.........................................
+L   1 / N   29 BbAAb.........................................
+L   1 / N   30 BaBbA.........................................
+L   1 / N   31 bBbBa.........................................
+L   1 / N   32 BABAB.........................................
+L   1 / N   33 bABBb.........................................
+L   1 / N   34 aABBa.........................................
+L   1 / N   35 bBaBA.........................................
+L   1 / N   36 AAbAB.........................................
+L   1 / N   37 AABAA.........................................
+L   1 / N   38 bAaba.........................................
+L   1 / N   39 bbbBb.........................................
+L   1 / N   40 aaBba.........................................
+L   1 / N   41 bbbab.........................................
+L   1 / N   42 ABBBa.........................................
+L   1 / N   43 AabAb.........................................
+L   1 / N   44 AAABA.........................................
+L   1 / N   45 ..............................................
+L   2 / N   46 .....bbBbBbaaBaABABaBAaAaAaABBAaAaaaaAaaAaBBab
+L   2 / N   47 .....AaBaAABbabABAAAabaAAABbbaAabABabaaabbbbab
+L   2 / N   48 .....BbBaBbabBBBAbBbAabbaAaABAABBAabaaBBabbABb
+L   2 / N   49 .....AAbAABbBbaaaBbbAbBaaBABBabbAABAaABBbABbAb
+L   2 / N   50 .....abbAbBAbbBbAABbBBAABaBabAABABAAbABBBAABAA
+L   2 / N   51 .....BaaBabBbAAaAbAaBaBABABAaBabaaABabbbAbBABA
+L   2 / N   52 .....bABBBAbAabbaAabbAaAbbbaaaBaaaaBABBaBaaaBA
+L   2 / N   53 .....abaBbAaaaAAaBBAAaBbABAAAbaBABBbaBaaBbBaaa
+L   2 / N   54 .....BAaAbbbbaBBBaabBaAAbAbBbaBbbbAaBbBAabBaaA
+L   2 / N   55 .....babaabABBAABAAbaBbaaAaaAbBABbBAbbAAAAaaab
+L   2 / N   56 .....BbAAaBaaaBbBaABbbBbbaabBBAAabbaBbBAABBBbA
+L   2 / N   57 .....bbbABbABbBbABbAABBABbAbbbABbAbBAbBbbBBBbA
+L   2 / N   58 .....bBAaaabbbBaBbaBAabaAbBBBbBBBBbAbBaabAAaAA
+L   2 / N   59 .....BaAaaaAAAaAabAabAabABbAaABBbaAAbbaaAAbaba
+L   2 / N   60 .....baaABaabaBbAAaaaaaAbbAaAbbbbabaaAAbAbaAAa
+L   2 / N   61 .....BbBaabBBBBbabAAbBAAbBBBABaAaBaABAabBABBaB
+L   2 / N   62 .....bBbBaaBBBBBBAABBabBAAAbBBbaAbBAbAAbbBBbBA
+L   2 / N   63 .....BAaAabBabaBBABAAaaAbBBBABBaBBbABBBAbbaabB
+L   2 / N   64 .....abaaBbAbABbABAAAbaAaBAbBbbBAAbabbBaBBbbAB
+L   2 / N   65 .....abABAabbbAbBABBBAaABBAbAbbabbBBabAaBbABbb
+L   2 / N   66 .....BBABBAAabaaBaBBAaBAbBbbAABAbBBaBBbABAbbBA
+L   2 / N   67 .....aAbaaAAaaBbabAbbaaBbAAbAaBaabbBAABBbaaaBb
+L   2 / N   68 .....AbaaaaAAbBaBBBbBbABbAaBaabBBAAbbBaaaAbBBb
+L   2 / N   69 .....bAbbBBaaBABaaaAAaabbAbBBAbaBbbBaBBAAABbAa
+L   2 / N   70 .....bBBaaaBBaBaAAaaBAbbBBAABbbABbbabBbAaAaabb
+L   2 / N   71 .....BABbbBBbBAbabBAaaaaaBAabaBAAbABBaAbaABAaa
+L   2 / N   72 .....ABaaaABBbaABAAbaaAAbAAAbABAaAbBbbaAaBaabA
+L   2 / N   73 .....bBaAbBbBabaBBAAAaBaaBaAbBBbaabbabababbbAa
+L   2 / N   74 .....AabbBBaBbBAAaBaaBBBbBbabbAaaBBAaaBaaBBabB
+L   2 / N   75 .....bAaBbBAbABBAbbBBAbAABBBBaaAaABbAAAAAaaABb
+L   2 / N   76 .....AAaAabbaAAaAAbbBBaAAAabbBBaaAaabBABaBbBaB
+L   2 / N   77 .....bbabbaBabABAAbaAaBbBbaBBbbAbBbbbbAbbBbAbA
+L   2 / N   78 .....AAaAbBbBbbBaBBaBaABaABAbbAbbabBbBaABbBAbB
+L   2 / N   79 .....AABABABAAabaBaAAaAbAAbABAabAbaABBaaAbaaAA
+L   2 / N   80 .....abABBbaaaBbaaBbBbABabBbAbBAababAAAaaBABbA
+L   2 / N   81 .....babBaBbbBaaAabBbAbbbbABBbbAAbBbbbabAbbBba
+L   2 / N   82 .....aBBaABbBbbBBbBBbaAabBaababaabaBaaAABABABB
+L   2 / N   83 .....AABAAbBbabbBabbAaAABABbbAbBaBAaAaabBABbBb
+L   2 / N   84 .....aBAaBbBABAbAAaaBbAABbbbabbBbaBbAAAbAABaaa
+L   2 / N   85 .....abbBABbaAbaAbBAaBABBBAAaAbbaaABBBbBabbAAb
+L   2 / N   86 .....baaBBABAAAAbbBAaBbBAbAabAAbAbAAbBBbBABAaa
+L   2 / N   87 .....baAbbBbaAAaaBaBAAAAaaBbbbbBBBbabABbBBabaB
+L   2 / N   88 .....ABBBBaAabBAbbBbbAbbBabAaaabAAAAbaabbAAaBa
+L   2 / N   89 .....bBaBBAABAaaBBAaaAbBbABABBAAaBAABabBbAabaA
+L   2 / N   90 .....aaABABAAABbaababBAbaaBAaBBbbBABaBaaAabbbb
+L   2 / N   91 .....aAAABAAAABBAAaaAAaAbbBbAaAbaAbabABAaAaBbb
+L   2 / N   92 .....BABabABAbbAbbaaAaBaaaAbbaABAaBBaAAABaAaaB
+L   2 / N   93 .....BABabABbbbaBaAbBaAabaABbaAabBBBBABaAAbBBa
+L   2 / N   94 .....bAAAAaBbBbAAbAbBbbAbbAAbBaABbaabBBBaaAAbB
+L   2 / N   95 .....aBBBBBbBabbbAbbbBbbbaabbbAABbBAaAAaaaAaBA
+L   2 / N   96 .....abaAbaabAAaBAABbbAaBaBabaBaBbaAaaBbAaaABB
+L   2 / N   97 .....bAAAAABabBABbAaBbbbAAaBAaABBbBBaAaBbBBabA
+L   2 / N   98 .....bBBAaBBaBabbaBABBAbAaabAaaAaBABBAAABaAabB
+L   2 / N   99 .....AababbbAaAbBBBaaAAaaAaBaBBAaaBaBaAbABaabb
+L   2 / N  100 .....aBBabaBBAbaBbABbaaaaBaBaAabBAaBbbBaababBa
+L   2 / N  101 .....ABaaBABbBbbbBaAaAAbBaabbBaabAbaabBABAAbaA
+L   2 / N  102 .....bAAAabaBbbaaaabBBbAbABbAABabbABaaABBAaBAA
+L   2 / N  103 .....bbBAaAaAbaababBaabAbBBaABabbbBBabABaabBAA
+L   2 / N  104 .....bBbaAAABbABbbaBaabAaBBaABABbAAABaAbBbBAaa
+L   2 / N  105 .....AaABabaaAAaAbbaABAaabaABaAbaaAABBaBbabAbA
+L   2 / N  106 .....bAAbbabABABbaBABbBaAAaABbBbbabBABABbbBBBa
+L   2 / N  107 .....BbAAAABAbabaBBaBbAaaaBabAaaAbaBBaAAbbaAbB
+L   2 / N  108 .....BABBBABABabBAbaBaBbABbbAAbAbBBbAaBaaAaBAA
+L   2 / N  109 .....babbBBABbaAbabBABBaBbBaBaBAABbbBaababAbbB
+L   2 / N  110 .....AaaBbBBbaBbabbABAaBAAAbBAabaababAAbAABABA
+L   2 / N  111 .....BaBBBBaaAbBabAbAAabBAbaaabbbBbBAaBaaABAaB
+L   2 / N  112 .....aAbbAAAbBaBBBabBaaAAaaBaAaBaBaaabaaBbbBBa
+L   2 / N  113 .....ABaBbaaABBBaBbBbbabAAaAbBaaBbaaBbABbBaABb
+L   2 / N  114 .....AbbBbabaAAbbbaBAAAABbABAabAABABABbaBAaabb
+L   2 / N  115 .....AbaBbBaAaaAbaaaabbaAbBAbaAABBBBABbaBBBAaa
+L   2 / N  116 .....aaABBbBbaAbabbAABaAAaaAaAAaAbBBAbAAbAAbba
+L   2 / N  117 .....aaaabbbABABbbaBBBABAAABbaBBBbBbaaABABbbBB
+L   2 / N  118 .....bbbAbBaBABaaAABAaABaBaBAbAAbAaBBABAAABaaB
+L   2 / N  119 .....BBaaAbBaBaabaBaBAaAbaAAbbaABBbAABbbAabBaA
+L   2 / N  120 .....bABbBBAaaAABaABAaBaAAbaBaBbaBaBbbBbBABbBA
+L   2 / N  121 .....BBBaBABBBaabBbaAaAAAAABaBAbABbbABbbBABAAa
+L   2 / N  122 .....BAbbBBaAababBBBABAaBBbBBbAababAbAAaaAAbbB
+L   2 / N  123 .....abAbbbbAABaBBabaBaABBBaAbBbBbaAaaaAAaAbbA
+L   2 / N  124 .....ABaBBBAbAAbABAABBABbbbAABaBaAbBbbabbbBaAa
+L   2 / N  125 .....aabbbBBAAbBBBaAbabAaBBAaBAaABbBbabaababAa
+L   2 / N  126 .....BAaabAAbabbbBabaBBbbBaABAbBBbAabbBAaabABa
+L   2 / N  127 .....BBbabAbBBaAbBABBABbbababABABaaaaaAAabBabb
+L   2 / N  128 .....bbBAbBbbBaabBaBABBbbaaABBBbAbbBbaABAAbAAa
+L   2 / N  129 .....BAaaABaabAAabAaBBbbBBaaAbBbaaABaabABbbabA
+L   2 / N  130 .....BaAABAaBAaBbAaaaAABaaaAAbAAbBAABbaabBBBAb
+L   2 / N  131 .....ABAbbbAAbBbaABabAaBbbBaaaAababbbBBbBbBAbA
+L   2 / N  132 .....BaaBBaabaAabbBaAbABaAbbAabAaBAbBbaABABbBA
+L   2 / N  133 .....AbAaabABbBAbbaAbBBbAbBAaAABABBbaBAAaBbbBB
+L   2 / N  134 .....BbbbAbbAaBAaAbBbbAbBBaAabbababbbbbaBaAAAa
+L   2 / N  135 .....aBBaBbaAbaaaBBabbAabAaaBBabaBBAaBAABAbaAa
+L   2 / N  136 .....BBaAaaBBAbabaaBBaaAabbbAABbBaAbbAABBBAAAA
+L   2 / N  137 .....bAbaABBBAbBBaaAbaaabAAAbaabBbBAbaBABBaBAA
+L   2 / N  138 .....AaBbBBAaaABbabaBaaBbbbaBAaBbaAAbBAbBABabA
+L   2 / N  139 .....bbBaaBABBABBbBAAABbaAbababAbaAAAAAbbAABaa
+L   2 / N  140 .....AaAaBabAaaaaBaBBbBaAAbaabaBBaaaBABaaaAbAb
+L   2 / N  141 .....abBBBBBAaAaABABaABABbAAbbbaAbBBABAABAaaBb
+L   2 / N  142 .....BabAaAbbbbbBAbBAaABaaAaBabaBAaBaBBbbaabAA
+L   2 / N  143 .....bAbaaBBBBabAAbBBAAaBaBBabBBaBaBbBbAabAaBB
+L   2 / N  144 .....AaAAaaaBBaaBbABBabBBbbBbAbbbabbBAAABBBAAa
+L   2 / N  145 .....BAaAaaBAbBAbAABABbbbbBAAAAAAaaBaBbBbaBAAA
+L   2 / N  146 .....bBbBBBBBBBbBAAabaBaAAAaBAaaabBBaBbaABaABb
+L   2 / N  147 .....AABaBbABababAaAbAbbAbAAbBabbBBaAAabaaAaBB
+L   2 / N  148 .....BBAbAABABaAabBaaBAbBbBaaBBAAbAABabBbABAAa
+L   2 / N  149 .....ababaAbbBbbAaaAabbaAAabBabAbBbaaaAAAaABbB
+L   2 / N  150 .....BBbaAaaABbabaaaABaabBBaaabBbBBBBBbbaAAbaB
+L   2 / N  151 .....AabBBABabBbBbAaaaabaaBbabaBAAaabBABAbBbbA
+L   2 / N  152 .....bbBBabbBaabbaAaBABaBaABBAabaAbbAbBAABAabB
+L   2 / N  153 .....AaabBaBABAbaabbBbaaaabAaAbbaAaabBBaAbbabB
+L   2 / N  154 .....AAaAAbBbAbABABAAbBaAbAABBbbbAbBaAbBbaAaBB
+L   2 / N  155 .....BBaAabAbaaaBBbBBaBAaBBBBBbaAababBBBaBAaaB
+L   2 / N  156 .....AbABbAbBbABbAABABAbbBbbAbaaABBaABBAbaBBAa
+L   2 / N  157 .....ABbaAAaaAAbBBBBaaAbbBBbBAbaabBBBBBbAAABaa
+L   2 / N  158 .....BabAaABBBBAAbabbBAbAaBAabbBBBabAAaaBbaABa
+L   2 / N  159 .....aAaBAaAaAaBaBbABbaAAAabbBbbbBBAbaBbbaAABb
+L   2 / N  160 .....abBAABBbAaAbABBABbaBAAaaAaAaBaaaAaBabAAAb
+L   2 / N  161 .....aBAbAbbAABabbABAabABaBAABBBaaAAAabBBaBABA
+L   2 / N  162 .....BbBABabbBBaAabaabBBAaABAaBBaABBabAbbbabBb
+L   2 / N  163 .....AAAAbbAbbaAAbbbbbaAbabbbbbbabbABAaAAAaAAA
+L   2 / N  164 .....abBaaBAAaAbaBbabaBaaAbbbABABAbaBabaABBaaA
+L   2 / N  165 .....AAaBbabbAAAAAAaAabbaAbBBaaBbBbAaABbAaaABB
+L   2 / N  166 .....aAAbBaabaBAaAABbaBbAAabAABBBABBbAAbaBAAaA
+L   2 / N  167 .....aBbBAaaaaBbBbAabAaBaaBBBbaBBbbaabAaABBbaB
+L   2 / N  168 .....bbbBAbabbAaBAabbaBaAbAAAbaABabAAbBaBBABba
+L   2 / N  169 .....aBBBBbbAaABbbAbaabBaBaAAAaAaaAAAAAaaAAbbb
+L   2 / N  170 .....bbaAaBbAAaabbbBaAbBaAABabaBAAbBAaaaAbAaBB
+L   2 / N  171 .....AbBABaaBaAABABbBBBAbAaaBBbbaaBbbbbBBAbBbB
+L   2 / N  172 .....AbaAbaaBBAAbBABbAaAAAAAAaAaAaaaBaBAAbbAbA
+L   2 / N  173 .....baABaAaAbbbAABbbbAAAbAbBbAbbabAAAbaBBBaBB
+L   2 / N  174 .....aAAaABaaababbbaBbababABaBBbBbbAABbBAbaBAA
+L   2 / N  175 .....bAAaBaAaAbabBBbBbBBaAAbBAABbAaAAbbbBABaaB
+L   2 / N  176 .....BABAAABAababbbABbBaAabAAbAaBBAABbaaBbaAAa
+L   2 / N  177 .....BAAbaabbAAaAabBBaBBBAAbBbBbaAABabaAAABBaA
+L   2 / N  178 .....bbBabBABBaaAAaAaabbBbAbabAbBaaaAAabAaAabb
+L   2 / N  179 .....AAABabaAbbAAabBbbBAAbabAaBBBabBBAABbAaBBa
+L   2 / N  180 .....aABAABAaaaAAAbBabAAbAABaAbbBBBbaABBbBaabA
+L   2 / N  181 .....BAbbAAbabbbBbaababBaabBabbbAAbbaBaAAbABaB
+L   2 / N  182 .....BbBaaBAaBBBBBbBbaaAAABAbabbbbABBAAbBABaaB
+L   2 / N  183 .....aaAaaAABbaabBAABBABaABBabBBBaaBAAAbBbBAab
+L   2 / N  184 .....bABAaAAbABAaBbABBabbaBBBBAbAbaBabAbAaAABA
+L   2 / N  185 .....aaAaBabaAaAaaaaBabbBBabAaABbbBAabaAbABaaa
+L   2 / N  186 .....bAAabABbBBbbBAAaABAaAbABBBABaBbaABBAABBaA
+L   2 / N  187 .....BAaAbBabaAAaaabbBBABbBabBBAABBbBaaaAaAAAa
+L   2 / N  188 .....abBBabBaAAAaBAbBaAAaBaAaBaAabaBAaAaBAbbbA
+L   2 / N  189 .....AAAaBaAAbBaaAAabaBbAAABaBBbbBaAABbBAAAaAa
+L   2 / N  190 .....AbbaabAbbaBBaaBbaBBAAaABaaaBAbabbaAAaaBaA
+L   2 / N  191 .....BaBbbBabBbAaAAABBAaBBAbbaAaAABbabbaabBABB
+L   2 / N  192 .....aaaBBaBAAAaaBaAaBbbAaaBAAaAabAaaBAaBbbaBB
+L   2 / N  193 .....BbAaBbbbbBAaBbbaAAabBBbAaBAabAabABaAbaAba
+L   2 / N  194 .....bAbaBABabbbBbBabaAaBBaABAaBbBbabAAaabaBbA
+L   2 / N  195 .....bbABaBaBbaBaBBbbAbbBabABAbBBBbaBbbAaBBaba
+L   2 / N  196 .....aAbbAaBAAABBbBabBbBBABBBAaBAABBbabbBaBaba
+L   2 / N  197 .....aBAabAbaABbABBbbAABaABBABABBbbaABBBBABaaB
+L   2 / N  198 .....aBAbbABBaaabbBbBBBBBbAABaAAaBBbbAAaBaaAAA
+L   2 / N  199 .....BBAABaaAabBbBBAaaBbbbaBABABbbAAbaaAaBbBaa
+L   2 / N  200 .....BabABaBBABBBAABaaBAbAAaBbAAbAbAaaAbaBBaAB
+L   2 / N  201 .....bAABaBabaaABAAbabaBaBaAaabaaABbBaAAAaBBBb
+L   2 / N  202 .....aAAbAbbbBaBabbBaAbBAaABBaAabAbbbBBbABaABB
+L   2 / N  203 .....aaBAbabaaBAbBAaaBabBAbAAbbAaBabbBbBbAbaBB
+L   2 / N  204 .....bBAAbbaAbaabbBaaaAbBBaAbbBAbaaBaaAbaAAbAB
+L   2 / N  205 .....aBBbbaABaaAAbABBaBaABBBABabaABaBAabBAAABb
+L   2 / N  206 .....aAabaaaaAbaabBaABAbAbbaaabBbBBbaaAaBBBbAB
+L   2 / N  207 .....aBbbaAbBABbBbabaababbAABbAABAbBbbBaaaaabb
+L   2 / N  208 .....ABaBBAaBbAbAbBBBAAaBAAbaBABbbbbABaABbBAba
+L   2 / N  209 .....BBABAaAaBabaAAbbabaaaBaBAbbaBbABbaABAbbaA
+L   2 / N  210 .....aAbBBabbAAaABabbaABAaABAaAbABAbbbaBBBbbAA
+L   2 / N  211 .....AbABaBaBABbaAABaBabaAbAbBABBAaAbAbBbBaBAa
+L   2 / N  212 .....bbbBBaAaabbaAbbbBbBaABbBBbAbbaaaAAbaBBBbB
+L   2 / N  213 .....BAAbBBbBAaaaAaaABaAaBBBabaaBbaBbbabBbbABA
+L   2 / N  214 .....bbbaaBaBaBBaAbAbaAaBaaBBAAbBaBaAbAbAaAaBa
+L   2 / N  215 .....babaBbBaaABBABaaBbABAaBbaaabBaabAaaaAbBBB
+L   2 / N  216 .....AAAabBabAaABbBaAaaAABAbaBABbaAbbaAAaabABa
+L   2 / N  217 .....aBAbaaaABBAabBaAAAbaAbAaBBABaAbAABBBbaABa
+L   2 / N  218 .....baaBBbAabBbaAabaBbBAaAbbABbBAbbAaaAbaaAAb
+L   2 / N  219 .....ABABbbBbbAABAAaABbbBbBaAAAbBbABAAAAABaBBB
+L   2 / N  220 .....AAAababbabaaAbBbbAbBABaaabbBbbBABaBBBbbbb
+L   2 / N  221 .....aAAaaAABBaAABBBBBABbAABBaBAaBBAaaaBBbaABB
+L   2 / N  222 .....bAAbaabbabABbAaBaBBaaaBBbABAaAaAbBAAaABBB
+L   2 / N  223 .....AABabBABAbaBbbbAbAbAbBBBAAaaAbbbBBabAbbaa
+L   2 / N  224 .....aaaAabAbbabbabAbABABBBABbAAaAbAbaBBBbAbab
+L   2 / N  225 .....aaaABAbBbBABAAbababbbaAbbAbAAaABBbAAAAaBA
+L   2 / N  226 .....bAbABABbAbaBBaBaaABBaBAAaabbAbABBBAAaABbA
+L   2 / N  227 .....bBaaBABAAABAaabAAbaABbABBbbaBaBBbaabbbAAB
+L   2 / N  228 .....AabbaABaBAabbbBbaabAbbBAaBAAAaaaAAabbbAbB
+L   2 / N  229 .....BaBBabaAbBBbBaABbbaaABbbbbaaAAbAbbaabBbaA
+L   2 / N  230 .....BAAabaaaBABAAbBBAbabaBbAaABbAbBaAaAABbbAA
+L   2 / N  231 .....baaabbBaAbBAbabBbaabaBBBAaAAAaaAAABBBBbAB
+L   2 / N  232 .....BbbbaBaBbabbbBAAAbabaBAbBaBAAaAaAAAbaBBAa
+L   2 / N  233 .....bBABabAAaAbaabaBbbaAABaaaaBaaAAaabaBaBaBA
+L   2 / N  234 .....AaBBABBBbAAbbBaaABBbabAAaaBaBBBabBbBAbABB
+L   2 / N  235 .....bBBbaaAbbBAaabABbbABbBbBbbAbAAbBABBBbAbbA
+L   2 / N  236 .....BaBbbBbaababaaaababAaBbaBbaAaAbbbbbaBbAba
+L   2 / N  237 .....baBAAbAbbaAbABbAaABbAbbAbAaaaABABAbAABABa
+L   2 / N  238 .....aBBaBABAABbAbAAABBbAAAaaBBBAABBbBBaBaaabb
+L   2 / N  239 .....aAbBaBBaBabaBabBbBAbBABAbAbaBaAaBAbbAbaaA
+L   2 / N  240 .....aBAAbaBbbBBABABaBaabBAbABaaBBBAbAbBBABBAB
+L   2 / N  241 .....BaAAabaAaAAbAaBbABBAaBbABbbBbABbBAAbAbBbB
+L   2 / N  242 .....AbABBAAAabbaaAbABbAaBBaaaAbAababaBbbAABBB
+L   2 / N  243 .....bbaBaBAaAbaAaBBbBAAbbAaBAAaaaaaaaAaAABbaB
+L   2 / N  244 .....ABbaBbbaAaaaAaBbBbAaAbAbaaBbAaBbbbAbaAAbB
+L   2 / N  245 .....baAAaAAAbBbbaaABbAAAAABAbBbBabBAAAbBbAaaa
+L   2 / N  246 .....AABBbBbAaAbbaBaaBaABaaABaabbBaAaBaabaaBAb
+L   2 / N  247 .....BBaBaAAAaAbAbBbABbaaABbbbaAAbbAbbBBaAabbB
+L   2 / N  248 .....bBbBbABbBbBBabBAAaABbAbBaaABABBAABAAaaBaa
+L   2 / N  249 .....BaBbbaAAbAAAAAbbaBBbAaAAbbBabaBBABbBbAaba
+L   2 / N  250 .....bBbBbabBbbAAAbABbbbabBbBBBbAaabAaaaaAabBa
+L   2 / N  251 .....BAbBbbBabaAbAAbAAABbBAabBABbBBAAaBAABAbBB
+L   2 / N  252 .....ABAbBbBABbAaaBabAABAbABBbAAAAAAaAbaababba
+L   2 / N  253 .....AABaBBbaBBAaBAAaabBBBaaBBBBbbbAAAAbaAaBaa
+L   2 / N  254 .....aBbBaabAabaAAaaaaAaaabBBaaaBbBbABbAaaBBBB
+L   2 / N  255 .....aaaABBBaabBabAAabaAbabBAAbbabBaaaBbaAbBBa
+L   2 / N  256 .....AaabBBaaaaBAaabaaAaabBABbBabBaaaAAAaABBBa
+L   2 / N  257 .....BaAaABBaabaaBbaBaaABABaaABBaABAAbbBBbBbab
+L   2 / N  258 .....aBBabBBAAAaAbAbBAaAabbAbbaaBABBBABaAAaaab
+L   2 / N  259 .....ABbaBBBaaaaAbAAABAbAaBabaBBAabABbBbbAbabA
+L   2 / N  260 .....BBAAabAbbbabAAAaAbBBBABABBaBaAaaabBBbaBaA
+L   2 / N  261 .....aAbbbAAbaabBaBAabABBBbbbBbbaBABabBababaBa
+L   2 / N  262 .....ABBaAaAbbabbabbAaaABbBBbbbAbAaAbbAAABbBBa
+L   2 / N  263 .....BbBbbaaaBbAAbABabbbaBbAaAaaAbabbaBbAaaBbA
+L   2 / N  264 .....aBAbAbbBbAAabbbaaAABBAbAABBbBbAbBaaAaaaAB
+L   2 / N  265 .....BBbbBAAAbaaAAbaababbBabbAAABbbBbBBbAaAaAB
+L   2 / N  266 .....AaaAAABbBbbbbbBABBABAABABAbaBAbabAbAaBBbB
+L   2 / N  267 .....BabbbBBBaBAbAbbbbaBBAaBbaAAaaAabBabbbbBAB
+L   2 / N  268 .....aBaABAAaaaBBabaBAAbabbaAaaAaaaaBaAaabbAAa
+L   2 / N  269 .....AABBBAaaAAABBbaaBBAabaAAAbBAAAbabBbbaAAba
+L   2 / N  270 .....bbbbaAbbbababBbbBBAABbABbAaBaabaAaABBABBB
+L   2 / N  271 .....baBBABBaAaaBbaBBABbbBaAbBaBAaBaAbaAAaabbA
+L   2 / N  272 .....aBAABAaAAaaBBaBaaaBbBaabBBAabABaaAbbbaAAB
+L   2 / N  273 .....bAAaAbBBbBBabBabAAbbAAabAAababBaAABaBAbBA
+L   2 / N  274 .....BaABABaabABABbaAAaBAabaBbAAABAbABBAAAbBAA
+L   2 / N  275 .....BaAbAbABbbbaAbabBBBabAbBaAAaAbbaaAabBbbBa
+L   2 / N  276 .....aaBaABbABaAAAABbbaAaabAbABbABbBbaAaBAAAAB
+L   2 / N  277 .....baAAaAAAaBbaAabaaAbaAbBaABBbaAbaBAbbaBBAB
+L   2 / N  278 .....bbaabBBBbaaabBBBAbbabAaBAabaaBbaBAAbaAbAB
+L   2 / N  279 .....ABBaBAbBBabaAbBbbaaBaABbabAbbbBBbAbBabBbA
+L   2 / N  280 .....bAaaaaaBBabAaaBABBBbBAbAAbBBbbaaAAAbbbBBA
+L   2 / N  281 .....babaaAaaaabBABAAAaBBBbAaBBaBAaaBBaabbBAab
+L   2 / N  282 .....BaAABabaabbaAAbABbaaAbbbAabaBAAABabBBabba
+L   2 / N  283 .....aAbBBBBBbbaaaABAAaaaBbaababaAbBBAbAABaaBA
+L   2 / N  284 .....BaBabAbAbAAbBBbbbAAaAAbBbABABBaBbbaaBaBBb
+L   2 / N  285 .....aBBabbaBBAAaAaaabbbBabBAabaBbbBAbBBaBaaAB
+L   2 / N  286 .....BBAaabaabaAaaaAAAaABbaBBbaBaAAaaAbABbbaaA
+L   2 / N  287 .....bABabABAaABAABBBAbAbABABAABBBaabbaabbaBaB
+L   2 / N  288 .....AbAaBABbbbBbBABAAAABbABABbAbBbbabBBBAAbBB
+L   2 / N  289 .....BBBaBaBAbBBABaABbABbBabBbbaBabAbbAABbAAba
+L   2 / N  290 .....aAaBbbBBbBBabAaabbBbBBbaAbabAaAbbBBabBabB
+L   2 / N  291 .....baBBAaBAaBabbBBabBbAAbBabbaBaaAAAAAababaa
+L   2 / N  292 .....aAAbaBabBbBBBbBbaBABaaABBBBbbbAaAbABBbbAa
+L   2 / N  293 .....BAbbAaAaBaAbbABbabbAAAaAaaAaaaAabBAAbbbbA
+L   2 / N  294 .....AbAabABbBaBaBAAbbBAAAbAaAbAAbAbBBBbBabbbA
+L   2 / N  295 .....BAaabaAbBbBBAaaBBbbAabababaabABBabaaABAab
+L   2 / N  296 .....aaBABBABBbabaaaAABBaABABbbabABbbbbBbBabAA
+L   2 / N  297 .....aBbAbAaBABAaaAAABAbBBabBbbBaaabAabaaBAaaa
+L   2 / N  298 .....bBBAaaAbAabbabbABABaAaAAABAaaBAaAAbbbAbAB
+L   2 / N  299 .....bAaaBBbaAabbBBABababBABaABaabbbaBaABaBbBb
+L   2 / N  300 .....aBBbABaAbAABABAAaBBAbbAABaBAABABAAbaAAbAa
+L   2 / N  301 .....AaBABabBbABaaaaAaBabAbAaabBBbAbBBbaBaAAAb
+L   2 / N  302 .....AbAbabaaaabAbaBbaBaBbaBbBAAaabABabBAaabAA
+L   2 / N  303 .....baBAabBaaAaBaaAbBBabAaaAabBAaAaabaBaaBABa
+L   2 / N  304 .....BABabBbbaaAABabBaBbBbABaAaBaBABBbBbaAaAbB
+L   2 / N  305 .....aBAABAbABBBaBababaaBabBbaaBBBBAaAaBABBaAB
+L   2 / N  306 .....bBBAbbBAaABAabbBBBBBAbABBbABaaBAaBaaBbBaA
+L   2 / N  307 .....BbBBbBBbAABAaAAAaABAaAbaBaaBbAabBaBBaBbBA
+L   2 / N  308 .....BABAbabAaBbbBaBbBBaAaaaBaabbabAaAABABbabB
+L   2 / N  309 .....AbAbbBBbaaABAabBAaaAbAbAABAAbBaBbbBbbAaaB
+L   2 / N  310 .....BbAaaaBABaBaAaBAbABBbABbabbBaABaAaABBaAAB
+L   2 / N  311 .....abABbbBABBAAABBBbBaAAAaBaaABbaBAaaaaAabAa
+L   2 / N  312 .....BbbABBBAaAaBbbaaBbAaBbAaAbbbbAaBAaAAbaaAb
+L   2 / N  313 .....AAbBBaAbBBbbAaAAaABbBABaaaABAbBaABbabAabA
+L   2 / N  314 .....aabBBBaAAaaabBBAaAaaaABbAbaaAAbbBabAbaaBB
+L   2 / N  315 .....AababAAAbbbABbabaAABABBbBAbbBbbAabBABAbBB
+L   2 / N  316 .....bAAaBABAaBabAabbAaBAaaBAaAabAaBBBAaAabbAB
+L   2 / N  317 .....ABaBbaaaaBBBBaaaBAbbAbBbaAaaBbbabAabbAAaA
+L   2 / N  318 .....aaABABAbbAAaABAbabbabaAAABAaabBBaaAbaaaAb
+L   2 / N  319 .....bBAbABaABBAaaababaBbaAABaBaBabBaBAaaaBbaA
+L   2 / N  320 .....ABbbBababaBBbAaBbbbbBABAbabBaAAbaAaaBaBbB
+L   2 / N  321 .....ABBbbBbabaaAaBBABBbAaaBbAaBbbbBAbABaAbAAa
+L   2 / N  322 .....BaABbaBbaaaBaaaAaAAAabAbbBBbAaaAAbaBaabBA
+L   2 / N  323 .....AABbbaaBbbbaAaaAbabABAaBbaaaabbBBBBbaaBAa
+L   2 / N  324 .....bBbAbAAABaaAAaBBAbbAabAaBBAaAaABbBabAbBaa
+L   2 / N  325 .....bbBaBBbbbBabaAbbaABAbABbbbAbBbABbaabaaaab
+L   2 / N  326 .....BAAABBbaAAAaAAaAaaaaBbAaABBbbaabBBABBAbAa
+L   2 / N  327 .....BBBAbaBAAaABbbABBAbaBbbBAbBaaaAbbaBaBAbab
+L   2 / N  328 .....BabbBBbaBaaBAaAAbBBAabBBBbAAabAaaAabAaAAA
+L   2 / N  329 .....bAbAbBBbBaaBbaBaBaBbbbaBaAaBbBaaaABAaAAbb
+L   2 / N  330 .....bbaABAaaAAaABbbaABAAabbBBAaAaaAAABbaAAAbb
+L   2 / N  331 .....bBBaBaBBbAbbABBabABAaabaaABBabBaBBABbAAbb
+L   2 / N  332 .....AaBAaaBBbAbaBAAaAAAAabAbBAaabAABBAabBaBbB
+L   2 / N  333 .....baAAbbbABBBBAbAbAbbbAbBaAbbBbaBbAaBBababB
+L   2 / N  334 .....abaAAAbAAbaBbAabBbbaBaBaaABabbaabBBBaBAbb
+L   2 / N  335 .....BBbAaaAAABabBBaAABABaBbaBBABaBBaBbbbaBAbA
+L   2 / N  336 .....bbAbAbBABABAAbAaBaBAbbAbaBAbAABAAaBaAABab
+L   2 / N  337 .....AbBBAbABbabbBbABAAaaabbABababaABaaAbAaBAA
+L   2 / N  338 .....BBAbaaBBBbbBbBAABbBaAABBaBaABbaABBBbaAbbB
+L   2 / N  339 .....bBBbAaBAbaaBbbbbABBBbAAbABAbBBBbBBaaabbAA
+L   2 / N  340 .....aaBAABaABbBABbbAAbAabBbbbAaaBBbbaBBbBbBAb
+L   2 / N  341 .....AbbAbAaaaAAaBAaABBaBBAaAaAAaabABaAAAaBBAA
+L   2 / N  342 .....abAbabBaABababaBABbAAbBbBaAAabbBaBBABBbAA
+L   2 / N  343 .....aABabBBBbAabAABbbAaaBaAAbaABAbABAaaBaaAab
+L   2 / N  344 .....bAABAAbbbaBabAaAbabbBbAaAaABbBBaaAbBbaBaB
+L   2 / N  345 .....BABabAaABAaBbAAAaABbaaAbAabBaAAaaABabaBBB
+L   2 / N  346 .....aBbbABabAAaBbaaAAabaBaAabBAABAabAaabbAbBb
+L   2 / N  347 .....AAabbBBABbabABaAaBAbaBAAbAAABaBabbAaBaBBa
+L   2 / N  348 .....abbaaBAaaBAaaaabbbBABaAbBbbbbBAABBBaAABba
+L   2 / N  349 .....AaBBBBBBBaBbbBBaBbABBaAAbbaBbabABbaABaAAB
+L   2 / N  350 .....aBbbAAbBbbAaBaABAaBbAABAbAAabbaAbAABbBAab
+L   2 / N  351 .....aABAaBbAAbaabBaBaBBAbaAAbaBbbbbaBBBbBbBaa
+L   2 / N  352 .....bAabbaABaaBBBAbaabAaaBbaBabBbAbaaAAaBbbba
+L   2 / N  353 .....bBaABBbbaaAaABabbbaAaABbaaBaabBabbbbbbbaa
+L   2 / N  354 .....BBbAbbBaAaAaaBABAbbBBABbAbbAaAbbaaBAAABbb
+L   2 / N  355 .....AaAaBabBaBBbBBABBabaAaBBbaaAaABbBaABAABbA
+L   2 / N  356 .....AbAaBAbaBABbaBaBabaBBaBbBABAABabbBAbABaaa
+L   2 / N  357 .....aABbBAaBbaAabBaBABaAbABbbbABaBaBAbBaBabBA
+L   2 / N  358 .....BaBAAAaaBbAaBBAbaaAaAaBBabBBaBabbaBABbbBa
+L   2 / N  359 .....BaaABabbBaBbaBAABaBABbAbBabbABaAbAbBbabBA
+L   2 / N  360 .....bbbbAABBaaBAbBaABAaBbBBBbBBabAbaBbaaAbabA
+L   2 / N  361 .....bABbbABBBABBAAbAAAAaABbBbAAaBBbbAbbBABAAA
+L   2 / N  362 .....AaaaABBbAbBaaBABabBaaBBaBABBaAABbBaABbBaa
+L   2 / N  363 .....ABAaAABBaabbbAbBaBaBabbaaAaAaBBbAAAaaAaBB
+L   2 / N  364 .....aBBBbBaBbaaaaBBbbaaBaAAbbbAAaaaBaaBaaaaaA
+L   2 / N  365 .....AAbAAbAbAAaaaAaabbBaAAABabbBaAaBaAABBbBAB
+L   2 / N  366 .....aBbbaAaaaBBbaBaAbbBAABbaaBaaBBaaBaabBBAaA
+L   2 / N  367 .....AabaBAababBbbbabaBbababABaAABBbAabBbAabbA
+L   2 / N  368 .....BbAbABAABBBbbabAbAabBBabBaBaABBabaABababB
+L   2 / N  369 .....babAAABabBbbbaBAbbbbbAaabbBaaBbAaaaBBbbBB
+L   2 / N  370 .....aBbABBBbbBbBbABbabAaaaBAAAAABaAbaBAaAAaBa
+L   2 / N  371 .....AAAaABBBabaAbBaAABaBAAaAaAbBbbaBABbaAbbba
+L   2 / N  372 .....aBaabBBbaBAbbaaBaabAABbAbAbbAbabbAabAabbb
+L   2 / N  373 .....BbabAbABbaAbAbbbaaAAAAAabAbaBbABaBbbbBbbb
+L   2 / N  374 .....AaABAAbBbAABabbBbABabAABBBBABbAAAbAbAABBa
+L   2 / N  375 .....ABAABAAaABaaAabaaAaAabbaAbbbbBAABabBbBbAB
+L   2 / N  376 .....AbabbBaBaBbabABbAbbABAAbBabBaBAbBbabbBbaA
+L   2 / N  377 .....aBBBABABBaAABAAaBaBBbBBabbaBbBAABaAaaabaA
+L   2 / N  378 .....BBAaABabAaaAbABbbBabAbBBAaaBAAAaAbBbbaaBA
+L   2 / N  379 .....AaBaaBabaAAaaABBBBaaaBBABbAbaAAbbaaaaBaBa
+L   2 / N  380 .....baBAaAAbbBabBbBbBBAaAAabBBaAaaBaABbBaAbAA
+L   2 / N  381 .....AAaAaAaabBBAabAbAbaBbAABAaabABBbaaBBBbbBb
+L   2 / N  382 .....bAabbaAaBAaababAAabAbababBaabaaaBAaBbbaBA
+L   2 / N  383 .....BaBbAaBbAaaBaABabbaaABbabbaaaabaBBaAaaABA
+L   2 / N  384 .....BBbABAAbbBABbBbaaaBBabAaabAABAaAaAbbbBbbA
+L   2 / N  385 .....BBBBBbbaBBBBAbaBBBAaabBBabBbaBBbBABAAbBAB
+L   2 / N  386 .....AaABAaAABbBbBAabAaaAaaaBaBAaBbaAaBAbabBba
+L   2 / N  387 .....AabaAbbbAAabBaaBBBABaaabBAAbaAaBbAaABaBaB
+L   2 / N  388 .....aaBABAAAaABABbAaAABabAaAbbAAbBAaaabbBABaa
+L   2 / N  389 .....BBbBAAAbabababaAABAAAbBBabBbbbaBbABBbabAa
+L   2 / N  390 .....aABababBbAabAaAAaABABABaaAABAbbBBbaBaaBAB
+L   2 / N  391 .....aBAAaabBbABAAabbBBBBbBBbbAAaabaABBaabaaab
+L   2 / N  392 .....bbAabBbbAbbaBaAAbbBbAAbaBAAbBbaBbbabBAbAA
+L   2 / N  393 .....abABAaBAabbBaAABaBAaaaaaBAbaABbbBBbabbBab
+L   2 / N  394 .....bbaBBabBBabaBabaAabaAabaaaaaaBAAbbaBaaAaB
+L   2 / N  395 .....AAAbBBAabBBabaAABbbAAAAABAbaaaaBbbbbBAAbA
+L   2 / N  396 .....aaABBbAbabABBaBaaaABAAbAAbAaAAbbBBBBbABaA
+L   2 / N  397 .....AbABbBaaAaBbaABAbaaBaaAbaAbBAAAbAbbAbABAB
+L   2 / N  398 .....BBaaBBAbbaAAbBBAbBbAaabAaBAbBbBBBabBbBBab
+L   2 / N  399 .....aBabBBbBbBaaBBBBabAAbAAaAaAAbBAABBBBBbAbB
+L   2 / N  400 .....BABBaAbAaAABbBAaabAaBbaBbaAbbBBbaABBabaAA
+L   2 / N  401 .....BABAbababAbaBbabBAaAaaBbbAabbbBBBBAbaAaab
+L   2 / N  402 .....ABbAaaaBABbBAabaBaaBaaBbBBAAbbBABbbbaaBba
+L   2 / N  403 .....bBbababaBbAaBBaAabBABAaBAAabaaaAaabaBbBBa
+L   2 / N  404 .....AaaaAbBABaAaBAbaBaBaBAAaAbaBBbbaAABaABBAa
+L   2 / N  405 .....AbbbbAbAAaabBAABBaBbAbBbbbAbbaaAaABAbBbBb
+L   2 / N  406 .....AbbbAbbbBaBbbBabAabBABbbABaaBaAaaBABBAbBb
+L   2 / N  407 .....BBbBbaaaaabbAaBaAabBBAbBabAbbabbabBaaaBBA
+L   2 / N  408 .....bbbaBaBbABbabBAbAAaBAAbBaAaBAbaAbABbBBbAA
+L   2 / N  409 .....aBAbaBBbaABBBAaABbbBAAbbAbBaaAbAaBBBAAbBa
+L   2 / N  410 .....BBbabAbbBbAAbAbaAAAaAaAabAbBAbbaBaBBbbbBb
+L   2 / N  411 .....BaaAABabaAABabbbaBAabbaabaAbaaaaBBBaAaabB
+L   2 / N  412 .....bbaabaABbbBbaaaABabaBabBaAAAbAAaABAAbaAba
+L   2 / N  413 .....AaABAaBbabbAaBbbaAbbbaBbbAaaaaBBBABABBBbB
+L   2 / N  414 .....BBaBBaaAaABBABBbbaaAbaABabAbBBbBAaBAAabbB
+L   2 / N  415 .....BbaBbABabAAAbaBbbBbBBbaabBBabbbBbAAbaAAab
+L   2 / N  416 .....aBaBAABAABABaBBaBbaBaabbBaaAbBBaAbaaAabab
+L   2 / N  417 .....AbaabAbaBBBbbBbaaAabABBAbbaaaBaBbBbbabaab
+L   2 / N  418 .....aaabAAAabABBaAbAbaBBBABABBBbaaaAAABabaAab
+L   2 / N  419 .....abababbAbBAAAbAAbAbaBBbaAaAbBbbaaAAABAaBA
+L   2 / N  420 .....BaabbbaAbAABBbAaBBbBBAbAaAabBbABABBAbbabB
+L   2 / N  421 .....BbABABBabAaBAbbaabbABBaBBBBBaBAbbabAbBbaa
+L   2 / N  422 .....AabAaabAABAAbaabbbabBAbbABaAbBbAbaaAAAaaa
+L   2 / N  423 .....BBAbbAaaBabaAabaBAaABbBbaaBbAbaaBbABABbAa
+L   2 / N  424 .....aBbBbAABbbAbBAAaaABabaaabbBBaaaBaAAabbbba
+L   2 / N  425 .....BaaaBABAAaBbBbbbbbaaAaBbBbbbababaAAaaAbBb
+L   2 / N  426 .....bbBabBabaBAAAAaBBaaBBaaabBBAbBBbBAABaBbBB
+L   2 / N  427 .....BaAaBAabBabaAAaAabBbBbBAABbABBaAbBbBAabaA
+L   2 / N  428 .....aAaBbbbaBbbBbAaBABBAaaAaaABBBaAbbBBbBbaBa
+L   2 / N  429 .....AAaababbbAaabBBBBBBbaBbbBabBBBbaAAABBBBBa
+L   2 / N  430 .....abaababBbbbbaaBAaBaaBBbaABbaBbAabbAbaAbAA
+L   2 / N  431 .....bABaAABabaaBaBaabBbbaabABabaaAbAabbBBbbBa
+L   2 / N  432 .....aAAabBaBbaaaaBaBBBaAbbBabAbbBBAaAbABbBBab
+L   2 / N  433 .....aBAbbAbBBBbBAabaabbaAAbBbBbbAAbBaBbaaaabb
+L   2 / N  434 .....abBBbbbaaAbBAbbaabbBabbbbAAABBBaBAbbBaAbB
+L   2 / N  435 .....BBaBBBbBBbaBbabABBAAAbAaaBbAabAbbbbBBaBBa
+L   2 / N  436 .....bBAAbbAbBaABbbbBbBbaAaaAAaABaAbAAAbABBABb
+L   2 / N  437 .....aAbABBABbbaAabbBABbabABBBaBAbABAaBbaBBabb
+L   2 / N  438 .....AAaBBaABABbbABbbBBaAABbAbaaBAaBababBBABaA
+L   2 / N  439 .....BAbBBbAAabbaaAaAbaaaaBABbAABababBABABAbaB
+L   2 / N  440 .....bAbBbBBaaaBbBBaaAbBAABaaBBbababbBbBBBBabb
+L   2 / N  441 .....aabbAAABabAaABbABaAaaAbaAbaAAAABBBBAaaAAA
+L   2 / N  442 .....bbabbBbAaaBbAaBABaaabbbBbBbAaBbaBaAbaAAAB
+L   2 / N  443 .....ABaBAbABaBbAbBABbbbbaAbBaabBBABaaaababbBb
+L   2 / N  444 .....babbBbabaaabAbaBbbABbbaaAaAAaAAABBABbBBaa
+L   2 / N  445 .....aaBaABABaABABbbbBBAaAbaaBbABbBaabaBBbAAAb
+L   2 / N  446 ..............................................
+Input layer                          :   4 neurons, 1 bias
+  Hidden layer                       :  40 neurons, 1 bias
+Output layer                         : 400 neurons
+Total neurons and biases             : 446
+Total connections                    :16600
+Connection rate                      :   1.000
+Network type                         :   FANN_NETTYPE_LAYER
+Training algorithm                   :   FANN_TRAIN_RPROP
+Training error function              :   FANN_ERRORFUNC_TANH
+Training stop function               :   FANN_STOPFUNC_MSE
+Bit fail limit                       :   0.350
+Learning rate                        :   0.700
+Learning momentum                    :   0.000
+Quickprop decay                      :  -0.000100
+Quickprop mu                         :   1.750
+RPROP increase factor                :   1.200
+RPROP decrease factor                :   0.500
+RPROP delta min                      :   0.000
+RPROP delta max                      :  50.000
+Cascade output change fraction       :   0.010000
+Cascade candidate change fraction    :   0.010000
+Cascade output stagnation epochs     :  12
+Cascade candidate stagnation epochs  :  12
+Cascade max output epochs            : 150
+Cascade min output epochs            :  50
+Cascade max candidate epochs         : 150
+Cascade min candidate epochs         :  50
+Cascade weight multiplier            :   0.400
+Cascade candidate limit              :1000.000
+Cascade activation functions[0]      :   FANN_SIGMOID
+Cascade activation functions[1]      :   FANN_SIGMOID_SYMMETRIC
+Cascade activation functions[2]      :   FANN_GAUSSIAN
+Cascade activation functions[3]      :   FANN_GAUSSIAN_SYMMETRIC
+Cascade activation functions[4]      :   FANN_ELLIOT
+Cascade activation functions[5]      :   FANN_ELLIOT_SYMMETRIC
+Cascade activation functions[6]      :   FANN_SIN_SYMMETRIC
+Cascade activation functions[7]      :   FANN_COS_SYMMETRIC
+Cascade activation functions[8]      :   FANN_SIN
+Cascade activation functions[9]      :   FANN_COS
+Cascade activation steepnesses[0]    :   0.250
+Cascade activation steepnesses[1]    :   0.500
+Cascade activation steepnesses[2]    :   0.750
+Cascade activation steepnesses[3]    :   1.000
+Cascade candidate groups             :   2
+Cascade no. of candidates            :  80
+
+ -> Output file is =Analysis.root
+-> Read data file=data.in
+-> Number of files=716
+0 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_001.root
+1 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_002.root
+2 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_003.root
+3 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_004.root
+4 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_005.root
+5 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_006.root
+6 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_007.root
+7 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_008.root
+8 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_009.root
+9 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_010.root
+10 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_011.root
+11 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_012.root
+12 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_013.root
+13 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_014.root
+14 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_015.root
+15 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_016.root
+16 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_017.root
+17 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_018.root
+18 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_019.root
+19 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_020.root
+20 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_021.root
+21 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_022.root
+22 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_023.root
+23 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_024.root
+24 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_025.root
+25 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_026.root
+26 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_027.root
+27 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_028.root
+28 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_029.root
+29 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_030.root
+30 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_031.root
+31 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_032.root
+32 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_033.root
+33 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_034.root
+34 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_035.root
+35 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_036.root
+36 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_037.root
+37 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_038.root
+38 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_039.root
+39 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_040.root
+40 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_041.root
+41 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_042.root
+42 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_043.root
+43 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_044.root
+44 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_045.root
+45 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_046.root
+46 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_047.root
+47 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_048.root
+48 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_049.root
+49 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_050.root
+50 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_051.root
+51 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_052.root
+52 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_053.root
+53 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_054.root
+54 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_055.root
+55 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_056.root
+56 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_057.root
+57 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_058.root
+58 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_059.root
+59 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_060.root
+60 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_061.root
+61 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_062.root
+62 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_063.root
+63 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_064.root
+64 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_065.root
+65 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_066.root
+66 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_067.root
+67 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_068.root
+68 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_069.root
+69 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_070.root
+70 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_071.root
+71 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_072.root
+72 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_073.root
+73 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_074.root
+74 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_075.root
+75 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_076.root
+76 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_077.root
+77 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_078.root
+78 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_079.root
+79 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_080.root
+80 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_081.root
+81 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_082.root
+82 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_083.root
+83 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_084.root
+84 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_085.root
+85 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_086.root
+86 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_087.root
+87 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_088.root
+88 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_089.root
+89 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_090.root
+90 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_091.root
+91 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_092.root
+92 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_093.root
+93 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_094.root
+94 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_095.root
+95 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_096.root
+96 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_097.root
+97 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_098.root
+98 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_099.root
+99 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_100.root
+100 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_101.root
+101 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_102.root
+102 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_103.root
+103 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_104.root
+104 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_105.root
+105 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_106.root
+106 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_107.root
+107 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_108.root
+108 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_109.root
+109 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_110.root
+110 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_111.root
+111 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_112.root
+112 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_113.root
+113 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_114.root
+114 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_115.root
+115 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_116.root
+116 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_117.root
+117 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_118.root
+118 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_119.root
+119 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_120.root
+120 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_121.root
+121 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_122.root
+122 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_123.root
+123 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_124.root
+124 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_125.root
+125 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_126.root
+126 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_127.root
+127 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_128.root
+128 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_129.root
+129 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_130.root
+130 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_131.root
+131 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_132.root
+132 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_133.root
+133 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_134.root
+134 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_135.root
+135 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_136.root
+136 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_137.root
+137 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_138.root
+138 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_139.root
+139 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_140.root
+140 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_141.root
+141 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_142.root
+142 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_143.root
+143 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_144.root
+144 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_145.root
+145 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_146.root
+146 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_147.root
+147 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_148.root
+148 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_149.root
+149 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_150.root
+150 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_151.root
+151 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_152.root
+152 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_153.root
+153 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_154.root
+154 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_155.root
+155 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_156.root
+156 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_157.root
+157 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_158.root
+158 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_159.root
+159 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_160.root
+160 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_161.root
+161 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_162.root
+162 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_163.root
+163 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_164.root
+164 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_165.root
+165 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_166.root
+166 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_167.root
+167 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_168.root
+168 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_169.root
+169 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_170.root
+170 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_171.root
+171 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_172.root
+172 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_173.root
+173 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_174.root
+174 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_175.root
+175 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_176.root
+176 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_177.root
+177 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_178.root
+178 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_179.root
+179 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_180.root
+180 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_181.root
+181 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_182.root
+182 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_183.root
+183 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_184.root
+184 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_185.root
+185 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_186.root
+186 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_187.root
+187 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_188.root
+188 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_189.root
+189 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_190.root
+190 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_191.root
+191 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_192.root
+192 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_193.root
+193 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_194.root
+194 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_195.root
+195 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_196.root
+196 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_197.root
+197 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_198.root
+198 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_199.root
+199 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_200.root
+200 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_201.root
+201 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_202.root
+202 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_203.root
+203 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_204.root
+204 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_205.root
+205 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_206.root
+206 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_207.root
+207 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_208.root
+208 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_209.root
+209 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_210.root
+210 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_211.root
+211 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_212.root
+212 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_213.root
+213 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_214.root
+214 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_215.root
+215 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_216.root
+216 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_217.root
+217 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_218.root
+218 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_219.root
+219 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_220.root
+220 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_221.root
+221 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_222.root
+222 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_223.root
+223 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_224.root
+224 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_225.root
+225 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_226.root
+226 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_227.root
+227 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_228.root
+228 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_229.root
+229 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_230.root
+230 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_231.root
+231 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_232.root
+232 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_233.root
+233 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_234.root
+234 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_235.root
+235 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_236.root
+236 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_237.root
+237 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_238.root
+238 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_239.root
+239 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_240.root
+240 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_241.root
+241 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_242.root
+242 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_243.root
+243 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_244.root
+244 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_245.root
+245 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_246.root
+246 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_247.root
+247 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_248.root
+248 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_249.root
+249 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_250.root
+250 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_251.root
+251 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_252.root
+252 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_253.root
+253 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_254.root
+254 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_255.root
+255 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_256.root
+256 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_257.root
+257 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_258.root
+258 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_259.root
+259 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_260.root
+260 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_261.root
+261 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_262.root
+262 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_263.root
+263 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_264.root
+264 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_265.root
+265 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_266.root
+266 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_267.root
+267 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_268.root
+268 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_269.root
+269 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_270.root
+270 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_271.root
+271 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_272.root
+272 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_273.root
+273 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_274.root
+274 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_275.root
+275 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_276.root
+276 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_277.root
+277 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_278.root
+278 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_279.root
+279 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_280.root
+280 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_281.root
+281 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_282.root
+282 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_283.root
+283 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_284.root
+284 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_285.root
+285 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_286.root
+286 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_287.root
+287 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_288.root
+288 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_289.root
+289 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_290.root
+290 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_291.root
+291 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_292.root
+292 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_293.root
+293 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_294.root
+294 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_295.root
+295 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_296.root
+296 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_297.root
+297 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_298.root
+298 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_299.root
+299 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_300.root
+300 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_301.root
+301 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_302.root
+302 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_303.root
+303 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_304.root
+304 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_305.root
+305 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_306.root
+306 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_307.root
+307 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_308.root
+308 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_309.root
+309 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_310.root
+310 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_311.root
+311 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_312.root
+312 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_313.root
+313 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_314.root
+314 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_315.root
+315 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_316.root
+316 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_317.root
+317 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_318.root
+318 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_319.root
+319 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_320.root
+320 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_321.root
+321 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_322.root
+322 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_323.root
+323 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_324.root
+324 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_325.root
+325 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_326.root
+326 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_327.root
+327 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_328.root
+328 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_329.root
+329 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_330.root
+330 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_331.root
+331 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_332.root
+332 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_333.root
+333 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_334.root
+334 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_335.root
+335 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_336.root
+336 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_337.root
+337 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_338.root
+338 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_339.root
+339 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_340.root
+340 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_341.root
+341 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_342.root
+342 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_343.root
+343 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_344.root
+344 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_345.root
+345 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_346.root
+346 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_347.root
+347 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_348.root
+348 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_349.root
+349 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_350.root
+350 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_351.root
+351 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_352.root
+352 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_353.root
+353 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_354.root
+354 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_355.root
+355 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_356.root
+356 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_357.root
+357 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_358.root
+358 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_359.root
+359 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_360.root
+360 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_361.root
+361 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_362.root
+362 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_363.root
+363 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_364.root
+364 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_365.root
+365 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_366.root
+366 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_367.root
+367 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_368.root
+368 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_369.root
+369 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_370.root
+370 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_371.root
+371 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_372.root
+372 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_373.root
+373 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_374.root
+374 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_375.root
+375 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_376.root
+376 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_377.root
+377 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_378.root
+378 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_379.root
+379 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_380.root
+380 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_381.root
+381 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_382.root
+382 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_383.root
+383 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_384.root
+384 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_385.root
+385 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_386.root
+386 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_387.root
+387 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_388.root
+388 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_389.root
+389 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_390.root
+390 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_391.root
+391 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_392.root
+392 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_393.root
+393 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_394.root
+394 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_395.root
+395 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_396.root
+396 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_397.root
+397 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_398.root
+398 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_399.root
+399 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_400.root
+400 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_401.root
+401 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_402.root
+402 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_403.root
+403 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_404.root
+404 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_405.root
+405 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_406.root
+406 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_407.root
+407 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_408.root
+408 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_409.root
+409 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_410.root
+410 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_411.root
+411 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_412.root
+412 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_413.root
+413 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_414.root
+414 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_415.root
+415 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_416.root
+416 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_417.root
+417 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_418.root
+418 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_419.root
+419 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_420.root
+420 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_421.root
+421 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_422.root
+422 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_423.root
+423 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_424.root
+424 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_425.root
+425 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_426.root
+426 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_427.root
+427 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_428.root
+428 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_429.root
+429 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_430.root
+430 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_431.root
+431 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_432.root
+432 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_433.root
+433 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_434.root
+434 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_435.root
+435 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_436.root
+436 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_437.root
+437 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_438.root
+438 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_439.root
+439 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_440.root
+440 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_441.root
+441 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_442.root
+442 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_443.root
+443 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_444.root
+444 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_445.root
+445 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_446.root
+446 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_447.root
+447 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_448.root
+448 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_449.root
+449 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_450.root
+450 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_451.root
+451 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_452.root
+452 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_453.root
+453 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_454.root
+454 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_455.root
+455 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_456.root
+456 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_457.root
+457 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_458.root
+458 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_459.root
+459 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_460.root
+460 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_461.root
+461 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_462.root
+462 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_463.root
+463 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_464.root
+464 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_465.root
+465 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_466.root
+466 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_467.root
+467 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_468.root
+468 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_469.root
+469 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_470.root
+470 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_471.root
+471 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_472.root
+472 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_473.root
+473 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_474.root
+474 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_475.root
+475 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_476.root
+476 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_477.root
+477 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_478.root
+478 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_479.root
+479 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_480.root
+480 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_481.root
+481 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_482.root
+482 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_483.root
+483 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_484.root
+484 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_485.root
+485 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_486.root
+486 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_487.root
+487 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_488.root
+488 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_489.root
+489 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_490.root
+490 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_491.root
+491 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_492.root
+492 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_493.root
+493 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_494.root
+494 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_495.root
+495 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_496.root
+496 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_497.root
+497 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_498.root
+498 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_499.root
+499 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_500.root
+500 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_501.root
+501 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_502.root
+502 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_503.root
+503 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_504.root
+504 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_505.root
+505 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_506.root
+506 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_507.root
+507 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_508.root
+508 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_509.root
+509 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_510.root
+510 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_511.root
+511 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_512.root
+512 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_513.root
+513 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_514.root
+514 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_515.root
+515 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_516.root
+516 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_517.root
+517 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_518.root
+518 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_519.root
+519 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_520.root
+520 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_521.root
+521 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_522.root
+522 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_523.root
+523 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_524.root
+524 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_525.root
+525 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_526.root
+526 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_527.root
+527 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_528.root
+528 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_529.root
+529 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_530.root
+530 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_531.root
+531 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_532.root
+532 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_533.root
+533 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_534.root
+534 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_535.root
+535 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_536.root
+536 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_537.root
+537 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_538.root
+538 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_539.root
+539 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_540.root
+540 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_541.root
+541 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_542.root
+542 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_543.root
+543 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_544.root
+544 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_545.root
+545 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_546.root
+546 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_547.root
+547 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_548.root
+548 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_549.root
+549 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_550.root
+550 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_551.root
+551 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_552.root
+552 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_553.root
+553 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_554.root
+554 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_555.root
+555 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_556.root
+556 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_557.root
+557 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_558.root
+558 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_559.root
+559 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_560.root
+560 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_561.root
+561 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_562.root
+562 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_563.root
+563 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_564.root
+564 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_565.root
+565 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_566.root
+566 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_567.root
+567 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_568.root
+568 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_569.root
+569 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_570.root
+570 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_571.root
+571 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_572.root
+572 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_573.root
+573 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_574.root
+574 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_575.root
+575 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_576.root
+576 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_577.root
+577 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_578.root
+578 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_579.root
+579 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_580.root
+580 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_581.root
+581 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_582.root
+582 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_583.root
+583 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_584.root
+584 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_585.root
+585 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_586.root
+586 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_587.root
+587 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_588.root
+588 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_589.root
+589 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_590.root
+590 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_591.root
+591 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_592.root
+592 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_593.root
+593 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_594.root
+594 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_595.root
+595 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_596.root
+596 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_597.root
+597 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_598.root
+598 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_599.root
+599 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_600.root
+600 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_601.root
+601 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_602.root
+602 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_603.root
+603 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_604.root
+604 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_605.root
+605 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_606.root
+606 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_607.root
+607 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_608.root
+608 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_609.root
+609 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_610.root
+610 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_611.root
+611 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_612.root
+612 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_613.root
+613 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_614.root
+614 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_615.root
+615 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_616.root
+616 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_617.root
+617 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_618.root
+618 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_619.root
+619 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_620.root
+620 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_621.root
+621 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_622.root
+622 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_623.root
+623 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_624.root
+624 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_625.root
+625 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_626.root
+626 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_627.root
+627 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_628.root
+628 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_629.root
+629 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_630.root
+630 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_631.root
+631 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_632.root
+632 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_633.root
+633 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_634.root
+634 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_635.root
+635 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_636.root
+636 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_637.root
+637 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_638.root
+638 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_639.root
+639 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_640.root
+640 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_641.root
+641 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_642.root
+642 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_643.root
+643 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_644.root
+644 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_645.root
+645 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_646.root
+646 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_647.root
+647 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_648.root
+648 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_649.root
+649 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_650.root
+650 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_651.root
+651 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_652.root
+652 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_653.root
+653 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_654.root
+654 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_655.root
+655 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_656.root
+656 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_657.root
+657 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_658.root
+658 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_659.root
+659 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_660.root
+660 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_661.root
+661 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_662.root
+662 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_663.root
+663 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_664.root
+664 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_665.root
+665 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_666.root
+666 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_667.root
+667 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_668.root
+668 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_669.root
+669 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_670.root
+670 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_671.root
+671 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_672.root
+672 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_673.root
+673 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_674.root
+674 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_675.root
+675 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_676.root
+676 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_677.root
+677 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_678.root
+678 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_679.root
+679 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_680.root
+680 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_681.root
+681 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_682.root
+682 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_683.root
+683 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_684.root
+684 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_685.root
+685 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_686.root
+686 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_687.root
+687 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_688.root
+688 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_689.root
+689 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_690.root
+690 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_691.root
+691 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_692.root
+692 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_693.root
+693 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_694.root
+694 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_695.root
+695 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_696.root
+696 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_697.root
+697 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_698.root
+698 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_699.root
+699 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_700.root
+700 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_701.root
+701 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_702.root
+702 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_703.root
+703 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_704.root
+704 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_705.root
+705 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_706.root
+706 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_707.root
+707 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_708.root
+708 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_709.root
+709 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_710.root
+710 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_711.root
+711 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_712.root
+712 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_713.root
+713 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_714.root
+714 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_715.root
+715 file to analyse=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_716.root
+ -> No of files to read:716
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_001.root
+Event=1
+Event=2
+Event=3
+Event=4
+Event=5
+Event=6
+Event=7
+Event=8
+Event=9
+Event=10
+Event=11
+Event=12
+Event=13
+Event=14
+Event=15
+Event=16
+Event=17
+Event=18
+Event=19
+Event=20
+Event=21
+Event=22
+Event=23
+Event=24
+Event=25
+Event=26
+Event=27
+Event=28
+Event=29
+Event=30
+Event=31
+Event=32
+Event=33
+Event=34
+Event=35
+Event=36
+Event=37
+Event=38
+Event=39
+Event=40
+Event=41
+Event=42
+Event=43
+Event=44
+Event=45
+Event=46
+Event=47
+Event=48
+Event=49
+Event=50
+Event=51
+Event=52
+Event=53
+Event=54
+Event=55
+Event=56
+Event=57
+Event=58
+Event=59
+Event=60
+Event=61
+Event=62
+Event=63
+Event=64
+Event=65
+Event=66
+Event=67
+Event=68
+Event=69
+Event=70
+Event=71
+Event=72
+Event=73
+Event=74
+Event=75
+Event=76
+Event=77
+Event=78
+Event=79
+Event=80
+Event=81
+Event=82
+Event=83
+Event=84
+Event=85
+Event=86
+Event=87
+Event=88
+Event=89
+Event=90
+Event=91
+Event=92
+Event=93
+Event=94
+Event=95
+Event=96
+Event=97
+Event=98
+Event=99
+Event=100
+Event=200
+Event=300
+Event=400
+Event=500
+Event=600
+Event=700
+Event=800
+Event=900
+Event=1000
+Event=1100
+Event=1200
+Event=1300
+Event=1400
+Event=1500
+Event=1600
+Event=1700
+Event=1800
+Event=1900
+Event=2000
+Event=2100
+Event=2200
+Event=2300
+Event=2400
+Event=2500
+Event=2600
+Event=2700
+Event=2800
+Event=2900
+Event=3000
+Event=3100
+Event=3200
+Event=3300
+Event=3400
+Event=3500
+Event=3600
+Event=3700
+Event=3800
+Event=3900
+Event=4000
+Event=4100
+Event=4200
+Event=4300
+Event=4400
+Event=4500
+Event=4600
+Event=4700
+Event=4800
+Event=4900
+Event=5000
+Event=5100
+Event=5200
+Event=5300
+Event=5400
+Event=5500
+Event=5600
+Event=5700
+Event=5800
+Event=5900
+Event=6000
+Event=6100
+Event=6200
+Event=6300
+Event=6400
+Event=6500
+Event=6600
+Event=6700
+Event=6800
+Event=6900
+Event=7000
+Event=7100
+Event=7200
+Event=7300
+Event=7400
+Event=7500
+Event=7600
+Event=7700
+Event=7800
+Event=7900
+Event=8000
+Event=8100
+Event=8200
+Event=8300
+Event=8400
+Event=8500
+Event=8600
+Event=8700
+Event=8800
+Event=8900
+Event=9000
+Event=9100
+Event=9200
+Event=9300
+Event=9400
+Event=9500
+Event=9600
+Event=9700
+Event=9800
+Event=9900
+Event=10000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_002.root
+Event=10100
+Event=10200
+Event=10300
+Event=10400
+Event=10500
+Event=10600
+Event=10700
+Event=10800
+Event=10900
+Event=11000
+Event=11100
+Event=11200
+Event=11300
+Event=11400
+Event=11500
+Event=11600
+Event=11700
+Event=11800
+Event=11900
+Event=12000
+Event=12100
+Event=12200
+Event=12300
+Event=12400
+Event=12500
+Event=12600
+Event=12700
+Event=12800
+Event=12900
+Event=13000
+Event=13100
+Event=13200
+Event=13300
+Event=13400
+Event=13500
+Event=13600
+Event=13700
+Event=13800
+Event=13900
+Event=14000
+Event=14100
+Event=14200
+Event=14300
+Event=14400
+Event=14500
+Event=14600
+Event=14700
+Event=14800
+Event=14900
+Event=15000
+Event=15100
+Event=15200
+Event=15300
+Event=15400
+Event=15500
+Event=15600
+Event=15700
+Event=15800
+Event=15900
+Event=16000
+Event=16100
+Event=16200
+Event=16300
+Event=16400
+Event=16500
+Event=16600
+Event=16700
+Event=16800
+Event=16900
+Event=17000
+Event=17100
+Event=17200
+Event=17300
+Event=17400
+Event=17500
+Event=17600
+Event=17700
+Event=17800
+Event=17900
+Event=18000
+Event=18100
+Event=18200
+Event=18300
+Event=18400
+Event=18500
+Event=18600
+Event=18700
+Event=18800
+Event=18900
+Event=19000
+Event=19100
+Event=19200
+Event=19300
+Event=19400
+Event=19500
+Event=19600
+Event=19700
+Event=19800
+Event=19900
+Event=20000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_003.root
+Event=20100
+Event=20200
+Event=20300
+Event=20400
+Event=20500
+Event=20600
+Event=20700
+Event=20800
+Event=20900
+Event=21000
+Event=21100
+Event=21200
+Event=21300
+Event=21400
+Event=21500
+Event=21600
+Event=21700
+Event=21800
+Event=21900
+Event=22000
+Event=22100
+Event=22200
+Event=22300
+Event=22400
+Event=22500
+Event=22600
+Event=22700
+Event=22800
+Event=22900
+Event=23000
+Event=23100
+Event=23200
+Event=23300
+Event=23400
+Event=23500
+Event=23600
+Event=23700
+Event=23800
+Event=23900
+Event=24000
+Event=24100
+Event=24200
+Event=24300
+Event=24400
+Event=24500
+Event=24600
+Event=24700
+Event=24800
+Event=24900
+Event=25000
+Event=25100
+Event=25200
+Event=25300
+Event=25400
+Event=25500
+Event=25600
+Event=25700
+Event=25800
+Event=25900
+Event=26000
+Event=26100
+Event=26200
+Event=26300
+Event=26400
+Event=26500
+Event=26600
+Event=26700
+Event=26800
+Event=26900
+Event=27000
+Event=27100
+Event=27200
+Event=27300
+Event=27400
+Event=27500
+Event=27600
+Event=27700
+Event=27800
+Event=27900
+Event=28000
+Event=28100
+Event=28200
+Event=28300
+Event=28400
+Event=28500
+Event=28600
+Event=28700
+Event=28800
+Event=28900
+Event=29000
+Event=29100
+Event=29200
+Event=29300
+Event=29400
+Event=29500
+Event=29600
+Event=29700
+Event=29800
+Event=29900
+Event=30000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_004.root
+Event=30100
+Event=30200
+Event=30300
+Event=30400
+Event=30500
+Event=30600
+Event=30700
+Event=30800
+Event=30900
+Event=31000
+Event=31100
+Event=31200
+Event=31300
+Event=31400
+Event=31500
+Event=31600
+Event=31700
+Event=31800
+Event=31900
+Event=32000
+Event=32100
+Event=32200
+Event=32300
+Event=32400
+Event=32500
+Event=32600
+Event=32700
+Event=32800
+Event=32900
+Event=33000
+Event=33100
+Event=33200
+Event=33300
+Event=33400
+Event=33500
+Event=33600
+Event=33700
+Event=33800
+Event=33900
+Event=34000
+Event=34100
+Event=34200
+Event=34300
+Event=34400
+Event=34500
+Event=34600
+Event=34700
+Event=34800
+Event=34900
+Event=35000
+Event=35100
+Event=35200
+Event=35300
+Event=35400
+Event=35500
+Event=35600
+Event=35700
+Event=35800
+Event=35900
+Event=36000
+Event=36100
+Event=36200
+Event=36300
+Event=36400
+Event=36500
+Event=36600
+Event=36700
+Event=36800
+Event=36900
+Event=37000
+Event=37100
+Event=37200
+Event=37300
+Event=37400
+Event=37500
+Event=37600
+Event=37700
+Event=37800
+Event=37900
+Event=38000
+Event=38100
+Event=38200
+Event=38300
+Event=38400
+Event=38500
+Event=38600
+Event=38700
+Event=38800
+Event=38900
+Event=39000
+Event=39100
+Event=39200
+Event=39300
+Event=39400
+Event=39500
+Event=39600
+Event=39700
+Event=39800
+Event=39900
+Event=40000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_005.root
+Event=40100
+Event=40200
+Event=40300
+Event=40400
+Event=40500
+Event=40600
+Event=40700
+Event=40800
+Event=40900
+Event=41000
+Event=41100
+Event=41200
+Event=41300
+Event=41400
+Event=41500
+Event=41600
+Event=41700
+Event=41800
+Event=41900
+Event=42000
+Event=42100
+Event=42200
+Event=42300
+Event=42400
+Event=42500
+Event=42600
+Event=42700
+Event=42800
+Event=42900
+Event=43000
+Event=43100
+Event=43200
+Event=43300
+Event=43400
+Event=43500
+Event=43600
+Event=43700
+Event=43800
+Event=43900
+Event=44000
+Event=44100
+Event=44200
+Event=44300
+Event=44400
+Event=44500
+Event=44600
+Event=44700
+Event=44800
+Event=44900
+Event=45000
+Event=45100
+Event=45200
+Event=45300
+Event=45400
+Event=45500
+Event=45600
+Event=45700
+Event=45800
+Event=45900
+Event=46000
+Event=46100
+Event=46200
+Event=46300
+Event=46400
+Event=46500
+Event=46600
+Event=46700
+Event=46800
+Event=46900
+Event=47000
+Event=47100
+Event=47200
+Event=47300
+Event=47400
+Event=47500
+Event=47600
+Event=47700
+Event=47800
+Event=47900
+Event=48000
+Event=48100
+Event=48200
+Event=48300
+Event=48400
+Event=48500
+Event=48600
+Event=48700
+Event=48800
+Event=48900
+Event=49000
+Event=49100
+Event=49200
+Event=49300
+Event=49400
+Event=49500
+Event=49600
+Event=49700
+Event=49800
+Event=49900
+Event=50000
+reading file=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/rfast004/mg5_ttbar_jet_006.root
+### Reset MSE after =50000 training 100 epoches 
+-> Start training for energy bin = 0
+bin=0 epoch=0 MSE=0.066434
+bin=0 epoch=1 MSE=0.0305275
+bin=0 epoch=2 MSE=0.0196784
+bin=0 epoch=3 MSE=0.0124401
+bin=0 epoch=4 MSE=0.00883581
+bin=0 epoch=5 MSE=0.00816102
+bin=0 epoch=6 MSE=0.0049076
+bin=0 epoch=7 MSE=0.00514817
+bin=0 epoch=8 MSE=0.0042889
+bin=0 epoch=9 MSE=0.00331483
+bin=0 epoch=20 MSE=0.00148846
+bin=0 epoch=40 MSE=0.0014727
+bin=0 epoch=60 MSE=0.0014725
+bin=0 epoch=80 MSE=0.0014724
+  Bin=0 with 56565 events has MSE=0.00147245 after epoch Nr=100
+-> Start training for energy bin = 1
+bin=1 epoch=0 MSE=0.0670001
+bin=1 epoch=1 MSE=0.0320375
+bin=1 epoch=2 MSE=0.0217825
+bin=1 epoch=3 MSE=0.0133452
+bin=1 epoch=4 MSE=0.00977336
+bin=1 epoch=5 MSE=0.00763458
+bin=1 epoch=6 MSE=0.00615534
+bin=1 epoch=7 MSE=0.00464102
+bin=1 epoch=8 MSE=0.00407313
+bin=1 epoch=9 MSE=0.00319175
+bin=1 epoch=20 MSE=0.00185725
+bin=1 epoch=40 MSE=0.00184191
+bin=1 epoch=60 MSE=0.00184195
+bin=1 epoch=80 MSE=0.00184181
+  Bin=1 with 40944 events has MSE=0.00184246 after epoch Nr=100
+-> Start training for energy bin = 2
+bin=2 epoch=0 MSE=0.0685985
+bin=2 epoch=1 MSE=0.0314162
+bin=2 epoch=2 MSE=0.0198258
+bin=2 epoch=3 MSE=0.0120974
+bin=2 epoch=4 MSE=0.00946653
+bin=2 epoch=5 MSE=0.00717724
+bin=2 epoch=6 MSE=0.00652779
+bin=2 epoch=7 MSE=0.00497492
+bin=2 epoch=8 MSE=0.00437492
+bin=2 epoch=9 MSE=0.00384146
+bin=2 epoch=20 MSE=0.00194437
+bin=2 epoch=40 MSE=0.00192179
+bin=2 epoch=60 MSE=0.00192188
+bin=2 epoch=80 MSE=0.00192192
+  Bin=2 with 46990 events has MSE=0.00192162 after epoch Nr=100
+-> Start training for energy bin = 3
+bin=3 epoch=0 MSE=0.0739915
+bin=3 epoch=1 MSE=0.0381157
+bin=3 epoch=2 MSE=0.028803
+bin=3 epoch=3 MSE=0.0176607
+bin=3 epoch=4 MSE=0.0124693
+bin=3 epoch=5 MSE=0.00942862
+bin=3 epoch=6 MSE=0.0063703
+bin=3 epoch=7 MSE=0.00502181
+bin=3 epoch=8 MSE=0.00465969
+bin=3 epoch=9 MSE=0.0041455
+bin=3 epoch=20 MSE=0.0019947
+bin=3 epoch=40 MSE=0.00196252
+bin=3 epoch=60 MSE=0.00196235
+bin=3 epoch=80 MSE=0.00196227
+  Bin=3 with 27998 events has MSE=0.00196243 after epoch Nr=100
+-> Start training for energy bin = 4
+bin=4 epoch=0 MSE=0.0809525
+bin=4 epoch=1 MSE=0.0413088
+bin=4 epoch=2 MSE=0.0307954
+bin=4 epoch=3 MSE=0.0205032
+bin=4 epoch=4 MSE=0.0162699
+bin=4 epoch=5 MSE=0.0123462
+bin=4 epoch=6 MSE=0.00890153
+bin=4 epoch=7 MSE=0.00677324
+bin=4 epoch=8 MSE=0.00560187
+bin=4 epoch=9 MSE=0.00515267
+bin=4 epoch=20 MSE=0.00202758
+bin=4 epoch=40 MSE=0.00197531
+bin=4 epoch=60 MSE=0.00197524
+bin=4 epoch=80 MSE=0.00197523
+  Bin=4 with 20353 events has MSE=0.00197542 after epoch Nr=100
+-> Start training for energy bin = 5
+bin=5 epoch=0 MSE=0.0954436
+bin=5 epoch=1 MSE=0.0597918
+bin=5 epoch=2 MSE=0.0473171
+bin=5 epoch=3 MSE=0.0356287
+bin=5 epoch=4 MSE=0.0297719
+bin=5 epoch=5 MSE=0.0232426
+bin=5 epoch=6 MSE=0.0178832
+bin=5 epoch=7 MSE=0.011048
+bin=5 epoch=8 MSE=0.00963644
+bin=5 epoch=9 MSE=0.00760399
+bin=5 epoch=20 MSE=0.00214316
+bin=5 epoch=40 MSE=0.00196961
+bin=5 epoch=60 MSE=0.00196574
+bin=5 epoch=80 MSE=0.00196347
+  Bin=5 with 15283 events has MSE=0.00196161 after epoch Nr=100
+-> Start training for energy bin = 6
+bin=6 epoch=0 MSE=0.100053
+bin=6 epoch=1 MSE=0.0808747
+bin=6 epoch=2 MSE=0.0648167
+bin=6 epoch=3 MSE=0.0507715
+bin=6 epoch=4 MSE=0.0460511
+bin=6 epoch=5 MSE=0.0350474
+bin=6 epoch=6 MSE=0.0251912
+bin=6 epoch=7 MSE=0.0185786
+bin=6 epoch=8 MSE=0.0138087
+bin=6 epoch=9 MSE=0.0108317
+bin=6 epoch=20 MSE=0.00229309
+bin=6 epoch=40 MSE=0.00199482
+bin=6 epoch=60 MSE=0.00198019
+bin=6 epoch=80 MSE=0.00197289
+  Bin=6 with 11465 events has MSE=0.00197043 after epoch Nr=100
+-> Start training for energy bin = 7
+bin=7 epoch=0 MSE=0.113348
+bin=7 epoch=1 MSE=0.0933691
+bin=7 epoch=2 MSE=0.077599
+bin=7 epoch=3 MSE=0.0608729
+bin=7 epoch=4 MSE=0.0543686
+bin=7 epoch=5 MSE=0.0446044
+bin=7 epoch=6 MSE=0.0327055
+bin=7 epoch=7 MSE=0.0253486
+bin=7 epoch=8 MSE=0.0193626
+bin=7 epoch=9 MSE=0.0167509
+bin=7 epoch=20 MSE=0.00260937
+bin=7 epoch=40 MSE=0.00196046
+bin=7 epoch=60 MSE=0.00195583
+bin=7 epoch=80 MSE=0.00195222
+  Bin=7 with 8870 events has MSE=0.00194991 after epoch Nr=100
+-> Start training for energy bin = 8
+bin=8 epoch=0 MSE=0.122782
+bin=8 epoch=1 MSE=0.1045
+bin=8 epoch=2 MSE=0.0937982
+bin=8 epoch=3 MSE=0.0696849
+bin=8 epoch=4 MSE=0.0617107
+bin=8 epoch=5 MSE=0.054656
+bin=8 epoch=6 MSE=0.0395094
+bin=8 epoch=7 MSE=0.0270251
+bin=8 epoch=8 MSE=0.0236407
+bin=8 epoch=9 MSE=0.0156168
+bin=8 epoch=20 MSE=0.00289703
+bin=8 epoch=40 MSE=0.00195364
+bin=8 epoch=60 MSE=0.00193606
+bin=8 epoch=80 MSE=0.00192746
+  Bin=8 with 7143 events has MSE=0.00192274 after epoch Nr=100
+-> Start training for energy bin = 9
+bin=9 epoch=0 MSE=0.1144
+bin=9 epoch=1 MSE=0.10819
+bin=9 epoch=2 MSE=0.094595
+bin=9 epoch=3 MSE=0.0709771
+bin=9 epoch=4 MSE=0.0676739
+bin=9 epoch=5 MSE=0.0581699
+bin=9 epoch=6 MSE=0.0455832
+bin=9 epoch=7 MSE=0.0374712
+bin=9 epoch=8 MSE=0.0266197
+bin=9 epoch=9 MSE=0.0277591
+bin=9 epoch=20 MSE=0.0028367
+bin=9 epoch=40 MSE=0.00195211
+bin=9 epoch=60 MSE=0.00193592
+bin=9 epoch=80 MSE=0.00192811
+  Bin=9 with 5916 events has MSE=0.00192444 after epoch Nr=100
+-> Start training for energy bin = 10
+bin=10 epoch=0 MSE=0.121531
+bin=10 epoch=1 MSE=0.105138
+bin=10 epoch=2 MSE=0.0890822
+bin=10 epoch=3 MSE=0.0732034
+bin=10 epoch=4 MSE=0.0688754
+bin=10 epoch=5 MSE=0.0585756
+bin=10 epoch=6 MSE=0.0429907
+bin=10 epoch=7 MSE=0.0389823
+bin=10 epoch=8 MSE=0.0269608
+bin=10 epoch=9 MSE=0.0209087
+bin=10 epoch=20 MSE=0.00277178
+bin=10 epoch=40 MSE=0.00193719
+bin=10 epoch=60 MSE=0.00192112
+bin=10 epoch=80 MSE=0.00191457
+  Bin=10 with 4771 events has MSE=0.00190961 after epoch Nr=100
+-> Start training for energy bin = 11
+bin=11 epoch=0 MSE=0.123254
+bin=11 epoch=1 MSE=0.0919953
+bin=11 epoch=2 MSE=0.0785812
+bin=11 epoch=3 MSE=0.0719859
+bin=11 epoch=4 MSE=0.0663524
+bin=11 epoch=5 MSE=0.06
+bin=11 epoch=6 MSE=0.0477058
+bin=11 epoch=7 MSE=0.0367647
+bin=11 epoch=8 MSE=0.0303961
+bin=11 epoch=9 MSE=0.0251404
+bin=11 epoch=20 MSE=0.00283583
+bin=11 epoch=40 MSE=0.00200946
+bin=11 epoch=60 MSE=0.00195512
+bin=11 epoch=80 MSE=0.00193578
+  Bin=11 with 3997 events has MSE=0.00192458 after epoch Nr=100
+-> Start training for energy bin = 12
+bin=12 epoch=0 MSE=0.126367
+bin=12 epoch=1 MSE=0.104877
+bin=12 epoch=2 MSE=0.0887882
+bin=12 epoch=3 MSE=0.0777656
+bin=12 epoch=4 MSE=0.0715217
+bin=12 epoch=5 MSE=0.0614722
+bin=12 epoch=6 MSE=0.0610593
+bin=12 epoch=7 MSE=0.0487473
+bin=12 epoch=8 MSE=0.0404725
+bin=12 epoch=9 MSE=0.0359801
+bin=12 epoch=20 MSE=0.00316701
+bin=12 epoch=40 MSE=0.00201654
+bin=12 epoch=60 MSE=0.00195636
+bin=12 epoch=80 MSE=0.0019296
+  Bin=12 with 3329 events has MSE=0.00191623 after epoch Nr=100
+-> Start training for energy bin = 13
+bin=13 epoch=0 MSE=0.1296
+bin=13 epoch=1 MSE=0.115723
+bin=13 epoch=2 MSE=0.0970738
+bin=13 epoch=3 MSE=0.0851195
+bin=13 epoch=4 MSE=0.0811089
+bin=13 epoch=5 MSE=0.0787477
+bin=13 epoch=6 MSE=0.0652931
+bin=13 epoch=7 MSE=0.0560671
+bin=13 epoch=8 MSE=0.0419145
+bin=13 epoch=9 MSE=0.0437457
+bin=13 epoch=20 MSE=0.00426907
+bin=13 epoch=40 MSE=0.00203997
+bin=13 epoch=60 MSE=0.00195208
+bin=13 epoch=80 MSE=0.00191725
+  Bin=13 with 2788 events has MSE=0.00189862 after epoch Nr=100
+-> Start training for energy bin = 14
+bin=14 epoch=0 MSE=0.130655
+bin=14 epoch=1 MSE=0.116613
+bin=14 epoch=2 MSE=0.107425
+bin=14 epoch=3 MSE=0.0888981
+bin=14 epoch=4 MSE=0.0856268
+bin=14 epoch=5 MSE=0.0837218
+bin=14 epoch=6 MSE=0.0735099
+bin=14 epoch=7 MSE=0.0650684
+bin=14 epoch=8 MSE=0.0556599
+bin=14 epoch=9 MSE=0.0435618
+bin=14 epoch=20 MSE=0.00606363
+bin=14 epoch=40 MSE=0.0020754
+bin=14 epoch=60 MSE=0.00195503
+bin=14 epoch=80 MSE=0.00192274
+  Bin=14 with 2522 events has MSE=0.00191012 after epoch Nr=100
+### MSE for this batch after 50000
+Event=50000 Bin=0  MSE=0.00147245
+Event=50000 Bin=1  MSE=0.00184246
+Event=50000 Bin=2  MSE=0.00192162
+Event=50000 Bin=3  MSE=0.00196243
+Event=50000 Bin=4  MSE=0.00197542
+Event=50000 Bin=5  MSE=0.00196161
+Event=50000 Bin=6  MSE=0.00197043
+Event=50000 Bin=7  MSE=0.00194991
+Event=50000 Bin=8  MSE=0.00192274
+Event=50000 Bin=9  MSE=0.00192444
+Event=50000 Bin=10  MSE=0.00190961
+Event=50000 Bin=11  MSE=0.00192458
+Event=50000 Bin=12  MSE=0.00191623
+Event=50000 Bin=13  MSE=0.00189862
+Event=50000 Bin=14  MSE=0.00191012
+## Total MSE for all bins for this batch 0.0284627
+Event=50100
+
+
+-- Write output file=Analysis.root
+
+
+TFile: name=Analysis.root, title=Histogram file, option=CREATE
+TH1.Print Name  = debug, Entries= 0, Total sum= 0
+TH1.Print Name  = jet_PT, Entries= 232913, Total sum= 232773
+TH1.Print Name  = jet_truth_PT, Entries= 299078, Total sum= 298888
+TH1.Print Name  = jet_dR, Entries= 1502576, Total sum= 1.50004e+06
+TH1.Print Name  = in1, Entries= 205385, Total sum= 139846
+TH1.Print Name  = in2, Entries= 205385, Total sum= 203669
+TH1.Print Name  = in3, Entries= 205385, Total sum= 205385
+TH1.Print Name  = in4, Entries= 205385, Total sum= 205385
+TH1.Print Name  = out1, Entries= 205385, Total sum= 205308
+TH1.Print Name  = out2, Entries= 205385, Total sum= 200964
+TH1.Print Name  = out3, Entries= 205385, Total sum= 201055
+TH1.Print Name  = out4, Entries= 205385, Total sum= 205307
+******************************************************************************
+*Tree    :Ntuple    : Ntuple                                                 *
+*Entries :        0 : Total =            1360 bytes  File  Size =        406 *
+*        :          : Tree compression factor =   1.00                       *
+******************************************************************************
+*Br    0 :RunNumber : RunNumber/I                                            *
+*Entries :        0 : Total  Size=        501 bytes  One basket in memory    *
+*Baskets :        0 : Basket Size=      32000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br    1 :EventNumber : EventNumber/I                                        *
+*Entries :        0 : Total  Size=        509 bytes  One basket in memory    *
+*Baskets :        0 : Basket Size=      32000 bytes  Compression=   1.00     *
+*............................................................................*
+New configuration successfully written to: out_ann/config.cfg
+Saving ANN results 
+0 Save out_ann/ann_jet_0.net with RME=0.00147245
+1 Save out_ann/ann_jet_1.net with RME=0.00184246
+2 Save out_ann/ann_jet_2.net with RME=0.00192162
+3 Save out_ann/ann_jet_3.net with RME=0.00196243
+4 Save out_ann/ann_jet_4.net with RME=0.00197542
+5 Save out_ann/ann_jet_5.net with RME=0.00196161
+6 Save out_ann/ann_jet_6.net with RME=0.00197043
+7 Save out_ann/ann_jet_7.net with RME=0.00194991
+8 Save out_ann/ann_jet_8.net with RME=0.00192274
+9 Save out_ann/ann_jet_9.net with RME=0.00192444
+10 Save out_ann/ann_jet_10.net with RME=0.00190961
+11 Save out_ann/ann_jet_11.net with RME=0.00192458
+12 Save out_ann/ann_jet_12.net with RME=0.00191623
+13 Save out_ann/ann_jet_13.net with RME=0.00189862
+14 Save out_ann/ann_jet_14.net with RME=0.00191012
+Total MSE for all bins for this run is 0.0284627
