@@ -10,7 +10,7 @@ ln -s $DELPHES delphes
 rm -f analysis 
 make -f Makefile
 
-NEVENTS=50100
+NEVENTS=100100
 
 # /netapp/data/hepsim/events/pp/13tev/pythia8_qcd_jz/JZ7/rfast106/
 # XF="rfast106"

@@ -223,9 +223,9 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 			double mse=0;
 			for (int e=0; e<nEpoch; e++) {
-				mse=fann_train_epoch ( ann_jets[m] , dataset );
-				if (e%100==0 ||  (e<10) || (e%20==0)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mse << endl;
-				if (mse<MSESTOP) break;
+                          mse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann_jets[m], dataset, num_threads) : fann_train_epoch(ann_jets[m], dataset);
+    			  if (e%100==0 ||  (e<10) || (e%20==0)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mse << endl;
+			  if (mse<MSESTOP) break;
 			}
 			cout << "  Bin=" << m << " with " << eventsBins[m] << " events has MSE=" <<  mse << " after epoch Nr=" << nEpoch << endl;
 
@@ -265,9 +265,10 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			}// end of dataset
 
 			for (int e=0; e<nEpoch*10; e++) {
-				float mmse=fann_train_epoch ( ann_jets_eff[m] , dataset_eff );
-				if (e%100==0 ||  (e<10) || (e%50==0)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;
-				if (mse<MSESTOP) break;
+                            float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann_jets_eff[m], dataset_eff, num_threads) : fann_train_epoch(ann_jets_eff[m], dataset_eff);
+
+			     if (e%100==0 || (e<10)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;
+		             if (mse<MSESTOP) break;
 			}
 			fann_destroy_train(dataset_eff) ; // clear
 

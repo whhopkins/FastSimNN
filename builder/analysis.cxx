@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 
         bool stop=false;
         int nev=0;
-	for(unsigned int m=0; m < Nfiles; m++){
+	for(int m=0; m < Nfiles; m++){
                 if (stop) break;
 
 		string Rfile=ana.ntup[m];

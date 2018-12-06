@@ -40,6 +40,7 @@ Int_t Ana::Finish() {
    nn.add("number_of_inputs", Setting::TypeInt) = num_input;
    nn.add("number_of_outputs", Setting::TypeInt) = num_output;
    nn.add("number_of_hidden_nodes", Setting::TypeInt) = num_neurons_hidden_1;
+   nn.add("number_of_threads", Setting::TypeInt) = num_threads;
 
    // configuration for jets
    Setting &njet = root.add("Jets", Setting::TypeGroup);
