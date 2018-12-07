@@ -65,7 +65,7 @@ for e in rfile.Ntuple:
            phi=e.AntiKt4JetPhi[j2]
            deta=etaT-eta
            dphi=phiT-phi
-           if (abs(dphi)>math.pi): dphi=2*math.pi-dphi 
+           if (abs(dphi)>math.pi): dphi=2*math.pi-abs(dphi) 
            dr=math.sqrt(deta*deta + dphi*dphi)
            if (dr<0.2):
                ratio=(pt/ptT) -1.0 
@@ -77,7 +77,7 @@ for e in rfile.Ntuple:
            phi=e.AntiKt4NNJetPhi[j2]
            deta=etaT-eta
            dphi=phiT-phi
-           if (abs(dphi)>math.pi): dphi=2*math.pi-dphi
+           if (abs(dphi)>math.pi): dphi=2*math.pi-abs(dphi)
            dr=math.sqrt(deta*deta + dphi*dphi)
            if (dr<0.2):
                ratio=(pt/ptT) -1.0

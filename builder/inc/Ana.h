@@ -54,7 +54,7 @@ class Ana  {
    static const int nBins=16;
    static const int nBatch=100000;  // number of events in batches for training
    static const int nEpoch=200;    // max number of epochs 
-   static const int nBinsNN=300;   // number of bins for resolution plots
+   static const int nBinsNN=200;   // number of bins for resolution plots
    static const int MinEntries=10; // min nr of entries in pT for NN training (per bunch);
 
    double DeltaR;  // parameter used to match true jets with reco

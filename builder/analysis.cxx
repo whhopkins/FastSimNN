@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
                         for(int i = 0; i < branchJet->GetEntriesFast(); ++i) { 
 				// Take first jet
 				Jet *jet = (Jet*) branchJet->At(i);
-                                if (abs(jet->Eta)>ana.maxEta) continue;
+                                if (abs(jet->Eta)>1.4*ana.maxEta) continue; // use large Eta (needs for matching) 
  
                                 TLorentzVector l;
                                 l.SetPtEtaPhiM(jet->PT,jet->Eta,jet->Phi,jet->Mass);
@@ -148,10 +148,12 @@ int main(int argc, char *argv[])
                                 //cout << jet->PT << endl;
 			}
 
+                        // use proper kinematic cuts
                         for(int i = 0; i < branchGenJet->GetEntriesFast(); ++i) { 
                                 // Take first jet
                                 Jet *jet = (Jet*) branchGenJet->At(i);
                                 if (abs(jet->Eta)>ana.maxEta) continue;
+                                if (jet->PT<ana.minPT) continue;
                                 TLorentzVector l;
                                 l.SetPtEtaPhiM(jet->PT,jet->Eta,jet->Phi,jet->Mass);
                                 LParticle p;

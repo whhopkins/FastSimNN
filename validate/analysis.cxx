@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
                         for(int i = 0; i < branchGenJet->GetEntriesFast(); ++i) { 
                                 // Take first jet
                                 Jet *jet = (Jet*) branchGenJet->At(i);
-                                if (abs(jet->Eta)>ana.maxEta) continue;
+                                //if (abs(jet->Eta)>ana.maxEta) continue;
                                 TLorentzVector l;
                                 l.SetPtEtaPhiM(jet->PT,jet->Eta,jet->Phi,jet->Mass);
                                 LParticle p;
