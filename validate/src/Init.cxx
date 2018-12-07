@@ -166,15 +166,13 @@ Int_t Ana::Init() {
 	m_ntuple->Branch("AntiKt4JetEta",   &m_jeteta);
 	m_ntuple->Branch("AntiKt4JetPhi",   &m_jetphi);
 
-
-	m_ntuple->Branch("AntiKt4TruthJetPT",    &m_gjetpt);
+	m_ntuple->Branch("AntiKt4TruthJetPt",    &m_gjetpt);
 	m_ntuple->Branch("AntiKt4TruthJetEta",   &m_gjeteta);
 	m_ntuple->Branch("AntiKt4TruthJetPhi",   &m_gjetphi);
 
 	m_ntuple->Branch("AntiKt4NNJetPt",    &m_nnjetpt);
 	m_ntuple->Branch("AntiKt4NNJetEta",   &m_nnjeteta);
 	m_ntuple->Branch("AntiKt4NNJetPhi",   &m_nnjetphi);
-
 
 
 	// read files from data.in file and put to a vector
