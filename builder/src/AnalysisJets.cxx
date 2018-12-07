@@ -153,7 +153,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					if (phiT !=0) phiOUT=jet_etascale*(abs(phi/phiT)-1) +  jet_etashift; 
 					//float eeOUT=abs(ee-eeT)/dmax;
 					// shrink pT (important for pileup!)
-					float eeOUT=jet_escale*((ee/eeT) -1) + jet_escale;
+					float eeOUT=jet_escale*((ee/eeT) -1) + jet_eshift;
 					//float shiftOUT=0.0f;
 					//if (ee-eeT>0) shiftOUT=1.0f; // gain or positive shift
 
@@ -249,7 +249,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				} // end energy range
 			}// end of dataset
 
-			for (int e=0; e<nEpoch*10; e++) {
+			for (int e=0; e<nEpoch*2; e++) {
                             float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann_jets_eff[m], dataset_eff, num_threads) : fann_train_epoch(ann_jets_eff[m], dataset_eff);
 
 			     if (e%100==0 || (e<10)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;

@@ -30,6 +30,19 @@ mv Analysis.root out_root/$XF.root
 cp -r out_ann out_ann_$XF
 
 
+XF="rfast007"
+DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
+# remove all ANN files if you start a new ANN training
+rm -f out_ann/*
+rm -r out_ann_$XF
+rm -f data.in
+Make_input $DIR/
+echo "Run $XF"
+./analysis $NEVENTS
+mv Analysis.root out_root/$XF.root
+cp -r out_ann out_ann_$XF
+
+
 XF="rfast006"
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 # remove all ANN files if you start a new ANN training

@@ -231,7 +231,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				BinSelected=myRand(BinOverTrue, freqE, nBinsNN); // select random value (bin) assuming frequencies
 				recoOvertrue=-1+BinSelected*delta;
 				// correction
-				double ecorr=( (recoOvertrue -  jet_eshift)/jet_escale ) +1;
+				double ecorr=( (recoOvertrue -  jet_eshift)/jet_escale ) + 1.0;
 				ee =  eeT * ecorr; // gain
 				iii=0;
 				for (int jjj=3*nBinsNN; jjj<4*nBinsNN; jjj++) {

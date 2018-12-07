@@ -150,6 +150,9 @@ Int_t Ana::Init() {
 		// detect files with pileup (automatically)
 		std::size_t found = temp.find("rfast006");
 		if (found!=std::string::npos) MuPileup=140; // detect pileup events from HepSim
+                // detect files with pileup (automatically)
+                found = temp.find("rfast007");
+                if (found!=std::string::npos) MuPileup=40; // detect pileup events from HepSim
 
 		ntup.push_back(temp);
 	}
@@ -174,6 +177,12 @@ Int_t Ana::Init() {
                           jet_etashift=0.0;
                          }
 
+     if (MuPileup>10 && MuPileup<50) { // shrink to fit to -1 - 1 
+                          jet_escale=0.8;
+                          jet_eshift=-0.25;
+                          jet_etascale=2.0;
+                          jet_etashift=0.0;
+                         }
 
 
 
