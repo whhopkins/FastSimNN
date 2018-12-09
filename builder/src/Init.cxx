@@ -10,19 +10,17 @@ string getEnvVar( std::string const & key ) {
 // initialize your calculations (histograms)
 Int_t Ana::Init() {
 
-
-	// jet cuts
-	minPT=25;
-	maxEta=2.5;
+        minPT=25; 
+	maxEta=3.0;
 	nevv=0;
 	DeltaR=0.2; // cone to match with jets
 	MSESTOP=0.0001; // error to stop training
 	MuPileup=0;
 
 	mcEventWeight=1.0;
-	double xBins[] = {minPT,50,70,100,125,150,175,200,225,250,275,300,325,350,375,400};
+	double xBins[] = {minPT,50,75,100,125,150,175,200,225,250,275,300,325,350,375,400};
 	//double xBins[] = {minPT,50,100,200,400,600,800,1000,1200,1400,1600,1800,2000,2400,2800,3200};
-	const int nxBins=sizeof(xBins)/sizeof(double);
+	//const int nxBins=sizeof(xBins)/sizeof(double);
 
 
 	for (int m=0; m<nBins; m++){
@@ -63,9 +61,7 @@ Int_t Ana::Init() {
 
 			cout << "   - Create new ANN for efficiency.. " << ann_jets_eff_name[m] << endl;
 			int num_layers_eff=3;
-			int num_input_eff=3;
-			int num_neurons_hidden_eff=3;
-			int num_output_eff=1;
+			int num_neurons_hidden_eff=5;
 			ann_jets_eff[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
 			fann_set_activation_function_hidden(ann_jets_eff[m], FANN_SIGMOID_SYMMETRIC);
 			fann_set_activation_function_output(ann_jets_eff[m], FANN_SIGMOID_SYMMETRIC);
@@ -111,25 +107,23 @@ Int_t Ana::Init() {
 	h_dR = new TH1D("jet_dR", "truth-jet distance", 500, 0, 7);
 
 
-	h_in1 = new TH1D("in1", "in1", nBinsNN, -1.2, 1.2);
-	h_in2 = new TH1D("in2", "in2", nBinsNN, -1.2, 1.2);
-	h_in3 = new TH1D("in3", "in3", nBinsNN, -1.2, 1.2);
-	h_in4 = new TH1D("in4", "in4", nBinsNN, -1.2, 1.2);
+	h_in1 = new TH1D("in1", "in1", nBinsNN, -1.1, 1.1);
+	h_in2 = new TH1D("in2", "in2", nBinsNN, -1.1, 1.1);
+	h_in3 = new TH1D("in3", "in3", nBinsNN, -1.1, 1.1);
+	h_in4 = new TH1D("in4", "in4", nBinsNN, -1.1, 1.1);
 
-	h_out1 = new TH1D("out1", "out1", nBinsNN, -1.2, 1.2);
-	h_out2 = new TH1D("out2", "out2", nBinsNN, -1.2, 1.2);
-	h_out3 = new TH1D("out3", "out3", nBinsNN, -1.2, 1.2);
-	h_out4 = new TH1D("out4", "out4", nBinsNN, -1.2, 1.2);
-	h_out5 = new TH1D("out5_eff", "out5_eff", nBinsNN, -1.2, 1.2);
-
+	h_out1 = new TH1D("out1", "out1", nBinsNN, -1.1, 1.1);
+	h_out2 = new TH1D("out2", "out2", nBinsNN, -1.1, 1.1);
+	h_out3 = new TH1D("out3", "out3", nBinsNN, -1.1, 1.1);
+	h_out4 = new TH1D("out4", "out4", nBinsNN, -1.1, 1.1);
+	h_out5 = new TH1D("out5_eff", "out5_eff matching efficiency", nBinsNN, -1.1, 1.1);
+        h_out6 = new TH1D("out5_btag", "out6_btag b-tagging", nBinsNN, -1.1, 1.1);
 
 
 	// create ntuple
 	m_ntuple  = new TTree("Ntuple","Ntuple");
 	m_ntuple->Branch("RunNumber",   &RunNumber,  "RunNumber/I");
 	m_ntuple->Branch("EventNumber", &EventNumber,   "EventNumber/I");
-	//a_jets = new TClonesArray("LParticle",10);
-	//m_ntuple->Branch("jets", "TClonesArray", &a_jets, 256000, 0);
 
 	// read files from data.in file and put to a vector
 	string name="data.in";
@@ -168,11 +162,15 @@ Int_t Ana::Init() {
       // energy and eta scaling factors 
       jet_escale=1.5;
       jet_eshift=0.0;
+      jet_mscale=1.0;
+      jet_mshift=0.0;
       jet_etascale=2.0;
       jet_etashift=0.0;
       if (MuPileup>100) { // shrink to fit to -1 - 1 
                           jet_escale=0.5;
                           jet_eshift=-0.5;
+                          jet_mscale=0.25;
+                          jet_mshift=-0.8;
                           jet_etascale=2.0;
                           jet_etashift=0.0;
                          }
@@ -180,6 +178,8 @@ Int_t Ana::Init() {
      if (MuPileup>10 && MuPileup<50) { // shrink to fit to -1 - 1 
                           jet_escale=0.8;
                           jet_eshift=-0.25;
+                          jet_mscale=0.5;
+                          jet_mshift=-0.5;
                           jet_etascale=2.0;
                           jet_etashift=0.0;
                          }

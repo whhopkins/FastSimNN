@@ -17,7 +17,9 @@ Int_t Ana::Init() {
 	nev=0;
 	DeltaR=0.2; // cone to match with jets
 	MuPileup=0;
-
+        jet_escale=0;
+        jet_mscale=0;
+        jet_etascale=0;
 
 	static const char *conf_file = "out_ann/config.cfg";
 	Config cfg;
@@ -43,7 +45,11 @@ Int_t Ana::Init() {
 
 	// ML
 	Setting &mL = root["DelphesML"];
-	if (!(mL.lookupValue("pileup_mu", MuPileup) ))  {
+	if (!(mL.lookupValue("pileup_mu", MuPileup)
+                 && mL.lookupValue("number_of_inputs",   num_input)
+                 && mL.lookupValue("number_of_inputs_eff",  num_input_eff) 
+                 && mL.lookupValue("number_of_outputs_eff",  num_output_eff) 
+                 ))  {
 		cout << "Error: some values are not in DelphesML configuration!" << endl;
 		exit(0);
 	}
@@ -52,9 +58,11 @@ Int_t Ana::Init() {
 	if (!(njets.lookupValue("EnergyBinsNr", nBins)
 	                && njets.lookupValue("MinPT", minPT)
 	                && njets.lookupValue("MaxEta", maxEta)
-	                && njets.lookupValue("EnergyBinsForResolution", nBinsNN)
+	                && njets.lookupValue("PtBinsForResolution", nBinsNN)
                         && njets.lookupValue("EnergyScale",jet_escale)
                         && njets.lookupValue("EnergyShift",jet_eshift)
+                        && njets.lookupValue("MassScale",jet_mscale)
+                        && njets.lookupValue("MassShift",jet_mshift)
                         && njets.lookupValue("EtaScale",jet_etascale)
                         && njets.lookupValue("EtaShift",jet_etashift))
 
@@ -64,8 +72,13 @@ Int_t Ana::Init() {
 	}
 
 
+        if (jet_escale == 0 || jet_mscale == 0 || jet_etascale == 0){
+         cout << "Error: failed to read scale factors from configuration file !" << endl;
+         exit(0);
+        }
+
 	eBins = new double[nBinsNN];
-	const Setting &bin_settings = njets.lookup("EnergyBins");
+	const Setting &bin_settings = njets.lookup("PtBins");
 	for (unsigned int n = 0; n < bin_settings.getLength(); ++n) eBins[n]=bin_settings[n];
 	if (bin_settings.getLength() != (unsigned int)nBins) {
 		cout << "getLength() =" << bin_settings.getLength() << "  nBinsNN=" << nBins << endl;
@@ -74,11 +87,9 @@ Int_t Ana::Init() {
 	}
 
 
-	num_input=4;
 	num_output= num_input*nBinsNN;
 
 	mcEventWeight=1.0;
-
 
 	// vector with bins for reco/true
 	ann_jets_name = new string[nBinsNN-1];
@@ -146,16 +157,22 @@ Int_t Ana::Init() {
 	h_phicor = new TH1D("jet_phicor", "Phi correction", 200, 0.0, 3);
 
 
-	h_in1 = new TH1D("in1", "in1", 140, -1.2, 1.2);
-	h_in2 = new TH1D("in2", "in2", 140, -1.2, 1.2);
-	h_in3 = new TH1D("in3", "in3", 140, -1.2, 1.2);
-	h_in4 = new TH1D("in4", "in4", 140, -1.2, 1.2);
+	h_in1 = new TH1D("in1", "in1", nBinsNN, -1.1, 1.1);
+	h_in2 = new TH1D("in2", "in2", nBinsNN, -1.1, 1.1);
+	h_in3 = new TH1D("in3", "in3", nBinsNN, -1.1, 1.1);
+	h_in4 = new TH1D("in4", "in4", nBinsNN, -1.1, 1.1);
 
-	h_out1 = new TH1D("out1", "out1", nBinsNN, -1., 1.);
-	h_out2 = new TH1D("out2", "out2", nBinsNN, -1., 1.);
-	h_out3 = new TH1D("out3", "out3", nBinsNN, -1., 1.);
-	h_out4 = new TH1D("out4", "out4", nBinsNN, -1., 1.);
-	h_out5_eff = new TH1D("out5_eff", "out5 efficiency", 140, -1.2, 1.2);
+	h_out1 = new TH1D("out1", "out1", nBinsNN, -1.1, 1.1);
+	h_out2 = new TH1D("out2", "out2", nBinsNN, -1.1, 1.1);
+	h_out3 = new TH1D("out3", "out3", nBinsNN, -1.1, 1.1);
+	h_out4 = new TH1D("out4", "out4", nBinsNN, -1.1, 1.1);
+	h_out5_eff = new TH1D("out5_eff", "out5 efficiency", nBinsNN, -1.1, 1.1);
+        h_out6_btag = new TH1D("out6_btag", "out6 b-tagging", nBinsNN, -1.1, 1.1);
+
+        h_rout1 = new TH1D("rout1", "out1 random bin", nBinsNN, 0, nBinsNN);
+        h_rout2 = new TH1D("rout2", "out2 random bin", nBinsNN, 0, nBinsNN);
+        h_rout3 = new TH1D("rout3", "out3 random bin", nBinsNN, 0, nBinsNN);
+        h_rout4 = new TH1D("rout4", "out4 random bin", nBinsNN, 0, nBinsNN);
 
 
 	// create ntuple
@@ -165,14 +182,20 @@ Int_t Ana::Init() {
 	m_ntuple->Branch("AntiKt4JetPt",    &m_jetpt);
 	m_ntuple->Branch("AntiKt4JetEta",   &m_jeteta);
 	m_ntuple->Branch("AntiKt4JetPhi",   &m_jetphi);
+        m_ntuple->Branch("AntiKt4JetM",   &m_jetm);
+        m_ntuple->Branch("AntiKt4JetBtag",   &m_jetbtag);
 
 	m_ntuple->Branch("AntiKt4TruthJetPt",    &m_gjetpt);
 	m_ntuple->Branch("AntiKt4TruthJetEta",   &m_gjeteta);
 	m_ntuple->Branch("AntiKt4TruthJetPhi",   &m_gjetphi);
+        m_ntuple->Branch("AntiKt4TruthJetM",   &m_gjetm);
+        m_ntuple->Branch("AntiKt4TruthJetBtag",   &m_gjetbtag);
 
 	m_ntuple->Branch("AntiKt4NNJetPt",    &m_nnjetpt);
 	m_ntuple->Branch("AntiKt4NNJetEta",   &m_nnjeteta);
 	m_ntuple->Branch("AntiKt4NNJetPhi",   &m_nnjetphi);
+        m_ntuple->Branch("AntiKt4NNJetM",   &m_nnjetm);
+        m_ntuple->Branch("AntiKt4NNJetBtag",   &m_nnjetbtag);
 
 
 	// read files from data.in file and put to a vector

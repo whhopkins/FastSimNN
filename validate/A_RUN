@@ -5,13 +5,17 @@ echo $XPWD
 
 source ./setup.sh
 
+rm -f delphes
 ln -s $DELPHES delphes 
 
 rm -f analysis 
 make -f Makefile
 
+# look at LAST 20 files (avoid training biase)
 
-NEVENTS=100000
+NrFiles=20
+
+NEVENTS=200000
 
 XF="rfast004"
 rm -f out_ann
@@ -19,7 +23,7 @@ ln -s ../builder/out_ann_$XF out_ann
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 rm -f data.in
 Make_input $DIR/
-head -n 20  data.in > a
+tail -n $NrFiles  data.in > a
 mv a data.in
 echo "Run $XF"
 ./analysis $NEVENTS
@@ -31,7 +35,7 @@ ln -s ../builder/out_ann_$XF out_ann
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 rm -f data.in
 Make_input $DIR/
-head -n 20  data.in > a
+tail -n $NrFiles  data.in > a
 mv a data.in
 echo "Run $XF"
 ./analysis $NEVENTS
@@ -44,14 +48,13 @@ ln -s ../builder/out_ann_$XF out_ann
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 rm -f data.in
 Make_input $DIR/
-head -n 20  data.in > a
+tail -n $NrFiles  data.in > a
 mv a data.in
 echo "Run $XF"
 ./analysis $NEVENTS
 mv Analysis.root out_root/$XF.root
 
-
-
+echo "All done!"
 
 
 

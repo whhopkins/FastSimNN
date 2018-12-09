@@ -20,16 +20,15 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		double phiT = L2.Phi();
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
-		double eeT =  L2.E();
-		//if (phiT<0) phiT=abs(phiT)+PI;
-
+		double massT =  L2.M();
+                float  btagT=(float)tjet.GetType(); // get  b-quark in 100%
 
 		for (int m=0; m<nBins-1; m++){
 			double dmin=eBins[m];
 			double dmax=eBins[m+1];
 			//double width=dmax-dmin;
 			//double dcenter=dmin+0.5*width;
-			if (eeT>dmin && eeT<dmax)  eventsBins[m]++;
+			if (ptT>dmin && ptT<dmax)  eventsBins[m]++;
 		}
 
 
@@ -39,39 +38,36 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			LParticle rjet = (LParticle)JetsReco.at(i);
 			TLorentzVector L1 = rjet.GetP();
 			double phi = L1.Phi();
-			//if (phi<0) phi=abs(phi)+PI;
 			double eta = L1.PseudoRapidity();
-			//double mass = L1.M();
 			double dEta=etaT-eta;
 			double dPhi=phiT-phi;
 			if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 			double dR=sqrt(dEta*dEta+dPhi*dPhi);
 			h_dR->Fill(dR);
 			if (dR<DeltaR) indexMatch=i;
-			// cout << "Reco jet=" << i << " " << pt << " " << eta << endl;
 		}
 
+                float btag=0;
 		if (indexMatch>-1){
 			LParticle rjet = (LParticle)JetsReco.at(indexMatch);
 			TLorentzVector L1 = rjet.GetP();
 			float phi = L1.Phi();
-			float pt =  L1.Perp();
+			float pt  = L1.Perp();
 			float eta = L1.PseudoRapidity();
-			float ee = L1.E();
-			//if (phi<0) phi=abs(phi)+PI;
+			float mass  = L1.M();
+                        btag  = (float)rjet.GetType();
 
 			vector<float> input;
 			vector<float> output;
-
 			input.push_back((float)ptT);
 			input.push_back((float)etaT);
 			input.push_back((float)phiT);
-			input.push_back( (float)eeT);
+			input.push_back( (float)massT);
 
 			output.push_back(pt);
 			output.push_back(eta);
 			output.push_back(phi);
-			output.push_back(ee);
+			output.push_back(mass);
 
 			// push vectors
 			finput_jets.push_back(input);
@@ -80,13 +76,20 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 		// statistics limitted for efficiency
 		vector<float> input2;
-		vector<int>   output2;
-		input2.push_back((float)eeT);
+		vector<float> output2;
+		input2.push_back((float)ptT);
 		input2.push_back((float)etaT);
 		input2.push_back((float)phiT);
-		int iout=-1; // no match
-		if (indexMatch>-1) iout=1;
-		output2.push_back(iout);
+                input2.push_back((float)btagT); // fraction of b-quark momenta in % (100-0) 
+
+                float ibb=-1.0f;
+		float iout=-1.0f; // no match
+		if (indexMatch>-1)  iout=1.0f;
+                if (btag>0)         ibb=1.0f;  // b-tagged and matched
+
+                output2.push_back(iout);
+                output2.push_back(ibb);
+
 		finput_jets_eff.push_back(input2);
 		foutput_jets_eff.push_back(output2);
 
@@ -103,11 +106,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			double dmin=eBins[m];
 			double dmax=eBins[m+1];
 			double width=dmax-dmin;
-			//double dcenter=dmin+0.5*width;
 			if (eventsBins[m]<MinEntries) continue;
-			//
 			cout << "-> Start training for energy bin = " << m << endl;
-
 
 			// empty data
 			fann_train_data *  dataset=  fann_create_train(eventsBins[m], num_input, num_output);
@@ -115,32 +115,28 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			// create a dataset for a given bin
 			int nn=0;
 			for (unsigned int i=0; i<finput_jets.size(); i++){
-
 				vector<float> input = finput_jets[i];
 				vector<float> output = foutput_jets[i];
 				float ptT=input[0];
 				float etaT=input[1];
 				float phiT=input[2];
-				float eeT=input[3];
+				float massT=input[3];
 
 				float pt=output[0];
 				float eta=output[1];
 				float phi=output[2];
-				float ee=output[3];
-
-				//if (phi<0) phi=abs(phi)+PI;
-				//if (phiT<0) phiT=abs(phiT)+PI;
+				float mass=output[3];
 
 
+				if (ptT>dmin && ptT<dmax) {
 
-				if (eeT>dmin && eeT<dmax) {
-
-					float eeIN=(eeT-dmin)/width;
+                                        float dminmax=dmin+0.5*width;
+					float ptIN=((ptT-dminmax)/(0.5*width));
 					float etaIN=etaT/EtaMax; // range -1 -1
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
-					float ptIN=(((eeT-ptT)/width)-1);
+					float mIN=-1+(massT/(0.5*dmin));
 
-					// assume -1 - 1 range.
+	                   		// assume -1 - 1 range.
 					// scale to avoid sharp behaviour near 0
 					// for pileup we make the distribution narrower and shift to -0.5 to fit to [-1,1]
 					float ptOUT= jet_escale*((pt/ptT)-1) + jet_eshift;
@@ -153,10 +149,9 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					if (phiT !=0) phiOUT=jet_etascale*(abs(phi/phiT)-1) +  jet_etashift; 
 					//float eeOUT=abs(ee-eeT)/dmax;
 					// shrink pT (important for pileup!)
-					float eeOUT=jet_escale*((ee/eeT) -1) + jet_eshift;
+					float mOUT=jet_mscale*((mass/massT) -1) + jet_mshift;
 					//float shiftOUT=0.0f;
 					//if (ee-eeT>0) shiftOUT=1.0f; // gain or positive shift
-
 
 					fann_type uinput[num_input];
 					fann_type uoutput[num_output];
@@ -164,14 +159,12 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					uinput[0] = ptIN;
 					uinput[1] = etaIN;
 					uinput[2] = phiIN;
-					uinput[3] = eeIN;
+					uinput[3] = mIN;
 					// outputs
 					uoutput[0] = ptOUT;
 					uoutput[1] = etaOUT;
 					uoutput[2] = phiOUT;
-					uoutput[3] = eeOUT;
-					//uoutput[4] = 0.0; // shiftOUT;
-
+					uoutput[3] = mOUT;
 
 					for (unsigned int jjj=0; jjj<num_output; jjj++) uoutput[jjj]=0.0;
 
@@ -182,9 +175,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 						if (ptOUT>d1  && ptOUT<=d2)    uoutput[jjj]=1.0;
 						if (etaOUT>d1 && etaOUT<=d2)   uoutput[jjj+nBinsNN]=1.0;
 						if (phiOUT>d1 && phiOUT<=d2)   uoutput[jjj+2*nBinsNN]=1.0;
-						if (eeOUT>d1  && eeOUT<=d2)    uoutput[jjj+3*nBinsNN]=1.0;
+						if (mOUT>d1  && mOUT<=d2)      uoutput[jjj+3*nBinsNN]=1.0;
 					}
-
 
 					for (unsigned int kk=0; kk<num_input; kk++)  dataset->input[nn][kk] =uinput[kk];
 					for (unsigned int kk=0; kk<num_output; kk++) dataset->output[nn][kk] =uoutput[kk];
@@ -192,14 +184,13 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					h_in1->Fill(ptIN);
 					h_in2->Fill(etaIN);
 					h_in3->Fill(phiIN);
-					h_in4->Fill(eeIN);
+					h_in4->Fill(mIN);
 
 					h_out1->Fill(ptOUT);
 					h_out2->Fill(etaOUT);
 					h_out3->Fill(phiOUT);
-					h_out4->Fill(eeOUT);
+					h_out4->Fill(mOUT);
 
-					//
 					nn++;
 				} // end energy range
 
@@ -217,39 +208,51 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 			fann_destroy_train(dataset) ; // clear
 
-
 			// empty data
-			fann_train_data *  dataset_eff=  fann_create_train(eventsBins[m], 3, 1);
+			fann_train_data *  dataset_eff=  fann_create_train(eventsBins[m], num_input_eff, num_output_eff);
 			nn=0;
 			cout << "\n  -> Training for efficiency  = " << m << " sample size=" << finput_jets_eff.size() << endl;
 			for (unsigned int i=0; i<finput_jets_eff.size(); i++){
 				//cout << i << endl;
 				vector<float> input2 = finput_jets_eff[i];
-				vector<int> output2 =  foutput_jets_eff[i];
-				float eeT=input2[0];
+				vector<float> output2 =  foutput_jets_eff[i];
+				float ptT=input2[0];
 				float etaT=input2[1];
 				float phiT=input2[2];
-				int   fout=output2[0];
-				h_out5->Fill((float)fout);
+                                float btagT=(float)input2[3]; // 0 - 100 
+                                // outputs
+				float match=output2[0];
+                                float btag=output2[1];
+				h_out5->Fill(match);
+                                h_out6->Fill(btag); // -1 or 1 
 
-				if (eeT>dmin && eeT<dmax) {
-					float eeIN=(eeT-dmin)/width;
+				if (ptT>dmin && ptT<dmax) {
+				        float dminmax=dmin+0.5*width;
+                                        float ptIN=((ptT-dminmax)/(0.5*width));
 					float etaIN=etaT/EtaMax; // range -1 -1
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
-					fann_type uinput[3];
-					fann_type uoutput[1];
-					uinput[0]=eeIN;
+					fann_type uinput[num_input_eff];
+					fann_type uoutput[num_output_eff];
+					uinput[0]=ptIN;
 					uinput[1]=etaIN;
 					uinput[2]=phiIN;
-					uoutput[0]=fout;
-					for (unsigned int kk=0; kk<3; kk++)  dataset_eff->input[nn][kk] =uinput[kk];
-					dataset_eff->output[nn][0] =uoutput[0];
+                                        uinput[3]=(float)(btagT/100.) - 1; // normalize  -1 - 0 
+                                        if (uinput[3]>1) uinput[3]=1;
+
+					uoutput[0]=(float)match;
+                                        uoutput[1]=(float)btag;
+
+                                        // debug
+                                        //if (uoutput[0]>0 && btag>0) cout << "In " << uinput[3]  << "  out=" << uoutput[1] << endl;
+
+					for (unsigned int kk=0; kk<4; kk++)  dataset_eff->input[nn][kk] =uinput[kk];
+					for (unsigned int kk=0; kk<2; kk++)  dataset_eff->output[nn][kk] =uoutput[kk];
 
 					nn++;
 				} // end energy range
 			}// end of dataset
 
-			for (int e=0; e<nEpoch*2; e++) {
+			for (int e=0; e<nEpoch*4; e++) {
                             float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann_jets_eff[m], dataset_eff, num_threads) : fann_train_epoch(ann_jets_eff[m], dataset_eff);
 
 			     if (e%100==0 || (e<10)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;
@@ -259,18 +262,6 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 
 		} // end run over energy bins
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -293,24 +284,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 	}
 
-	/*
-	   // ********************************   fill ntuple
-	    int n=0;
-	    TClonesArray &ar = *a_jets;
-	    for (unsigned int i=0; i<JetsReco.size(); i++) {
-	              LParticle p = (LParticle)JetsReco[i];
-	              new(ar[n])  LParticle(&p);
-	              n++;
-	         }
-
-
-	   m_ntuple->Fill();
-
-	*/
-
-
 	nevv++;
-
 
 	return 0;
 

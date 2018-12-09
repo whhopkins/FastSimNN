@@ -85,9 +85,25 @@ for e in rfile.Ntuple:
                prof_pt_nn.Fill(ptT,ratio);
  
 c1=TCanvas("c","FastNN",10,10,600,600);
-prof_eta.SetMarkerSize(1)
+
+Xmin=-2.5
+Xmax=2.5
+Ymin=0.0
+Ymax=0.4
+nameX="eta"
+nameY="pT-pT(true)/pT(true)"
+h=gPad.DrawFrame(Xmin,Ymin,Xmax,Ymax)
+ax=h.GetXaxis(); ax.SetTitleOffset(0.8)
+ax.SetTitle( nameX );
+ay=h.GetYaxis(); ay.SetTitleOffset(0.8)
+ay.SetTitle( nameY );
+ax.SetTitleOffset(1.1); ay.SetTitleOffset(1.4)
+ax.Draw("same")
+ay.Draw("same")
+
+prof_eta.SetMarkerSize(1.1)
 prof_eta.SetMarkerColor(1)
-prof_eta.Draw("pe")
+prof_eta.Draw("pe same")
 prof_eta_nn.SetMarkerSize(1)
 prof_eta_nn.SetMarkerColor(2)
 prof_eta_nn.Draw("pe same")

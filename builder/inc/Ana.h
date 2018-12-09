@@ -52,17 +52,25 @@ class Ana  {
    int  MuPileup; // number of pileup (mu)
    static const int num_threads = 16; // number of threads 
    static const int nBins=16;
-   static const int nBatch=100000;  // number of events in batches for training
-   static const int nEpoch=200;    // max number of epochs 
+   static const int nBatch=100000; // number of events in batches for training
+   static const int nEpoch=300;    // max number of epochs 
    static const int nBinsNN=200;   // number of bins for resolution plots
-   static const int MinEntries=10; // min nr of entries in pT for NN training (per bunch);
+   static const int MinEntries=20; // min nr of entries in pT for NN training (per bunch);
+   static const int num_layers = 3;
+   //number in hidden layer 1
+   static  const int num_neurons_hidden_1=16;
+
 
    double DeltaR;  // parameter used to match true jets with reco
    double MSESTOP;  // when stop training..
 
-   // NN structure 
+   // NN structure for resolution 
    static const int num_input=4;
    static const int num_output=4*nBinsNN;
+
+   // this is input and output for NN for efficiency
+   static const int num_input_eff=4;
+   static const int num_output_eff=2;
 
 
    bool firstTime[nBins-1]; // if false, continue training;
@@ -72,8 +80,8 @@ class Ana  {
    vector<vector<float>> finput_jets;
    vector<vector<float>> foutput_jets;
    // for efficiency
-   vector<vector<float>> finput_jets_eff;
-   vector<vector<int>>   foutput_jets_eff;
+   vector<vector<float>>   finput_jets_eff;
+   vector<vector<float>>   foutput_jets_eff;
 
    
    double initialRME[nBins-1];
@@ -88,10 +96,9 @@ class Ana  {
    float jet_eshift;
    float jet_etascale;
    float jet_etashift;
+   float jet_mscale;
+   float jet_mshift;
 
-   static const int num_layers = 3;
-   //number in hidden layer 1
-   static  const int num_neurons_hidden_1=40;
    TH1D *h_jetpt;
    TH1D *h_jetpt_truth;
 
@@ -113,6 +120,7 @@ protected:
    TH1D *h_out3;
    TH1D *h_out4;
    TH1D *h_out5;
+   TH1D *h_out6;
 
    string ffile; 
    TFile *RootFile;

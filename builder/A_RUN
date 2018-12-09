@@ -5,6 +5,7 @@ echo $XPWD
 
 source ./setup.sh
 
+rm -f delphes
 ln -s $DELPHES delphes 
 
 rm -f analysis 

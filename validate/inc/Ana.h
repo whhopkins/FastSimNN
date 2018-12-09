@@ -54,12 +54,13 @@ class Ana  {
  
   // NN structure 
    unsigned int num_layers = 3;
-   unsigned int num_neurons_hidden_1=40;
    int nBinsNN;   // number of bins for resolution plots
 
     // NN structure 
    unsigned int num_input;
    unsigned int num_output;
+   unsigned int num_input_eff;
+   unsigned int num_output_eff;
 
    int  MuPileup; 
    int nBins;
@@ -77,6 +78,8 @@ class Ana  {
    float jet_eshift;
    float jet_etascale;
    float jet_etashift;
+   float jet_mscale;
+   float jet_mshift;
 
    
    int *BinOverTrue; // bins for reco/true distributions 
@@ -112,21 +115,33 @@ protected:
    TH1D *h_out3;
    TH1D *h_out4;
    TH1D *h_out5_eff;
+   TH1D *h_out6_btag;
 
-   //TTree*  m_jets; //!
+   //random bins generated
+   TH1D *h_rout1;
+   TH1D *h_rout2;
+   TH1D *h_rout3;
+   TH1D *h_rout4;
+
+
+
    std::vector<Double32_t> m_jetpt; //!
    std::vector<Double32_t> m_jeteta; //!
    std::vector<Double32_t> m_jetphi; //!
+   std::vector<Double32_t> m_jetm; //!
+   std::vector<Int_t>      m_jetbtag; //!
 
-   //TTree*  m_gjets; //!
    std::vector<Double32_t> m_gjetpt; //!
    std::vector<Double32_t> m_gjeteta; //!
    std::vector<Double32_t> m_gjetphi; //!
+   std::vector<Double32_t> m_gjetm; //!
+   std::vector<Int_t>      m_gjetbtag; //!
 
-   //TTree*  m_nnjets; //!
    std::vector<Double32_t> m_nnjetpt; //!
    std::vector<Double32_t> m_nnjeteta; //!
    std::vector<Double32_t> m_nnjetphi; //!
+   std::vector<Double32_t> m_nnjetm; //!
+   std::vector<Double32_t> m_nnjetbtag; //!
 
    TTree* m_ntuple;
 

@@ -41,19 +41,23 @@ Int_t Ana::Finish() {
    nn.add("number_of_outputs", Setting::TypeInt) = num_output;
    nn.add("number_of_hidden_nodes", Setting::TypeInt) = num_neurons_hidden_1;
    nn.add("number_of_threads", Setting::TypeInt) = num_threads;
+   nn.add("number_of_inputs_eff", Setting::TypeInt) = num_input_eff;
+   nn.add("number_of_outputs_eff", Setting::TypeInt) = num_output_eff;
 
    // configuration for jets
    Setting &njet = root.add("Jets", Setting::TypeGroup);
    njet.add("MinPT", Setting::TypeFloat) = minPT;
    njet.add("MaxEta", Setting::TypeFloat) = maxEta;
-   njet.add("EnergyBinsForResolution", Setting::TypeInt) = nBinsNN;
+   njet.add("PtBinsForResolution", Setting::TypeInt) = nBinsNN;
    njet.add("EnergyBinsNr", Setting::TypeInt) = nBins;
    njet.add("EnergyScale", Setting::TypeFloat) = jet_escale;
    njet.add("EnergyShift", Setting::TypeFloat) = jet_eshift;
    njet.add("EtaScale", Setting::TypeFloat) = jet_etascale;
    njet.add("EtaShift", Setting::TypeFloat) = jet_etashift;
+   njet.add("MassScale", Setting::TypeFloat) = jet_mscale;
+   njet.add("MassShift", Setting::TypeFloat) = jet_mshift;
    // bins
-   Setting &array = njet.add("EnergyBins", Setting::TypeArray);
+   Setting &array = njet.add("PtBins", Setting::TypeArray);
    for(int i = 0; i <  nBins; ++i) array.add(Setting::TypeFloat) = eBins[i]; 
 
     
