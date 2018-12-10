@@ -83,7 +83,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 	const  double EtaMax=maxEta;
 	const  double PhiMax=PI;
 	const  double intmove=10000; // number for converting to integer frequencies
-	const  double delta=2.0/nBinsNN;
+	const  double delta=2.0/(nBinsNN-1);
 
 	//TRandom2 Rphi;
 
@@ -147,7 +147,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			double dmax=eBins[m+1];
 			double width=dmax-dmin;
 
-			if (ptT>dmin && ptT<dmax) {
+			if (ptT>dmin && ptT<=dmax) {
 				// Range [0-1]. 0.5 - no difference; 0 - missed reco
                                 float dminmax=dmin+0.5*width;
                                 float ptIN=((ptT-dminmax)/(0.5*width));
@@ -160,25 +160,9 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				input[1] = etaIN;
 				input[2] = phiIN;
 				input[3] = massIN;
+                                fann_type *output;
 
-				fann_type *output = fann_run(ann_jets[m], input);
-
-				fann_type input_eff[num_input_eff];
-				input_eff[0] = ptIN;
-				input_eff[1] = etaIN;
-				input_eff[2] = phiIN;
-                                input_eff[3] = (float)(btagT/100.) - 1; // normalize  -1 - 0 
-                                if (input_eff[3]>1) input_eff[3]=1;
-
-				fann_type *output_eff = fann_run(ann_jets_eff[m], input_eff);
-				float prob_efficiency=output_eff[0];
-                                btag=output_eff[1];
-				//double R1=Reta.Rndm();
-				//cout << "efficiency=" << prob_efficiency << endl;
-				h_out5_eff->Fill(prob_efficiency);
-				if (prob_efficiency<-0.8) continue; // skip event since low efficiency
-                                h_out6_btag->Fill(btag);
-
+				output = fann_run(ann1_jets[m], input);
 
 				double scale=0;
 				// output of NN can have negaive values. So we add scale to fix those.
@@ -189,8 +173,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				//cout << endl;
 
 
-                               int freqPT[nBinsNN];
-                               for (int jjj=0; jjj<nBinsNN; jjj++) freqPT[jjj]=(int)((scale+output[jjj])*intmove);
+                               int freqPT[nBinsNN-1];
+                               for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPT[jjj]=(int)((scale+output[jjj])*intmove);
 
                              // you can use Boost but it is slower
                              // vector<double> freqPT;
@@ -199,7 +183,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                              //int BinSelected = dist(gen); 
                              //cout << BinSelected << endl;
                                  
-				int BinSelected=myRand(BinOverTrue, freqPT, nBinsNN); // select random value (bin) assuming frequencies from freqPT
+				int BinSelected=myRand(BinOverTrue, freqPT, nBinsNN-1); // select random value (bin) assuming frequencies from freqPT
 				double recoOvertrue=-1+BinSelected*delta;
 				double ptcor= ( (recoOvertrue - jet_eshift)/jet_escale )+1.0;
 				pt =  ptT *ptcor; // gain
@@ -209,18 +193,17 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 				// unpack the outputs for pT
 				//cout << "\n New jet:" << endl;
-				fann_type ptout[nBinsNN];
-				for (int jjj=0; jjj<nBinsNN; jjj++) {
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 					double d1=-1.0+jjj*delta;
-					//double d2=-1.0+(jjj+1)*delta;
 					h_out1->Fill( d1+0.5*delta, output[jjj]);
 				}
 
 
 				// Eta
-				int freqETA[nBinsNN];
-				for (int jjj=0; jjj<nBinsNN; jjj++) freqETA[jjj]=(int)((scale+output[jjj+nBinsNN])*intmove);
-				BinSelected=myRand(BinOverTrue, freqETA, nBinsNN); // select random value (bin) assuming frequencies
+                                output = fann_run(ann2_jets[m], input);
+				int freqETA[nBinsNN-1];
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqETA[jjj]=(int)((scale+output[jjj])*intmove);
+				BinSelected=myRand(BinOverTrue, freqETA, nBinsNN-1); // select random value (bin) assuming frequencies
 
                                 h_rout2->Fill( (float)BinSelected );
 
@@ -228,17 +211,16 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                 double etacor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_etacor->Fill( etacor );
 				eta =  etaT * etacor; 
-                                int iii=0;
-				for (int jjj=nBinsNN; jjj<2*nBinsNN; jjj++) {
-					double d1=-1.0+iii*delta;
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
+					double d1=-1.0+jjj*delta;
 					h_out2->Fill( d1+0.5*delta, output[jjj]);
-					iii++;
 				}
 
 				// Phi
-				int freqPHI[nBinsNN];
-				for (int jjj=0; jjj<nBinsNN; jjj++) freqPHI[jjj]=(int)( (scale+output[jjj+2*nBinsNN])*intmove);
-				BinSelected=myRand(BinOverTrue, freqPHI, nBinsNN); // select random value (bin) assuming frequencies
+                                output = fann_run(ann3_jets[m], input);
+				int freqPHI[nBinsNN-1];
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPHI[jjj]=(int)( (scale+output[jjj])*intmove);
+				BinSelected=myRand(BinOverTrue, freqPHI, nBinsNN-1); // select random value (bin) assuming frequencies
 
                                 h_rout3->Fill( (float)BinSelected );
 
@@ -246,18 +228,17 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				double phicor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_phicor->Fill( phicor );
 				phi =  phiT * phicor; 
-				iii=0;
-				for (int jjj=2*nBinsNN; jjj<3*nBinsNN; jjj++) {
-					double d1=-1.0+iii*delta;
+				for (int jjj=0; jjj<nBinsNN; jjj++) {
+					double d1=-1.0+jjj*delta;
 					h_out3->Fill( d1+0.5*delta, output[jjj]);
-					iii++;
 				}
 
 				
                                 // mass 
-				int freqM[nBinsNN];
-				for (int jjj=0; jjj<nBinsNN; jjj++) freqM[jjj]=(int)( (scale+output[jjj+3*nBinsNN])*intmove);
-				BinSelected=myRand(BinOverTrue, freqM, nBinsNN); // select random value (bin) assuming frequencies
+                                output = fann_run(ann4_jets[m], input);
+				int freqM[nBinsNN-1];
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqM[jjj]=(int)( (scale+output[jjj])*intmove);
+				BinSelected=myRand(BinOverTrue, freqM, nBinsNN-1); // select random value (bin) assuming frequencies
 
                                 h_rout4->Fill( (float)BinSelected );
 
@@ -265,11 +246,9 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				// correction
 				double mcorr=( (recoOvertrue -  jet_mshift)/jet_mscale ) + 1.0;
 				mass =  massT * mcorr; // gain
-				iii=0;
-				for (int jjj=3*nBinsNN; jjj<4*nBinsNN; jjj++) {
-					double d1=-1.0+iii*delta;
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
+					double d1=-1.0+jjj*delta;
 					h_out4->Fill( d1+0.5*delta, output[jjj]);
-					iii++;
 				}
 
 				h_in1->Fill(ptIN);
@@ -278,6 +257,24 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				h_in4->Fill(massIN);
 
 				if (phi>PI || phi<-PI) phi=phiT; // overcorrection!
+
+
+                                // feature NN
+                                fann_type input_eff[num_input_eff];
+                                input_eff[0] = ptIN;
+                                input_eff[1] = etaIN;
+                                input_eff[2] = phiIN;
+                                input_eff[3] = (float)(btagT/100.) - 1; // normalize  -1 - 0
+                                if (input_eff[3]>1) input_eff[3]=1;
+
+                                output = fann_run(ann5_jets[m], input_eff);
+                                float prob_efficiency=output[0];
+                                btag=output[1];
+                                h_out5_eff->Fill(prob_efficiency);
+                                if (prob_efficiency<-0.8) continue; // skip event since low efficiency
+                                h_out6_btag->Fill(btag);
+
+
 			}
 		}
 

@@ -69,10 +69,18 @@ class Ana  {
    double *initialRME;
    double *finalRME;
    // jets
-   struct fann **ann_jets; 
-   struct fann **ann_jets_eff;
-   string *ann_jets_name;
-   string *ann_jets_eff_name;
+   struct fann **ann1_jets; 
+   struct fann **ann2_jets;
+   struct fann **ann3_jets;
+   struct fann **ann4_jets;
+   struct fann **ann5_jets;
+
+   string *ann1_jets_name;
+   string *ann2_jets_name;
+   string *ann3_jets_name;
+   string *ann4_jets_name;
+   string *ann5_jets_name;
+
    // to deal with scale extensions
    float jet_escale;
    float jet_eshift;

@@ -51,14 +51,14 @@ class Ana  {
 
    int  MuPileup; // number of pileup (mu)
    static const int num_threads = 16; // number of threads 
-   static const int nBins=16;
+   static const int nBins=16;         // number of energy bins 
    static const int nBatch=100000; // number of events in batches for training
-   static const int nEpoch=300;    // max number of epochs 
-   static const int nBinsNN=200;   // number of bins for resolution plots
+   static const int nEpoch=150;    // max number of epochs 
+   static const int nBinsNN=201;   // number of bins for resolution plots
    static const int MinEntries=20; // min nr of entries in pT for NN training (per bunch);
    static const int num_layers = 3;
    //number in hidden layer 1
-   static  const int num_neurons_hidden_1=16;
+   static  const int num_neurons_hidden_1=40;
 
 
    double DeltaR;  // parameter used to match true jets with reco
@@ -66,7 +66,7 @@ class Ana  {
 
    // NN structure for resolution 
    static const int num_input=4;
-   static const int num_output=4*nBinsNN;
+   static const int num_output=nBinsNN-1;
 
    // this is input and output for NN for efficiency
    static const int num_input_eff=4;
@@ -87,10 +87,26 @@ class Ana  {
    double initialRME[nBins-1];
    double finalRME[nBins-1];
    int    eventsBins[nBins-1]; 
-   struct fann *ann_jets[nBins-1];
-   string ann_jets_name[nBins-1];
-   struct fann *ann_jets_eff[nBins-1];
-   string ann_jets_eff_name[nBins-1];
+
+   // correction net
+   struct fann *ann1_jets[nBins-1];
+   string ann1_jets_name[nBins-1];
+
+   struct fann *ann2_jets[nBins-1];
+   string ann2_jets_name[nBins-1];
+
+
+   struct fann *ann3_jets[nBins-1];
+   string ann3_jets_name[nBins-1];
+
+   struct fann *ann4_jets[nBins-1];
+   string ann4_jets_name[nBins-1];
+
+   // feature net
+   struct fann *ann5_jets[nBins-1];
+   string ann5_jets_name[nBins-1];
+
+
    // to deal with scale extensions
    float jet_escale;
    float jet_eshift;

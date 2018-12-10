@@ -11,7 +11,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
-	const double delta=2.0/nBinsNN;
+	const double delta=2.0/(nBinsNN-1);
 
 
 	for(unsigned int j = 0; j<JetsTrue.size(); j++){
@@ -28,7 +28,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			double dmax=eBins[m+1];
 			//double width=dmax-dmin;
 			//double dcenter=dmin+0.5*width;
-			if (ptT>dmin && ptT<dmax)  eventsBins[m]++;
+			if (ptT>dmin && ptT<=dmax)  eventsBins[m]++;
 		}
 
 
@@ -110,7 +110,10 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			cout << "-> Start training for energy bin = " << m << endl;
 
 			// empty data
-			fann_train_data *  dataset=  fann_create_train(eventsBins[m], num_input, num_output);
+			fann_train_data *  dataset1=  fann_create_train(eventsBins[m], num_input, num_output);
+                        fann_train_data *  dataset2=  fann_create_train(eventsBins[m], num_input, num_output);
+                        fann_train_data *  dataset3=  fann_create_train(eventsBins[m], num_input, num_output);
+                        fann_train_data *  dataset4=  fann_create_train(eventsBins[m], num_input, num_output);
 
 			// create a dataset for a given bin
 			int nn=0;
@@ -128,7 +131,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				float mass=output[3];
 
 
-				if (ptT>dmin && ptT<dmax) {
+				if (ptT>dmin && ptT<=dmax) {
 
                                         float dminmax=dmin+0.5*width;
 					float ptIN=((ptT-dminmax)/(0.5*width));
@@ -154,32 +157,47 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					//if (ee-eeT>0) shiftOUT=1.0f; // gain or positive shift
 
 					fann_type uinput[num_input];
-					fann_type uoutput[num_output];
-
+                                        // outputs
+					fann_type uoutput1[num_output];
+                                        fann_type uoutput2[num_output];
+                                        fann_type uoutput3[num_output];
+                                        fann_type uoutput4[num_output];
+ 
 					uinput[0] = ptIN;
 					uinput[1] = etaIN;
 					uinput[2] = phiIN;
 					uinput[3] = mIN;
-					// outputs
-					uoutput[0] = ptOUT;
-					uoutput[1] = etaOUT;
-					uoutput[2] = phiOUT;
-					uoutput[3] = mOUT;
 
-					for (unsigned int jjj=0; jjj<num_output; jjj++) uoutput[jjj]=0.0;
+					for (unsigned int jjj=0; jjj<num_output; jjj++) {uoutput1[jjj]=0.0; 
+                                                                                         uoutput2[jjj]=0.0; 
+                                                                                         uoutput3[jjj]=0.0; 
+                                                                                         uoutput4[jjj]=0.0; } 
 
 					// bin the resolution plots
-					for (unsigned int jjj=0; jjj<nBinsNN; jjj++) {
+					for (unsigned int jjj=0; jjj<nBinsNN-1; jjj++) {
 						double d1=-1.0+jjj*delta;
-						double d2=-1.0+(jjj+1)*delta;
-						if (ptOUT>d1  && ptOUT<=d2)    uoutput[jjj]=1.0;
-						if (etaOUT>d1 && etaOUT<=d2)   uoutput[jjj+nBinsNN]=1.0;
-						if (phiOUT>d1 && phiOUT<=d2)   uoutput[jjj+2*nBinsNN]=1.0;
-						if (mOUT>d1  && mOUT<=d2)      uoutput[jjj+3*nBinsNN]=1.0;
+						double d2=d1+delta;
+						if (ptOUT>d1  && ptOUT<=d2)    uoutput1[jjj]=1.0;
+						if (etaOUT>d1 && etaOUT<=d2)   uoutput2[jjj]=1.0;
+						if (phiOUT>d1 && phiOUT<=d2)   uoutput3[jjj]=1.0;
+						if (mOUT>d1   && mOUT<=d2)     uoutput4[jjj]=1.0;
 					}
 
-					for (unsigned int kk=0; kk<num_input; kk++)  dataset->input[nn][kk] =uinput[kk];
-					for (unsigned int kk=0; kk<num_output; kk++) dataset->output[nn][kk] =uoutput[kk];
+					for (unsigned int kk=0; kk<num_input; kk++)  {
+                                                       dataset1->input[nn][kk] =uinput[kk];
+                                                       dataset2->input[nn][kk] =uinput[kk];
+                                                       dataset3->input[nn][kk] =uinput[kk];
+                                                       dataset4->input[nn][kk] =uinput[kk];
+                                        }
+
+ 
+					for (unsigned int kk=0; kk<num_output; kk++) {
+                                                        dataset1->output[nn][kk] =uoutput1[kk];
+                                                        dataset2->output[nn][kk] =uoutput2[kk];
+                                                        dataset3->output[nn][kk] =uoutput3[kk];
+                                                        dataset4->output[nn][kk] =uoutput4[kk];
+                                        }
+
 
 					h_in1->Fill(ptIN);
 					h_in2->Fill(etaIN);
@@ -197,21 +215,33 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 			} // end over data
 
-			double mse=0;
+                        double mse=0;
+			double mse1=0;
+                        double mse2=0; 
+                        double mse3=0;
+                        double mse4=0;
 			for (int e=0; e<nEpoch; e++) {
-                          mse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann_jets[m], dataset, num_threads) : fann_train_epoch(ann_jets[m], dataset);
-    			  if (e%100==0 ||  (e<10) || (e%20==0)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mse << endl;
+                          mse1 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann1_jets[m], dataset1, num_threads) : fann_train_epoch(ann1_jets[m], dataset1);
+                          mse2 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann2_jets[m], dataset2, num_threads) : fann_train_epoch(ann2_jets[m], dataset2);
+                          mse3 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann3_jets[m], dataset3, num_threads) : fann_train_epoch(ann3_jets[m], dataset3);
+                          mse4 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann4_jets[m], dataset4, num_threads) : fann_train_epoch(ann4_jets[m], dataset4);
+
+                          mse=mse1+mse2+mse3+mse4;  
+    			  if (e%100==0 ||  (e<10) || (e%20==0)) cout << " epoch=" << e << " MSE=" << std::fixed << std::setw( 11 ) << std::setprecision( 6 ) << mse1 << ", " <<  mse2 << ", " << mse3 << ", " << mse4 << " tot=" << mse << endl;
 			  if (mse<MSESTOP) break;
 			}
-			cout << "  Bin=" << m << " with " << eventsBins[m] << " events has MSE=" <<  mse << " after epoch Nr=" << nEpoch << endl;
+			cout << "  Bin=" << m << " with " << eventsBins[m] << " events has total MSE=" <<  mse  << " after epoch Nr=" << nEpoch << endl;
 
 
-			fann_destroy_train(dataset) ; // clear
+			fann_destroy_train(dataset1) ; // clear
+                        fann_destroy_train(dataset2) ; // clear
+                        fann_destroy_train(dataset3) ; // clear
+                        fann_destroy_train(dataset4) ; // clear
 
 			// empty data
 			fann_train_data *  dataset_eff=  fann_create_train(eventsBins[m], num_input_eff, num_output_eff);
 			nn=0;
-			cout << "\n  -> Training for efficiency  = " << m << " sample size=" << finput_jets_eff.size() << endl;
+    			cout << "\n  -> Training for efficiency  = " << m << " sample size=" << finput_jets_eff.size() << endl;
 			for (unsigned int i=0; i<finput_jets_eff.size(); i++){
 				//cout << i << endl;
 				vector<float> input2 = finput_jets_eff[i];
@@ -253,7 +283,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			}// end of dataset
 
 			for (int e=0; e<nEpoch*4; e++) {
-                            float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann_jets_eff[m], dataset_eff, num_threads) : fann_train_epoch(ann_jets_eff[m], dataset_eff);
+                            float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann5_jets[m], dataset_eff, num_threads) : fann_train_epoch(ann5_jets[m], dataset_eff);
 
 			     if (e%100==0 || (e<10)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;
 		             if (mse<MSESTOP) break;
@@ -271,7 +301,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 		double sumMSE=0;
 		for (int m=0; m<nBins-1; m++){
-			double mse=fann_get_MSE(ann_jets[m]);
+			double mse=fann_get_MSE(ann1_jets[m]);
 			cout << "Event=" << nevv << " Bin=" << m << "  MSE=" << mse << endl;
 			if (mse<1000) sumMSE=sumMSE+mse;
 		};

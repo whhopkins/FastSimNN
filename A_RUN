@@ -1,0 +1,22 @@
+#!/bin/bash
+XPWD=`pwd`
+echo $XPWD
+
+cd builder/
+echo "Train NN"
+./A_RUN
+cd ..
+
+echo "Apply NN"
+cd validate
+./A_RUN
+cd ..
+
+echo "Make plots"
+cd compare
+./A_RUN
+cd ..
+
+
+
+

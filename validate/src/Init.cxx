@@ -87,20 +87,29 @@ Int_t Ana::Init() {
 	}
 
 
-	num_output= num_input*nBinsNN;
+        // number of bins -1 
+	num_output= nBinsNN-1;
 
 	mcEventWeight=1.0;
 
 	// vector with bins for reco/true
-	ann_jets_name = new string[nBinsNN-1];
-	ann_jets_eff_name = new string[nBinsNN-1];
+	ann1_jets_name = new string[nBinsNN-1];
+        ann2_jets_name = new string[nBinsNN-1];
+        ann3_jets_name = new string[nBinsNN-1];
+        ann4_jets_name = new string[nBinsNN-1];
+        ann5_jets_name = new string[nBinsNN-1];
+
+        ann1_jets = new fann*[nBinsNN-1];
+        ann2_jets = new fann*[nBinsNN-1];
+        ann3_jets = new fann*[nBinsNN-1];
+        ann4_jets = new fann*[nBinsNN-1];
+        ann5_jets = new fann*[nBinsNN-1];
 
 	initialRME = new double[nBinsNN-1];
 	finalRME   = new double[nBinsNN-1];
-	BinOverTrue = new int[nBinsNN];
-	ann_jets = new fann*[nBinsNN-1];
-	ann_jets_eff = new fann*[nBinsNN-1];
-	for (int jjj=0; jjj<nBinsNN; jjj++) BinOverTrue[jjj]=jjj;
+	BinOverTrue = new int[nBinsNN-1];
+
+	for (int jjj=0; jjj<nBinsNN-1; jjj++) BinOverTrue[jjj]=jjj;
 
 	//eBins = new double[nBins];
 	for (int m=0; m<nBins; m++){
@@ -115,22 +124,24 @@ Int_t Ana::Init() {
 		finalRME[m]=0;
 
 		// jets and efficiencis
-		ann_jets_name[m]="out_ann/ann_jet_"+std::to_string(m)+".net";
-		ann_jets_eff_name[m]="out_ann/ann_jet_eff_"+std::to_string(m)+".net";
+		ann1_jets_name[m]="out_ann/ann1_jet_"+std::to_string(m)+".net";
+                ann2_jets_name[m]="out_ann/ann2_jet_"+std::to_string(m)+".net";
+                ann3_jets_name[m]="out_ann/ann3_jet_"+std::to_string(m)+".net";
+                ann4_jets_name[m]="out_ann/ann4_jet_"+std::to_string(m)+".net";
+                ann5_jets_name[m]="out_ann/ann5_jet_"+std::to_string(m)+".net";
 
-		//ann[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
-		cout << "Read ANN from " << ann_jets_name[m] << endl;
-		ann_jets[m] = fann_create_from_file(ann_jets_name[m].c_str());
-		ann_jets_eff[m] = fann_create_from_file(ann_jets_eff_name[m].c_str());
-		//fann_set_activation_function_hidden(ann[m], FANN_SIGMOID);
-		//fann_set_activation_function_output(ann[m], FANN_SIGMOID);
-		//fann_set_activation_function_hidden(ann_jets[m], FANN_SIGMOID_SYMMETRIC);
-		//fann_set_activation_function_output(ann_jets[m], FANN_SIGMOID_SYMMETRIC);
+		cout << "Read ANN from files.."  << endl;
+		ann1_jets[m] = fann_create_from_file(ann1_jets_name[m].c_str());
+                ann2_jets[m] = fann_create_from_file(ann2_jets_name[m].c_str());
+                ann3_jets[m] = fann_create_from_file(ann3_jets_name[m].c_str());
+                ann4_jets[m] = fann_create_from_file(ann4_jets_name[m].c_str());
+                ann5_jets[m] = fann_create_from_file(ann5_jets_name[m].c_str());
+  
 
 		if (m==nBins-2) {
 			cout << "# Structure for last ANN" << endl;
-			fann_print_connections(ann_jets[m]);
-			fann_print_parameters(ann_jets[m]);
+			fann_print_connections(ann1_jets[m]);
+			fann_print_parameters(ann1_jets[m]);
 		};
 
 
@@ -157,17 +168,17 @@ Int_t Ana::Init() {
 	h_phicor = new TH1D("jet_phicor", "Phi correction", 200, 0.0, 3);
 
 
-	h_in1 = new TH1D("in1", "in1", nBinsNN, -1.1, 1.1);
-	h_in2 = new TH1D("in2", "in2", nBinsNN, -1.1, 1.1);
-	h_in3 = new TH1D("in3", "in3", nBinsNN, -1.1, 1.1);
-	h_in4 = new TH1D("in4", "in4", nBinsNN, -1.1, 1.1);
+	h_in1 = new TH1D("in1", "in1", nBinsNN, -1., 1.);
+	h_in2 = new TH1D("in2", "in2", nBinsNN, -1., 1.);
+	h_in3 = new TH1D("in3", "in3", nBinsNN, -1., 1.);
+	h_in4 = new TH1D("in4", "in4", nBinsNN, -1., 1.);
 
-	h_out1 = new TH1D("out1", "out1", nBinsNN, -1.1, 1.1);
-	h_out2 = new TH1D("out2", "out2", nBinsNN, -1.1, 1.1);
-	h_out3 = new TH1D("out3", "out3", nBinsNN, -1.1, 1.1);
-	h_out4 = new TH1D("out4", "out4", nBinsNN, -1.1, 1.1);
-	h_out5_eff = new TH1D("out5_eff", "out5 efficiency", nBinsNN, -1.1, 1.1);
-        h_out6_btag = new TH1D("out6_btag", "out6 b-tagging", nBinsNN, -1.1, 1.1);
+	h_out1 = new TH1D("out1", "out1", nBinsNN, -1., 1.);
+	h_out2 = new TH1D("out2", "out2", nBinsNN, -1., 1.);
+	h_out3 = new TH1D("out3", "out3", nBinsNN, -1., 1.);
+	h_out4 = new TH1D("out4", "out4", nBinsNN, -1., 1.);
+	h_out5_eff = new TH1D("out5_eff", "out5 efficiency", nBinsNN, -1., 1.);
+        h_out6_btag = new TH1D("out6_btag", "out6 b-tagging", nBinsNN, -1., 1.);
 
         h_rout1 = new TH1D("rout1", "out1 random bin", nBinsNN, 0, nBinsNN);
         h_rout2 = new TH1D("rout2", "out2 random bin", nBinsNN, 0, nBinsNN);

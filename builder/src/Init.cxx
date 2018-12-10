@@ -23,6 +23,7 @@ Int_t Ana::Init() {
 	//const int nxBins=sizeof(xBins)/sizeof(double);
 
 
+        // 16 bins
 	for (int m=0; m<nBins; m++){
 		eBins[m]=xBins[m];
 	};
@@ -30,18 +31,22 @@ Int_t Ana::Init() {
 	cout << " ###  Initialize ANN in Nr bins=" <<nBins-1<<  endl;
 
 
+        // 15 NN 
 	for (int m=0; m<nBins-1; m++){
 		firstTime[m]=true;
 		initialRME[m]=0;
 		finalRME[m]=0;
 		eventsBins[m]=0; // Nr of events
-		ann_jets_name[m]="out_ann/ann_jet_"+std::to_string(m)+".net";
-		ann_jets_eff_name[m]="out_ann/ann_jet_eff_"+std::to_string(m)+".net";
+		ann1_jets_name[m]="out_ann/ann1_jet_"+std::to_string(m)+".net";
+                ann2_jets_name[m]="out_ann/ann2_jet_"+std::to_string(m)+".net";
+                ann3_jets_name[m]="out_ann/ann3_jet_"+std::to_string(m)+".net";
+                ann4_jets_name[m]="out_ann/ann4_jet_"+std::to_string(m)+".net";
+                ann5_jets_name[m]="out_ann/ann5_jet_"+std::to_string(m)+".net";
 
 
 
 		// if 1st ANN is found, we will read previous NN
-		std::ifstream ifile(ann_jets_name[m].c_str());
+		std::ifstream ifile(ann1_jets_name[m].c_str());
 		if ((bool)ifile) {
 			firstTime[m]=false;
 			cout << "We found ANN file for bin=" << m << " So we improve the ANN training.." << endl;
@@ -49,45 +54,53 @@ Int_t Ana::Init() {
 
 
 		if (firstTime[m]) {
-			cout << "   - Create new ANN Nr " << ann_jets_name[m] << endl;
-			ann_jets[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
-			fann_set_activation_function_hidden(ann_jets[m], FANN_SIGMOID_SYMMETRIC);
-			fann_set_activation_function_output(ann_jets[m], FANN_SIGMOID_SYMMETRIC);
-			fann_randomize_weights(ann_jets[m],-1.0,1.0);
-			//fann_set_activation_function_hidden(ann[m], FANN_SIGMOID);
-			//fann_set_activation_function_output(ann[m], FANN_SIGMOID);
-			//fann_randomize_weights(ann[m],0.0,0.9999);
+			cout << "   - Create new ANN"<< endl;
+			ann1_jets[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+			fann_set_activation_function_hidden(ann1_jets[m], FANN_SIGMOID_SYMMETRIC);
+			fann_set_activation_function_output(ann1_jets[m], FANN_SIGMOID_SYMMETRIC);
+			fann_randomize_weights(ann1_jets[m],-1.0,1.0);
 
+                        ann2_jets[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann2_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann2_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann2_jets[m],-1.0,1.0);
 
-			cout << "   - Create new ANN for efficiency.. " << ann_jets_eff_name[m] << endl;
-			int num_layers_eff=3;
-			int num_neurons_hidden_eff=5;
-			ann_jets_eff[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
-			fann_set_activation_function_hidden(ann_jets_eff[m], FANN_SIGMOID_SYMMETRIC);
-			fann_set_activation_function_output(ann_jets_eff[m], FANN_SIGMOID_SYMMETRIC);
-			fann_randomize_weights(ann_jets_eff[m],-1.0,1.0);
+                        ann3_jets[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann3_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann3_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann3_jets[m],-1.0,1.0);
+
+                        ann4_jets[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann4_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann4_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann4_jets[m],-1.0,1.0);
+
+                        // feature or efficiency net
+                        int num_layers_eff=3;
+                        int num_neurons_hidden_eff=5;
+                        ann5_jets[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
+                        fann_set_activation_function_hidden(ann5_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann5_jets[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann5_jets[m],-1.0,1.0);
 
 		}
 
 
 		if (firstTime[m]==false){
-			cout << "Found previous ANN. Continue training.. Read from " << ann_jets_name[m] << endl;
-			ann_jets[m] = fann_create_from_file(ann_jets_name[m].c_str());
-			//fann_set_activation_function_hidden(ann[m], FANN_SIGMOID);
-			//fann_set_activation_function_output(ann[m], FANN_SIGMOID);
-			//for (int m=0; m<nBins-1; m++){
-			//    double mse=fann_get_MSE(ann[m]);
-			//    cout << m << ") initial MSE error=" << mse << endl;
-			//}
-			ann_jets_eff[m] = fann_create_from_file(ann_jets_eff_name[m].c_str());
-
+			cout << "Found previous ANN. Continue training.. Read from files" << endl;
+			ann1_jets[m] = fann_create_from_file(ann1_jets_name[m].c_str());
+                        ann2_jets[m] = fann_create_from_file(ann2_jets_name[m].c_str());
+                        ann3_jets[m] = fann_create_from_file(ann3_jets_name[m].c_str());
+                        ann4_jets[m] = fann_create_from_file(ann4_jets_name[m].c_str());
+                        ann5_jets[m] = fann_create_from_file(ann5_jets_name[m].c_str());
+ 
 		}
 
 
 		if (m==nBins-2) {
 			cout << "# Structure this ANN" << endl;
-			fann_print_connections(ann_jets[m]);
-			fann_print_parameters(ann_jets[m]);
+			fann_print_connections(ann1_jets[m]);
+			fann_print_parameters(ann1_jets[m]);
 		};
 
 
@@ -118,7 +131,6 @@ Int_t Ana::Init() {
 	h_out4 = new TH1D("out4", "out4", nBinsNN, -1.1, 1.1);
 	h_out5 = new TH1D("out5_eff", "out5_eff matching efficiency", nBinsNN, -1.1, 1.1);
         h_out6 = new TH1D("out5_btag", "out6_btag b-tagging", nBinsNN, -1.1, 1.1);
-
 
 	// create ntuple
 	m_ntuple  = new TTree("Ntuple","Ntuple");
@@ -160,11 +172,11 @@ Int_t Ana::Init() {
 
 
       // energy and eta scaling factors 
-      jet_escale=1.5;
+      jet_escale=2.0;
       jet_eshift=0.0;
       jet_mscale=1.0;
       jet_mshift=0.0;
-      jet_etascale=2.0;
+      jet_etascale=4.0;
       jet_etashift=0.0;
       if (MuPileup>100) { // shrink to fit to -1 - 1 
                           jet_escale=0.5;

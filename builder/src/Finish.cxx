@@ -79,34 +79,43 @@ Int_t Ana::Finish() {
    double sumMSE=0;
    cout << "Saving ANN results " << endl;
    for (int m=0; m<nBins-1; m++){
-   double mse=fann_get_MSE(ann_jets[m]);
-   finalRME[m]=mse;
+   double mse1=fann_get_MSE(ann1_jets[m]);
+   double mse2=fann_get_MSE(ann2_jets[m]);
+   double mse3=fann_get_MSE(ann3_jets[m]);
+   double mse4=fann_get_MSE(ann4_jets[m]);
+   double mse=mse1+mse2+mse3+mse4;
+
+   finalRME[m]=mse1+mse2+mse3+mse4;
    // cout << m << " Events=" << eventsBins[m]<< " MSE =" << mse << "  Improved =" << (initialRME[m]/mse) << "x. save to " << ann_name[m] << endl;
    if (mse<1000000 ) sumMSE=sumMSE+mse;
 
    // always save first sample
    if (firstTime[m] == true)  {
-             fann_save(ann_jets[m],  ann_jets_name[m].c_str());
-             cout << m << " Save correction " << ann_jets_name[m] << " with RME=" << mse << endl;
-             fann_save(ann_jets_eff[m],  ann_jets_eff_name[m].c_str());
-             cout << m << " Save efficiency " << ann_jets_name[m] << " with RME=" << fann_get_MSE(ann_jets_eff[m]) << endl;
+              fann_save(ann1_jets[m],  ann1_jets_name[m].c_str());
+              fann_save(ann2_jets[m],  ann2_jets_name[m].c_str());
+              fann_save(ann3_jets[m],  ann3_jets_name[m].c_str());
+              fann_save(ann4_jets[m],  ann4_jets_name[m].c_str());
+              fann_save(ann5_jets[m],  ann5_jets_name[m].c_str());
    };
 
    // for other samples save only small RMS NN
    if (firstTime[m] == false) { 
        if (mse>0 && mse < 1) {
-             fann_save(ann_jets[m],  ann_jets_name[m].c_str());
-             fann_save(ann_jets_eff[m],  ann_jets_name[m].c_str());
-             cout << m << " Save " << ann_jets_name[m] << " with RME=" << mse << endl;
-             cout << m << " Save " << ann_jets_eff_name[m] << " with RME=" << fann_get_MSE(ann_jets_eff[m]) << endl;
- 
+              fann_save(ann1_jets[m],  ann1_jets_name[m].c_str());
+              fann_save(ann2_jets[m],  ann2_jets_name[m].c_str());
+              fann_save(ann3_jets[m],  ann3_jets_name[m].c_str());
+              fann_save(ann4_jets[m],  ann4_jets_name[m].c_str());
+              fann_save(ann5_jets[m],  ann5_jets_name[m].c_str());
         } else { 
-             cout << m << " Do not save " << ann_jets_name[m] << " with RME=" << mse << endl;
+             cout << m << " Do not save   with RME=" << mse << endl;
         }
     };
 
-   fann_destroy(ann_jets[m]);
-   fann_destroy(ann_jets_eff[m]);
+   fann_destroy(ann1_jets[m]);
+   fann_destroy(ann2_jets[m]);
+   fann_destroy(ann3_jets[m]);
+   fann_destroy(ann4_jets[m]);
+   fann_destroy(ann5_jets[m]);
 
     };
 
