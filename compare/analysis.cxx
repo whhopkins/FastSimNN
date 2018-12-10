@@ -28,6 +28,9 @@
 #include "TSystem.h"
 #include "LParticle.h"
 
+const double PI   = TMath::Pi();
+const double PI2  = 2*PI;
+
 
 using namespace std;
 #include <vector>
@@ -42,6 +45,8 @@ int main(int argc, char *argv[])
 {
 
       int MaxEvents=200000;
+      double EtaMax=2.5;
+      double PtMin=25;
 
 // Choose input and output files from the command line
         string infile("-"), outfile("-");
@@ -118,17 +123,120 @@ int main(int argc, char *argv[])
              exit(1);
         }
 
+  const double DeltaR=0.2;
+  TH1D *h_dR = new TH1D("jet_dR", "truth-jet distance", 500, 0, 7);
 
+ // jet resolution
+  static int nmax_jet=14;
+  TH1D *h_jet1_res[nmax_jet];
+  TH1D *h_jet1_ptr[nmax_jet];
+
+  TH1D *h_jet2_res[nmax_jet];
+  TH1D *h_jet2_ptr[nmax_jet];
+
+  for (int j=0; j<nmax_jet; j++){
+  int nbins=50+40*j; // increasing number of bins  
+  h_jet1_res[j] = new TH1D(Form("jet1_resolution_%02d",j), Form("jets1_res_%02d",j),nbins,0.0,4.0);
+  h_jet1_ptr[j] = new TH1D(Form("jet1_resolution_pt_%02d",j), Form("jets1_res_pt_%02d",j),2000,0,2000);
+  h_jet1_res[j]->Sumw2();
+  h_jet1_ptr[j]->Sumw2();
+
+  h_jet2_res[j] = new TH1D(Form("jet2_resolution_%02d",j), Form("jets2_res_%02d",j),nbins,0.0,4.0);
+  h_jet2_ptr[j] = new TH1D(Form("jet2_resolution_pt_%02d",j), Form("jets2_res_pt_%02d",j),2000,0,2000);
+  h_jet2_res[j]->Sumw2();
+  h_jet2_ptr[j]->Sumw2();
+
+  }
+
+
+  
 
   Int_t nentries = (Int_t)m_ntuple->GetEntries();
    for (Int_t event=0; event<nentries; event++) {
      m_ntuple->GetEntry(event);
      if (event%1000==0 || event<100) cout << "Process=" <<  event << endl;
 
-     cout << "jetpt=" << jetpt->size() << endl;
+
+    for(unsigned int j = 0; j<gjetpt->size(); j++){
+                double phiT = gjetphi->at(j);
+                double ptT =  gjetpt->at(j);
+                double etaT = gjeteta->at(j);
+                double massT =  gjetm->at(j);
+                float  btagT=  gjetbtag->at(j); // get  b-quark in 100%
+
+                if (abs(etaT)>EtaMax) continue;
+                if (ptT<PtMin) continue;
+
+// reco jets
+                double pt_matched1 =-1000;
+                double eta_matched1 =-1000;
+                for(unsigned int i = 0; i<jetpt->size(); i++){
+                        double phi = jetphi->at(i);
+                        double pt =  jetpt->at(i);
+                        double eta = jeteta->at(i);
+                        double mass =  jetm->at(i);
+                        float  btagT=  jetbtag->at(i); // get  b-quark in 100%
+                        double dEta=etaT-eta;
+                        double dPhi=phiT-phi;
+                        if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
+                        double dR=sqrt(dEta*dEta+dPhi*dPhi);
+                        h_dR->Fill(dR);
+                        if (dR<DeltaR) pt_matched1=pt;
+                   } 
+
+// NN jets
+
+                double pt_matched2 =-1000;
+                double eta_matched2 =-1000;
+                for(unsigned int i = 0; i<nnjetpt->size(); i++){
+                        double phi = nnjetphi->at(i);
+                        double pt =  nnjetpt->at(i);
+                        double eta = nnjeteta->at(i);
+                        double mass =  nnjetm->at(i);
+                        float  btagT=  nnjetbtag->at(i); // get  b-quark in 100%
+                        double dEta=etaT-eta;
+                        double dPhi=phiT-phi;
+                        if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
+                        double dR=sqrt(dEta*dEta+dPhi*dPhi);
+                        h_dR->Fill(dR);
+                        if (dR<DeltaR) pt_matched2=pt;
+                   }
+
+                 
 
 
-  }
+
+
+
+   if (pt_matched1>0 && ptT>0) {
+   for (int kk=0; kk<nmax_jet; kk++){
+   double x1=5+pow(2,(0.35*(kk+12)));
+   double x2=10+pow(2,(0.35*(kk+12+1)));
+   //cout << kk << " " << x1 << " " << x2 << endl;
+   if (ptT>x1 && ptT<x2)
+         {h_jet1_res[kk]->Fill(pt_matched1/ptT); h_jet1_ptr[kk]->Fill(ptT); }
+   }
+   }
+
+
+// NN
+   if (pt_matched2>0 && ptT>0) {
+   for (int kk=0; kk<nmax_jet; kk++){
+   double x1=5+pow(2,(0.35*(kk+12)));
+   double x2=10+pow(2,(0.35*(kk+12+1)));
+   //cout << kk << " " << x1 << " " << x2 << endl;
+   if (ptT>x1 && ptT<x2)
+         {h_jet2_res[kk]->Fill(pt_matched2/ptT); h_jet2_ptr[kk]->Fill(ptT); }
+   }
+   }
+
+
+
+
+
+  } // end loop over true jets
+
+  } // end loop over events 
 
 
         f->Close();
