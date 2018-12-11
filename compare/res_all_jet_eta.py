@@ -37,8 +37,8 @@ epsfig=figdir+__file__.replace("py","eps")
 epsfig=epsfig.replace(".eps","_"+tag+".eps")
 Ymin=0.0 
 Ymax=0.5 
-Xmin=20   
-Xmax=1000
+Xmin=-3   
+Xmax=3
 
 if (tag == "rfast007"):
         Ymax=0.8;
@@ -65,11 +65,11 @@ c1.SetFillColor(0)
 
 h=gPad.DrawFrame(Xmin,Ymin,Xmax,Ymax)
 gPad.SetLogy(0)
-gPad.SetLogx(1)
+gPad.SetLogx(0)
 ax=h.GetXaxis(); ax.SetTitleOffset(1.0)
-ax.SetTitle( "p_{T}^{jet} [GeV]"  );
+ax.SetTitle( "#eta^{jet} [GeV]"  );
 ay=h.GetYaxis();
-ay.SetTitle( "#sigma (p_{T}^{jet}) / p_{T}^{jet}" );
+ay.SetTitle( "#sigma (#eta^{jet}) / #eta^{jet}" );
 ay.SetTitleSize(0.05);
 ax.SetTitleSize(0.05);
 ay.SetLabelSize(0.04)
@@ -108,10 +108,10 @@ f1.FixParameter(1,0)
 f1.SetParameter(2,2.02282e-02)
 f1.SetParLimits(2,0.005,0.8)
 
-filename="root/resolution_jet1_"+tag+".txt"
+filename="root/resolution_jeteta1_"+tag+".txt"
 h1=getResolutionGraph(filename)
 
-filename="root/resolution_jet2_"+tag+".txt"
+filename="root/resolution_jeteta2_"+tag+".txt"
 h2=getResolutionGraph(filename)
 
 
@@ -128,8 +128,8 @@ for i in range(20):
 fitr.Print()
 print "Is valid=",fitr.IsValid()
 
-ptmin=20
-ptmax=500
+ptmin=-3
+ptmax=3
 f2=TF1("f2",s1,ptmin,ptmax);
 f2.SetLineStyle(1)
 f2.SetLineWidth(2)

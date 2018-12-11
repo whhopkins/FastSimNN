@@ -20,8 +20,15 @@ from module_functions import *
 
 tag="rfast004"
 if (len(sys.argv) ==2):
+   myinput = sys.argv[1]
+print "mode =",myinput
+
+if (len(sys.argv) ==3):
    tag = sys.argv[1]
-print "TAG Mode=",myinput
+   myinput = sys.argv[2]
+print "TAG =",tag
+print "mode =",myinput
+
 
 gROOT.Reset()
 figdir="figs/"
@@ -61,7 +68,7 @@ gPad.SetLogx(1)
 ax=h.GetXaxis(); ax.SetTitleOffset(1.0)
 ax.SetTitle( "p_{T}^{jet} [GeV]"  );
 ay=h.GetYaxis();
-ay.SetTitle( "Jet response" );
+ay.SetTitle( "< p_{T} / p_{T}^{true} >" );
 ay.SetTitleSize(0.05);
 ax.SetTitleSize(0.05);
 ay.SetLabelSize(0.04)
@@ -114,7 +121,7 @@ s1="#sqrt{"+a1+" ^{2} /p_{T} +"+b1+" ^{2}/p_{T}^{2} +"+k1+"^{2}}"
 
 
 # myText( 0.2,0.85,4,0.05,dlab)
-myText( 0.2,0.8,4,0.04,"antiKT R=0.4 jets")
+myText( 0.2,0.84,4,0.04,"antiKT R=0.4 jets")
 
 leg2=TLegend(0.6, 0.7, 0.85, 0.9);
 leg2.SetBorderSize(0);

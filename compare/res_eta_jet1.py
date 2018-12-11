@@ -29,8 +29,23 @@ Xmin=-2
 Xmax=2
 
 
+myinput="interactive"
+xdir=""
+
 tag="rfast004"
-filename="root/resolution_jet_"+tag+".txt"
+if (len(sys.argv) ==2):
+   myinput = sys.argv[1]
+print "mode =",myinput
+
+if (len(sys.argv) ==3):
+   tag = sys.argv[1]
+   myinput = sys.argv[2]
+print "TAG =",tag
+print "mode =",myinput
+
+
+
+filename="root/resolution_jeteta1_"+tag+".txt"
 import os
 if os.path.isfile(filename):
      os.remove(filename)
@@ -55,10 +70,11 @@ c1.SetFillColor(0)
 sig=TFile("out/"+tag+"_histo.root")
 sig.ls()
 
-for i in range(14):
+for i in range(12):
   xx="%02d" % (i,)
-  name="jet_resolution_"+xx
-  name1="jet_resolution_pt_"+xx
+  name="jeteta1_resolution_"+xx
+  name1="jeteta1_resolution_eta_"+xx
+  print  "Name=",name
   c1.cd(i)
   gPad.SetBottomMargin(0.18)
   h1=sig.Get(name)
@@ -66,9 +82,9 @@ for i in range(14):
   binmax = h1.GetMaximumBin();
   yyy = h1.GetBinContent(binmax);
   Ymax=1.2*yyy
-  mu=int(mean.GetMean())
+  mu=float(mean.GetMean())
   print "Processing pT =", mu, " GeV"
-  plot(c1,h1,mean,0.8,0.1,0.0,2.0,mu,0.0,2.0,Ymin,Ymax,filename,True)
+  ploteta(c1,h1,mean,0.8,0.1,0.0,4.0,mu,0.5,1.5,Ymin,Ymax,filename,False)
   gPad.RedrawAxis()
  
 

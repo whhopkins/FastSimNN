@@ -29,10 +29,20 @@ Xmin=-2
 Xmax=2
 
 
+myinput="interactive"
+xdir=""
+
 tag="rfast004"
 if (len(sys.argv) ==2):
+   myinput = sys.argv[1]
+print "mode =",myinput
+
+if (len(sys.argv) ==3):
    tag = sys.argv[1]
-print "TAG Mode=",myinput
+   myinput = sys.argv[2]
+print "TAG =",tag
+print "mode =",myinput
+
 
 filename="root/resolution_jet2_"+tag+".txt"
 import os
@@ -59,7 +69,7 @@ c1.SetFillColor(0)
 sig=TFile("out/"+tag+"_histo.root")
 sig.ls()
 
-for i in range(14):
+for i in range(13):
   xx="%02d" % (i,)
   name="jet2_resolution_"+xx
   name1="jet2_resolution_pt_"+xx

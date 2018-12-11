@@ -18,7 +18,6 @@ from AtlasUtils import *
 from initialize  import *
 from module_functions import *
 
-
 tag="rfast004"
 if (len(sys.argv) ==2):
    myinput = sys.argv[1]
@@ -35,15 +34,15 @@ gROOT.Reset()
 figdir="figs/"
 epsfig=figdir+__file__.replace("py","eps")
 epsfig=epsfig.replace(".eps","_"+tag+".eps")
-Ymin=0.0 
-Ymax=0.5 
-Xmin=20   
-Xmax=1000
+Ymin=0.9 
+Ymax=1.1  
+Xmin=-3   
+Xmax=3
 
 if (tag == "rfast007"):
-        Ymax=0.8;
+        Ymax=2.5;
 if (tag == "rfast006"):
-        Ymax=1.2;
+        Ymax=3.5;
 
 
 ######################################################
@@ -59,32 +58,30 @@ c1.SetTitle("")
 c1.SetLineWidth(3)
 c1.SetBottomMargin(0.13)
 c1.SetTopMargin(0.05)
-c1.SetLeftMargin(0.14)
+c1.SetLeftMargin(0.13)
 c1.SetRightMargin(0.05)
 c1.SetFillColor(0)
 
 h=gPad.DrawFrame(Xmin,Ymin,Xmax,Ymax)
 gPad.SetLogy(0)
-gPad.SetLogx(1)
+gPad.SetLogx(0)
 ax=h.GetXaxis(); ax.SetTitleOffset(1.0)
-ax.SetTitle( "p_{T}^{jet} [GeV]"  );
+ax.SetTitle( "#eta^{jet}"  );
 ay=h.GetYaxis();
-ay.SetTitle( "#sigma (p_{T}^{jet}) / p_{T}^{jet}" );
+ay.SetTitle( "< #eta / #eta^{true} >" );
 ay.SetTitleSize(0.05);
 ax.SetTitleSize(0.05);
 ay.SetLabelSize(0.04)
 ax.SetTitleOffset(1.1);
-ay.SetTitleOffset(1.25)
+ay.SetTitleOffset(1.1)
 ay.SetLabelFont(42)
 ax.SetLabelFont(42)
-ax.SetLabelSize(0.04)
-
 ax.SetTitleFont(62)
 ay.SetTitleFont(62)
-
+ax.SetLabelSize(0.04)
 
 ptmin=20
-ptmax=500
+ptmax=600
 s1="sqrt(([0]/sqrt(x))*([0]/sqrt(x))+([1]/x)*([1]/x)+[2]*[2])"
 
 """
@@ -97,89 +94,36 @@ c) effects coming from calibration errors, non-uniformities and non-linearities
 f1=TF1("f1",s1,ptmin,ptmax);
 f1.SetLineStyle(1)
 f1.SetLineWidth(2)
-f1.SetLineColor(2)
-f1.SetParameter(0,0.9)
-f1.SetParLimits(0,0.2,2.0)
+f1.SetParameter(0,0.5)
 f1.SetParameter(1,4.58662e-01)
-f1.SetParameter(1,4.58662e-01)
-f1.SetParLimits(1,0.01,0.8)
-f1.FixParameter(1,0)
-# f1.FixParameter(2,0)
 f1.SetParameter(2,2.02282e-02)
-f1.SetParLimits(2,0.005,0.8)
 
-filename="root/resolution_jet1_"+tag+".txt"
-h1=getResolutionGraph(filename)
-
-filename="root/resolution_jet2_"+tag+".txt"
-h2=getResolutionGraph(filename)
+h1=getResponseGraph( "root/resolution_jeteta1_"+tag+".txt" )
+h2=getResponseGraph( "root/resolution_jeteta2_"+tag+".txt" )
 
 
 #h1.SetMarkerColor(ROOT.kBlack)
 h1.SetMarkerSize(1.0)
 h1.SetMarkerStyle(20)
 h1.Draw("P same")
+
+h2.SetMarkerColor(2)
+h2.SetMarkerStyle(24)
+h2.SetMarkerSize(1.0)
+h2.Draw("pe same")
+
 # h1.Fit(f1,"RE+","",ptmin,ptmax);
-for i in range(20):
-     fitr=h1.Fit(f1,"SR0E+","",ptmin,ptmax);
-     # fitr=h1.Fit(f1,"SMR0", ptmin,ptmax)
-     print "Status=",int(fitr), " is valid=",fitr.IsValid()
-     if (fitr.IsValid()==True): break;
-fitr.Print()
-print "Is valid=",fitr.IsValid()
-
-ptmin=20
-ptmax=500
-f2=TF1("f2",s1,ptmin,ptmax);
-f2.SetLineStyle(1)
-f2.SetLineWidth(2)
-f2.SetLineColor(2)
-f2.SetParameter(0,0.9)
-f2.SetParLimits(0,0.2,2.0)
-f2.SetParameter(1,4.58662e-01)
-f2.SetParameter(1,4.58662e-01)
-f2.SetParLimits(1,0.01,0.8)
-f2.FixParameter(1,0)
-# f1.FixParameter(2,0)
-f2.SetParameter(2,2.02282e-02)
-for i in range(20):
-     fitr=h1.Fit(f2,"SR0E+","",ptmin,ptmax);
-     # fitr=h1.Fit(f1,"SMR0", ptmin,ptmax)
-     print "Status=",int(fitr), " is valid=",fitr.IsValid()
-     if (fitr.IsValid()==True): break;
-fitr.Print()
-print "Is valid=",fitr.IsValid()
-
-# f1.Draw("same")
-# f2.Draw("same")
-
 par1 = f1.GetParameters()
-par2 = f2.GetParameters()
-
 a1='%.2f'%( par1[0] )
 b1='%.2f'%( par1[1] )
 k1='%.2f'%( par1[2] )
-s1="#sqrt{"+a1+" ^{2} /p_{T}^{jet} +"+b1+" ^{2}/p_{T}^{jet,2} +"+k1+"^{2}}" 
+s1="#sqrt{"+a1+" ^{2} /p_{T} +"+b1+" ^{2}/p_{T}^{2} +"+k1+"^{2}}" 
 
-print s1
-a1='%.1f'%( par1[0]*100 )
-k1='%.1f'%( par1[2]*100 )
-aPerc= a1
-kPerc = k1
-s1 ="#scale[1.2]{#frac{"+aPerc+"%}{#sqrt{p_{T}^{jet}}} #oplus "+kPerc+"%}"
-print s1
 
-a2='%.2f'%( par2[0] )
-b2='%.2f'%( par2[1] )
-k2='%.2f'%( par2[2] )
-a1='%.1f'%( par2[0]*100 )
-k1='%.1f'%( par2[2]*100 )
-aPerc= a1
-kPerc = k1
-s2 ="#scale[1.2]{#frac{"+aPerc+"%}{#sqrt{p_{T}^{jet}}} #oplus "+kPerc+"%}"
-print s2
+# myText( 0.2,0.85,4,0.05,dlab)
+myText( 0.2,0.84,4,0.04,"antiKT R=0.4 jets")
 
-leg2=TLegend(0.5, 0.7, 0.85, 0.91);
+leg2=TLegend(0.6, 0.7, 0.85, 0.9);
 leg2.SetBorderSize(0);
 leg2.SetTextFont(62);
 leg2.SetFillColor(10);
@@ -188,21 +132,6 @@ leg2.AddEntry(h1,dlab, "pl")
 leg2.AddEntry(h2,nnlab, "pl")
 leg2.Draw("same");
 
-leg1=TLegend(0.5, 0.38, 0.85, 0.6);
-leg1.SetBorderSize(0);
-leg1.SetTextFont(62);
-leg1.SetFillColor(10);
-leg1.SetTextSize(0.04);
-# leg1.AddEntry(f1,s1,"l")
-leg1.Draw("same");
-
-h1.Draw("pe same")
-h2.SetMarkerColor(2)
-h2.SetMarkerStyle(24)
-h2.SetMarkerSize(1.0)
-h2.Draw("pe same")
-
-myText( 0.2,0.84,4,0.04,"antiKT R=0.4 jets")
 
 if (tag == "rfast004"):
       myText( 0.2,0.9,2,0.05,"<#mu>=0")
@@ -210,6 +139,15 @@ if (tag == "rfast007"):
       myText( 0.2,0.9,2,0.05,"<#mu>=40")
 if (tag == "rfast006"):
       myText( 0.2,0.9,2,0.05,"<#mu>=140")
+
+
+#myText( 0.2,0.9,4,0.04,lab1)
+#myText( 0.2,0.85,4,0.04,lab2)
+# myText( 0.2,0.85,4,0.03,lab3)
+
+line =TLine(Xmin,1,Xmax,1);
+line.Draw()
+
 
 
 gPad.RedrawAxis()

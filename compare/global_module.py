@@ -193,7 +193,7 @@ def plot(c1,h1,h2, peak=1.0, sigma=0.1, MyMin=0, MyMax=2, mu=140,Xmin=0.0,Xmax=2
   nameX="p_{T}^{reco, jet} / p_{T}^{true, jet}"
   nameY="Entries"
   mean=h2.GetMean()
-  if (mean<1): return
+  # if (mean<1): return
 
   # mean_err=h2.GetMeanError()
   mean_err=h2.GetRMS()
@@ -277,3 +277,42 @@ def plot(c1,h1,h2, peak=1.0, sigma=0.1, MyMin=0, MyMax=2, mu=140,Xmin=0.0,Xmax=2
   file=open(filename,"a")
   file.write(str(mean)+","+str(mean_err)+","+str(par[1])+","+str(err[1])+","+str(par[2])+","+str(err[2])+"\n")
   file.close()
+
+# h1- pT(rec)/pT(true)
+# h2- pT(true) - for mean
+# isFit=False - use RMS instead of fits
+def ploteta(c1,h1,h2, peak=1.0, sigma=0.1, MyMin=0, MyMax=2, mu=140,Xmin=0.0,Xmax=2.0,Ymin=0,Ymax=500, filename="root/resolution_eta.txt",isFit=True):
+  nameX="#eta_^{reco, jet} / #eta^{true, jet}"
+  nameY="Entries"
+  mean=h2.GetMean()
+  # if (mean<1): return
+  # mean_err=h2.GetMeanError()
+  mean_err=h2.GetRMS()
+  xmean=h1.GetMean()
+  xrms=h1.GetRMS()
+  txt='#LT p_{T} #GT =%.0f GeV'%( mean )
+  print txt
+ 
+  par=[]
+  par.append(0); 
+  par.append(0);
+  par.append(0);
+  err=[]
+  err.append(0);
+  err.append(0);
+  err.append(0);
+
+  # Use RMS of histogram, no fit
+  par[1]=h1.GetMean()
+  err[1]=h1.GetMeanError()
+  par[2]=rms90(h1); 
+  # par[2]=h1.GetRMS()
+  err[2]=h1.GetRMSError()
+  print "Replace fits with histogram RMS!"
+
+  print "Write="+filename
+  file=open(filename,"a")
+  file.write(str(mean)+","+str(mean_err)+","+str(par[1])+","+str(err[1])+","+str(par[2])+","+str(err[2])+"\n")
+  file.close()
+
+
