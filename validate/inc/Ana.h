@@ -49,6 +49,7 @@ class Ana  {
    vector <string> ntup;       // ntuple list
    TH1D *h_debug ;             // global debug file
    int   MaxEvents;            // max number of events
+   TH1D *h_dR;
 
 
  
@@ -132,24 +133,35 @@ protected:
    TH1D *h_rout4;
 
 
-
+   // reco jets
    std::vector<Double32_t> m_jetpt; //!
    std::vector<Double32_t> m_jeteta; //!
    std::vector<Double32_t> m_jetphi; //!
    std::vector<Double32_t> m_jetm; //!
    std::vector<Int_t>      m_jetbtag; //!
 
+   // matched jets
+   std::vector<Double32_t> m_matchedjetpt; //!
+   std::vector<Double32_t> m_matchedjeteta; //!
+   std::vector<Double32_t> m_matchedjetphi; //!
+   std::vector<Double32_t> m_matchedjetm; //!
+   std::vector<Int_t>      m_matchedjetbtag; //!
+
+   // truth jets
    std::vector<Double32_t> m_gjetpt; //!
    std::vector<Double32_t> m_gjeteta; //!
    std::vector<Double32_t> m_gjetphi; //!
    std::vector<Double32_t> m_gjetm; //!
    std::vector<Int_t>      m_gjetbtag; //!
 
+   // NN jets
    std::vector<Double32_t> m_nnjetpt; //!
    std::vector<Double32_t> m_nnjeteta; //!
    std::vector<Double32_t> m_nnjetphi; //!
    std::vector<Double32_t> m_nnjetm; //!
    std::vector<Double32_t> m_nnjetbtag; //!
+
+
 
    TTree* m_ntuple;
 

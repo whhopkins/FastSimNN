@@ -62,23 +62,34 @@ int myRand(int arr[], int freq[], int n)
 Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) {
 
 	JetsFastNN.clear();
+
+        // NN jets
 	m_nnjetpt.clear();
 	m_nnjeteta.clear();
 	m_nnjetphi.clear();
         m_nnjetm.clear();
         m_nnjetbtag.clear();
 
+        // true jets
 	m_gjetpt.clear();
 	m_gjeteta.clear();
 	m_gjetphi.clear();
         m_gjetm.clear();
         m_gjetbtag.clear();
 
+        // reco jets
 	m_jetpt.clear();
 	m_jeteta.clear();
 	m_jetphi.clear();
         m_jetm.clear();
         m_jetbtag.clear();
+
+        // matched jets
+        m_matchedjetpt.clear();
+        m_matchedjeteta.clear();
+        m_matchedjetphi.clear();
+        m_matchedjetm.clear();
+        m_matchedjetbtag.clear();
 
 	const  double EtaMax=maxEta;
 	const  double PhiMax=PI;
@@ -118,17 +129,46 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		double massT =  L2.M();
                 float  btagT =  (float)tjet.GetType(); // fraction of b-quark momenta in 100% 
 
-		if (ptT>minPT) {
+		if (ptT>minPT && abs(etaT)<maxEta) {
 			m_gjetpt.push_back(ptT);
 			m_gjeteta.push_back(etaT);
 			m_gjetphi.push_back( phiT );
                         m_gjetm.push_back( massT );
                         if (btagT>50) m_gjetbtag.push_back( 1 );
                         else          m_gjetbtag.push_back( 0 );
-		}
-
+                }
 
 		h_jetcutflow->Fill(1);
+
+
+                // reco jets
+                if (ptT>minPT && abs(etaT)<maxEta) { // only for the pT cut 
+                int indexMatch=-1;
+                for(unsigned int i = 0; i<JetsReco.size(); i++){
+                        LParticle rjet = (LParticle)JetsReco.at(i);
+                        TLorentzVector L1 = rjet.GetP();
+                        double phi = L1.Phi();
+                        double eta = L1.PseudoRapidity();
+                        double dEta=etaT-eta;
+                        double dPhi=phiT-phi;
+                        if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
+                        double dR=sqrt(dEta*dEta+dPhi*dPhi);
+                        h_dR->Fill(dR);
+                        if (dR<DeltaR) indexMatch=i;
+                }
+
+                // only matched jets 
+                if (indexMatch>-1){
+                        LParticle rjet = (LParticle)JetsReco.at(indexMatch);
+                        TLorentzVector L1 = rjet.GetP();
+                        m_matchedjetpt.push_back(  L1.Perp() );
+                        m_matchedjeteta.push_back( L1.PseudoRapidity() );
+                        m_matchedjetphi.push_back( L1.Phi()  );
+                        m_matchedjetm.push_back(  L1.M()  );
+                        m_matchedjetbtag.push_back( rjet.GetType() );
+                 }
+
+                } // end cut on pT and Eta
 
 		// cout << "True jet=" << j << " " << ptT << " " << etaT << endl;
 

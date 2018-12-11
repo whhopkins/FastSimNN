@@ -155,6 +155,8 @@ Int_t Ana::Init() {
 	RootFile = new TFile(ffile.c_str(), "RECREATE", "Histogram file");
 	// define histograms
 	h_debug = new TH1D("debug", "debug", 10, 0, 10);
+        h_dR = new TH1D("jet_dR", "truth-jet distance", 500, 0, 7);
+
 	h_jetpt = new TH1D("jet_PT", "jet_PT reconstructed", 100, 0, 1000);  h_jetpt->Sumw2();
 	h_jetpt_truth = new TH1D("jet_truth_PT", "jet_PT truth", 100, 0, 1000);  h_jetpt_truth->Sumw2();
 	h_jetpt_nn = new TH1D("jet_nn_PT", "jet_PT from NN", 100, 0, 1000);  h_jetpt_nn->Sumw2();
@@ -193,15 +195,21 @@ Int_t Ana::Init() {
 	m_ntuple->Branch("AntiKt4JetPt",    &m_jetpt);
 	m_ntuple->Branch("AntiKt4JetEta",   &m_jeteta);
 	m_ntuple->Branch("AntiKt4JetPhi",   &m_jetphi);
-        m_ntuple->Branch("AntiKt4JetM",   &m_jetm);
+        m_ntuple->Branch("AntiKt4JetM",      &m_jetm);
         m_ntuple->Branch("AntiKt4JetBtag",   &m_jetbtag);
-
+        // matched
+        m_ntuple->Branch("AntiKt4MatchedJetPt",    &m_matchedjetpt);
+        m_ntuple->Branch("AntiKt4MatchedJetEta",   &m_matchedjeteta);
+        m_ntuple->Branch("AntiKt4MatchedJetPhi",   &m_matchedjetphi);
+        m_ntuple->Branch("AntiKt4MatchedJetM",     &m_matchedjetm);
+        m_ntuple->Branch("AntiKt4MatchedJetBtag",  &m_matchedjetbtag);
+        // truth
 	m_ntuple->Branch("AntiKt4TruthJetPt",    &m_gjetpt);
 	m_ntuple->Branch("AntiKt4TruthJetEta",   &m_gjeteta);
 	m_ntuple->Branch("AntiKt4TruthJetPhi",   &m_gjetphi);
         m_ntuple->Branch("AntiKt4TruthJetM",   &m_gjetm);
         m_ntuple->Branch("AntiKt4TruthJetBtag",   &m_gjetbtag);
-
+        // NN jets
 	m_ntuple->Branch("AntiKt4NNJetPt",    &m_nnjetpt);
 	m_ntuple->Branch("AntiKt4NNJetEta",   &m_nnjeteta);
 	m_ntuple->Branch("AntiKt4NNJetPhi",   &m_nnjetphi);
