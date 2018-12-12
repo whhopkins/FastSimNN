@@ -34,15 +34,10 @@ gROOT.Reset()
 figdir="figs/"
 epsfig=figdir+__file__.replace("py","eps")
 epsfig=epsfig.replace(".eps","_"+tag+".eps")
-Ymin=0.9 
-Ymax=1.1  
+Ymin=0.96 
+Ymax=1.04  
 Xmin=-3   
 Xmax=3
-
-if (tag == "rfast007"):
-        Ymax=2.5;
-if (tag == "rfast006"):
-        Ymax=3.5;
 
 
 ######################################################

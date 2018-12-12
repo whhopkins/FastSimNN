@@ -201,10 +201,11 @@ int main(int argc, char *argv[])
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
 				h_dR->Fill(dR);
 				if (dR<DeltaR) {pt_matched1=pt; eta_matched1=eta;} 
+                                //if (abs(dPhi)<0.15) {eta_matched1=eta;}
+
 			}
 
 			// NN jets
-
 			double pt_matched2 =-1000;
 			double eta_matched2 =-1000;
 			for(unsigned int i = 0; i<nnjetpt->size(); i++){
@@ -218,7 +219,9 @@ int main(int argc, char *argv[])
 				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
 				h_dR->Fill(dR);
-				if (dR<DeltaR) {pt_matched2=pt; eta_matched2=eta;} 
+				if (dR<DeltaR) {pt_matched2=pt; eta_matched2=eta; } 
+                                //if (abs(dPhi)<0.15) {eta_matched2=eta;}
+
 			}
 
 			// step for Eta
@@ -231,16 +234,19 @@ int main(int argc, char *argv[])
 					double x1=5+pow(2,(0.35*(kk+12)));
 					double x2=10+pow(2,(0.35*(kk+12+1)));
 					//cout << kk << " " << x1 << " " << x2 << endl;
-					if (ptT>x1 && ptT<x2)
-					{h_jet1_res[kk]->Fill(pt_matched1/ptT); h_jet1_ptr[kk]->Fill(ptT); }
+					if (ptT>x1 && ptT<x2) { 
+					          h_jet1_res[kk]->Fill(pt_matched1/ptT); 
+                                                  h_jet1_ptr[kk]->Fill(ptT); }
 				}
 
 				for (int kk=0; kk<nmax_jet-1; kk++){
 					double x1=-1*EtaMax+kk*delta;
 					double x2= x1+delta;
 					//cout << kk << " " << x1 << " " << x2 << endl;
-					if (etaT>x1 && etaT<x2 && etaT !=0)
-					{h_jeteta1_res[kk]->Fill(eta_matched1/etaT); h_jeteta1_ptr[kk]->Fill(etaT); }
+					if (etaT>x1 && etaT<x2 && etaT !=0) { 
+					   h_jeteta1_res[kk]->Fill(abs(eta_matched1/etaT)); 
+                                           h_jeteta1_ptr[kk]->Fill(etaT); 
+                                         }
 				}
 
 			}
@@ -261,8 +267,9 @@ int main(int argc, char *argv[])
 					double x1=-1*EtaMax+kk*delta;
 					double x2= x1+delta;
 					//cout << kk << " " << x1 << " " << x2 << endl;
-					if (etaT>x1 && etaT<x2 && etaT !=0)
-					{h_jeteta2_res[kk]->Fill(abs(eta_matched2/etaT)); h_jeteta2_ptr[kk]->Fill(etaT); }
+					if (etaT>x1 && etaT<x2 && etaT !=0)  { 
+					h_jeteta2_res[kk]->Fill(abs(eta_matched2/etaT)); 
+                                        h_jeteta2_ptr[kk]->Fill(etaT); }
 				}
 
 

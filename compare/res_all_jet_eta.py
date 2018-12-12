@@ -36,14 +36,14 @@ figdir="figs/"
 epsfig=figdir+__file__.replace("py","eps")
 epsfig=epsfig.replace(".eps","_"+tag+".eps")
 Ymin=0.0 
-Ymax=0.5 
+Ymax=0.3 
 Xmin=-3   
 Xmax=3
 
-if (tag == "rfast007"):
-        Ymax=0.8;
-if (tag == "rfast006"):
-        Ymax=1.2;
+#if (tag == "rfast007"):
+#        Ymax=0.8;
+#if (tag == "rfast006"):
+#        Ymax=1.2;
 
 
 ######################################################
@@ -83,8 +83,8 @@ ax.SetTitleFont(62)
 ay.SetTitleFont(62)
 
 
-ptmin=20
-ptmax=500
+ptmin=-3
+ptmax=3
 s1="sqrt(([0]/sqrt(x))*([0]/sqrt(x))+([1]/x)*([1]/x)+[2]*[2])"
 
 """
@@ -128,8 +128,6 @@ for i in range(20):
 fitr.Print()
 print "Is valid=",fitr.IsValid()
 
-ptmin=-3
-ptmax=3
 f2=TF1("f2",s1,ptmin,ptmax);
 f2.SetLineStyle(1)
 f2.SetLineWidth(2)

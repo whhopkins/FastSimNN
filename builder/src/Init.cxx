@@ -169,21 +169,19 @@ Int_t Ana::Init() {
 	}
 
 
-
-
       // energy and eta scaling factors 
       jet_escale=2.0;
       jet_eshift=0.0;
       jet_mscale=1.0;
       jet_mshift=0.0;
-      jet_etascale=4.0;
+      jet_etascale=8.0;
       jet_etashift=0.0;
       if (MuPileup>100) { // shrink to fit to -1 - 1 
                           jet_escale=0.5;
                           jet_eshift=-0.5;
                           jet_mscale=0.25;
                           jet_mshift=-0.8;
-                          jet_etascale=2.0;
+                          jet_etascale=6.0;
                           jet_etashift=0.0;
                          }
 
@@ -192,7 +190,7 @@ Int_t Ana::Init() {
                           jet_eshift=-0.25;
                           jet_mscale=0.5;
                           jet_mshift=-0.5;
-                          jet_etascale=2.0;
+                          jet_etascale=6.0;
                           jet_etashift=0.0;
                          }
 

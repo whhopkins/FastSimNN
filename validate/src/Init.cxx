@@ -72,6 +72,14 @@ Int_t Ana::Init() {
 	}
 
 
+         cout << "EnergyScale=" << jet_escale << endl;
+         cout << "EnergyShift=" << jet_eshift << endl;
+         cout << "MassScale=" << jet_mscale << endl;
+         cout << "MassShift=" << jet_mshift << endl;
+         cout << "EtaScale=" << jet_etascale << endl;
+         cout << "EtaShift=" << jet_etashift << endl;
+
+
         if (jet_escale == 0 || jet_mscale == 0 || jet_etascale == 0){
          cout << "Error: failed to read scale factors from configuration file !" << endl;
          exit(0);
