@@ -5,9 +5,9 @@
 #include <TRandom2.h>
 
 //BOOST library
-//#include <boost/random/mersenne_twister.hpp>
-//#include <boost/random/discrete_distribution.hpp>
-//boost::mt19937 gen;
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/discrete_distribution.hpp>
+boost::mt19937 gen;
 
 
 const double PI   = TMath::Pi();
@@ -27,7 +27,8 @@ int findCeil(int  arr[], int r, int l, int h)
 	}
 	int va=(arr[l] >= r) ? l : -1;
 	// if negative, assume no correction (center)
-	if (va<0) va=(int)(h/2.0);
+	// if (va<0) va=(int)(h/2.0);
+        if (va<0)  va=(int)(Reta.Rndm()*h); // random smearing  
 	return va;
 
 }
@@ -45,17 +46,18 @@ int myRand(int arr[], int freq[], int n)
 	// prefix[n-1] is sum of all frequencies. Generate a random number
 	// with value from 1 to this sum
 	if (prefix[n - 1] != 0) {
-		int r = (rand() % prefix[n - 1]) + 1;
-		//long  R1=Reta.Rndm()*RAND_MAX;
-		//int r = (R1 % prefix[n - 1]) + 1;
+		//int r = (rand() % prefix[n - 1]) + 1;
+		long  R1=Reta.Rndm()*RAND_MAX;
+		int r = (R1 % prefix[n - 1]) + 1;
 		//cout << "Random value on [0 " << RAND_MAX << endl;
 		// Find index of ceiling of r in prefix arrat
 		int indexc = findCeil(prefix, r, 0, n - 1);
 		return arr[indexc];
 	}
 
-	return (int)(n/2.0); // assume no correction when error
-
+	// return (int)(n/2.0); // assume no correction when error
+           int va=(int)(Reta.Rndm()*n);
+           return va; // random smearing  
 }
 
 
@@ -93,7 +95,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
-	const double intmove=10000; // number for converting to integer frequencies
+	const double intmove=100000; // number for converting to integer frequencies
 	const double delta=2.0/nBinsNN;
 	const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta
 	const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi
@@ -253,16 +255,20 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				//cout << endl;
 
 
-				int freqPT[nBinsNN-1];
-				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPT[jjj]=(int)((scale+output[jjj])*intmove);
-
 				// you can use Boost but it is slower
-				// vector<double> freqPT;
-				//for (int jjj=0; jjj<nBinsNN; jjj++) freqPT.push_back( (double)(scale+output[jjj])*intmove) ;
-				//boost::random::discrete_distribution<> dist(freqPT);
-				//int BinSelected = dist(gen);
+                                /*
+				vector<double> freqPT;
+                                // create probability distribution
+                                double xsum=0; 
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) xsum=xsum+output[jjj];
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPT.push_back( (double)(output[jjj]/xsum));
+				boost::random::discrete_distribution<> dist1(freqPT);
+				int BinSelected = dist1(gen);
 				//cout << BinSelected << endl;
+                                */
 
+                                int freqPT[nBinsNN-1];
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPT[jjj]=(int)((scale+output[jjj])*intmove);
 				int BinSelected=myRand(BinOverTrue, freqPT, nBinsNN-1); // select random value (bin) assuming frequencies from freqPT
 				double recoOvertrue=-1+BinSelected*delta;
 				double ptcor= ( (recoOvertrue - jet_eshift)/jet_escale )+1.0;
@@ -284,9 +290,16 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				int freqETA[nBinsNN-1];
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqETA[jjj]=(int)((scale+output[jjj])*intmove);
 				BinSelected=myRand(BinOverTrue, freqETA, nBinsNN-1); // select random value (bin) assuming frequencies
-
+                               
+                                /* slow boost 
+                                vector<double> freqETA;
+                                xsum=0;
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) xsum=xsum+output[jjj];
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) freqETA.push_back( (double)(output[jjj]/xsum));
+                                boost::random::discrete_distribution<> dist2(freqETA);
+                                BinSelected = dist2(gen);
+                                */
 				h_rout2->Fill( (float)BinSelected );
-
 				recoOvertrue=-1+BinSelected*delta;
 				double etacor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_etacor->Fill( etacor );
@@ -301,9 +314,16 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				int freqPHI[nBinsNN-1];
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPHI[jjj]=(int)( (scale+output[jjj])*intmove);
 				BinSelected=myRand(BinOverTrue, freqPHI, nBinsNN-1); // select random value (bin) assuming frequencies
+                                /*
+                                vector<double> freqPHI;
+                                xsum=0;
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) xsum=xsum+output[jjj];
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPHI.push_back( (double)(output[jjj]/xsum));
+                                boost::random::discrete_distribution<> dist3(freqPHI);
+                                BinSelected = dist3(gen);
+                                */
 
 				h_rout3->Fill( (float)BinSelected );
-
 				recoOvertrue=-1+BinSelected*delta;
 				double phicor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_phicor->Fill( phicor );
@@ -319,9 +339,15 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				int freqM[nBinsNN-1];
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqM[jjj]=(int)( (scale+output[jjj])*intmove);
 				BinSelected=myRand(BinOverTrue, freqM, nBinsNN-1); // select random value (bin) assuming frequencies
-
+                                /* boost 
+                                vector<double> freqM;
+                                xsum=0;
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) xsum=xsum+output[jjj];
+                                for (int jjj=0; jjj<nBinsNN-1; jjj++) freqM.push_back( (double)(output[jjj]/xsum));
+                                boost::random::discrete_distribution<> dist4(freqM);
+                                BinSelected = dist4(gen);
+                                */
 				h_rout4->Fill( (float)BinSelected );
-
 				recoOvertrue=-1+BinSelected*delta;
 				// correction
 				double mcorr=( (recoOvertrue -  jet_mshift)/jet_mscale ) + 1.0;
@@ -367,7 +393,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		l.SetPtEtaPhiM(pt,eta,phi,mass);
 		LParticle p;
 		p.SetP(l);
-		if (btagFound>0) p.SetType(1);
+		if (btagFound>-0.9f) p.SetType(1);
 		else p.SetType(0);
 
 		JetsFastNN.push_back(p);
@@ -380,7 +406,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			m_nnjetphi.push_back(phi);
 			m_nnjetm.push_back(mass);
                         int bt=0;
-			if (btagFound>0)  bt=1;
+			if (btagFound> -0.9f)  bt=1;
 			m_nnjetbtag.push_back(bt);
                         // cout << btagFound << " " << bt << endl;
 		}
