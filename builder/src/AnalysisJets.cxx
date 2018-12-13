@@ -10,7 +10,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
-	const double delta=2.0/(nBinsNN-1);              // slices for resolution 
+	const double delta=2.0/(nBinsNN);                // slices for resolution 
         const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta  
         const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi  
 
@@ -137,7 +137,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					float ptIN=((ptT-dminmax)/(0.5*width));
 					float etaIN=etaT/EtaMax; // range -1 -1
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
-					float mIN=-1+(massT/(0.5*dmin));
+					float massIN=-1+(massT/(0.5*dmin));
 
                                         // sliced input for NN
                                         float etaINSlice[slices_etaphi-1];
@@ -145,8 +145,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
                                                 float d1=-EtaMax+jjj*slicesEta;
                                                 float d2=d1+slicesEta;
-                                                float dmm=d1+0.5*slicesEta;
-                                                if (etaT>d1  && etaT<=d2)    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
+                                                //float dmm=d1+0.5*slicesEta;
+                                                if (etaT>d1  && etaT<=d2) etaINSlice[jjj]=1.0f; //    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
                                                 else etaINSlice[jjj]=0;
                                         }
 
@@ -154,8 +154,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
                                                 float d1=-PhiMax+jjj*slicesPhi;
                                                 float d2=d1+slicesPhi;
-                                                float dmm=d1+0.5*slicesPhi;
-                                                if (phiT>d1  && phiT<=d2)    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
+                                                //float dmm=d1+0.5*slicesPhi;
+                                                if (phiT>d1  && phiT<=d2) phiINSlice[jjj]=1.0f; //    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
                                                 else phiINSlice[jjj]=0;
                                         }
 
@@ -185,7 +185,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         fann_type uoutput4[num_output];
  
 					uinput[0] = ptIN;
-                                        uinput[1] = mIN;
+                                        uinput[1] = massIN;
                                         uinput[2] = etaIN;
                                         uinput[3] = phiIN;
 
@@ -219,10 +219,10 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					for (unsigned int jjj=0; jjj<nBinsNN-1; jjj++) {
 						double d1=-1.0+jjj*delta;
 						double d2=d1+delta;
-						if (ptOUT>d1  && ptOUT<=d2)    uoutput1[jjj]=1.0;
-						if (etaOUT>d1 && etaOUT<=d2)   uoutput2[jjj]=1.0;
-						if (phiOUT>d1 && phiOUT<=d2)   uoutput3[jjj]=1.0;
-						if (mOUT>d1   && mOUT<=d2)     uoutput4[jjj]=1.0;
+						if (ptOUT>d1  && ptOUT<=d2)    uoutput1[jjj]=1.0f;
+						if (etaOUT>d1 && etaOUT<=d2)   uoutput2[jjj]=1.0f;
+						if (phiOUT>d1 && phiOUT<=d2)   uoutput3[jjj]=1.0f;
+						if (mOUT>d1   && mOUT<=d2)     uoutput4[jjj]=1.0f;
 					}
 
 					for (unsigned int kk=0; kk<num_input; kk++)  {
@@ -240,11 +240,15 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                                         dataset4->output[nn][kk] =uoutput4[kk];
                                         }
 
+                                        // debug output 
+                                        //cout <<  " " << endl;
+                                        //for (int jjj=0; jjj<nBinsNN-1; jjj++) {cout << uoutput1[jjj] << " ";}
+                                        //cout <<  " " << endl;
 
 					h_in1->Fill(ptIN);
 					h_in2->Fill(etaIN);
 					h_in3->Fill(phiIN);
-					h_in4->Fill(mIN);
+					h_in4->Fill(massIN);
 
 					h_out1->Fill(ptOUT);
 					h_out2->Fill(etaOUT);

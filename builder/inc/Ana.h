@@ -53,19 +53,19 @@ class Ana  {
    static const int num_threads = 16; // number of threads 
    static const int nBins=16;        // number of energy bins 
    static const int nBatch=100000; // number of events in batches for training
-   static const int nEpoch=150;    // max number of epochs 
+   static const int nEpoch=100;    // max number of epochs 
    static const int nBinsNN=201;   // number of bins for resolution plots
    static const int MinEntries=20; // min nr of entries in pT for NN training (per bunch);
    static const int num_layers = 3;
    //number in hidden layer 1
-   static  const int num_neurons_hidden_1=80;
+   static  const int num_neurons_hidden_1=20;
 
 
    double DeltaR;  // parameter used to match true jets with reco
    double MSESTOP;  // when stop training..
 
    // number of divisions in eta and phi to reproduce spacial structure  
-   static const int slices_etaphi=20;
+   static const int slices_etaphi=60;
 
    // NN structure for resolution 
    // pT, eta,phi(slices), mass 

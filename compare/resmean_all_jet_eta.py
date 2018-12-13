@@ -98,6 +98,11 @@ h2=getResponseGraph( "root/resolution_jeteta2_"+tag+".txt" )
 
 
 #h1.SetMarkerColor(ROOT.kBlack)
+
+h1=TGraphSkipRange(h1,-0.5, 0.5 )
+h2=TGraphSkipRange(h2,-0.5, 0.5 )
+
+
 h1.SetMarkerSize(1.0)
 h1.SetMarkerStyle(20)
 h1.Draw("P same")
@@ -126,6 +131,7 @@ leg2.SetTextSize(0.04);
 leg2.AddEntry(h1,dlab, "pl")
 leg2.AddEntry(h2,nnlab, "pl")
 leg2.Draw("same");
+
 
 
 if (tag == "rfast004"):

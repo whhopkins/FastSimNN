@@ -160,7 +160,7 @@ protected:
    std::vector<Double32_t> m_nnjeteta; //!
    std::vector<Double32_t> m_nnjetphi; //!
    std::vector<Double32_t> m_nnjetm; //!
-   std::vector<Double32_t> m_nnjetbtag; //!
+   std::vector<Int_t>      m_nnjetbtag; //!
 
 
 

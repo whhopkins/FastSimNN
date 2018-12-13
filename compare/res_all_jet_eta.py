@@ -177,6 +177,23 @@ kPerc = k1
 s2 ="#scale[1.2]{#frac{"+aPerc+"%}{#sqrt{p_{T}^{jet}}} #oplus "+kPerc+"%}"
 print s2
 
+leg1=TLegend(0.5, 0.38, 0.85, 0.6);
+leg1.SetBorderSize(0);
+leg1.SetTextFont(62);
+leg1.SetFillColor(10);
+leg1.SetTextSize(0.04);
+# leg1.AddEntry(f1,s1,"l")
+leg1.Draw("same");
+
+h1=TGraphSkipRange(h1,-0.5, 0.5 )
+h2=TGraphSkipRange(h2,-0.5, 0.5 )
+
+h1.Draw("pe same")
+h2.SetMarkerColor(2)
+h2.SetMarkerStyle(24)
+h2.SetMarkerSize(1.0)
+h2.Draw("pe same")
+
 leg2=TLegend(0.5, 0.7, 0.85, 0.91);
 leg2.SetBorderSize(0);
 leg2.SetTextFont(62);
@@ -186,19 +203,7 @@ leg2.AddEntry(h1,dlab, "pl")
 leg2.AddEntry(h2,nnlab, "pl")
 leg2.Draw("same");
 
-leg1=TLegend(0.5, 0.38, 0.85, 0.6);
-leg1.SetBorderSize(0);
-leg1.SetTextFont(62);
-leg1.SetFillColor(10);
-leg1.SetTextSize(0.04);
-# leg1.AddEntry(f1,s1,"l")
-leg1.Draw("same");
 
-h1.Draw("pe same")
-h2.SetMarkerColor(2)
-h2.SetMarkerStyle(24)
-h2.SetMarkerSize(1.0)
-h2.Draw("pe same")
 
 myText( 0.2,0.84,4,0.04,"antiKT R=0.4 jets")
 

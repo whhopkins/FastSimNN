@@ -94,7 +94,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
 	const double intmove=10000; // number for converting to integer frequencies
-	const double delta=2.0/(nBinsNN-1);
+	const double delta=2.0/nBinsNN;
 	const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta
 	const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi
 
@@ -179,7 +179,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		float eta=etaT;
 		float phi=phiT;
 		float mass=massT;
-		float btag=btagT;
+		float btagFound=-1.0f;
 
 		//if (phiT<0) phiT=abs(phiT)+PI;
 		//if (phi<0) phi=abs(phi)+PI;
@@ -203,8 +203,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
 					float d1=-EtaMax+jjj*slicesEta;
 					float d2=d1+slicesEta;
-					float dmm=d1+0.5*slicesEta;
-					if (etaT>d1  && etaT<=d2)    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
+					//float dmm=d1+0.5*slicesEta;
+					if (etaT>d1  && etaT<=d2) etaINSlice[jjj]=1.0f; //     etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
 					else etaINSlice[jjj]=0;
 				}
 
@@ -212,8 +212,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
 					float d1=-PhiMax+jjj*slicesPhi;
 					float d2=d1+slicesPhi;
-					float dmm=d1+0.5*slicesPhi;
-					if (phiT>d1  && phiT<=d2)    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
+					//float dmm=d1+0.5*slicesPhi;
+					if (phiT>d1  && phiT<=d2)  phiINSlice[jjj]=1.0f; //    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
 					else phiINSlice[jjj]=0;
 				}
 
@@ -349,10 +349,12 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 				output = fann_run(ann5_jets[m], input_eff);
 				float prob_efficiency=output[0];
-				btag=output[1];
+				btagFound=output[1];
+                                //cout << "B-tag=" << input_eff[3] << " " << btagFound << " " << endl;
+
 				h_out5_eff->Fill(prob_efficiency);
-				if (prob_efficiency<-0.8) continue; // skip event since low efficiency
-				h_out6_btag->Fill(btag);
+                                h_out6_btag->Fill(btagFound);
+				if (prob_efficiency<-0.9) continue; // skip event since low efficiency
 
 
 			}
@@ -365,7 +367,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		l.SetPtEtaPhiM(pt,eta,phi,mass);
 		LParticle p;
 		p.SetP(l);
-		if (btag>-0.75) p.SetType(1);
+		if (btagFound>0) p.SetType(1);
 		else p.SetType(0);
 
 		JetsFastNN.push_back(p);
@@ -377,8 +379,10 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			m_nnjeteta.push_back(eta);
 			m_nnjetphi.push_back(phi);
 			m_nnjetm.push_back(mass);
-			if (btag>-0.75)  m_nnjetbtag.push_back(1);
-			else m_nnjetbtag.push_back(0);
+                        int bt=0;
+			if (btagFound>0)  bt=1;
+			m_nnjetbtag.push_back(bt);
+                        // cout << btagFound << " " << bt << endl;
 		}
 
 

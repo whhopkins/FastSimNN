@@ -132,6 +132,16 @@ int main(int argc, char *argv[])
 	TH1D *h_jet1_ptr[nmax_jet];
 	TH1D *h_jet2_res[nmax_jet];
 	TH1D *h_jet2_ptr[nmax_jet];
+        // for b-tagging efficiency
+        TH1D *h_jet1_btag = new TH1D("jet1_btag", "jet1_btag",20,0.0,500.);
+        TH1D *h_jet2_btag =  new TH1D("jet2_btag", "jet1_btag",20,0.0,500.);
+        TH1D *h_jet1_all = new TH1D("jet1_all", "jet1_all",20,0.0,500.);
+        TH1D *h_jet2_all = new TH1D("jet2_all", "jet2_all",20,0.0,500.);
+        h_jet1_btag->Sumw2();
+        h_jet2_btag->Sumw2();
+        h_jet1_all->Sumw2();
+        h_jet2_all->Sumw2();
+
 
 	for (int j=0; j<nmax_jet; j++){
 		int nbins=50+40*j; // increasing number of bins
@@ -189,18 +199,19 @@ int main(int argc, char *argv[])
 			// reco jets
 			double pt_matched1 =-1000;
 			double eta_matched1 =-1000;
+                        double btag_matched1=0;
 			for(unsigned int i = 0; i<jetpt->size(); i++){
 				double phi = jetphi->at(i);
 				double pt =  jetpt->at(i);
 				double eta = jeteta->at(i);
-				double mass =  jetm->at(i);
-				float  btagT=  jetbtag->at(i); // get  b-quark in 100%
+				double mass =jetm->at(i);
+				float  btag= jetbtag->at(i); // get  b-quark in 100%
 				double dEta=etaT-eta;
 				double dPhi=phiT-phi;
 				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
 				h_dR->Fill(dR);
-				if (dR<DeltaR) {pt_matched1=pt; eta_matched1=eta;} 
+				if (dR<DeltaR) {pt_matched1=pt; eta_matched1=eta; btag_matched1=btag;} 
                                 //if (abs(dPhi)<0.15) {eta_matched1=eta;}
 
 			}
@@ -208,18 +219,19 @@ int main(int argc, char *argv[])
 			// NN jets
 			double pt_matched2 =-1000;
 			double eta_matched2 =-1000;
+                        double btag_matched2=0;
 			for(unsigned int i = 0; i<nnjetpt->size(); i++){
 				double phi = nnjetphi->at(i);
 				double pt =  nnjetpt->at(i);
 				double eta = nnjeteta->at(i);
-				double mass =  nnjetm->at(i);
-				float  btagT=  nnjetbtag->at(i); // get  b-quark in 100%
+				double mass =nnjetm->at(i);
+				float  btag= nnjetbtag->at(i); // get  b-quark in 100%
 				double dEta=etaT-eta;
 				double dPhi=phiT-phi;
 				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
 				h_dR->Fill(dR);
-				if (dR<DeltaR) {pt_matched2=pt; eta_matched2=eta; } 
+				if (dR<DeltaR) {pt_matched2=pt; eta_matched2=eta;  btag_matched2=btag;  } 
                                 //if (abs(dPhi)<0.15) {eta_matched2=eta;}
 
 			}
@@ -230,6 +242,9 @@ int main(int argc, char *argv[])
 			// Delphes jets
 			if (pt_matched1>0 && ptT>0) {
 
+                                h_jet1_all->Fill(ptT);
+                                if (btag_matched1 > 0) h_jet1_btag->Fill(ptT);
+ 
 				for (int kk=0; kk<nmax_jet; kk++){
 					double x1=5+pow(2,(0.35*(kk+12)));
 					double x2=10+pow(2,(0.35*(kk+12+1)));
@@ -255,6 +270,10 @@ int main(int argc, char *argv[])
 
 			// NN jets
 			if (pt_matched2>0 && ptT>0) {
+
+                                h_jet2_all->Fill(ptT);
+                                if (btag_matched2 > 0) h_jet2_btag->Fill(ptT);
+
 				for (int kk=0; kk<nmax_jet; kk++){
 					double x1=5+pow(2,(0.35*(kk+12)));
 					double x2=10+pow(2,(0.35*(kk+12+1)));
