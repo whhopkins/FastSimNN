@@ -210,22 +210,22 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         //cout <<  " " << endl;
 
 
-					for (unsigned int jjj=0; jjj<num_output; jjj++) {uoutput1[jjj]=0.0; 
-                                                                                         uoutput2[jjj]=0.0; 
-                                                                                         uoutput3[jjj]=0.0; 
-                                                                                         uoutput4[jjj]=0.0; } 
+					for (int jjj=0; jjj<num_output; jjj++) {uoutput1[jjj]=0; 
+                                                                                uoutput2[jjj]=0; 
+                                                                                uoutput3[jjj]=0; 
+                                                                                uoutput4[jjj]=0; } 
 
 					// bin the resolution plots
-					for (unsigned int jjj=0; jjj<nBinsNN-1; jjj++) {
-						double d1=-1.0+jjj*delta;
-						double d2=d1+delta;
+					for (int jjj=0; jjj<nBinsNN-1; jjj++) {
+						float d1=-1.0+jjj*delta;
+						float d2=d1+delta;
 						if (ptOUT>d1  && ptOUT<=d2)    uoutput1[jjj]=1.0f;
 						if (etaOUT>d1 && etaOUT<=d2)   uoutput2[jjj]=1.0f;
 						if (phiOUT>d1 && phiOUT<=d2)   uoutput3[jjj]=1.0f;
 						if (mOUT>d1   && mOUT<=d2)     uoutput4[jjj]=1.0f;
 					}
 
-					for (unsigned int kk=0; kk<num_input; kk++)  {
+					for (int kk=0; kk<num_input; kk++)  {
                                                        dataset1->input[nn][kk] =uinput[kk];
                                                        dataset2->input[nn][kk] =uinput[kk];
                                                        dataset3->input[nn][kk] =uinput[kk];
@@ -233,7 +233,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         }
 
  
-					for (unsigned int kk=0; kk<num_output; kk++) {
+					for (int kk=0; kk<num_output; kk++) {
                                                         dataset1->output[nn][kk] =uoutput1[kk];
                                                         dataset2->output[nn][kk] =uoutput2[kk];
                                                         dataset3->output[nn][kk] =uoutput3[kk];
