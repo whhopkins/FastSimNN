@@ -89,6 +89,7 @@ class Ana  {
    float jet_etashift;
    float jet_mscale;
    float jet_mshift;
+   int slices_etaphi;
 
    
    int *BinOverTrue; // bins for reco/true distributions 

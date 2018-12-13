@@ -48,6 +48,7 @@ Int_t Ana::Finish() {
    Setting &njet = root.add("Jets", Setting::TypeGroup);
    njet.add("MinPT", Setting::TypeFloat) = minPT;
    njet.add("MaxEta", Setting::TypeFloat) = maxEta;
+   njet.add("SlicesEtaPhi4Input", Setting::TypeInt) = slices_etaphi;
    njet.add("PtBinsForResolution", Setting::TypeInt) = nBinsNN;
    njet.add("EnergyBinsNr", Setting::TypeInt) = nBins;
    njet.add("EnergyScale", Setting::TypeFloat) = jet_escale;

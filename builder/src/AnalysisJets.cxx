@@ -8,11 +8,11 @@ const double PIover2   = 0.5*PI;
 
 Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) {
 
-
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
-	const double delta=2.0/(nBinsNN-1);
-
+	const double delta=2.0/(nBinsNN-1);              // slices for resolution 
+        const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta  
+        const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi  
 
 	for(unsigned int j = 0; j<JetsTrue.size(); j++){
 		LParticle tjet = (LParticle)JetsTrue.at(j);
@@ -139,6 +139,27 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
 					float mIN=-1+(massT/(0.5*dmin));
 
+                                        // sliced input for NN
+                                        float etaINSlice[slices_etaphi-1];
+                                        // bin the resolution plots
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                float d1=-EtaMax+jjj*slicesEta;
+                                                float d2=d1+slicesEta;
+                                                float dmm=d1+0.5*slicesEta;
+                                                if (etaT>d1  && etaT<=d2)    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
+                                                else etaINSlice[jjj]=0;
+                                        }
+
+                                        float phiINSlice[slices_etaphi-1];
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                float d1=-PhiMax+jjj*slicesPhi;
+                                                float d2=d1+slicesPhi;
+                                                float dmm=d1+0.5*slicesPhi;
+                                                if (phiT>d1  && phiT<=d2)    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
+                                                else phiINSlice[jjj]=0;
+                                        }
+
+
 	                   		// assume -1 - 1 range.
 					// scale to avoid sharp behaviour near 0
 					// for pileup we make the distribution narrower and shift to -0.5 to fit to [-1,1]
@@ -164,9 +185,30 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         fann_type uoutput4[num_output];
  
 					uinput[0] = ptIN;
-					uinput[1] = etaIN;
-					uinput[2] = phiIN;
-					uinput[3] = mIN;
+                                        uinput[1] = mIN;
+                                        uinput[2] = etaIN;
+                                        uinput[3] = phiIN;
+
+                                        // eta and phi are sliced for ANN
+                                        // this is needed to reproduce spacial defects 
+                                        int shift=4; 
+                                        int kshift=0; 
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                uinput[shift+kshift] =  etaINSlice[jjj];
+                                                kshift++;
+                                        }
+                                        shift=shift+slices_etaphi-1;
+                                        kshift=0;
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                uinput[shift+kshift] =  phiINSlice[jjj];
+                                                kshift++;
+                                        }
+
+                                        // debug input
+                                        //cout <<  " " << endl;
+                                        //for (int jjj=0; jjj<num_input; jjj++) {cout << uinput[jjj] << " ";}
+                                        //cout <<  " " << endl;
+
 
 					for (unsigned int jjj=0; jjj<num_output; jjj++) {uoutput1[jjj]=0.0; 
                                                                                          uoutput2[jjj]=0.0; 

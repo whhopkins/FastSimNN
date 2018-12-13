@@ -59,6 +59,7 @@ Int_t Ana::Init() {
 	                && njets.lookupValue("MinPT", minPT)
 	                && njets.lookupValue("MaxEta", maxEta)
 	                && njets.lookupValue("PtBinsForResolution", nBinsNN)
+                        && njets.lookupValue("SlicesEtaPhi4Input", slices_etaphi)
                         && njets.lookupValue("EnergyScale",jet_escale)
                         && njets.lookupValue("EnergyShift",jet_eshift)
                         && njets.lookupValue("MassScale",jet_mscale)
@@ -71,14 +72,15 @@ Int_t Ana::Init() {
 		exit(0);
 	}
 
-
+         cout << "############# ANN settingsi ############" << endl;
          cout << "EnergyScale=" << jet_escale << endl;
          cout << "EnergyShift=" << jet_eshift << endl;
          cout << "MassScale=" << jet_mscale << endl;
          cout << "MassShift=" << jet_mshift << endl;
          cout << "EtaScale=" << jet_etascale << endl;
          cout << "EtaShift=" << jet_etashift << endl;
-
+         cout << "SlicesEtaPhi4Input=" << slices_etaphi << endl;
+          
 
         if (jet_escale == 0 || jet_mscale == 0 || jet_etascale == 0){
          cout << "Error: failed to read scale factors from configuration file !" << endl;
@@ -97,6 +99,7 @@ Int_t Ana::Init() {
 
         // number of bins -1 
 	num_output= nBinsNN-1;
+
 
 	mcEventWeight=1.0;
 
