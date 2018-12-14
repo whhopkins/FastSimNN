@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 	std::vector<Double32_t> *nnjeteta=0; //!
 	std::vector<Double32_t> *nnjetphi=0; //!
 	std::vector<Double32_t> *nnjetm=0; //!
-	std::vector<Double32_t> *nnjetbtag=0; //!
+	std::vector<Int_t>      *nnjetbtag=0; //!
 
 	TBranch        *b_jetpt;
 	TBranch        *b_jeteta;

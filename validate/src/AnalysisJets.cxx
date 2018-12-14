@@ -131,7 +131,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
 		double massT =  L2.M();
-		float  btagT =  (float)tjet.GetType(); // fraction of b-quark momenta in 100%
+		double btagT =  (double)tjet.GetType(); // fraction of b-quark momenta in 100%
 
 		if (ptT>minPT && abs(etaT)<maxEta) {
 			m_gjetpt.push_back(ptT);
@@ -181,7 +181,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		float eta=etaT;
 		float phi=phiT;
 		float mass=massT;
-		float btagFound=-1.0f;
+		double btagFound=-1.0;
 
 		//if (phiT<0) phiT=abs(phiT)+PI;
 		//if (phi<0) phi=abs(phi)+PI;
@@ -370,18 +370,17 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				input_eff[0] = ptIN;
 				input_eff[1] = etaIN;
 				input_eff[2] = phiIN;
-				input_eff[3] = (float)(btagT/100.) - 1; // normalize  -1 - 0
+				input_eff[3] = (float)( (btagT/100.)) - 1; // normalize  -1 - 0
 				if (input_eff[3]>1) input_eff[3]=1;
 
 				output = fann_run(ann5_jets[m], input_eff);
 				float prob_efficiency=output[0];
-				btagFound=output[1];
+				btagFound=(double)output[1];
                                 //cout << "B-tag=" << input_eff[3] << " " << btagFound << " " << endl;
 
 				h_out5_eff->Fill(prob_efficiency);
-                                h_out6_btag->Fill(btagFound);
 				if (prob_efficiency<-0.9) continue; // skip event since low efficiency
-
+                                h_out6_btag->Fill(btagFound);
 
 			}
 		}
@@ -393,7 +392,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		l.SetPtEtaPhiM(pt,eta,phi,mass);
 		LParticle p;
 		p.SetP(l);
-		if (btagFound>-0.9f) p.SetType(1);
+		if (btagFound > -0.95) p.SetType(1);
 		else p.SetType(0);
 
 		JetsFastNN.push_back(p);
@@ -406,7 +405,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			m_nnjetphi.push_back(phi);
 			m_nnjetm.push_back(mass);
                         int bt=0;
-			if (btagFound> -0.9f)  bt=1;
+			if (btagFound > -0.95)  bt=1;
 			m_nnjetbtag.push_back(bt);
                         // cout << btagFound << " " << bt << endl;
 		}

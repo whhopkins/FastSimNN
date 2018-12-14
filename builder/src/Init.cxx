@@ -1,4 +1,4 @@
-// S.Chekanov
+// S.Chekanov (ANL)
 
 #include "Ana.h"
 
@@ -7,7 +7,7 @@ string getEnvVar( std::string const & key ) {
 	return val == NULL ? std::string("") : std::string(val);
 }
 
-// initialize your calculations (histograms)
+// initialize  the code 
 Int_t Ana::Init() {
 
         minPT=25; 
@@ -18,18 +18,14 @@ Int_t Ana::Init() {
 	MuPileup=0;
 
 	mcEventWeight=1.0;
-	double xBins[] = {minPT,50,75,100,125,150,175,200,225,250,275,300,325,350,375,400};
-	//double xBins[] = {minPT,50,100,200,400,600,800,1000,1200,1400,1600,1800,2000,2400,2800,3200};
-	//const int nxBins=sizeof(xBins)/sizeof(double);
+	double xBins[] = {minPT,50,75,100,125,150,175,200,225,250,275,300,325,350,375,400, 450, 500, 550, 600, 700, 800, 900, 1000, 1200, 1400, 1600, 1800, 2000, 2400, 2800, 3200, 3600, 4000};
 
-
-        // 16 bins
+        // map bins 
 	for (int m=0; m<nBins; m++){
 		eBins[m]=xBins[m];
 	};
 
 	cout << " ###  Initialize ANN in Nr bins=" <<nBins-1<<  endl;
-
 
         // 15 NN 
 	for (int m=0; m<nBins-1; m++){

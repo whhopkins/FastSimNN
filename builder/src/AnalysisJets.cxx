@@ -1,5 +1,6 @@
-#include "Ana.h"
+// S.Chekanov (ANL)
 
+#include "Ana.h"
 
 const double PI   = TMath::Pi();
 const double PI2  = 2*PI;
@@ -21,7 +22,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
 		double massT =  L2.M();
-                float  btagT=(float)tjet.GetType(); // get  b-quark in 100%
+                double btagT=(double)tjet.GetType(); // get  b-quark in 100%
 
 		for (int m=0; m<nBins-1; m++){
 			double dmin=eBins[m];
@@ -312,7 +313,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					uinput[0]=ptIN;
 					uinput[1]=etaIN;
 					uinput[2]=phiIN;
-                                        uinput[3]=(float)(btagT/100.) - 1; // normalize  -1 - 0 
+                                        uinput[3]=(float)((btagT/100.) - 1); // normalize  -1 - 0 
                                         if (uinput[3]>1) uinput[3]=1;
 
 					uoutput[0]=(float)match;

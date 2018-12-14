@@ -204,7 +204,7 @@ int main(int argc, char *argv[])
 
 
                                 // get fraction of b-quark inside this jet (in %) 
-                                float btag_fracmom=0;
+                                double btag_fracmom=0;
                                 for(int i1 = 0; i1 < branchParticle->GetEntriesFast(); ++i1) {
                                         GenParticle *ph = (GenParticle*) branchParticle->At(i1);
                                         int    pdgCode = TMath::Abs(ph->PID);

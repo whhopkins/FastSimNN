@@ -51,9 +51,9 @@ class Ana  {
 
    int  MuPileup; // number of pileup (mu)
    static const int num_threads = 16; // number of threads 
-   static const int nBins=16;        // number of energy bins 
-   static const int nBatch=100000; // number of events in batches for training
-   static const int nEpoch=100;    // max number of epochs 
+   static const int nBins=34;      // number of energy bins 
+   static const int nBatch=150000; // number of events in batches for training
+   static const int nEpoch=150;    // max number of epochs 
    static const int nBinsNN=201;   // number of bins for resolution plots
    static const int MinEntries=20; // min nr of entries in pT for NN training (per bunch);
    static const int num_layers = 3;
