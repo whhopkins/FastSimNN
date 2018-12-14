@@ -75,7 +75,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			foutput_jets.push_back(output);
 		}
 
-		// statistics limitted for efficiency
+		// statistics limitted for efficiency. No matching 
 		vector<float> input2;
 		vector<float> output2;
 		input2.push_back((float)ptT);
@@ -285,7 +285,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                         fann_destroy_train(dataset3) ; // clear
                         fann_destroy_train(dataset4) ; // clear
 
-			// empty data
+			// empty data for feature NN 
 			fann_train_data *  dataset_eff=  fann_create_train(eventsBins[m], num_input_eff, num_output_eff);
 			nn=0;
     			cout << "\n  -> Training for efficiency  = " << m << " sample size=" << finput_jets_eff.size() << endl;
@@ -316,14 +316,58 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         uinput[3]=(float)((btagT/100.) - 1); // normalize  -1 - 0 
                                         if (uinput[3]>1.0f) uinput[3]=1.0f;
 
+                                       // sliced input for NN
+                                        float etaINSlice[slices_etaphi-1];
+                                        // bin the resolution plots
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                float d1=-EtaMax+jjj*slicesEta;
+                                                float d2=d1+slicesEta;
+                                                //float dmm=d1+0.5*slicesEta;
+                                                if (etaT>d1  && etaT<=d2) etaINSlice[jjj]=1.0f; //    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
+                                                else etaINSlice[jjj]=0;
+                                        }
+
+                                        float phiINSlice[slices_etaphi-1];
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                float d1=-PhiMax+jjj*slicesPhi;
+                                                float d2=d1+slicesPhi;
+                                                //float dmm=d1+0.5*slicesPhi;
+                                                if (phiT>d1  && phiT<=d2) phiINSlice[jjj]=1.0f; //    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
+                                                else phiINSlice[jjj]=0;
+                                        }
+
+
+                                        // eta and phi are sliced for ANN
+                                        // this is needed to reproduce spacial defects 
+                                        int shift=4;
+                                        int kshift=0;
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                uinput[shift+kshift] =  etaINSlice[jjj];
+                                                kshift++;
+                                        }
+                                        shift=shift+slices_etaphi-1;
+                                        kshift=0;
+                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+                                                uinput[shift+kshift] =  phiINSlice[jjj];
+                                                kshift++;
+                                        }
+
+
+                                        //debug input 
+                                        //cout <<  " " << endl;
+                                        //for (int jjj=0; jjj<num_input_eff; jjj++) {cout << uinput[jjj] << " ";}
+                                        //cout <<  " " << endl;
+
+
+                                        // outputs
 					uoutput[0]=(float)match;
                                         uoutput[1]=(float)btag;
 
                                         // debug
                                         //if (uoutput[0]>0 && btag>0) cout << "In " << uinput[3]  << "  out=" << uoutput[1] << endl;
 
-					for (unsigned int kk=0; kk<4; kk++)  dataset_eff->input[nn][kk] =uinput[kk];
-					for (unsigned int kk=0; kk<2; kk++)  dataset_eff->output[nn][kk] =uoutput[kk];
+					for (unsigned int kk=0; kk<num_input_eff; kk++)  dataset_eff->input[nn][kk] =uinput[kk];
+					for (unsigned int kk=0; kk<num_output_eff; kk++)  dataset_eff->output[nn][kk] =uoutput[kk];
 
 					nn++;
 				} // end energy range

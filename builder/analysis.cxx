@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	ana.Init(); // initialize histogram and global variable
+	ana.Init(); // initialize histograms and global variables for jets 
 	const int Nfiles = ana.ntup.size();
 	cout << " -> No of files to read:" << Nfiles << endl;
 
@@ -211,7 +211,7 @@ int main(int argc, char *argv[])
                                         if (abs(dphi)>PI) dphi=PI2-abs(dphi);
                                         double dR=sqrt(deta*deta + dphi*dphi);
                                         double rat=(ph->PT / jet->PT); 
-                                        if (dR<0.4 && rat>0.25) btag_fracmom= 100 * rat;
+                                        if (dR<0.4 && rat>0.3) btag_fracmom= 100 * rat;
                                 }
 
                                 //if (btag_fracmom>0) cout << btag_fracmom << endl;

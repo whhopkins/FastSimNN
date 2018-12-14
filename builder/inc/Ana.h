@@ -40,14 +40,15 @@ class Ana  {
           virtual ~Ana();
           Ana();
           int nevv; 
-	  int  Init();
           int  Finish();
+          int  Init();
+
+          // jets 
           int  AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco);
 
    vector <string> ntup;       // ntuple list
    TH1D *h_debug ;             // global debug file
    int   MaxEvents;            // max number of events
-
 
    int  MuPileup; // number of pileup (mu)
    static const int num_threads = 16; // number of threads 
@@ -65,7 +66,7 @@ class Ana  {
    double MSESTOP;  // when stop training..
 
    // number of divisions in eta and phi to reproduce spacial structure  
-   static const int slices_etaphi=60;
+   static const int slices_etaphi=30;
 
    // NN structure for resolution 
    // pT, eta,phi(slices), mass 
@@ -73,18 +74,18 @@ class Ana  {
    static const int num_output=nBinsNN-1;
 
    // this is input and output for NN for efficiency
-   static const int num_input_eff=4;
+   static const int num_input_eff=num_input;
    static const int num_output_eff=2;
 
    bool firstTime[nBins-1]; // if false, continue training;
-   // if ANN is found, we will read the old one. See src/Init.cxx
+   // if ANN is found, we will read the old one. 
    double eBins[nBins];
    // for correction
    vector<vector<float>> finput_jets;
    vector<vector<float>> foutput_jets;
    // for efficiency
-   vector<vector<float>>   finput_jets_eff;
-   vector<vector<float>>   foutput_jets_eff;
+   vector<vector<float>> finput_jets_eff;
+   vector<vector<float>> foutput_jets_eff;
 
    
    double initialRME[nBins-1];
@@ -97,7 +98,6 @@ class Ana  {
 
    struct fann *ann2_jets[nBins-1];
    string ann2_jets_name[nBins-1];
-
 
    struct fann *ann3_jets[nBins-1];
    string ann3_jets_name[nBins-1];

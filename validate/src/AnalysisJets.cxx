@@ -362,19 +362,16 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 				if (phi>PI || phi<-PI) phi=phiT; // overcorrection!
 
+                                // ----------------- feature NN starts here --------------------
+                                // structure of input the same but mass is replaced with b-tagging
+                                uinput[3] = (float)((btagT/100.) - 1); // normalize  -1 - 0
+                                if (uinput[3]>1.0f)  uinput[3]=1.0f;
 
-				// feature NN
-				fann_type input_eff[num_input_eff];
-				input_eff[0] = ptIN;
-				input_eff[1] = etaIN;
-				input_eff[2] = phiIN;
-				input_eff[3] = (float)((btagT/100.) - 1); // normalize  -1 - 0
-				if (input_eff[3]>1.0f) input_eff[3]=1.0f;
 
-				fann_type * output5 = fann_run(ann5_jets[m], input_eff);
+				fann_type * output5 = fann_run(ann5_jets[m], uinput);
 				float prob_efficiency=output5[0];
 				btagFound=(double)output5[1];
-                                // cout << "B-tag NN input=" << input_eff[3] << " btagT=" << btagT << " NN out=" << btagFound << " " << endl;
+                                //cout << "B-tag NN input=" << uinput[3] << " btagT=" << btagT << " NN out=" << btagFound << " " << endl;
 
 				h_out5_eff->Fill(prob_efficiency);
 				//if (prob_efficiency<-0.9) continue; // skip event since low efficiency
@@ -390,7 +387,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		l.SetPtEtaPhiM(pt,eta,phi,mass);
 		LParticle p;
 		p.SetP(l);
-		if (btagFound > -0.9) p.SetType(1);
+		if (btagFound > 0) p.SetType(1);
 		else p.SetType(0);
 
 		JetsFastNN.push_back(p);
@@ -403,7 +400,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			m_nnjetphi.push_back(phi);
 			m_nnjetm.push_back(mass);
                         int bt=0;
-			if (btagFound > -0.9)  bt=1;
+			if (btagFound > 0)  bt=1;
 			m_nnjetbtag.push_back(bt);
                         // cout << btagFound << " " << bt << endl;
 		}

@@ -214,7 +214,7 @@ int main(int argc, char *argv[])
                                         if (abs(dphi)>PI) dphi=PI2-abs(dphi);
                                         double dR=sqrt(deta*deta + dphi*dphi);
                                         double rat=(ph->PT / jet->PT);      
-                                        if (dR<0.4 && rat>0.25) btag_fracmom= 100 * rat;
+                                        if (dR<0.4 && rat>0.3) btag_fracmom= 100 * rat;
                                 }
 
 
