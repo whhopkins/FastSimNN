@@ -48,9 +48,6 @@
 #include "fann.h"
 #include "parallel_fann.h"
 
-const double PI   = TMath::Pi();
-const double PI2  = 2*PI;
-
 using namespace std;
 extern vector<string> getfiles(char * directory);
 
@@ -130,6 +127,12 @@ int main(int argc, char *argv[])
 
 			vector<LParticle> JetsReco;
 			vector<LParticle> JetsTrue;
+                        vector<LParticle> MuonsReco;
+                        vector<LParticle> ElectronsReco;
+                        vector<LParticle> PhotonsReco;
+                        vector<LParticle> MuonsTrue;
+                        vector<LParticle> ElectronsTrue;
+                        vector<LParticle> PhotonsTrue;
 
 
 			for(int i = 0; i < branchJet->GetEntriesFast(); ++i) {
@@ -251,12 +254,78 @@ int main(int argc, char *argv[])
 			}
 
 
-			// main event loop
-			ana.AnalysisJets(JetsTrue,JetsReco);  // analysis at the end
 
 
+
+                        // truth level muons, electrons, photons
+                            for(int i = 0; i < branchParticle->GetEntriesFast(); ++i) {
+                                        GenParticle *ph = (GenParticle*) branchParticle->At(i);
+                                        int    pdgCode = TMath::Abs(ph->PID);
+                                        if (pdgCode == 13) {
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetP(l);
+                                        MuonsTrue.push_back(p);
+                                        }
+
+                                        if (pdgCode == 11) {
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetP(l);
+                                        ElectronsTrue.push_back(p);
+                                        }
+
+                                        if (pdgCode == 22) {
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetP(l);
+                                        PhotonsTrue.push_back(p);
+                                        }
+
+                                }
+
+
+
+                              for(int i = 0; i < branchMuon->GetEntriesFast(); ++i) {
+                                        Muon *ph = (Muon*) branchMuon->At(i);
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetP(l);
+                                        MuonsReco.push_back(p);
+                                }
+
+
+
+                              for(int i = 0; i < branchElectron->GetEntriesFast(); ++i) {
+                                        Electron *ph = (Electron*) branchElectron->At(i);
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetP(l);
+                                        ElectronsReco.push_back(p);
+                                }
+
+
+                              for(int i = 0; i < branchPhoton->GetEntriesFast(); ++i) {
+                                        Photon *ph = (Photon*) branchPhoton->At(i);
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetP(l);
+                                        PhotonsReco.push_back(p);
+                                }
+
+			// main event loop and training for all objects
+			ana.AnalysisJets(JetsTrue,JetsReco); 
+                        ana.AnalysisMuons(MuonsTrue,MuonsReco);
+                        ana.AnalysisElectrons(ElectronsTrue,ElectronsReco);  
+                        ana.AnalysisPhotons(PhotonsTrue,PhotonsReco); 
+                        ana.nevv++;
 		}
-
 
 	}// end loop over files
 

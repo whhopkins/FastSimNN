@@ -32,13 +32,34 @@ Int_t Ana::Init() {
 		firstTime[m]=true;
 		initialRME[m]=0;
 		finalRME[m]=0;
-		eventsBins[m]=0; // Nr of events
+		eventsJetBins[m]=0; // Nr of events
+                eventsMuonBins[m]=0; // Nr of events
+                eventsElectronBins[m]=0; // Nr of events
+                eventsPhotonBins[m]=0; // Nr of events
+
 		ann1_jets_name[m]="out_ann/ann1_jet_"+std::to_string(m)+".net";
                 ann2_jets_name[m]="out_ann/ann2_jet_"+std::to_string(m)+".net";
                 ann3_jets_name[m]="out_ann/ann3_jet_"+std::to_string(m)+".net";
                 ann4_jets_name[m]="out_ann/ann4_jet_"+std::to_string(m)+".net";
                 ann5_jets_name[m]="out_ann/ann5_jet_"+std::to_string(m)+".net";
 
+                ann1_muons_name[m]="out_ann/ann1_muon_"+std::to_string(m)+".net";
+                ann2_muons_name[m]="out_ann/ann2_muon_"+std::to_string(m)+".net";
+                ann3_muons_name[m]="out_ann/ann3_muon_"+std::to_string(m)+".net";
+                ann4_muons_name[m]="out_ann/ann4_muon_"+std::to_string(m)+".net";
+                ann5_muons_name[m]="out_ann/ann5_muon_"+std::to_string(m)+".net";
+
+                ann1_electrons_name[m]="out_ann/ann1_electron_"+std::to_string(m)+".net";
+                ann2_electrons_name[m]="out_ann/ann2_electron_"+std::to_string(m)+".net";
+                ann3_electrons_name[m]="out_ann/ann3_electron_"+std::to_string(m)+".net";
+                ann4_electrons_name[m]="out_ann/ann4_electron_"+std::to_string(m)+".net";
+                ann5_electrons_name[m]="out_ann/ann5_electron_"+std::to_string(m)+".net";
+
+                ann1_photons_name[m]="out_ann/ann1_photon_"+std::to_string(m)+".net";
+                ann2_photons_name[m]="out_ann/ann2_photon_"+std::to_string(m)+".net";
+                ann3_photons_name[m]="out_ann/ann3_photon_"+std::to_string(m)+".net";
+                ann4_photons_name[m]="out_ann/ann4_photon_"+std::to_string(m)+".net";
+                ann5_photons_name[m]="out_ann/ann5_photon_"+std::to_string(m)+".net";
 
 
 		// if 1st ANN is found, we will read previous NN
@@ -50,7 +71,7 @@ Int_t Ana::Init() {
 
 
 		if (firstTime[m]) {
-			cout << "   - Create new ANN"<< endl;
+			cout << "   - Create new Jet ANN"<< endl;
 			ann1_jets[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
 			fann_set_activation_function_hidden(ann1_jets[m], FANN_SIGMOID_SYMMETRIC);
 			fann_set_activation_function_output(ann1_jets[m], FANN_SIGMOID_SYMMETRIC);
@@ -72,12 +93,94 @@ Int_t Ana::Init() {
                         fann_randomize_weights(ann4_jets[m],-1.0,1.0);
 
                         // feature or efficiency net
-                        int num_layers_eff=3;
-                        int num_neurons_hidden_eff=10;
                         ann5_jets[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
                         fann_set_activation_function_hidden(ann5_jets[m], FANN_SIGMOID_SYMMETRIC);
                         fann_set_activation_function_output(ann5_jets[m], FANN_SIGMOID_SYMMETRIC);
                         fann_randomize_weights(ann5_jets[m],-1.0,1.0);
+
+
+                        cout << "   - Create new Muon ANN"<< endl;
+                        ann1_muons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann1_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann1_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann1_muons[m],-1.0,1.0);
+
+                        ann2_muons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann2_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann2_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann2_muons[m],-1.0,1.0);
+
+                        ann3_muons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann3_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann3_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann3_muons[m],-1.0,1.0);
+
+                        ann4_muons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann4_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann4_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann4_muons[m],-1.0,1.0);
+
+                        // feature or efficiency net
+                        ann5_muons[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
+                        fann_set_activation_function_hidden(ann5_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann5_muons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann5_muons[m],-1.0,1.0);
+
+
+                        cout << "   - Create new Electron ANN"<< endl;
+                        ann1_electrons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann1_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann1_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann1_electrons[m],-1.0,1.0);
+
+                        ann2_electrons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann2_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann2_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann2_electrons[m],-1.0,1.0);
+
+                        ann3_electrons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann3_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann3_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann3_electrons[m],-1.0,1.0);
+
+                        ann4_electrons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann4_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann4_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann4_electrons[m],-1.0,1.0);
+
+                        // feature or efficiency net
+                        ann5_electrons[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
+                        fann_set_activation_function_hidden(ann5_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann5_electrons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann5_electrons[m],-1.0,1.0);
+
+
+                        cout << "   - Create new Photon ANN"<< endl;
+                        ann1_photons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann1_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann1_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann1_photons[m],-1.0,1.0);
+
+                        ann2_photons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann2_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann2_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann2_photons[m],-1.0,1.0);
+
+                        ann3_photons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann3_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann3_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann3_photons[m],-1.0,1.0);
+
+                        ann4_photons[m] = fann_create_standard(num_layers, num_input, num_neurons_hidden_1, num_output);
+                        fann_set_activation_function_hidden(ann4_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann4_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann4_photons[m],-1.0,1.0);
+
+                        // feature or efficiency net
+                        ann5_photons[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
+                        fann_set_activation_function_hidden(ann5_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_set_activation_function_output(ann5_photons[m], FANN_SIGMOID_SYMMETRIC);
+                        fann_randomize_weights(ann5_photons[m],-1.0,1.0);
 
 		}
 
@@ -89,6 +192,24 @@ Int_t Ana::Init() {
                         ann3_jets[m] = fann_create_from_file(ann3_jets_name[m].c_str());
                         ann4_jets[m] = fann_create_from_file(ann4_jets_name[m].c_str());
                         ann5_jets[m] = fann_create_from_file(ann5_jets_name[m].c_str());
+
+                        ann1_muons[m] = fann_create_from_file(ann1_muons_name[m].c_str());
+                        ann2_muons[m] = fann_create_from_file(ann2_muons_name[m].c_str());
+                        ann3_muons[m] = fann_create_from_file(ann3_muons_name[m].c_str());
+                        ann4_muons[m] = fann_create_from_file(ann4_muons_name[m].c_str());
+                        ann5_muons[m] = fann_create_from_file(ann5_muons_name[m].c_str());
+
+                        ann1_electrons[m] = fann_create_from_file(ann1_electrons_name[m].c_str());
+                        ann2_electrons[m] = fann_create_from_file(ann2_electrons_name[m].c_str());
+                        ann3_electrons[m] = fann_create_from_file(ann3_electrons_name[m].c_str());
+                        ann4_electrons[m] = fann_create_from_file(ann4_electrons_name[m].c_str());
+                        ann5_electrons[m] = fann_create_from_file(ann5_electrons_name[m].c_str());
+
+                        ann1_photons[m] = fann_create_from_file(ann1_photons_name[m].c_str());
+                        ann2_photons[m] = fann_create_from_file(ann2_photons_name[m].c_str());
+                        ann3_photons[m] = fann_create_from_file(ann3_photons_name[m].c_str());
+                        ann4_photons[m] = fann_create_from_file(ann4_photons_name[m].c_str());
+                        ann5_photons[m] = fann_create_from_file(ann5_photons_name[m].c_str());
  
 		}
 
@@ -190,7 +311,13 @@ Int_t Ana::Init() {
                           jet_etashift=0.0;
                          }
 
-
+      // scaling for EM objects (muons, electrons, photons) 
+      em_escale=10.0;
+      em_eshift=0.0;
+      em_mscale=1.0;
+      em_mshift=0.0;
+      em_etascale=10.0;
+      em_etashift=0.0;
 
 
 	return 0;

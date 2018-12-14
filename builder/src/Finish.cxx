@@ -61,6 +61,28 @@ Int_t Ana::Finish() {
    Setting &array = njet.add("PtBins", Setting::TypeArray);
    for(int i = 0; i <  nBins; ++i) array.add(Setting::TypeFloat) = eBins[i]; 
 
+
+   // configuration for jets
+   Setting &mu = root.add("EMObjects", Setting::TypeGroup);
+   mu.add("MinPT", Setting::TypeFloat) = minPT;
+   mu.add("MaxEta", Setting::TypeFloat) = maxEta;
+   mu.add("SlicesEtaPhi4Input", Setting::TypeInt) = slices_etaphi;
+   mu.add("PtBinsForResolution", Setting::TypeInt) = nBinsNN;
+   mu.add("EnergyBinsNr", Setting::TypeInt) = nBins;
+   mu.add("EnergyScale", Setting::TypeFloat) = em_escale;
+   mu.add("EnergyShift", Setting::TypeFloat) = em_eshift;
+   mu.add("EtaScale", Setting::TypeFloat) = em_etascale;
+   mu.add("EtaShift", Setting::TypeFloat) = em_etashift;
+   mu.add("MassScale", Setting::TypeFloat) = em_mscale;
+   mu.add("MassShift", Setting::TypeFloat) = em_mshift;
+   // bins
+   Setting &array1 = mu.add("PtBins", Setting::TypeArray);
+   for(int i = 0; i <  nBins; ++i) array1.add(Setting::TypeFloat) = eBins[i];
+
+
+
+
+
     
    try
   {
@@ -97,16 +119,55 @@ Int_t Ana::Finish() {
               fann_save(ann3_jets[m],  ann3_jets_name[m].c_str());
               fann_save(ann4_jets[m],  ann4_jets_name[m].c_str());
               fann_save(ann5_jets[m],  ann5_jets_name[m].c_str());
+              // muons
+              fann_save(ann1_muons[m],  ann1_muons_name[m].c_str());
+              fann_save(ann2_muons[m],  ann2_muons_name[m].c_str());
+              fann_save(ann3_muons[m],  ann3_muons_name[m].c_str());
+              fann_save(ann4_muons[m],  ann4_muons_name[m].c_str());
+              fann_save(ann5_muons[m],  ann5_muons_name[m].c_str());
+              // electrons 
+              fann_save(ann1_electrons[m],  ann1_electrons_name[m].c_str());
+              fann_save(ann2_electrons[m],  ann2_electrons_name[m].c_str());
+              fann_save(ann3_electrons[m],  ann3_electrons_name[m].c_str());
+              fann_save(ann4_electrons[m],  ann4_electrons_name[m].c_str());
+              fann_save(ann5_electrons[m],  ann5_electrons_name[m].c_str());
+              // photons 
+              fann_save(ann1_photons[m],  ann1_photons_name[m].c_str());
+              fann_save(ann2_photons[m],  ann2_photons_name[m].c_str());
+              fann_save(ann3_photons[m],  ann3_photons_name[m].c_str());
+              fann_save(ann4_photons[m],  ann4_photons_name[m].c_str());
+              fann_save(ann5_photons[m],  ann5_photons_name[m].c_str());
+
+
    };
 
    // for other samples save only small RMS NN
    if (firstTime[m] == false) { 
-       if (mse>0 && mse < 1) {
+       if (mse>0 && mse < 0.01) {
               fann_save(ann1_jets[m],  ann1_jets_name[m].c_str());
               fann_save(ann2_jets[m],  ann2_jets_name[m].c_str());
               fann_save(ann3_jets[m],  ann3_jets_name[m].c_str());
               fann_save(ann4_jets[m],  ann4_jets_name[m].c_str());
               fann_save(ann5_jets[m],  ann5_jets_name[m].c_str());
+
+              fann_save(ann1_muons[m],  ann1_muons_name[m].c_str());
+              fann_save(ann2_muons[m],  ann2_muons_name[m].c_str());
+              fann_save(ann3_muons[m],  ann3_muons_name[m].c_str());
+              fann_save(ann4_muons[m],  ann4_muons_name[m].c_str());
+              fann_save(ann5_muons[m],  ann5_muons_name[m].c_str());
+
+              fann_save(ann1_electrons[m],  ann1_electrons_name[m].c_str());
+              fann_save(ann2_electrons[m],  ann2_electrons_name[m].c_str());
+              fann_save(ann3_electrons[m],  ann3_electrons_name[m].c_str());
+              fann_save(ann4_electrons[m],  ann4_electrons_name[m].c_str());
+              fann_save(ann5_electrons[m],  ann5_electrons_name[m].c_str());
+
+              fann_save(ann1_photons[m],  ann1_photons_name[m].c_str());
+              fann_save(ann2_photons[m],  ann2_photons_name[m].c_str());
+              fann_save(ann3_photons[m],  ann3_photons_name[m].c_str());
+              fann_save(ann4_photons[m],  ann4_photons_name[m].c_str());
+              fann_save(ann5_photons[m],  ann5_photons_name[m].c_str());
+ 
         } else { 
              cout << m << " Do not save   with RME=" << mse << endl;
         }
@@ -117,6 +178,24 @@ Int_t Ana::Finish() {
    fann_destroy(ann3_jets[m]);
    fann_destroy(ann4_jets[m]);
    fann_destroy(ann5_jets[m]);
+
+   fann_destroy(ann1_muons[m]);
+   fann_destroy(ann2_muons[m]);
+   fann_destroy(ann3_muons[m]);
+   fann_destroy(ann4_muons[m]);
+   fann_destroy(ann5_muons[m]);
+
+   fann_destroy(ann1_electrons[m]);
+   fann_destroy(ann2_electrons[m]);
+   fann_destroy(ann3_electrons[m]);
+   fann_destroy(ann4_electrons[m]);
+   fann_destroy(ann5_electrons[m]);
+
+   fann_destroy(ann1_photons[m]);
+   fann_destroy(ann2_photons[m]);
+   fann_destroy(ann3_photons[m]);
+   fann_destroy(ann4_photons[m]);
+   fann_destroy(ann5_photons[m]);
 
     };
 
