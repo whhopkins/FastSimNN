@@ -314,7 +314,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					uinput[1]=etaIN;
 					uinput[2]=phiIN;
                                         uinput[3]=(float)((btagT/100.) - 1); // normalize  -1 - 0 
-                                        if (uinput[3]>1) uinput[3]=1;
+                                        if (uinput[3]>1.0f) uinput[3]=1.0f;
 
 					uoutput[0]=(float)match;
                                         uoutput[1]=(float)btag;
@@ -329,7 +329,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				} // end energy range
 			}// end of dataset
 
-			for (int e=0; e<nEpoch*4; e++) {
+			for (int e=0; e<nEpoch*2; e++) {
                             float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann5_jets[m], dataset_eff, num_threads) : fann_train_epoch(ann5_jets[m], dataset_eff);
 
 			     if (e%100==0 || (e<10)) cout << "bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;

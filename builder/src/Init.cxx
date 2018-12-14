@@ -73,7 +73,7 @@ Int_t Ana::Init() {
 
                         // feature or efficiency net
                         int num_layers_eff=3;
-                        int num_neurons_hidden_eff=5;
+                        int num_neurons_hidden_eff=10;
                         ann5_jets[m] = fann_create_standard(num_layers_eff, num_input_eff, num_neurons_hidden_eff, num_output_eff);
                         fann_set_activation_function_hidden(ann5_jets[m], FANN_SIGMOID_SYMMETRIC);
                         fann_set_activation_function_output(ann5_jets[m], FANN_SIGMOID_SYMMETRIC);

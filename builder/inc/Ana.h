@@ -69,11 +69,11 @@ class Ana  {
 
    // NN structure for resolution 
    // pT, eta,phi(slices), mass 
-   static const int num_input=1+2*slices_etaphi+1;
+   static const int num_input=2+2*slices_etaphi;
    static const int num_output=nBinsNN-1;
 
    // this is input and output for NN for efficiency
-   static const int num_input_eff=1+2*slices_etaphi+1;
+   static const int num_input_eff=4;
    static const int num_output_eff=2;
 
    bool firstTime[nBins-1]; // if false, continue training;
