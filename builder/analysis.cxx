@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	ana.Init(); // initialize histograms and global variables for jets 
+	ana.Init(); // initialize histograms and global variables for jets
 	const int Nfiles = ana.ntup.size();
 	cout << " -> No of files to read:" << Nfiles << endl;
 
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
 		TClonesArray *branchElectron = treeReader->UseBranch("Electron");
 		TClonesArray *branchMuon = treeReader->UseBranch("Muon");
 		TClonesArray *branchPhoton = treeReader->UseBranch("Photon");
-                TClonesArray *branchParticle = treeReader->UseBranch("Particle");
+		TClonesArray *branchParticle = treeReader->UseBranch("Particle");
 
 		// Loop over all events
 		for(Int_t entry = 0; entry < numberOfEntries; ++entry)
@@ -127,19 +127,19 @@ int main(int argc, char *argv[])
 
 			vector<LParticle> JetsReco;
 			vector<LParticle> JetsTrue;
-                        vector<LParticle> MuonsReco;
-                        vector<LParticle> ElectronsReco;
-                        vector<LParticle> PhotonsReco;
-                        vector<LParticle> MuonsTrue;
-                        vector<LParticle> ElectronsTrue;
-                        vector<LParticle> PhotonsTrue;
+			vector<LParticle> MuonsReco;
+			vector<LParticle> ElectronsReco;
+			vector<LParticle> PhotonsReco;
+			vector<LParticle> MuonsTrue;
+			vector<LParticle> ElectronsTrue;
+			vector<LParticle> PhotonsTrue;
 
 
 			for(int i = 0; i < branchJet->GetEntriesFast(); ++i) {
 				// Take first jet
 				Jet *jet = (Jet*) branchJet->At(i);
 				if (abs(jet->Eta)>ana.maxEta)     continue; // use large Eta (needs for matching)
-                                if (jet->Mass<1)                  continue; // cannot be zero 
+				if (jet->Mass<1)                  continue; // cannot be zero
 
 				// overlap removal
 				bool remove=false;
@@ -183,10 +183,10 @@ int main(int argc, char *argv[])
 				TLorentzVector l;
 				l.SetPtEtaPhiM(jet->PT,jet->Eta,jet->Phi,jet->Mass);
 				LParticle p;
-                                p.SetType(0);
-                                Bool_t BtagOk = ( jet->BTag & (1 << i) );
-                                if (BtagOk) p.SetType(1);
-                                //if (p.GetType() >0) cout << "reco B-tagging! " << endl;
+				p.SetType(0);
+				Bool_t BtagOk = ( jet->BTag & (1 << i) );
+				if (BtagOk) p.SetType(1);
+				//if (p.GetType() >0) cout << "reco B-tagging! " << endl;
 
 				p.SetP(l);
 				ana.h_jetpt->Fill(jet->PT);
@@ -200,54 +200,54 @@ int main(int argc, char *argv[])
 				Jet *jet = (Jet*) branchGenJet->At(i);
 				if (abs(jet->Eta)>ana.maxEta) continue;
 				if (jet->PT      <ana.minPT)  continue;
-                                if (jet->Mass<1)              continue; // cannot be zero 
+				if (jet->Mass<1)              continue; // cannot be zero
 
 
-                                // get fraction of b-quark inside this jet (in %) 
-                                double btag_fracmom=0;
-                                for(int i1 = 0; i1 < branchParticle->GetEntriesFast(); ++i1) {
-                                        GenParticle *ph = (GenParticle*) branchParticle->At(i1);
-                                        int    pdgCode = TMath::Abs(ph->PID);
-                                        if (pdgCode != 5) continue;
-                                        double deta=jet->Eta  - ph->Eta;
-                                        double dphi=jet->Phi  - ph->Phi;
-                                        if (abs(dphi)>PI) dphi=PI2-abs(dphi);
-                                        double dR=sqrt(deta*deta + dphi*dphi);
-                                        double rat=(ph->PT / jet->PT); 
-                                        if (dR<0.4 && rat>0.3) btag_fracmom= 100 * rat;
-                                }
+				// get fraction of b-quark inside this jet (in %)
+				double btag_fracmom=0;
+				for(int i1 = 0; i1 < branchParticle->GetEntriesFast(); ++i1) {
+					GenParticle *ph = (GenParticle*) branchParticle->At(i1);
+					int    pdgCode = TMath::Abs(ph->PID);
+					if (pdgCode != 5) continue;
+					double deta=jet->Eta  - ph->Eta;
+					double dphi=jet->Phi  - ph->Phi;
+					if (abs(dphi)>PI) dphi=PI2-abs(dphi);
+					double dR=sqrt(deta*deta + dphi*dphi);
+					double rat=(ph->PT / jet->PT);
+					if (dR<0.4 && rat>0.3) btag_fracmom= 100 * rat;
+				}
 
-                                //if (btag_fracmom>0) cout << btag_fracmom << endl;
+				//if (btag_fracmom>0) cout << btag_fracmom << endl;
 
-// Loop over all jet's constituents
-/*
-      int btag=0;
-      for(int j = 0; j < jet->Constituents.GetEntriesFast(); ++j)
-      {
-        TObject *object = jet->Constituents.At(j);
-        // Check if the constituent is accessible
-        if(object == 0) continue;
+				// Loop over all jet's constituents
+				/*
+				      int btag=0;
+				      for(int j = 0; j < jet->Constituents.GetEntriesFast(); ++j)
+				      {
+				        TObject *object = jet->Constituents.At(j);
+				        // Check if the constituent is accessible
+				        if(object == 0) continue;
 
-        if(object->IsA() == GenParticle::Class())
-        {
-          GenParticle * particle = (GenParticle*) object;
-          int status = particle->Status;
-          int pdgCode = TMath::Abs(particle->PID);
+				        if(object->IsA() == GenParticle::Class())
+				        {
+				          GenParticle * particle = (GenParticle*) object;
+				          int status = particle->Status;
+				          int pdgCode = TMath::Abs(particle->PID);
 
-          cout << "    GenPart pt: " << particle->PT << ", eta: " << particle->Eta << ", phi: " << particle->Phi << endl;
-          //momentum += particle->P4();
-         }
-         }
+				          cout << "    GenPart pt: " << particle->PT << ", eta: " << particle->Eta << ", phi: " << particle->Phi << endl;
+				          //momentum += particle->P4();
+				         }
+				         }
 
-*/
+				*/
 
 				TLorentzVector l;
 				l.SetPtEtaPhiM(jet->PT,jet->Eta,jet->Phi,jet->Mass);
 				LParticle p;
-                                p.SetType((int)(btag_fracmom));
-                                //Bool_t BtagOk = ( jet->BTag & (1 << i) );
-                                //if (BtagOk) p.SetType(1);
-                                //if (p.GetType() >0) cout << "truth B-tagging! " << endl;
+				p.SetType((int)(btag_fracmom));
+				//Bool_t BtagOk = ( jet->BTag & (1 << i) );
+				//if (BtagOk) p.SetType(1);
+				//if (p.GetType() >0) cout << "truth B-tagging! " << endl;
 				p.SetP(l);
 				ana.h_jetpt_truth->Fill(jet->PT);
 				JetsTrue.push_back(p);
@@ -257,74 +257,102 @@ int main(int argc, char *argv[])
 
 
 
-                        // truth level muons, electrons, photons
-                            for(int i = 0; i < branchParticle->GetEntriesFast(); ++i) {
-                                        GenParticle *ph = (GenParticle*) branchParticle->At(i);
-                                        int    pdgCode = TMath::Abs(ph->PID);
-                                        if (pdgCode == 13) {
-                                        TLorentzVector l;
-                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
-                                        LParticle p;
-                                        p.SetP(l);
-                                        MuonsTrue.push_back(p);
-                                        }
+			// truth level muons, electrons, photons
+			for(int i = 0; i < branchParticle->GetEntriesFast(); ++i) {
+				GenParticle *ph = (GenParticle*) branchParticle->At(i);
+				int    pdgCode = TMath::Abs(ph->PID);
+                                int    status = ph->Status;
+                                if (status  != 1) continue;
+                                if (pdgCode  != 13 && pdgCode != 11 && pdgCode != 22) continue; 
 
-                                        if (pdgCode == 11) {
-                                        TLorentzVector l;
-                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
-                                        LParticle p;
-                                        p.SetP(l);
-                                        ElectronsTrue.push_back(p);
-                                        }
-
-                                        if (pdgCode == 22) {
-                                        TLorentzVector l;
-                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
-                                        LParticle p;
-                                        p.SetP(l);
-                                        PhotonsTrue.push_back(p);
-                                        }
-
+                                // get fraction of energy in the cone 0.2 around the candidate 
+                                double ptsum=0;
+                                for(int i1 = 0; i1 < branchParticle->GetEntriesFast(); ++i1) {
+                                        GenParticle *gen = (GenParticle*) branchParticle->At(i1);
+                                        int    stat = gen->Status;
+                                        if (stat != 1) continue;
+                                        double deta=gen->Eta  - ph->Eta;
+                                        double dphi=gen->Phi  - ph->Phi;
+                                        if (abs(dphi)>PI) dphi=PI2-abs(dphi);
+                                        double dR=sqrt(deta*deta + dphi*dphi);
+                                        if (dR<0.2) ptsum=ptsum+(gen->PT);  
                                 }
 
+                               double isofrac= (ph->PT/ptsum); 
+                               // cout << isofrac << endl;
+
+				if (pdgCode == 13) {
+					TLorentzVector l;
+					l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+					LParticle p;
+					p.SetCharge(ph->Charge);
+                                        p.SetType( (int)(1000*isofrac));
+					p.SetP(l);
+					MuonsTrue.push_back(p);
+				}
+
+				if (pdgCode == 11) {
+					TLorentzVector l;
+					l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+					LParticle p;
+					p.SetCharge(ph->Charge);
+                                        p.SetType( (int)(1000*isofrac));
+					p.SetP(l);
+					ElectronsTrue.push_back(p);
+				}
+
+				if (pdgCode == 22) {
+					TLorentzVector l;
+					l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+					LParticle p;
+					p.SetCharge(ph->Charge);
+                                        p.SetType( (int)(1000*isofrac));
+					p.SetP(l);
+					PhotonsTrue.push_back(p);
+				}
+
+			}
 
 
-                              for(int i = 0; i < branchMuon->GetEntriesFast(); ++i) {
-                                        Muon *ph = (Muon*) branchMuon->At(i);
-                                        TLorentzVector l;
-                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
-                                        LParticle p;
-                                        p.SetP(l);
-                                        MuonsReco.push_back(p);
-                                }
+
+			for(int i = 0; i < branchMuon->GetEntriesFast(); ++i) {
+				Muon *ph = (Muon*) branchMuon->At(i);
+				TLorentzVector l;
+				l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+				LParticle p;
+				p.SetCharge(ph->Charge);
+				p.SetP(l);
+				MuonsReco.push_back(p);
+			}
 
 
 
-                              for(int i = 0; i < branchElectron->GetEntriesFast(); ++i) {
-                                        Electron *ph = (Electron*) branchElectron->At(i);
-                                        TLorentzVector l;
-                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
-                                        LParticle p;
-                                        p.SetP(l);
-                                        ElectronsReco.push_back(p);
-                                }
+			for(int i = 0; i < branchElectron->GetEntriesFast(); ++i) {
+				Electron *ph = (Electron*) branchElectron->At(i);
+				TLorentzVector l;
+				l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+				LParticle p;
+				p.SetCharge(ph->Charge);
+				p.SetP(l);
+				ElectronsReco.push_back(p);
+			}
 
 
-                              for(int i = 0; i < branchPhoton->GetEntriesFast(); ++i) {
-                                        Photon *ph = (Photon*) branchPhoton->At(i);
-                                        TLorentzVector l;
-                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
-                                        LParticle p;
-                                        p.SetP(l);
-                                        PhotonsReco.push_back(p);
-                                }
+			for(int i = 0; i < branchPhoton->GetEntriesFast(); ++i) {
+				Photon *ph = (Photon*) branchPhoton->At(i);
+				TLorentzVector l;
+				l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+				LParticle p;
+				p.SetP(l);
+				PhotonsReco.push_back(p);
+			}
 
 			// main event loop and training for all objects
-			ana.AnalysisJets(JetsTrue,JetsReco); 
-                        ana.AnalysisMuons(MuonsTrue,MuonsReco);
-                        ana.AnalysisElectrons(ElectronsTrue,ElectronsReco);  
-                        ana.AnalysisPhotons(PhotonsTrue,PhotonsReco); 
-                        ana.nevv++;
+			ana.AnalysisJets(JetsTrue,JetsReco);
+			ana.AnalysisMuons(MuonsTrue,MuonsReco);
+			ana.AnalysisElectrons(ElectronsTrue,ElectronsReco);
+			ana.AnalysisPhotons(PhotonsTrue,PhotonsReco);
+			ana.nevv++;
 		}
 
 	}// end loop over files

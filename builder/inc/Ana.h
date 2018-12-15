@@ -82,8 +82,6 @@ class Ana  {
    // this is input and output for NN for efficiency
    static const int num_input_eff=num_input;
    static const int num_output_eff=2;
-
-   // feature NN 
    static const int num_layers_eff=3;
    static const int num_neurons_hidden_eff=10;
 
@@ -140,9 +138,6 @@ class Ana  {
    // feature net
    struct fann *ann5_jets[nBins-1];
    string ann5_jets_name[nBins-1];
-
-
-
 
    // muons
    struct fann *ann1_muons[nBins-1];
@@ -213,8 +208,6 @@ class Ana  {
    float em_eshift;
    float em_etascale;
    float em_etashift;
-   float em_mscale;
-   float em_mshift;
 
    TH1D *h_jetpt;
    TH1D *h_jetpt_truth;
@@ -238,6 +231,17 @@ protected:
    TH1D *h_out4;
    TH1D *h_out5;
    TH1D *h_out6;
+
+   TH1D *h_mu_in1;
+   TH1D *h_mu_in2;
+   TH1D *h_mu_in3;
+   TH1D *h_mu_in4;
+
+   TH1D *h_mu_out1;
+   TH1D *h_mu_out2;
+   TH1D *h_mu_out3;
+   TH1D *h_mu_out4;
+   TH1D *h_mu_out5;
 
    string ffile; 
    TFile *RootFile;

@@ -73,8 +73,6 @@ Int_t Ana::Finish() {
    mu.add("EnergyShift", Setting::TypeFloat) = em_eshift;
    mu.add("EtaScale", Setting::TypeFloat) = em_etascale;
    mu.add("EtaShift", Setting::TypeFloat) = em_etashift;
-   mu.add("MassScale", Setting::TypeFloat) = em_mscale;
-   mu.add("MassShift", Setting::TypeFloat) = em_mshift;
    // bins
    Setting &array1 = mu.add("PtBins", Setting::TypeArray);
    for(int i = 0; i <  nBins; ++i) array1.add(Setting::TypeFloat) = eBins[i];

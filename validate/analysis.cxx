@@ -58,9 +58,6 @@ bool reorder(const TLorentzVector &a, const TLorentzVector &b)
 	return a.Pt() > b.Pt();
 }
 
-const double PI   = TMath::Pi();
-const double PI2  = 2*PI;
-
 //---------------------------------------------------------------------------
 
 static bool interrupted = false;
@@ -125,14 +122,21 @@ int main(int argc, char *argv[])
 		{
 
 
-			vector<LParticle> JetsReco;
-			vector<LParticle> JetsTrue;
+
+                        vector<LParticle> JetsReco;
+                        vector<LParticle> JetsTrue;
+                        vector<LParticle> MuonsReco;
+                        vector<LParticle> ElectronsReco;
+                        vector<LParticle> PhotonsReco;
+                        vector<LParticle> MuonsTrue;
+                        vector<LParticle> ElectronsTrue;
+                        vector<LParticle> PhotonsTrue;
 
 
 			nev++;
 			if (nev%500==0 || nev<100) cout << "Event=" << nev << endl;
 
-		if (ana.MaxEvents !=-1 && nev>ana.MaxEvents) { stop=true; break; };
+          		if (ana.MaxEvents !=-1 && nev>ana.MaxEvents) { stop=true; break; };
 
 
 			// Load selected branches with data from specified event
@@ -229,8 +233,104 @@ int main(int argc, char *argv[])
 				JetsTrue.push_back(p);
 			}
 
-			// main event loop
-			ana.AnalysisJets(JetsTrue,JetsReco);  // analysis at the end
+
+                        // truth level muons, electrons, photons
+                        for(int i = 0; i < branchParticle->GetEntriesFast(); ++i) {
+                                GenParticle *ph = (GenParticle*) branchParticle->At(i);
+                                int    pdgCode = TMath::Abs(ph->PID);
+                                int    status = ph->Status;
+                                if (status  != 1) continue;
+                                if (pdgCode  != 13 && pdgCode != 11 && pdgCode != 22) continue;
+
+                                // get fraction of energy in the cone 0.2 around the candidate 
+                                double ptsum=0;
+                                for(int i1 = 0; i1 < branchParticle->GetEntriesFast(); ++i1) {
+                                        GenParticle *gen = (GenParticle*) branchParticle->At(i1);
+                                        int    stat = gen->Status;
+                                        if (stat != 1) continue;
+                                        double deta=gen->Eta  - ph->Eta;
+                                        double dphi=gen->Phi  - ph->Phi;
+                                        if (abs(dphi)>PI) dphi=PI2-abs(dphi);
+                                        double dR=sqrt(deta*deta + dphi*dphi);
+                                        if (dR<0.2) ptsum=ptsum+(gen->PT);
+                                }
+
+                               double isofrac= (ph->PT/ptsum);
+                               // cout << isofrac << endl;
+
+                                if (pdgCode == 13) {
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetCharge(ph->Charge);
+                                        p.SetType( (int)(1000*isofrac));
+                                        p.SetP(l);
+                                        MuonsTrue.push_back(p);
+                                }
+
+                                if (pdgCode == 11) {
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetCharge(ph->Charge);
+                                        p.SetType( (int)(1000*isofrac));
+                                        p.SetP(l);
+                                        ElectronsTrue.push_back(p);
+                                }
+
+                                if (pdgCode == 22) {
+                                        TLorentzVector l;
+                                        l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                        LParticle p;
+                                        p.SetCharge(ph->Charge);
+                                        p.SetType( (int)(1000*isofrac));
+                                        p.SetP(l);
+                                        PhotonsTrue.push_back(p);
+                                }
+
+                        }
+
+
+
+                        for(int i = 0; i < branchMuon->GetEntriesFast(); ++i) {
+                                Muon *ph = (Muon*) branchMuon->At(i);
+                                TLorentzVector l;
+                                l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                LParticle p;
+                                p.SetCharge(ph->Charge);
+                                p.SetP(l);
+                                MuonsReco.push_back(p);
+                        }
+
+
+
+                        for(int i = 0; i < branchElectron->GetEntriesFast(); ++i) {
+                                Electron *ph = (Electron*) branchElectron->At(i);
+                                TLorentzVector l;
+                                l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                LParticle p;
+                                p.SetCharge(ph->Charge);
+                                p.SetP(l);
+                                ElectronsReco.push_back(p);
+                        }
+
+
+                        for(int i = 0; i < branchPhoton->GetEntriesFast(); ++i) {
+                                Photon *ph = (Photon*) branchPhoton->At(i);
+                                TLorentzVector l;
+                                l.SetPtEtaPhiM(ph->PT,ph->Eta,ph->Phi,0);
+                                LParticle p;
+                                p.SetP(l);
+                                PhotonsReco.push_back(p);
+                        }
+
+                        // main event loop and training for all objects
+                        ana.AnalysisJets(JetsTrue,JetsReco);
+                        ana.AnalysisMuons(MuonsTrue,MuonsReco);
+                        ana.AnalysisElectrons(ElectronsTrue,ElectronsReco);
+                        ana.AnalysisPhotons(PhotonsTrue,PhotonsReco);
+                        ana.m_ntuple->Fill();
+
 
 		}
 

@@ -237,17 +237,31 @@ Int_t Ana::Init() {
 	h_dR = new TH1D("jet_dR", "truth-jet distance", 500, 0, 7);
 
 
-	h_in1 = new TH1D("in1", "in1", nBinsNN, -1.1, 1.1);
-	h_in2 = new TH1D("in2", "in2", nBinsNN, -1.1, 1.1);
-	h_in3 = new TH1D("in3", "in3", nBinsNN, -1.1, 1.1);
-	h_in4 = new TH1D("in4", "in4", nBinsNN, -1.1, 1.1);
+	h_in1 = new TH1D("in1_jet", "in1", nBinsNN, -1.1, 1.1);
+	h_in2 = new TH1D("in2_jet", "in2", nBinsNN, -1.1, 1.1);
+	h_in3 = new TH1D("in3_jet", "in3", nBinsNN, -1.1, 1.1);
+	h_in4 = new TH1D("in4_jet", "in4", nBinsNN, -1.1, 1.1);
 
-	h_out1 = new TH1D("out1", "out1", nBinsNN, -1.1, 1.1);
-	h_out2 = new TH1D("out2", "out2", nBinsNN, -1.1, 1.1);
-	h_out3 = new TH1D("out3", "out3", nBinsNN, -1.1, 1.1);
-	h_out4 = new TH1D("out4", "out4", nBinsNN, -1.1, 1.1);
-	h_out5 = new TH1D("out5_eff", "out5_eff matching efficiency", nBinsNN, -1.1, 1.1);
-        h_out6 = new TH1D("out5_btag", "out6_btag b-tagging", nBinsNN, -1.1, 1.1);
+	h_out1 = new TH1D("out1_jet", "out1", nBinsNN, -1.1, 1.1);
+	h_out2 = new TH1D("out2_jet", "out2", nBinsNN, -1.1, 1.1);
+	h_out3 = new TH1D("out3_jet", "out3", nBinsNN, -1.1, 1.1);
+	h_out4 = new TH1D("out4_jet", "out4", nBinsNN, -1.1, 1.1);
+	h_out5 = new TH1D("out5_jet_eff", "out5_eff matching efficiency", nBinsNN, -1.1, 1.1);
+        h_out6 = new TH1D("out5_jet_btag", "out6_btag b-tagging", nBinsNN, -1.1, 1.1);
+
+
+        h_mu_in1 = new TH1D("in1_mu", "in1", nBinsNN, -1.1, 1.1);
+        h_mu_in2 = new TH1D("in2_mu", "in2", nBinsNN, -1.1, 1.1);
+        h_mu_in3 = new TH1D("in3_mu", "in3", nBinsNN, -1.1, 1.1);
+        h_mu_in4 = new TH1D("in4_mu", "in4", nBinsNN, -1.1, 1.1);
+
+        h_mu_out1 = new TH1D("out1_mu", "out1", nBinsNN, -1.1, 1.1);
+        h_mu_out2 = new TH1D("out2_mu", "out2", nBinsNN, -1.1, 1.1);
+        h_mu_out3 = new TH1D("out3_mu", "out3", nBinsNN, -1.1, 1.1);
+        h_mu_out4 = new TH1D("out4_mu", "out4", nBinsNN, -1.1, 1.1);
+        h_mu_out5 = new TH1D("out5_mu_eff", "out5_eff matching efficiency", nBinsNN, -1.1, 1.1);
+
+
 
 	// create ntuple
 	m_ntuple  = new TTree("Ntuple","Ntuple");
@@ -311,11 +325,10 @@ Int_t Ana::Init() {
                           jet_etashift=0.0;
                          }
 
+
       // scaling for EM objects (muons, electrons, photons) 
       em_escale=10.0;
       em_eshift=0.0;
-      em_mscale=1.0;
-      em_mshift=0.0;
       em_etascale=10.0;
       em_etashift=0.0;
 

@@ -2,7 +2,7 @@
 
 #include "Ana.h"
 
-Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsReco) {
+Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
@@ -10,13 +10,14 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
         const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta  
         const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi  
 
-	for(unsigned int j = 0; j<MuonsTrue.size(); j++){
-		LParticle tmuon = (LParticle)MuonsTrue.at(j);
-		TLorentzVector L2 = tmuon.GetP();
+	for(unsigned int j = 0; j<True.size(); j++){
+		LParticle tm = (LParticle)True.at(j);
+		TLorentzVector L2 = tm.GetP();
 		double phiT = L2.Phi();
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
-		double massT =  L2.M();
+		int    chargeT =  tm.GetCharge();
+                double isolationT= tm.GetType()/1000.; // isolation 
 
 		for (int m=0; m<nBins-1; m++){
 			double dmin=eBins[m];
@@ -27,38 +28,38 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 
 		// reco 
 		int indexMatch=-1;
-		for(unsigned int i = 0; i<MuonsReco.size(); i++){
-			LParticle rmuon = (LParticle)MuonsReco.at(i);
-			TLorentzVector L1 = rmuon.GetP();
+		for(unsigned int i = 0; i<Reco.size(); i++){
+			LParticle rm = (LParticle)Reco.at(i);
+			TLorentzVector L1 = rm.GetP();
 			double phi = L1.Phi();
 			double eta = L1.PseudoRapidity();
 			double dEta=etaT-eta;
 			double dPhi=phiT-phi;
 			if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 			double dR=sqrt(dEta*dEta+dPhi*dPhi);
-			h_dR->Fill(dR);
 			if (dR<DeltaR) indexMatch=i;
 		}
 
+                float charge=0;
 		if (indexMatch>-1){
-			LParticle rmuon = (LParticle)MuonsReco.at(indexMatch);
-			TLorentzVector L1 = rmuon.GetP();
+			LParticle rm = (LParticle)Reco.at(indexMatch);
+			TLorentzVector L1 = rm.GetP();
 			float phi = L1.Phi();
 			float pt  = L1.Perp();
 			float eta = L1.PseudoRapidity();
-			float mass  = L1.M();
+			charge  = rm.GetCharge();
 
 			vector<float> input;
 			vector<float> output;
 			input.push_back((float)ptT);
 			input.push_back((float)etaT);
 			input.push_back((float)phiT);
-			input.push_back( (float)massT);
+			input.push_back((float)chargeT);
 
 			output.push_back(pt);
 			output.push_back(eta);
 			output.push_back(phi);
-			output.push_back(mass);
+			output.push_back(charge);
 
 			// push vectors
 			finput_muons.push_back(input);
@@ -71,11 +72,14 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 		input2.push_back((float)ptT);
 		input2.push_back((float)etaT);
 		input2.push_back((float)phiT);
-                input2.push_back((float)0); //  some feature 
+                input2.push_back((float)chargeT);   //  some feature 
+                input2.push_back((float)isolationT); //  some feature 
 
                 float ibb=-1.0f;
 		float iout=-1.0f; // no match
-		if (indexMatch>-1)  iout=1.0f;
+		if (indexMatch>-1)  {iout=1.0f;
+                                     if (charge >0) ibb=1.0f;
+                                    }
 
                 output2.push_back(iout);
                 output2.push_back(ibb);
@@ -111,12 +115,12 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 				float ptT=input[0];
 				float etaT=input[1];
 				float phiT=input[2];
-				float massT=input[3];
+				float chargeT=input[3];
 
 				float pt=output[0];
 				float eta=output[1];
 				float phi=output[2];
-				float mass=output[3];
+				float charge=output[3];
 
 
 				if (ptT>dmin && ptT<=dmax) {
@@ -125,7 +129,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 					float ptIN=((ptT-dminmax)/(0.5*width));
 					float etaIN=etaT/EtaMax; // range -1 -1
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
-					float massIN=-1+(massT/(0.5*dmin));
+					float chargeIN=chargeT;
 
                                         // sliced input for NN
                                         float etaINSlice[slices_etaphi-1];
@@ -161,7 +165,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 					if (phiT !=0) phiOUT=em_etascale*(abs(phi/phiT)-1) +  em_etashift; 
 					//float eeOUT=abs(ee-eeT)/dmax;
 					// shrink pT (important for pileup!)
-					float mOUT=em_mscale*((mass/massT) -1) + em_mshift;
+					//float chargeOUT=charge;
 					//float shiftOUT=0.0f;
 					//if (ee-eeT>0) shiftOUT=1.0f; // gain or positive shift
 
@@ -173,7 +177,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
                                         fann_type uoutput4[num_output];
  
 					uinput[0] = ptIN;
-                                        uinput[1] = massIN;
+                                        uinput[1] = chargeIN;
                                         uinput[2] = etaIN;
                                         uinput[3] = phiIN;
 
@@ -210,7 +214,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 						if (ptOUT>d1  && ptOUT<=d2)    uoutput1[jjj]=1.0f;
 						if (etaOUT>d1 && etaOUT<=d2)   uoutput2[jjj]=1.0f;
 						if (phiOUT>d1 && phiOUT<=d2)   uoutput3[jjj]=1.0f;
-						if (mOUT>d1   && mOUT<=d2)     uoutput4[jjj]=1.0f;
+						uoutput4[jjj]=0;
 					}
 
 					for (int kk=0; kk<num_input; kk++)  {
@@ -233,15 +237,15 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
                                         //for (int jjj=0; jjj<nBinsNN-1; jjj++) {cout << uoutput1[jjj] << " ";}
                                         //cout <<  " " << endl;
 
-					h_in1->Fill(ptIN);
-					h_in2->Fill(etaIN);
-					h_in3->Fill(phiIN);
-					h_in4->Fill(massIN);
+					h_mu_in1->Fill(ptIN);
+					h_mu_in2->Fill(etaIN);
+					h_mu_in3->Fill(phiIN);
+					h_mu_in4->Fill(chargeIN);
 
-					h_out1->Fill(ptOUT);
-					h_out2->Fill(etaOUT);
-					h_out3->Fill(phiOUT);
-					h_out4->Fill(mOUT);
+					h_mu_out1->Fill(ptOUT);
+					h_mu_out2->Fill(etaOUT);
+					h_mu_out3->Fill(phiOUT);
+					h_mu_out4->Fill(charge);
 
 					nn++;
 				} // end energy range
@@ -275,7 +279,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 			// empty data for feature NN 
 			fann_train_data *  dataset_eff=  fann_create_train(eventsMuonBins[m], num_input_eff, num_output_eff);
 			nn=0;
-    			cout << "\n  Muons: -> Training for efficiency  = " << m << " sample size=" << finput_muons_eff.size() << endl;
+    			cout << "\n  Muons: -> Training for feature/efficiency  = " << m << " sample size=" << finput_muons_eff.size() << endl;
 			for (unsigned int i=0; i<finput_muons_eff.size(); i++){
 				//cout << i << endl;
 				vector<float> input2 = finput_muons_eff[i];
@@ -283,11 +287,15 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 				float ptT=input2[0];
 				float etaT=input2[1];
 				float phiT=input2[2];
-                                float btagT=input2[3]; // some feature 
+                                float chargeT=input2[3]; // some feature 
+                                float isolationT=input2[4]; // some feature 
+
                                 // outputs
 				float match=output2[0];
-                                float btag=output2[1];
+                                float charge=output2[1];
+                                h_mu_out5->Fill(match);
 
+                          
 				if (ptT>dmin && ptT<dmax) {
 				        float dminmax=dmin+0.5*width;
                                         float ptIN=((ptT-dminmax)/(0.5*width));
@@ -297,8 +305,8 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 					fann_type uoutput[num_output_eff];
 					uinput[0]=ptIN;
 					uinput[1]=etaIN;
-					uinput[2]=phiIN;
-                                        uinput[3]=0; // some feature
+					uinput[2]=isolationT;
+                                        uinput[3]=chargeT; // some feature
 
                                        // sliced input for NN
                                         float etaINSlice[slices_etaphi-1];
@@ -345,7 +353,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> MuonsTrue, vector<LParticle> MuonsRec
 
                                         // outputs
 					uoutput[0]=(float)match;
-                                        uoutput[1]=0;
+                                        uoutput[1]=charge;
 
 					for (unsigned int kk=0; kk<num_input_eff; kk++)  dataset_eff->input[nn][kk] =uinput[kk];
 					for (unsigned int kk=0; kk<num_output_eff; kk++)  dataset_eff->output[nn][kk] =uoutput[kk];

@@ -72,6 +72,25 @@ Int_t Ana::Init() {
 		exit(0);
 	}
 
+
+        Setting &em = root["EMObjects"];
+        if (!(em.lookupValue("EnergyBinsNr", EMnBins)
+                        && njets.lookupValue("MinPT", EMminPT)
+                        && njets.lookupValue("MaxEta", EMmaxEta)
+                        && njets.lookupValue("EnergyScale",em_escale)
+                        && njets.lookupValue("EnergyShift",em_eshift)
+                        && njets.lookupValue("EtaScale",em_etascale)
+                        && njets.lookupValue("EtaShift",em_etashift))
+
+           ) {
+                cout << "Error: some values are not in EMObjects configuration!" << endl;
+                exit(0);
+        }
+
+
+
+
+
 	cout << "############# ANN settingsi ############" << endl;
 	cout << "EnergyScale=" << jet_escale << endl;
 	cout << "EnergyShift=" << jet_eshift << endl;
@@ -116,6 +135,49 @@ Int_t Ana::Init() {
 	ann4_jets = new fann*[nBinsNN-1];
 	ann5_jets = new fann*[nBinsNN-1];
 
+
+        // muons
+        ann1_muons_name = new string[nBinsNN-1];
+        ann2_muons_name = new string[nBinsNN-1];
+        ann3_muons_name = new string[nBinsNN-1];
+        ann4_muons_name = new string[nBinsNN-1];
+        ann5_muons_name = new string[nBinsNN-1];
+
+        ann1_muons = new fann*[nBinsNN-1];
+        ann2_muons = new fann*[nBinsNN-1];
+        ann3_muons = new fann*[nBinsNN-1];
+        ann4_muons = new fann*[nBinsNN-1];
+        ann5_muons = new fann*[nBinsNN-1];
+
+        // electrons
+        ann1_electrons_name = new string[nBinsNN-1];
+        ann2_electrons_name = new string[nBinsNN-1];
+        ann3_electrons_name = new string[nBinsNN-1];
+        ann4_electrons_name = new string[nBinsNN-1];
+        ann5_electrons_name = new string[nBinsNN-1];
+
+        ann1_electrons = new fann*[nBinsNN-1];
+        ann2_electrons = new fann*[nBinsNN-1];
+        ann3_electrons = new fann*[nBinsNN-1];
+        ann4_electrons = new fann*[nBinsNN-1];
+        ann5_electrons = new fann*[nBinsNN-1];
+
+        // photons
+        ann1_photons_name = new string[nBinsNN-1];
+        ann2_photons_name = new string[nBinsNN-1];
+        ann3_photons_name = new string[nBinsNN-1];
+        ann4_photons_name = new string[nBinsNN-1];
+        ann5_photons_name = new string[nBinsNN-1];
+
+        ann1_photons = new fann*[nBinsNN-1];
+        ann2_photons = new fann*[nBinsNN-1];
+        ann3_photons = new fann*[nBinsNN-1];
+        ann4_photons = new fann*[nBinsNN-1];
+        ann5_photons = new fann*[nBinsNN-1];
+
+
+
+
 	initialRME = new double[nBinsNN-1];
 	finalRME   = new double[nBinsNN-1];
 	BinOverTrue = new int[nBinsNN-1];
@@ -147,6 +209,45 @@ Int_t Ana::Init() {
 		ann3_jets[m] = fann_create_from_file(ann3_jets_name[m].c_str());
 		ann4_jets[m] = fann_create_from_file(ann4_jets_name[m].c_str());
 		ann5_jets[m] = fann_create_from_file(ann5_jets_name[m].c_str());
+
+                // muon
+                ann1_muons_name[m]="out_ann/ann1_muon_"+std::to_string(m)+".net";
+                ann2_muons_name[m]="out_ann/ann2_muon_"+std::to_string(m)+".net";
+                ann3_muons_name[m]="out_ann/ann3_muon_"+std::to_string(m)+".net";
+                ann4_muons_name[m]="out_ann/ann4_muon_"+std::to_string(m)+".net";
+                ann5_muons_name[m]="out_ann/ann5_muon_"+std::to_string(m)+".net";
+
+                ann1_muons[m] = fann_create_from_file(ann1_muons_name[m].c_str());
+                ann2_muons[m] = fann_create_from_file(ann2_muons_name[m].c_str());
+                ann3_muons[m] = fann_create_from_file(ann3_muons_name[m].c_str());
+                ann4_muons[m] = fann_create_from_file(ann4_muons_name[m].c_str());
+                ann5_muons[m] = fann_create_from_file(ann5_muons_name[m].c_str());
+
+                // electron
+                ann1_electrons_name[m]="out_ann/ann1_electron_"+std::to_string(m)+".net";
+                ann2_electrons_name[m]="out_ann/ann2_electron_"+std::to_string(m)+".net";
+                ann3_electrons_name[m]="out_ann/ann3_electron_"+std::to_string(m)+".net";
+                ann4_electrons_name[m]="out_ann/ann4_electron_"+std::to_string(m)+".net";
+                ann5_electrons_name[m]="out_ann/ann5_electron_"+std::to_string(m)+".net";
+
+                ann1_electrons[m] = fann_create_from_file(ann1_electrons_name[m].c_str());
+                ann2_electrons[m] = fann_create_from_file(ann2_electrons_name[m].c_str());
+                ann3_electrons[m] = fann_create_from_file(ann3_electrons_name[m].c_str());
+                ann4_electrons[m] = fann_create_from_file(ann4_electrons_name[m].c_str());
+                ann5_electrons[m] = fann_create_from_file(ann5_electrons_name[m].c_str());
+
+                // photon
+                ann1_photons_name[m]="out_ann/ann1_photon_"+std::to_string(m)+".net";
+                ann2_photons_name[m]="out_ann/ann2_photon_"+std::to_string(m)+".net";
+                ann3_photons_name[m]="out_ann/ann3_photon_"+std::to_string(m)+".net";
+                ann4_photons_name[m]="out_ann/ann4_photon_"+std::to_string(m)+".net";
+                ann5_photons_name[m]="out_ann/ann5_photon_"+std::to_string(m)+".net";
+
+                ann1_photons[m] = fann_create_from_file(ann1_photons_name[m].c_str());
+                ann2_photons[m] = fann_create_from_file(ann2_photons_name[m].c_str());
+                ann3_photons[m] = fann_create_from_file(ann3_photons_name[m].c_str());
+                ann4_photons[m] = fann_create_from_file(ann4_photons_name[m].c_str());
+                ann5_photons[m] = fann_create_from_file(ann5_photons_name[m].c_str());
 
 
 		if (m==nBins-2) {
@@ -199,6 +300,11 @@ Int_t Ana::Init() {
 	h_rout4 = new TH1D("rout4", "out4 random bin", nBinsNN, 0, nBinsNN);
 
 
+        h_mu_out5_eff = new TH1D("out5_mu_eff", "out5 mu efficiency", nBinsNN, -1., 1.);
+        h_el_out5_eff = new TH1D("out5_el_eff", "out5 el efficiency", nBinsNN, -1., 1.);
+        h_ph_out5_eff = new TH1D("out5_ph_eff", "out5 ph efficiency", nBinsNN, -1., 1.);
+
+
 	// create ntuple
 	m_ntuple  = new TTree("Ntuple","Ntuple");
 	m_ntuple->Branch("RunNumber",   &RunNumber,  "RunNumber/I");
@@ -227,6 +333,52 @@ Int_t Ana::Init() {
 	m_ntuple->Branch("AntiKt4NNJetM",     &m_nnjetm);
 	m_ntuple->Branch("AntiKt4NNJetBtag",  &m_nnjetbtag);
 
+        // muons
+        m_ntuple->Branch("muonPt",    &m_mupt);
+        m_ntuple->Branch("muonEta",   &m_mueta);
+        m_ntuple->Branch("muonPhi",   &m_muphi);
+        m_ntuple->Branch("muonCharge",   &m_mucharge);
+
+        m_ntuple->Branch("muonTruthPt",    &m_gmupt);
+        m_ntuple->Branch("muonTruthEta",   &m_gmueta);
+        m_ntuple->Branch("muonTruthPhi",   &m_gmuphi);
+        m_ntuple->Branch("muonTrueCharge",   &m_gmucharge);
+
+        m_ntuple->Branch("muonNNPt",    &m_nnmupt);
+        m_ntuple->Branch("muonNNEta",   &m_nnmueta);
+        m_ntuple->Branch("muonNNPhi",   &m_nnmuphi);
+        m_ntuple->Branch("muonNNCharge",   &m_nnmucharge);
+
+        // electrons
+        m_ntuple->Branch("electronPt",    &m_elpt);
+        m_ntuple->Branch("electronEta",   &m_eleta);
+        m_ntuple->Branch("electronPhi",   &m_elphi);
+        m_ntuple->Branch("electronCharge",   &m_elcharge);
+
+        m_ntuple->Branch("electronTruthPt",    &m_gelpt);
+        m_ntuple->Branch("electronTruthEta",   &m_geleta);
+        m_ntuple->Branch("electronTruthPhi",   &m_gelphi);
+        m_ntuple->Branch("electronTruthCharge",   &m_gelcharge);
+ 
+        m_ntuple->Branch("electronNNPt",    &m_nnelpt);
+        m_ntuple->Branch("electronNNEta",   &m_nneleta);
+        m_ntuple->Branch("electronNNPhi",   &m_nnelphi);
+        m_ntuple->Branch("electronNNCharge",   &m_nnelcharge);
+
+        // photons
+        m_ntuple->Branch("photonPt",    &m_phpt);
+        m_ntuple->Branch("photonEta",   &m_pheta);
+        m_ntuple->Branch("photonPhi",   &m_phphi);
+
+        m_ntuple->Branch("photonTruthPt",    &m_gphpt);
+        m_ntuple->Branch("photonTruthEta",   &m_gpheta);
+        m_ntuple->Branch("photonTruthPhi",   &m_gphphi);
+
+        m_ntuple->Branch("photonNNPt",    &m_nnphpt);
+        m_ntuple->Branch("photonNNEta",   &m_nnpheta);
+        m_ntuple->Branch("photonNNPhi",   &m_nnphphi);
+
+
 
 	// read files from data.in file and put to a vector
 	string name="data.in";
@@ -253,5 +405,50 @@ Int_t Ana::Init() {
 
 
 	return 0;
+}
+
+
+
+// get a random value from a PDF
+int Ana::findCeil(int  arr[], int r, int l, int h)
+{
+        int mid;
+        while (l < h)
+        {
+                mid = l + ((h - l) >> 1); // Same as mid = (l+h)/2
+                (r > arr[mid]) ? (l = mid + 1) : (h = mid);
+        }
+        int va=(arr[l] >= r) ? l : -1;
+        // if negative, assume no correction (center)
+        // if (va<0) va=(int)(h/2.0);
+        if (va<0)  va=rand() % h; // random smearing  
+        return va;
+}
+
+// The main function that returns a random number from arr[] according to
+// distribution array defined by freq[]. n is size of arrays.
+int Ana::myRand(int arr[], int freq[], int n)
+{
+        // Create and fill prefix array
+        int prefix[n], i;
+        prefix[0] = freq[0];
+        for (i = 1; i < n; ++i)
+                prefix[i] = prefix[i - 1] + freq[i];
+
+        // prefix[n-1] is sum of all frequencies. Generate a random number
+        // with value from 1 to this sum
+        if (prefix[n - 1] != 0) {
+                int r = (rand() % prefix[n - 1]) + 1;
+                //long  R1=Reta.Rndm()*RAND_MAX;
+                //int r = (R1 % prefix[n - 1]) + 1;
+                //cout << "Random value on [0 " << RAND_MAX << endl;
+                // Find index of ceiling of r in prefix arrat
+                int indexc = findCeil(prefix, r, 0, n - 1);
+                return arr[indexc];
+        }
+
+        // return (int)(n/2.0); // assume no correction when error
+           int va=rand() % n;
+           return va; // random smearing  
 }
 
