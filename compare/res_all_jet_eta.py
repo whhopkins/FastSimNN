@@ -207,12 +207,10 @@ leg2.Draw("same");
 
 myText( 0.2,0.84,4,0.04,"antiKT R=0.4 jets")
 
-if (tag == "rfast004"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=0")
-if (tag == "rfast007"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=40")
-if (tag == "rfast006"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=140")
+txtt="<#mu>=0"
+if (tag == "rfast007"): txtt="<#mu>=40"
+if (tag == "rfast006"): txtt="<#mu>=140"
+myText( 0.2,0.9,2,0.05,txtt)
 
 
 gPad.RedrawAxis()

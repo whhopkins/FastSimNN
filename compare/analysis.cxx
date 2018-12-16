@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 	TH1D *h_dR = new TH1D("jet_dR", "truth-jet distance", 500, 0, 7);
 
 	// jet pT resolution
-	static int nmax_jet=13;
+	static int nmax_jet=22;
 	TH1D *h_jet1_res[nmax_jet];
 	TH1D *h_jet1_ptr[nmax_jet];
 	TH1D *h_jet2_res[nmax_jet];
@@ -147,14 +147,21 @@ int main(int argc, char *argv[])
 		int nbins=50+40*j; // increasing number of bins
 		// Delphes
 		h_jet1_res[j] = new TH1D(Form("jet1_resolution_%02d",j), Form("jets1_res_%02d",j),nbins,0.0,4.0);
-		h_jet1_ptr[j] = new TH1D(Form("jet1_resolution_pt_%02d",j), Form("jets1_res_pt_%02d",j),2000,0,2000);
+		h_jet1_ptr[j] = new TH1D(Form("jet1_resolution_pt_%02d",j), Form("jets1_res_pt_%02d",j),2500,0,5000);
 		h_jet1_res[j]->Sumw2();
 		h_jet1_ptr[j]->Sumw2();
 		// NN
 		h_jet2_res[j] = new TH1D(Form("jet2_resolution_%02d",j), Form("jets2_res_%02d",j),nbins,0.0,4.0);
-		h_jet2_ptr[j] = new TH1D(Form("jet2_resolution_pt_%02d",j), Form("jets2_res_pt_%02d",j),2000,0,2000);
+		h_jet2_ptr[j] = new TH1D(Form("jet2_resolution_pt_%02d",j), Form("jets2_res_pt_%02d",j),2500,0,5000);
 		h_jet2_res[j]->Sumw2();
 		h_jet2_ptr[j]->Sumw2();
+
+
+                double x1=5+pow(2,(0.35*(j+12)));
+                double x2=10+pow(2,(0.35*(j+12+1)));
+                cout << j << ") " << x1 << " - " << x2 << " GeV " << endl;
+
+
 	}
 
 	// jet Eta resolution

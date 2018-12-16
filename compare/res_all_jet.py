@@ -38,7 +38,7 @@ epsfig=epsfig.replace(".eps","_"+tag+".eps")
 Ymin=0.0 
 Ymax=0.5 
 Xmin=20   
-Xmax=1000
+Xmax=3500
 
 if (tag == "rfast007"):
         Ymax=0.8;
@@ -204,12 +204,11 @@ h2.Draw("pe same")
 
 myText( 0.2,0.84,4,0.04,"antiKT R=0.4 jets")
 
-if (tag == "rfast004"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=0")
-if (tag == "rfast007"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=40")
-if (tag == "rfast006"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=140")
+
+txtt="<#mu>=0"
+if (tag == "rfast007"): txtt="<#mu>=40"   
+if (tag == "rfast006"): txtt="<#mu>=140"
+myText( 0.2,0.9,2,0.05,txtt)
 
 
 gPad.RedrawAxis()

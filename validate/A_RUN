@@ -11,38 +11,55 @@ ln -s $DELPHES delphes
 rm -f analysis 
 make -f Makefile
 
-# look at LAST 20 files (avoid training biase)
+# look at LAST 15 files (avoid training biase)
 
-NrFiles=20
+NrFiles=15
 
-NEVENTS=200000
+NEVENTS=300000
 
-XF="rfast004"
+XF="rfast008"
+echo "############  Running $XF"
 rm -f out_ann
 ln -s ../builder/out_ann_$XF out_ann
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 rm -f data.in
 Make_input $DIR/
-tail -n $NrFiles  data.in > a
-mv a data.in
+tail -n $NrFiles  data.in > a1
+#  gamma+jets
+DIR=/netapp/data/hepsim/events/pp/14tev/pythia8_gammajets_wgt/$XF
+rm -f data.in
+Make_input $DIR/
+tail -n $NrFiles  data.in > a2
+cat a1 a2 > data.in
+rm -f a1 a2
 echo "Run $XF"
 ./analysis $NEVENTS
 mv Analysis.root out_root/$XF.root
 
+
+
 XF="rfast007"
+echo "############  Running $XF"
 rm -f out_ann
 ln -s ../builder/out_ann_$XF out_ann
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF
 rm -f data.in
 Make_input $DIR/
-tail -n $NrFiles  data.in > a
-mv a data.in
+tail -n $NrFiles  data.in > a1
+# gamma+jet
+DIR=/netapp/data/hepsim/events/pp/14tev/pythia8_gammajets_wgt/$XF
+rm -f data.in
+Make_input $DIR/
+tail -n $NrFiles  data.in > a2
+cat a1 a2 > data.in
+rm -f a1 a2
 echo "Run $XF"
 ./analysis $NEVENTS
 mv Analysis.root out_root/$XF.root
 
 
 XF="rfast006"
+echo "############  Running $XF"
 rm -f out_ann
 ln -s ../builder/out_ann_$XF out_ann
 DIR=/netapp/data/hepsim/events/pp/14tev/mg5_ttbar_jet/$XF

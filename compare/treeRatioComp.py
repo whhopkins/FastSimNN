@@ -146,7 +146,7 @@ def resComp(inFPath):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Compare jet kinematics between different trees ')
-    parser.add_argument('--inFPath', help='Location of ROOT files.', default='/users/chekanov/public/FastNNdelphes/rfast004.root')
+    parser.add_argument('--inFPath', help='Location of ROOT files.', default='/users/chekanov/public/FastNNdelphes/rfast008.root')
 
     args = parser.parse_args() 
     resComp(args.inFPath)

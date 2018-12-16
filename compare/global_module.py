@@ -20,6 +20,9 @@ dlab="Delphes ATLAS-like"
 tlab="MG5 t#bar{t}+jets"
 nnlab="ANN ATLAS-like"
 
+# max bins considered
+MaxJetBins=21
+
 # make a table with systematics 
 def genLatexTable(file,ISYS,NTOT,Value,Error,Chi2NDF):
   v=str(int(Value))

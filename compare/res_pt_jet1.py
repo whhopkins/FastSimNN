@@ -68,7 +68,7 @@ c1.SetFillColor(0)
 sig=TFile("out/"+tag+"_histo.root")
 sig.ls()
 
-for i in range(13):
+for i in range(MaxJetBins):
   xx="%02d" % (i,)
   name="jet1_resolution_"+xx
   name1="jet1_resolution_pt_"+xx

@@ -133,18 +133,11 @@ leg2.AddEntry(h2,nnlab, "pl")
 leg2.Draw("same");
 
 
+txtt="<#mu>=0"
+if (tag == "rfast007"): txtt="<#mu>=40"
+if (tag == "rfast006"): txtt="<#mu>=140"
+myText( 0.2,0.9,2,0.05,txtt)
 
-if (tag == "rfast004"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=0")
-if (tag == "rfast007"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=40")
-if (tag == "rfast006"):
-      myText( 0.2,0.9,2,0.05,"<#mu>=140")
-
-
-#myText( 0.2,0.9,4,0.04,lab1)
-#myText( 0.2,0.85,4,0.04,lab2)
-# myText( 0.2,0.85,4,0.03,lab3)
 
 line =TLine(Xmin,1,Xmax,1);
 line.Draw()
