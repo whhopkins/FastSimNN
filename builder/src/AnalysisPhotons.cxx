@@ -16,7 +16,7 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 		double phiT = L2.Phi();
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
-		int    chargeT =  tm.GetCharge();
+		int    chargeT =  0; // tm.GetCharge();
                 double isolationT= tm.GetType()/1000.; // isolation 
 
 		for (int m=0; m<nBins-1; m++){
@@ -47,7 +47,7 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 			float phi = L1.Phi();
 			float pt  = L1.Perp();
 			float eta = L1.PseudoRapidity();
-			charge  = rm.GetCharge();
+			// charge  = rm.GetCharge();
 
 			vector<float> input;
 			vector<float> output;
@@ -72,17 +72,13 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 		input2.push_back((float)ptT);
 		input2.push_back((float)etaT);
 		input2.push_back((float)phiT);
-                input2.push_back((float)chargeT);   //  some feature 
                 input2.push_back((float)isolationT); //  some feature 
 
-                float ibb=-1.0f;
 		float iout=-1.0f; // no match
-		if (indexMatch>-1)  {iout=1.0f;
-                                     if (charge >0) ibb=1.0f;
-                                    }
+		if (indexMatch>-1)  iout=1.0f;
 
                 output2.push_back(iout);
-                output2.push_back(ibb);
+                output2.push_back(0);
 
 		finput_photons_eff.push_back(input2);
 		foutput_photons_eff.push_back(output2);
@@ -289,12 +285,10 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 				float ptT=input2[0];
 				float etaT=input2[1];
 				float phiT=input2[2];
-                                float chargeT=input2[3]; // some feature 
-                                float isolationT=input2[4]; // some feature 
+                                float isolationT=input2[3]; // some feature 
 
                                 // outputs
 				float match=output2[0];
-                                float charge=output2[1];
                           
 				if (ptT>dmin && ptT<dmax) {
 				        float dminmax=dmin+0.5*width;
@@ -305,8 +299,8 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 					fann_type uoutput[num_output_eff];
 					uinput[0]=ptIN;
 					uinput[1]=etaIN;
-					uinput[2]=isolationT;
-                                        uinput[3]=chargeT; // some feature
+					uinput[2]=phiIN; 
+                                        uinput[3]=isolationT; // some feature
 
                                        // sliced input for NN
                                         float etaINSlice[slices_etaphi-1];
@@ -353,7 +347,7 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 
                                         // outputs
 					uoutput[0]=(float)match;
-                                        uoutput[1]=charge;
+                                        uoutput[1]=0; // not used 
 
 					for (unsigned int kk=0; kk<num_input_eff; kk++)  dataset_eff->input[nn][kk] =uinput[kk];
 					for (unsigned int kk=0; kk<num_output_eff; kk++)  dataset_eff->output[nn][kk] =uoutput[kk];

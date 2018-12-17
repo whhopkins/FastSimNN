@@ -307,7 +307,7 @@ int main(int argc, char *argv[])
 					LParticle p;
 					p.SetCharge(ph->Charge);
                                         p.SetType( (int)(1000*isofrac));
-					p.SetP(l);
+                        		p.SetP(l);
 					PhotonsTrue.push_back(p);
 				}
 

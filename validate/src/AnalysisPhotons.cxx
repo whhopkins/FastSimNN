@@ -87,7 +87,7 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 		float pt=ptT;
 		float eta=etaT;
 		float phi=phiT;
-		float charge=-1;
+		float charge=0;
 
 		//if (phiT<0) phiT=abs(phiT)+PI;
 		//if (phi<0) phi=abs(phi)+PI;
@@ -243,8 +243,8 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
                                 // structure of input the same but mass is replaced with b-tagging
                                 uinput[0] = ptIN;
                                 uinput[1] = etaIN;
-                                uinput[2] = isolationT;
-                                uinput[3] = phiIN;
+                                uinput[2] = phiIN;
+                                uinput[3] = isolationT;
 
 				fann_type * output5 = fann_run(ann5_muons[m], uinput);
 				prob_efficiency=output5[0];
