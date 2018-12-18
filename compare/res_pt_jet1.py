@@ -31,7 +31,7 @@ Xmax=2
 myinput="interactive"
 xdir=""
 
-tag="rfast004"
+tag="rfast008"
 if (len(sys.argv) ==2):
    myinput = sys.argv[1]
 print "mode =",myinput

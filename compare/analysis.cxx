@@ -250,14 +250,14 @@ int main(int argc, char *argv[])
 		h_jet2_res[j]->Sumw2();
 		h_jet2_ptr[j]->Sumw2();
 
-
+                // muons //
 		// Delphes
-		h_muon1_res[j] = new TH1D(Form("muon1_resolution_%02d",j), Form("muon1_res_%02d",j),nbins,0.5,1.5);
+		h_muon1_res[j] = new TH1D(Form("muon1_resolution_%02d",j), Form("muon1_res_%02d",j),nbins,0.6,1.4);
 		h_muon1_ptr[j] = new TH1D(Form("muon1_resolution_pt_%02d",j), Form("muon1_res_pt_%02d",j),2500,0,5000);
 		h_muon1_res[j]->Sumw2();
 		h_muon1_ptr[j]->Sumw2();
 		// NN
-		h_muon2_res[j] = new TH1D(Form("muon2_resolution_%02d",j), Form("muon2_res_%02d",j),nbins,0.5,1.5);
+		h_muon2_res[j] = new TH1D(Form("muon2_resolution_%02d",j), Form("muon2_res_%02d",j),nbins,0.6,1.4);
 		h_muon2_ptr[j] = new TH1D(Form("muon2_resolution_pt_%02d",j), Form("muon2_res_pt_%02d",j),2500,0,5000);
 		h_muon2_res[j]->Sumw2();
 		h_muon2_ptr[j]->Sumw2();

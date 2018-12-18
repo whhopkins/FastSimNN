@@ -23,6 +23,9 @@ nnlab="ANN ATLAS-like"
 # max bins considered
 MaxJetBins=21
 
+# max bins for muons
+MaxMuBins=11
+
 # make a table with systematics 
 def genLatexTable(file,ISYS,NTOT,Value,Error,Chi2NDF):
   v=str(int(Value))

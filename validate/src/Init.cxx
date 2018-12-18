@@ -47,6 +47,7 @@ Int_t Ana::Init() {
 	Setting &mL = root["DelphesML"];
 	if (!(mL.lookupValue("pileup_mu", MuPileup)
 	                && mL.lookupValue("number_of_inputs",   num_input)
+                        && mL.lookupValue("number_of_outputs",   num_output)
 	                && mL.lookupValue("number_of_inputs_eff",  num_input_eff)
 	                && mL.lookupValue("number_of_outputs_eff",  num_output_eff)
 	     ))  {
@@ -114,10 +115,6 @@ Int_t Ana::Init() {
 		cout << "Error: Bin sizes for jets cannot be read!" << endl;
 		exit(0);
 	}
-
-
-	// number of bins -1
-	num_output= nBinsNN-1;
 
 
 	mcEventWeight=1.0;
@@ -293,14 +290,28 @@ Int_t Ana::Init() {
 	h_out4 = new TH1D("out4", "out4", nBinsNN, -1., 1.);
 	h_out5_eff = new TH1D("out5_eff", "out5 efficiency", nBinsNN, -1., 1.);
 	h_out6_btag = new TH1D("out6_btag", "out6 b-tagging", nBinsNN, -1., 1.);
-
 	h_rout1 = new TH1D("rout1", "out1 random bin", nBinsNN, 0, nBinsNN);
 	h_rout2 = new TH1D("rout2", "out2 random bin", nBinsNN, 0, nBinsNN);
 	h_rout3 = new TH1D("rout3", "out3 random bin", nBinsNN, 0, nBinsNN);
 	h_rout4 = new TH1D("rout4", "out4 random bin", nBinsNN, 0, nBinsNN);
 
 
+        h_in1_mu = new TH1D("in1_mu", "in1", nBinsNN, -1., 1.);
+        h_in2_mu = new TH1D("in2_mu", "in2", nBinsNN, -1., 1.);
+        h_in3_mu = new TH1D("in3_mu", "in3", nBinsNN, -1., 1.);
+        h_in4_mu = new TH1D("in4_mu", "in4", nBinsNN, -1., 1.);
+
+        h_out1_mu = new TH1D("out1_mu", "out1 mu", nBinsNN, -1., 1.);
+        h_out2_mu = new TH1D("out2_mu", "out2 mu", nBinsNN, -1., 1.);
+        h_out3_mu = new TH1D("out3_mu", "out3 mu", nBinsNN, -1., 1.);
+        h_out4_mu = new TH1D("out4_mu", "out4 mu", nBinsNN, -1., 1.);
+        h_rout1_mu = new TH1D("rout1_mu", "out1 mu random bin", nBinsNN, 0, nBinsNN);
+        h_rout2_mu = new TH1D("rout2_mu", "out2 mu random bin", nBinsNN, 0, nBinsNN);
+        h_rout3_mu = new TH1D("rout3_mu", "out3 mu random bin", nBinsNN, 0, nBinsNN);
+        h_rout4_mu = new TH1D("rout4_mu", "out4 mu random bin", nBinsNN, 0, nBinsNN);
         h_mu_out5_eff = new TH1D("out5_mu_eff", "out5 mu efficiency", nBinsNN, -1., 1.);
+
+
         h_el_out5_eff = new TH1D("out5_el_eff", "out5 el efficiency", nBinsNN, -1., 1.);
         h_ph_out5_eff = new TH1D("out5_ph_eff", "out5 ph efficiency", nBinsNN, -1., 1.);
 

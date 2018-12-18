@@ -175,11 +175,13 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
                                         fann_type uoutput2[num_output];
                                         fann_type uoutput3[num_output];
                                         fann_type uoutput4[num_output];
- 
-					uinput[0] = ptIN;
-                                        uinput[1] = chargeIN;
+
+                                        uinput[0] = ptIN;
+                                        uinput[1] = 0.0f; // not used 
                                         uinput[2] = etaIN;
                                         uinput[3] = phiIN;
+                                        uinput[4] = 0.0f; // not used 
+ 
 
                                         // eta and phi are sliced for ANN
                                         // this is needed to reproduce spacial defects 
@@ -303,10 +305,11 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
 					fann_type uinput[num_input_eff];
 					fann_type uoutput[num_output_eff];
-					uinput[0]=ptIN;
-					uinput[1]=etaIN;
-					uinput[2]=isolationT;
-                                        uinput[3]=chargeT; // some feature
+                                        uinput[0]=ptIN;
+                                        uinput[1]=etaIN;
+                                        uinput[2]=phiIN;
+                                        uinput[3]=isolationT;
+                                        uinput[4]=chargeT; // some feature
 
                                        // sliced input for NN
                                         float etaINSlice[slices_etaphi-1];

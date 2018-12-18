@@ -19,7 +19,7 @@ from initialize  import *
 from module_functions import *
 
 
-tag="rfast004"
+tag="rfast008"
 if (len(sys.argv) ==2):
    myinput = sys.argv[1]
 print "mode =",myinput

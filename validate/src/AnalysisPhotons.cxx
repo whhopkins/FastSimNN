@@ -128,9 +128,10 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 				fann_type uinput[num_input];
 
 				uinput[0] = ptIN;
-				uinput[1] = 0;
+				uinput[1] = 0.0f;
 				uinput[2] = etaIN;
 				uinput[3] = phiIN;
+                                uinput[4] = 0.0f;  // not used 
 
 				// eta and phi are sliced for ANN
 				// this is needed to reproduce spacial defects
@@ -241,14 +242,15 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 
                                 // ----------------- feature NN starts here --------------------
                                 // structure of input the same but mass is replaced with b-tagging
-                                uinput[0] = ptIN;
-                                uinput[1] = etaIN;
-                                uinput[2] = phiIN;
-                                uinput[3] = isolationT;
+                                uinput[0]=ptIN;
+                                uinput[1]=etaIN;
+                                uinput[2]=phiIN;
+                                uinput[3]=isolationT;
+                                uinput[4]=0; // some feature
 
 				fann_type * output5 = fann_run(ann5_photons[m], uinput);
 				prob_efficiency=output5[0];
-				charge=output5[1];
+				//charge=output5[1];
                                 //cout << "B-tag NN input=" << uinput[3] << " btagT=" << btagT << " NN out=" << btagFound << " " << endl;
 
 

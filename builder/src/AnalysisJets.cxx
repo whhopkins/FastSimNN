@@ -184,6 +184,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                         uinput[1] = massIN;
                                         uinput[2] = etaIN;
                                         uinput[3] = phiIN;
+                                        uinput[4] = 0.0f; // not used 
 
                                         // eta and phi are sliced for ANN
                                         // this is needed to reproduce spacial defects 
@@ -308,8 +309,9 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					uinput[0]=ptIN;
 					uinput[1]=etaIN;
 					uinput[2]=phiIN;
-                                        uinput[3]=(float)((btagT/100.) - 1); // normalize  -1 - 0 
+                                        uinput[3]=(float)((btagT/100.) - 1); // btag normalize  -1 - 0 
                                         if (uinput[3]>1.0f) uinput[3]=1.0f;
+                                        uinput[4]=0; // reserved for charge
 
                                        // sliced input for NN
                                         float etaINSlice[slices_etaphi-1];

@@ -186,14 +186,26 @@ protected:
    TH1D *h_in3;
    TH1D *h_in4;
 
+   // mu
+   TH1D *h_in1_mu;
+   TH1D *h_in2_mu;
+   TH1D *h_in3_mu;
+   TH1D *h_in4_mu;
+
+
    TH1D *h_out1;
    TH1D *h_out2;
    TH1D *h_out3;
    TH1D *h_out4;
+
+   TH1D *h_out1_mu;
+   TH1D *h_out2_mu;
+   TH1D *h_out3_mu;
+   TH1D *h_out4_mu;
+
+
    TH1D *h_out5_eff;
    TH1D *h_out6_btag;
-
-
    TH1D *h_mu_out5_eff;
    TH1D *h_el_out5_eff;
    TH1D *h_ph_out5_eff;
@@ -203,6 +215,11 @@ protected:
    TH1D *h_rout2;
    TH1D *h_rout3;
    TH1D *h_rout4;
+
+   TH1D *h_rout1_mu;
+   TH1D *h_rout2_mu;
+   TH1D *h_rout3_mu;
+   TH1D *h_rout4_mu;
 
 
    // reco jets

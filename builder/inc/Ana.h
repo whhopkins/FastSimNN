@@ -75,15 +75,18 @@ class Ana  {
    static const int slices_etaphi=30;
 
    // NN structure for resolution 
-   // pT, eta,phi(slices), mass 
-   static const int num_input=2+2*slices_etaphi;
+   // pT, eta,phi(slices), mass
+   // 5 inputs + 2*(slices_etaphi-1) 
+   static const int num_input=5+2*(slices_etaphi-1);
    static const int num_output=nBinsNN-1;
 
    // this is input and output for NN for efficiency
-   static const int num_input_eff=num_input;
+   // 5 inputs plus 2*(slices_etaphi-1)
+   static const int num_input_eff=5+2*(slices_etaphi-1);
+   // number of outputs
    static const int num_output_eff=2;
    static const int num_layers_eff=3;
-   static const int num_neurons_hidden_eff=10;
+   static const int num_neurons_hidden_eff=20;
 
    bool firstTime[nBins-1]; // if false, continue training;
    // if ANN is found, we will read the old one. 

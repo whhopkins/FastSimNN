@@ -25,7 +25,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 
 	const double EtaMax=EMmaxEta;
 	const double PhiMax=PI;
-	const double intmove=100000; // number for converting to integer frequencies
+	const double intmove=10000; // number for converting to integer frequencies
 	const double delta=2.0/nBinsNN;
 	const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta
 	const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi
@@ -54,11 +54,10 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 	for(unsigned int j = 0; j<True.size(); j++){
 		LParticle tm = (LParticle)True.at(j);
 		TLorentzVector L2 = tm.GetP();
-
 		double phiT = L2.Phi();
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
-		int chargeT = tm.GetCharge(); // fraction of b-quark momenta in 100%
+		int chargeT = tm.GetCharge(); 
                 double isolationT= tm.GetType()/1000.; // isolation 
 
 		if (ptT>minPT && abs(etaT)<EMmaxEta) {
@@ -92,7 +91,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 		float pt=ptT;
 		float eta=etaT;
 		float phi=phiT;
-		float charge=-1;
+		float charge=chargeT;
                 float prob_efficiency=1;
 
 		//if (phiT<0) phiT=abs(phiT)+PI;
@@ -110,6 +109,11 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 				float etaIN=etaT/EtaMax; // range -1 -1
 				float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
                                 float chargeIN=chargeT;
+
+                                h_in1_mu->Fill(ptIN);
+                                h_in2_mu->Fill(etaIN);
+                                h_in3_mu->Fill(phiIN);
+                                h_in4_mu->Fill(chargeIN);
 
 				// sliced input for NN
 				float etaINSlice[slices_etaphi-1];
@@ -133,10 +137,12 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 
 				fann_type uinput[num_input];
 
-				uinput[0] = ptIN;
-				uinput[1] = chargeIN;
-				uinput[2] = etaIN;
-				uinput[3] = phiIN;
+                                uinput[0] = ptIN;
+                                uinput[1] = 0.0f;
+                                uinput[2] = etaIN;
+                                uinput[3] = phiIN;
+                                uinput[4] = 0.0f;  // not used 
+
 
 				// eta and phi are sliced for ANN
 				// this is needed to reproduce spacial defects
@@ -185,14 +191,14 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 				pt =  ptT *ptcor; // gain
 				//cout << "true=" << ptT << " reco=" << pt <<  " Corr=" << ptcor << " selected bin=" << BinSelected << endl;
 				//h_ptcor->Fill( ptcor );
-				//h_rout1->Fill( (float)BinSelected );
+				h_rout1_mu->Fill( (float)BinSelected );
 
 				// unpack the outputs for pT
 				//cout << "\n New muon:" << endl;
-				//for (int jjj=0; jjj<nBinsNN-1; jjj++) {
-			        //		double d1=-1.0+jjj*delta;
-					//h_out1->Fill( d1+0.5*delta, output1[jjj]);
-				//}
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
+			      		double d1=-1.0+jjj*delta;
+					h_out1_mu->Fill( d1+0.5*delta, output1[jjj]);
+				}
 
 
 				// Eta
@@ -213,10 +219,10 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 				double etacor= ( (recoOvertrue - em_etashift)/em_etascale )+1.0;
 				//h_etacor->Fill( etacor );
 				eta =  etaT * etacor;
-				//for (int jjj=0; jjj<nBinsNN-1; jjj++) {
-			        //		double d1=-1.0+jjj*delta;
-					//h_out2->Fill( d1+0.5*delta, output2[jjj]);
-				//}
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
+			       		double d1=-1.0+jjj*delta;
+					h_out2_mu->Fill( d1+0.5*delta, output2[jjj]);
+				}
 
 				// Phi
 				fann_type * output3 = fann_run(ann3_muons[m], uinput);
@@ -237,20 +243,21 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 				double phicor= ( (recoOvertrue - em_etashift)/em_etascale )+1.0;
 				//h_phicor->Fill( phicor );
 				phi =  phiT * phicor;
-				//for (int jjj=0; jjj<nBinsNN; jjj++) {
-				//	double d1=-1.0+jjj*delta;
-					//h_out3->Fill( d1+0.5*delta, output3[jjj]);
-				//}
+				for (int jjj=0; jjj<nBinsNN; jjj++) {
+					double d1=-1.0+jjj*delta;
+				        h_out3_mu->Fill( d1+0.5*delta, output3[jjj]);
+				}
 
 
 				if (phi>PI || phi<-PI) phi=phiT; // overcorrection!
 
                                 // ----------------- feature NN starts here --------------------
                                 // structure of input the same but mass is replaced with b-tagging
-                                uinput[0] = ptIN;
-                                uinput[1] = etaIN;
-                                uinput[2] = isolationT;
-                                uinput[3] = phiIN;
+                                uinput[0]=ptIN;
+                                uinput[1]=etaIN;
+                                uinput[2]=phiIN;
+                                uinput[3]=isolationT;
+                                uinput[4]=chargeT; // some feature
 
 				fann_type * output5 = fann_run(ann5_muons[m], uinput);
 				prob_efficiency=output5[0];
@@ -268,7 +275,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 			m_nnmupt.push_back(pt);
 			m_nnmueta.push_back(eta);
 			m_nnmuphi.push_back(phi);
-			if (charge>=0) m_nnmucharge.push_back(1);
+			if (charge>0) m_nnmucharge.push_back(1);
                         else m_nnmucharge.push_back(-1);
                         // cout << btagFound << " " << bt << endl;
 		}

@@ -133,10 +133,12 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 
 				fann_type uinput[num_input];
 
-				uinput[0] = ptIN;
-				uinput[1] = chargeIN;
-				uinput[2] = etaIN;
-				uinput[3] = phiIN;
+                                uinput[0] = ptIN;
+                                uinput[1] = 0.0f;
+                                uinput[2] = etaIN;
+                                uinput[3] = phiIN;
+                                uinput[4] = 0.0f;  // not used 
+
 
 				// eta and phi are sliced for ANN
 				// this is needed to reproduce spacial defects
@@ -247,10 +249,11 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 
                                 // ----------------- feature NN starts here --------------------
                                 // structure of input the same but mass is replaced with b-tagging
-                                uinput[0] = ptIN;
-                                uinput[1] = etaIN;
-                                uinput[2] = isolationT;
-                                uinput[3] = phiIN;
+                               uinput[0]=ptIN;
+                               uinput[1]=etaIN;
+                               uinput[2]=phiIN;
+                               uinput[3]=isolationT;
+                               uinput[4]=chargeT; // some feature
 
 				fann_type * output5 = fann_run(ann5_electrons[m], uinput);
 				prob_efficiency=output5[0];
@@ -268,7 +271,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 			m_nnelpt.push_back(pt);
 			m_nneleta.push_back(eta);
 			m_nnelphi.push_back(phi);
-                        if (charge>=0) m_nnelcharge.push_back(1);
+                        if (charge>0) m_nnelcharge.push_back(1);
                         else m_nnelcharge.push_back(-1);
 
 		}
