@@ -76,12 +76,12 @@ Int_t Ana::Init() {
 
         Setting &em = root["EMObjects"];
         if (!(em.lookupValue("EnergyBinsNr", EMnBins)
-                        && njets.lookupValue("MinPT", EMminPT)
-                        && njets.lookupValue("MaxEta", EMmaxEta)
-                        && njets.lookupValue("EnergyScale",em_escale)
-                        && njets.lookupValue("EnergyShift",em_eshift)
-                        && njets.lookupValue("EtaScale",em_etascale)
-                        && njets.lookupValue("EtaShift",em_etashift))
+                        && em.lookupValue("MinPT", EMminPT)
+                        && em.lookupValue("MaxEta", EMmaxEta)
+                        && em.lookupValue("EnergyScale",em_escale)
+                        && em.lookupValue("EnergyShift",em_eshift)
+                        && em.lookupValue("EtaScale",em_etascale)
+                        && em.lookupValue("EtaShift",em_etashift))
 
            ) {
                 cout << "Error: some values are not in EMObjects configuration!" << endl;
@@ -299,12 +299,12 @@ Int_t Ana::Init() {
         h_in1_mu = new TH1D("in1_mu", "in1", nBinsNN, -1., 1.);
         h_in2_mu = new TH1D("in2_mu", "in2", nBinsNN, -1., 1.);
         h_in3_mu = new TH1D("in3_mu", "in3", nBinsNN, -1., 1.);
-        h_in4_mu = new TH1D("in4_mu", "in4", nBinsNN, -1., 1.);
+        h_in4_mu = new TH1D("in4_mu", "in4 (charge)", nBinsNN, -1.05, 1.05);
 
         h_out1_mu = new TH1D("out1_mu", "out1 mu", nBinsNN, -1., 1.);
         h_out2_mu = new TH1D("out2_mu", "out2 mu", nBinsNN, -1., 1.);
         h_out3_mu = new TH1D("out3_mu", "out3 mu", nBinsNN, -1., 1.);
-        h_out4_mu = new TH1D("out4_mu", "out4 mu", nBinsNN, -1., 1.);
+        h_out4_mu = new TH1D("out4_mu", "out4 mu", nBinsNN, -1.05, 1.05);
         h_rout1_mu = new TH1D("rout1_mu", "out1 mu random bin", nBinsNN, 0, nBinsNN);
         h_rout2_mu = new TH1D("rout2_mu", "out2 mu random bin", nBinsNN, 0, nBinsNN);
         h_rout3_mu = new TH1D("rout3_mu", "out3 mu random bin", nBinsNN, 0, nBinsNN);

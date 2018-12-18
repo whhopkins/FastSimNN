@@ -257,7 +257,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
                                 uinput[1]=etaIN;
                                 uinput[2]=phiIN;
                                 uinput[3]=isolationT;
-                                uinput[4]=chargeT; // some feature
+                                uinput[4]=chargeIN; // some feature
 
 				fann_type * output5 = fann_run(ann5_muons[m], uinput);
 				prob_efficiency=output5[0];
