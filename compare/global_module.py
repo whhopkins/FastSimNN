@@ -262,10 +262,12 @@ def plot(c1,h1,h2, peak=1.0, sigma=0.1, MyMin=0, MyMax=2, mu=140,Xmin=0.0,Xmax=2
   # myText( 0.78,0.8,2,0.08,"#mu="+str(mu))
 
   # if fit fail, switch to RMS
-  print "Relative error on width=",err[2]/par[2] 
-  if (err[2]/par[2]>0.1):
+  if (par[2] !=0): 
+           print "Relative error on width=",err[2]/par[2] 
+           if (err[2]/par[2]>0.1):
                         isFit=False;
                         print "Fit is unreliable! use RMS 90%"
+  if (par[2] ==0): isFit=False;
 
   # Use RMS of histogram, no fit
   if (isFit == False):

@@ -113,7 +113,7 @@ leg2.AddEntry(p1,dlab, "pl")
 leg2.AddEntry(p2,nnlab, "pl")
 leg2.Draw("same");
 
-myText( 0.2,0.84,4,0.04,"Direct $gamma")
+myText( 0.2,0.84,4,0.04,"Direct #gamma")
 
 txtt="<#mu>=0"
 if (tag == "rfast007"): txtt="<#mu>=40" 

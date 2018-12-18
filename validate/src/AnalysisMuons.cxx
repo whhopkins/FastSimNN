@@ -211,7 +211,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
                                 */
 				recoOvertrue=-1+BinSelected*delta;
 				double etacor= ( (recoOvertrue - em_etashift)/em_etascale )+1.0;
-				h_etacor->Fill( etacor );
+				//h_etacor->Fill( etacor );
 				eta =  etaT * etacor;
 				//for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 			        //		double d1=-1.0+jjj*delta;
@@ -232,7 +232,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
                                 BinSelected = dist3(gen);
                                 */
 
-				h_rout3->Fill( (float)BinSelected );
+				//h_rout3->Fill( (float)BinSelected );
 				recoOvertrue=-1+BinSelected*delta;
 				double phicor= ( (recoOvertrue - em_etashift)/em_etascale )+1.0;
 				//h_phicor->Fill( phicor );

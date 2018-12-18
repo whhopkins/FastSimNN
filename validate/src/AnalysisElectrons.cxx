@@ -11,13 +11,13 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 	m_nnelphi.clear();
 	m_nnelcharge.clear();
 
-	// true muons
+	// true 
 	m_gelpt.clear();
 	m_geleta.clear();
 	m_gelphi.clear();
 	m_gelcharge.clear();
 
-	// reco muons
+	// reco 
 	m_elpt.clear();
 	m_eleta.clear();
 	m_elphi.clear();
@@ -32,7 +32,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 
 	//TRandom2 Rphi;
 
-	// fill RECO muons
+	// fill RECO 
 	for(unsigned int j = 0; j<Reco.size(); j++){
 		LParticle rm = (LParticle)Reco.at(j);
 		TLorentzVector L2 = rm.GetP();
@@ -73,8 +73,8 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 		if (ptT>minPT && abs(etaT)<EMmaxEta) { // only for the pT cut
 			int indexMatch=-1;
 			for(unsigned int i = 0; i<Reco.size(); i++){
-				LParticle rmuon = (LParticle)Reco.at(i);
-				TLorentzVector L1 = rmuon.GetP();
+				LParticle rm = (LParticle)Reco.at(i);
+				TLorentzVector L1 = rm.GetP();
 				double phi = L1.Phi();
 				double eta = L1.PseudoRapidity();
 				double dEta=etaT-eta;
@@ -86,7 +86,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 
 		} // end cut on pT and Eta
 
-		// cout << "True muon=" << j << " " << ptT << " " << etaT << endl;
+		// cout << "True ele=" << j << " " << ptT << " " << etaT << endl;
 
 		// corrected kinematics
 		float pt=ptT;
@@ -154,7 +154,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 				}
 
 
-				fann_type * output1 = fann_run(ann1_muons[m], uinput);
+				fann_type * output1 = fann_run(ann1_electrons[m], uinput);
 
 				double scale=0;
 				// output of NN can have negaive values. So we add scale to fix those.
@@ -188,7 +188,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 				//h_rout1->Fill( (float)BinSelected );
 
 				// unpack the outputs for pT
-				//cout << "\n New muon:" << endl;
+				//cout << "\n New electrons:" << endl;
 				//for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 			        //		double d1=-1.0+jjj*delta;
 					//h_out1->Fill( d1+0.5*delta, output1[jjj]);
@@ -196,7 +196,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 
 
 				// Eta
-				fann_type * output2 = fann_run(ann2_muons[m], uinput);
+				fann_type * output2 = fann_run(ann2_electrons[m], uinput);
 				int freqETA[nBinsNN-1];
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqETA[jjj]=(int)((scale+output2[jjj])*intmove);
 				BinSelected=myRand(BinOverTrue, freqETA, nBinsNN-1); // select random value (bin) assuming frequencies
@@ -211,7 +211,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
                                 */
 				recoOvertrue=-1+BinSelected*delta;
 				double etacor= ( (recoOvertrue - em_etashift)/em_etascale )+1.0;
-				h_etacor->Fill( etacor );
+				// h_etacor->Fill( etacor );
 				eta =  etaT * etacor;
 				//for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 			        //		double d1=-1.0+jjj*delta;
@@ -219,7 +219,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
 				//}
 
 				// Phi
-				fann_type * output3 = fann_run(ann3_muons[m], uinput);
+				fann_type * output3 = fann_run(ann3_electrons[m], uinput);
 				int freqPHI[nBinsNN-1];
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) freqPHI[jjj]=(int)((scale+output3[jjj])*intmove);
 				BinSelected=myRand(BinOverTrue, freqPHI, nBinsNN-1); // select random value (bin) assuming frequencies
@@ -232,7 +232,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
                                 BinSelected = dist3(gen);
                                 */
 
-				h_rout3->Fill( (float)BinSelected );
+				//h_rout3->Fill( (float)BinSelected );
 				recoOvertrue=-1+BinSelected*delta;
 				double phicor= ( (recoOvertrue - em_etashift)/em_etascale )+1.0;
 				//h_phicor->Fill( phicor );
@@ -252,7 +252,7 @@ Int_t Ana::AnalysisElectrons(vector<LParticle> True, vector<LParticle> Reco) {
                                 uinput[2] = isolationT;
                                 uinput[3] = phiIN;
 
-				fann_type * output5 = fann_run(ann5_muons[m], uinput);
+				fann_type * output5 = fann_run(ann5_electrons[m], uinput);
 				prob_efficiency=output5[0];
 				if (prob_efficiency>0) charge=output5[1];
                                 //cout << "B-tag NN input=" << uinput[3] << " btagT=" << btagT << " NN out=" << btagFound << " " << endl;
