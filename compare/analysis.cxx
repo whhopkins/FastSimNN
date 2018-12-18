@@ -107,34 +107,34 @@ int main(int argc, char *argv[])
 	std::vector<Double32_t> *nnmupt=0; //!
 	std::vector<Double32_t> *nnmueta=0; //!
 	std::vector<Double32_t> *nnmuphi=0; //!
-        TBranch        *b_mupt;
-        TBranch        *b_mueta;
-        TBranch        *b_muphi;
-        TBranch        *b_gmupt;
-        TBranch        *b_gmueta;
-        TBranch        *b_gmuphi;
+	TBranch        *b_mupt;
+	TBranch        *b_mueta;
+	TBranch        *b_muphi;
+	TBranch        *b_gmupt;
+	TBranch        *b_gmueta;
+	TBranch        *b_gmuphi;
 	TBranch        *b_nnmupt;
 	TBranch        *b_nnmueta;
 	TBranch        *b_nnmuphi;
 
-        std::vector<Double32_t> *gphpt=0; //!
-        std::vector<Double32_t> *gpheta=0; //!
-        std::vector<Double32_t> *gphphi=0; //!
-        std::vector<Double32_t> *phpt=0; //!
-        std::vector<Double32_t> *pheta=0; //!
-        std::vector<Double32_t> *phphi=0; //!
-        std::vector<Double32_t> *nnphpt=0; //!
-        std::vector<Double32_t> *nnpheta=0; //!
-        std::vector<Double32_t> *nnphphi=0; //!
-        TBranch        *b_phpt;
-        TBranch        *b_pheta;
-        TBranch        *b_phphi;
-        TBranch        *b_gphpt;
-        TBranch        *b_gpheta;
-        TBranch        *b_gphphi;
-        TBranch        *b_nnphpt;
-        TBranch        *b_nnpheta;
-        TBranch        *b_nnphphi;
+	std::vector<Double32_t> *gphpt=0; //!
+	std::vector<Double32_t> *gpheta=0; //!
+	std::vector<Double32_t> *gphphi=0; //!
+	std::vector<Double32_t> *phpt=0; //!
+	std::vector<Double32_t> *pheta=0; //!
+	std::vector<Double32_t> *phphi=0; //!
+	std::vector<Double32_t> *nnphpt=0; //!
+	std::vector<Double32_t> *nnpheta=0; //!
+	std::vector<Double32_t> *nnphphi=0; //!
+	TBranch        *b_phpt;
+	TBranch        *b_pheta;
+	TBranch        *b_phphi;
+	TBranch        *b_gphpt;
+	TBranch        *b_gpheta;
+	TBranch        *b_gphphi;
+	TBranch        *b_nnphpt;
+	TBranch        *b_nnpheta;
+	TBranch        *b_nnphphi;
 
 
 
@@ -170,18 +170,18 @@ int main(int argc, char *argv[])
 	m_ntuple->SetBranchAddress("muonNNEta",  &nnmueta, &b_nnmueta);
 	m_ntuple->SetBranchAddress("muonNNPhi",   &nnmuphi, &b_nnmuphi);
 
-        // photons 
-        m_ntuple->SetBranchAddress("photonPt",   &phpt, &b_phpt);
-        m_ntuple->SetBranchAddress("photonEta",  &pheta, &b_pheta);
-        m_ntuple->SetBranchAddress("photonPhi",   &phphi, &b_phphi);
+	// photons
+	m_ntuple->SetBranchAddress("photonPt",   &phpt, &b_phpt);
+	m_ntuple->SetBranchAddress("photonEta",  &pheta, &b_pheta);
+	m_ntuple->SetBranchAddress("photonPhi",   &phphi, &b_phphi);
 
-        m_ntuple->SetBranchAddress("photonTruthPt",   &gphpt, &b_gphpt);
-        m_ntuple->SetBranchAddress("photonTruthEta",  &gpheta, &b_gpheta);
-        m_ntuple->SetBranchAddress("photonTruthPhi",   &gphphi, &b_gphphi);
+	m_ntuple->SetBranchAddress("photonTruthPt",   &gphpt, &b_gphpt);
+	m_ntuple->SetBranchAddress("photonTruthEta",  &gpheta, &b_gpheta);
+	m_ntuple->SetBranchAddress("photonTruthPhi",   &gphphi, &b_gphphi);
 
-        m_ntuple->SetBranchAddress("photonNNPt",   &nnphpt, &b_nnphpt);
-        m_ntuple->SetBranchAddress("photonNNEta",  &nnpheta, &b_nnpheta);
-        m_ntuple->SetBranchAddress("photonNNPhi",   &nnphphi, &b_nnphphi);
+	m_ntuple->SetBranchAddress("photonNNPt",   &nnphpt, &b_nnphpt);
+	m_ntuple->SetBranchAddress("photonNNEta",  &nnpheta, &b_nnpheta);
+	m_ntuple->SetBranchAddress("photonNNPhi",   &nnphphi, &b_nnphphi);
 
 
 
@@ -194,12 +194,6 @@ int main(int argc, char *argv[])
 	const double DeltaR=0.2;
 	TH1D *h_dR = new TH1D("jet_dR", "truth-jet distance", 500, 0, 7);
 
-	// jet pT resolution
-	static int nmax_jet=22;
-	TH1D *h_jet1_res[nmax_jet];
-	TH1D *h_jet1_ptr[nmax_jet];
-	TH1D *h_jet2_res[nmax_jet];
-	TH1D *h_jet2_ptr[nmax_jet];
 	// for b-tagging efficiency
 	TH1D *h_jet1_btag = new TH1D("jet1_btag", "jet1_btag",20,0.0,500.);
 	TH1D *h_jet2_btag =  new TH1D("jet2_btag", "jet2_btag",20,0.0,500.);
@@ -210,8 +204,8 @@ int main(int argc, char *argv[])
 	h_jet1_all->Sumw2();
 	h_jet2_all->Sumw2();
 
-        double ptBins[] = {20,30,40,60,80,100,140,180, 210, 240, 290, 340, 400, 500, 800, 1000, 1500,  2000, 2500}; 
-        const int nBins=sizeof(ptBins)/sizeof(double);
+	double ptBins[] = {PtMin,40,60,80,100,140,180, 210, 240, 290, 340, 400, 500, 800, 1000, 1500,  2000, 2500};
+	const int nBins=sizeof(ptBins)/sizeof(double);
 
 	// for muon efficiency
 	TH1D *h_mu_reco_pt = new TH1D("mu_reco_pt", "mu_pt for delphes",nBins-1, ptBins);
@@ -221,14 +215,27 @@ int main(int argc, char *argv[])
 	h_mu_nn_pt->Sumw2();
 	h_mu_all_pt->Sumw2();
 
-        // for photon efficiency
-        TH1D *h_ph_reco_pt = new TH1D("ph_reco_pt", "ph_pt for delphes", nBins-1, ptBins);
-        TH1D *h_ph_nn_pt =  new TH1D("ph_nn_pt", "ph_pt for NN",nBins-1, ptBins);
-        TH1D *h_ph_all_pt = new TH1D("ph_true_pt", "ph pT for truth",nBins-1, ptBins);
-        h_ph_reco_pt->Sumw2();
-        h_ph_nn_pt->Sumw2();
-        h_ph_all_pt->Sumw2();
+	// for photon efficiency
+	TH1D *h_ph_reco_pt = new TH1D("ph_reco_pt", "ph_pt for delphes", nBins-1, ptBins);
+	TH1D *h_ph_nn_pt =  new TH1D("ph_nn_pt", "ph_pt for NN",nBins-1, ptBins);
+	TH1D *h_ph_all_pt = new TH1D("ph_true_pt", "ph pT for truth",nBins-1, ptBins);
+	h_ph_reco_pt->Sumw2();
+	h_ph_nn_pt->Sumw2();
+	h_ph_all_pt->Sumw2();
 
+
+	// jet pT resolution
+	static int nmax_jet=22;
+	TH1D *h_jet1_res[nmax_jet];
+	TH1D *h_jet1_ptr[nmax_jet];
+	TH1D *h_jet2_res[nmax_jet];
+	TH1D *h_jet2_ptr[nmax_jet];
+
+	// muon pT resolution
+	TH1D *h_muon1_res[nmax_jet];
+	TH1D *h_muon1_ptr[nmax_jet];
+	TH1D *h_muon2_res[nmax_jet];
+	TH1D *h_muon2_ptr[nmax_jet];
 
 	for (int j=0; j<nmax_jet; j++){
 		int nbins=50+40*j; // increasing number of bins
@@ -242,6 +249,18 @@ int main(int argc, char *argv[])
 		h_jet2_ptr[j] = new TH1D(Form("jet2_resolution_pt_%02d",j), Form("jets2_res_pt_%02d",j),2500,0,5000);
 		h_jet2_res[j]->Sumw2();
 		h_jet2_ptr[j]->Sumw2();
+
+
+		// Delphes
+		h_muon1_res[j] = new TH1D(Form("muon1_resolution_%02d",j), Form("muon1_res_%02d",j),nbins,0.5,1.5);
+		h_muon1_ptr[j] = new TH1D(Form("muon1_resolution_pt_%02d",j), Form("muon1_res_pt_%02d",j),2500,0,5000);
+		h_muon1_res[j]->Sumw2();
+		h_muon1_ptr[j]->Sumw2();
+		// NN
+		h_muon2_res[j] = new TH1D(Form("muon2_resolution_%02d",j), Form("muon2_res_%02d",j),nbins,0.5,1.5);
+		h_muon2_ptr[j] = new TH1D(Form("muon2_resolution_pt_%02d",j), Form("muon2_res_pt_%02d",j),2500,0,5000);
+		h_muon2_res[j]->Sumw2();
+		h_muon2_ptr[j]->Sumw2();
 
 
 		double x1=5+pow(2,(0.35*(j+12)));
@@ -291,8 +310,8 @@ int main(int argc, char *argv[])
 			if (ptT<PtMin) continue;
 
 			// reco jets
-			double pt_matched1 =-1000;
-			double eta_matched1 =-1000;
+			double pt_matched1 =-1;
+			double eta_matched1 =-1;
 			double btag_matched1=0;
 			for(unsigned int i = 0; i<jetpt->size(); i++){
 				double phi = jetphi->at(i);
@@ -311,8 +330,8 @@ int main(int argc, char *argv[])
 			}
 
 			// NN jets
-			double pt_matched2 =-1000;
-			double eta_matched2 =-1000;
+			double pt_matched2 =-1;
+			double eta_matched2 =-1;
 			double btag_matched2=0;
 			for(unsigned int i = 0; i<nnjetpt->size(); i++){
 				double phi = nnjetphi->at(i);
@@ -394,13 +413,17 @@ int main(int argc, char *argv[])
 
 
 
-                // *********************** muon's efficiency **************** /
+		// *********************** muon's efficiency **************** /
 		for(unsigned int i1 = 0; i1<gmupt->size(); i1++){
 			double phiT = gmuphi->at(i1);
 			double ptT =   gmupt->at(i1);
 			double etaT = gmueta->at(i1);
+			if (abs(etaT)>EtaMax) continue;
+			if (ptT<PtMin) continue;
+
 			h_mu_all_pt->Fill(ptT);
 
+			double pt_matched1=-1;
 			for(unsigned int i2 = 0; i2<mupt->size(); i2++){
 				double phi = muphi->at(i2);
 				double pt =  mupt->at(i2);
@@ -409,9 +432,26 @@ int main(int argc, char *argv[])
 				double dPhi=phiT-phi;
 				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
-				if (dR<0.2) h_mu_reco_pt->Fill(ptT);
+				if (dR<0.15) pt_matched1=pt;
 			}
 
+
+			if (pt_matched1>0){
+				h_mu_reco_pt->Fill(ptT);
+				for (int kk=0; kk<nmax_jet; kk++){
+					double x1=5+pow(2,(0.35*(kk+12)));
+					double x2=10+pow(2,(0.35*(kk+12+1)));
+					//cout << kk << " " << x1 << " " << x2 << endl;
+					if (ptT>x1 && ptT<x2) {
+						h_muon1_res[kk]->Fill(pt_matched1/ptT);
+						h_muon1_ptr[kk]->Fill(ptT); }
+				}
+
+
+			}
+
+
+			double pt_matched2=-1;
 			for(unsigned int i2 = 0; i2<nnmupt->size(); i2++){
 				double phi = nnmuphi->at(i2);
 				double pt =  nnmupt->at(i2);
@@ -420,41 +460,60 @@ int main(int argc, char *argv[])
 				double dPhi=phiT-phi;
 				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
-				if (dR<0.2) h_mu_nn_pt->Fill(ptT);
+				if (dR<0.15) pt_matched2=pt;
+			}
+
+
+			if (pt_matched2>0){
+				h_mu_nn_pt->Fill(ptT);
+				for (int kk=0; kk<nmax_jet; kk++){
+					double x1=5+pow(2,(0.35*(kk+12)));
+					double x2=10+pow(2,(0.35*(kk+12+1)));
+					if (ptT>x1 && ptT<x2) {
+						h_muon2_res[kk]->Fill(pt_matched2/ptT);
+						h_muon2_ptr[kk]->Fill(ptT); }
+				}
+			}
+
+
+
+		}
+
+		// photon efficiency
+		for(unsigned int i1 = 0; i1<gphpt->size(); i1++){
+			double phiT = gphphi->at(i1);
+			double ptT =   gphpt->at(i1);
+			double etaT = gpheta->at(i1);
+
+			if (abs(etaT)>EtaMax) continue;
+			if (ptT<PtMin) continue;
+
+			h_ph_all_pt->Fill(ptT);
+
+			for(unsigned int i2 = 0; i2<phpt->size(); i2++){
+				double phi = phphi->at(i2);
+				double pt =  phpt->at(i2);
+				double eta = pheta->at(i2);
+				double dEta=etaT-eta;
+				double dPhi=phiT-phi;
+				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
+				double dR=sqrt(dEta*dEta+dPhi*dPhi);
+				if (dR<0.15) h_ph_reco_pt->Fill(ptT);
+			}
+
+			for(unsigned int i2 = 0; i2<nnphpt->size(); i2++){
+				double phi = nnphphi->at(i2);
+				double pt =  nnphpt->at(i2);
+				double eta = nnpheta->at(i2);
+				double dEta=etaT-eta;
+				double dPhi=phiT-phi;
+				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
+				double dR=sqrt(dEta*dEta+dPhi*dPhi);
+				if (dR<0.15) h_ph_nn_pt->Fill(ptT);
 			}
 		}
 
-              // photon efficiency
-               for(unsigned int i1 = 0; i1<gphpt->size(); i1++){
-                        double phiT = gphphi->at(i1);
-                        double ptT =   gphpt->at(i1);
-                        double etaT = gpheta->at(i1);
-                        h_ph_all_pt->Fill(ptT);
 
-                        for(unsigned int i2 = 0; i2<phpt->size(); i2++){
-                                double phi = phphi->at(i2);
-                                double pt =  phpt->at(i2);
-                                double eta = pheta->at(i2);
-                                double dEta=etaT-eta;
-                                double dPhi=phiT-phi;
-                                if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
-                                double dR=sqrt(dEta*dEta+dPhi*dPhi);
-                                if (dR<0.2) h_ph_reco_pt->Fill(ptT);
-                        }
-
-                        for(unsigned int i2 = 0; i2<nnphpt->size(); i2++){
-                                double phi = nnphphi->at(i2);
-                                double pt =  nnphpt->at(i2);
-                                double eta = nnpheta->at(i2);
-                                double dEta=etaT-eta;
-                                double dPhi=phiT-phi;
-                                if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
-                                double dR=sqrt(dEta*dEta+dPhi*dPhi);
-                                if (dR<0.2) h_ph_nn_pt->Fill(ptT);
-                        }
-                }
-
-             
 
 	} // end loop over events
 

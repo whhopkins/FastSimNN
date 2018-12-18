@@ -258,7 +258,7 @@ Int_t Ana::AnalysisPhotons(vector<LParticle> True, vector<LParticle> Reco) {
 
                 h_ph_out5_eff->Fill(prob_efficiency);
 
-		if (pt>minPT && prob_efficiency>0) {
+		if (pt>minPT && prob_efficiency>0.5) {
 			m_nnphpt.push_back(pt);
 			m_nnpheta.push_back(eta);
 			m_nnphphi.push_back(phi);

@@ -65,7 +65,7 @@ h=gPad.DrawFrame(Xmin,Ymin,Xmax,Ymax)
 gPad.SetLogy(0)
 gPad.SetLogx(0)
 ax=h.GetXaxis(); ax.SetTitleOffset(1.0)
-ax.SetTitle( "p_{T}^{jet} [GeV]"  );
+ax.SetTitle( "p_{T}^{#mu} [GeV]"  );
 ay=h.GetYaxis();
 ay.SetTitle( "#mu efficiency" );
 ay.SetTitleSize(0.05);
