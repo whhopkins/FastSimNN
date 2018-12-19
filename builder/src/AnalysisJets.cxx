@@ -188,7 +188,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
                                         // eta and phi are sliced for ANN
                                         // this is needed to reproduce spacial defects 
-                                        int shift=4; 
+                                        int shift=num_kin; 
                                         int kshift=0; 
                                         for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
                                                 uinput[shift+kshift] =  etaINSlice[jjj];
@@ -201,10 +201,13 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                                 kshift++;
                                         }
 
+
                                         // debug input
-                                        //cout <<  " " << endl;
-                                        //for (int jjj=0; jjj<num_input; jjj++) {cout << uinput[jjj] << " ";}
-                                        //cout <<  " " << endl;
+                                        for (int jjj=0; jjj<num_input; jjj++) {
+                                           if (isnan(uinput[jjj])) {
+                                           cout << "NaN was dedected on input " << jjj << endl;
+                                           }
+                                         } 
 
 
 					for (int jjj=0; jjj<num_output; jjj++) {uoutput1[jjj]=0; 
@@ -336,7 +339,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
                                         // eta and phi are sliced for ANN
                                         // this is needed to reproduce spacial defects 
-                                        int shift=4;
+                                        int shift=num_kin;
                                         int kshift=0;
                                         for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
                                                 uinput[shift+kshift] =  etaINSlice[jjj];

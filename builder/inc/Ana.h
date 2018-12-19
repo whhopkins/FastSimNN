@@ -60,7 +60,7 @@ class Ana  {
    static const int num_threads = 16; // number of threads 
    static const int nBins=34;      // number of energy bins 
    static const int nBatch=200000; // number of events in batches for training
-   static const int nEpoch=150;      // max number of epochs 
+   static const int nEpoch=200;    // max number of epochs 
    static const int nBinsNN=201;   // number of bins for resolution plots
    static const int MinEntries=20; // min nr of entries in pT for NN training (per bunch);
    static const int num_layers = 3;
@@ -77,12 +77,13 @@ class Ana  {
    // NN structure for resolution 
    // pT, eta,phi(slices), mass
    // 5 inputs + 2*(slices_etaphi-1) 
-   static const int num_input=5+2*(slices_etaphi-1);
+   static const int num_kin=5; // 5 kinematic variables + grid 
+   static const int num_input=num_kin+2*(slices_etaphi-1);
    static const int num_output=nBinsNN-1;
 
    // this is input and output for NN for efficiency
    // 5 inputs plus 2*(slices_etaphi-1)
-   static const int num_input_eff=5+2*(slices_etaphi-1);
+   static const int num_input_eff=num_kin+2*(slices_etaphi-1);
    // number of outputs
    static const int num_output_eff=2;
    static const int num_layers_eff=3;

@@ -170,7 +170,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 				// eta and phi are sliced for ANN
 				// this is needed to reproduce spacial defects
-				int shift=4;
+				int shift= num_kin;
 				int kshift=0;
 				for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
 					uinput[shift+kshift] =  etaINSlice[jjj];
@@ -215,13 +215,17 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				pt =  ptT *ptcor; // gain
 				//cout << "true=" << ptT << " reco=" << pt <<  " Corr=" << ptcor << " selected bin=" << BinSelected << endl;
 				h_ptcor->Fill( ptcor );
-				h_rout1->Fill( (float)BinSelected );
+				h_rout1_jet->Fill( (float)BinSelected );
 
 				// unpack the outputs for pT
 				//cout << "\n New jet:" << endl;
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 					double d1=-1.0+jjj*delta;
-					h_out1->Fill( d1+0.5*delta, output1[jjj]);
+                                        if (isnan(output1[jjj])) {
+                                           cout << "ANN1: found NAN in bin " << jjj << endl;
+                                           for (int m1=0; m1<num_input; m1++) cout << "  " << m1<< " input " << uinput[m1] << endl;    
+                                    }
+					h_out1_jet->Fill( d1+0.5*delta,output1[jjj]);
 				}
 
 
@@ -239,14 +243,14 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                 boost::random::discrete_distribution<> dist2(freqETA);
                                 BinSelected = dist2(gen);
                                 */
-				h_rout2->Fill( (float)BinSelected );
+				h_rout2_jet->Fill( (float)BinSelected );
 				recoOvertrue=-1+BinSelected*delta;
 				double etacor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_etacor->Fill( etacor );
 				eta =  etaT * etacor;
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 					double d1=-1.0+jjj*delta;
-					h_out2->Fill( d1+0.5*delta, output2[jjj]);
+					h_out2_jet->Fill( d1+0.5*delta, output2[jjj]);
 				}
 
 				// Phi
@@ -263,14 +267,14 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                 BinSelected = dist3(gen);
                                 */
 
-				h_rout3->Fill( (float)BinSelected );
+				h_rout3_jet->Fill( (float)BinSelected );
 				recoOvertrue=-1+BinSelected*delta;
 				double phicor= ( (recoOvertrue - jet_etashift)/jet_etascale )+1.0;
 				h_phicor->Fill( phicor );
 				phi =  phiT * phicor;
-				for (int jjj=0; jjj<nBinsNN; jjj++) {
+				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 					double d1=-1.0+jjj*delta;
-					h_out3->Fill( d1+0.5*delta, output3[jjj]);
+					h_out3_jet->Fill( d1+0.5*delta, output3[jjj]);
 				}
 
 
@@ -287,20 +291,20 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                 boost::random::discrete_distribution<> dist4(freqM);
                                 BinSelected = dist4(gen);
                                 */
-				h_rout4->Fill( (float)BinSelected );
+				h_rout4_jet->Fill( (float)BinSelected );
 				recoOvertrue=-1+BinSelected*delta;
 				// correction
 				double mcorr=( (recoOvertrue -  jet_mshift)/jet_mscale ) + 1.0;
 				mass =  massT * mcorr; // gain
 				for (int jjj=0; jjj<nBinsNN-1; jjj++) {
 					double d1=-1.0+jjj*delta;
-					h_out4->Fill( d1+0.5*delta, output4[jjj]);
+					h_out4_jet->Fill( d1+0.5*delta, output4[jjj]);
 				}
 
-				h_in1->Fill(ptIN);
-				h_in2->Fill(etaIN);
-				h_in3->Fill(phiIN);
-				h_in4->Fill(massIN);
+				h_in1_jet->Fill(ptIN);
+				h_in2_jet->Fill(etaIN);
+				h_in3_jet->Fill(phiIN);
+				h_in4_jet->Fill(massIN);
 
 				if (phi>PI || phi<-PI) phi=phiT; // overcorrection!
 
@@ -320,9 +324,9 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				btagFound=(double)output5[1];
                                 //cout << "B-tag NN input=" << uinput[3] << " btagT=" << btagT << " NN out=" << btagFound << " " << endl;
 
-				h_out5_eff->Fill(prob_efficiency);
+				h_out5_jet_eff->Fill(prob_efficiency);
 				//if (prob_efficiency<-0.9) continue; // skip event since low efficiency
-                                h_out6_btag->Fill(btagFound);
+                                h_out6_jet_btag->Fill(btagFound);
 
 			}
 		}

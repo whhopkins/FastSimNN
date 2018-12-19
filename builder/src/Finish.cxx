@@ -35,6 +35,7 @@ Int_t Ana::Finish() {
    nn.add("name", Setting::TypeString) = "ML"; // "Backpropogation:"+FANN_SIGMOID_SYMMETRIC;
    nn.add("events_for_training", Setting::TypeInt) = nBatch;
    nn.add("pileup_mu", Setting::TypeInt) = MuPileup;
+   nn.add("number_of_kinematics", Setting::TypeInt) = num_kin;
    nn.add("number_of_epoch", Setting::TypeInt) = nEpoch;
    nn.add("number_of_layers", Setting::TypeInt) = num_layers;
    nn.add("number_of_inputs", Setting::TypeInt) = num_input;

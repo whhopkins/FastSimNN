@@ -184,7 +184,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 
                                         // eta and phi are sliced for ANN
                                         // this is needed to reproduce spacial defects 
-                                        int shift=4; 
+                                        int shift=num_kin; 
                                         int kshift=0; 
                                         for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
                                                 uinput[shift+kshift] =  etaINSlice[jjj];
@@ -333,7 +333,7 @@ Int_t Ana::AnalysisMuons(vector<LParticle> True, vector<LParticle> Reco) {
 
                                         // eta and phi are sliced for ANN
                                         // this is needed to reproduce spacial defects 
-                                        int shift=4;
+                                        int shift=num_kin;
                                         int kshift=0;
                                         for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
                                                 uinput[shift+kshift] =  etaINSlice[jjj];
