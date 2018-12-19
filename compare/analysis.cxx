@@ -224,6 +224,13 @@ int main(int argc, char *argv[])
 	h_ph_all_pt->Sumw2();
 
 
+         // jet mass
+        TH1D *h_jet_reco_mass = new TH1D("jet_reco_mass", "mass for delphes", 50,0,800);
+        TH1D *h_jet_nn_mass =  new TH1D("jet_nn_mass", "mass for NN",20,0,400);
+        TH1D *h_jet_truth1_mass = new TH1D("jet_true1_mass", "mass for truth",50, 0, 800);
+        TH1D *h_jet_truth2_mass = new TH1D("jet_true2_mass", "mass for truth",50, 0, 800);
+ 
+
 	// jet pT resolution
 	static int nmax_jet=22;
 	TH1D *h_jet1_res[nmax_jet];
@@ -324,8 +331,12 @@ int main(int argc, char *argv[])
 				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
 				h_dR->Fill(dR);
-			if (dR<DeltaR) {pt_matched1=pt; eta_matched1=eta; btag_matched1=btag;}
-				//if (abs(dPhi)<0.15) {eta_matched1=eta;}
+			        if (dR<DeltaR) {pt_matched1=pt; 
+                                                eta_matched1=eta; 
+                                                btag_matched1=btag;
+                                                h_jet_reco_mass->Fill(mass); 
+                                                h_jet_truth1_mass->Fill(massT); 
+                                                }
 
 			}
 
@@ -344,7 +355,12 @@ int main(int argc, char *argv[])
 				if (abs(dPhi)>PI) dPhi=PI2-abs(dPhi);
 				double dR=sqrt(dEta*dEta+dPhi*dPhi);
 				h_dR->Fill(dR);
-			if (dR<DeltaR) {pt_matched2=pt; eta_matched2=eta;  btag_matched2=btag;  }
+			       if (dR<DeltaR) {pt_matched2=pt; 
+                                               eta_matched2=eta;  
+                                               btag_matched2=btag; 
+                                               h_jet_nn_mass->Fill(mass); 
+                                               h_jet_truth2_mass->Fill(massT);
+                                             }
 				//if (abs(dPhi)<0.15) {eta_matched2=eta;}
 
 			}
@@ -383,6 +399,7 @@ int main(int argc, char *argv[])
 
 			// NN jets
 			if (pt_matched2>0 && ptT>0) {
+
 
 				h_jet2_all->Fill(ptT);
 				if (btag_matched2 > 0) h_jet2_btag->Fill(ptT);
