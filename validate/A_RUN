@@ -11,11 +11,11 @@ ln -s $DELPHES delphes
 rm -f analysis 
 make -f Makefile
 
-# look at LAST 15 files (avoid training biase)
+# look at LAST 20 files (avoid training biase)
 
-NrFiles=15
+NrFiles=20
 
-NEVENTS=300000
+NEVENTS=400000
 
 XF="rfast008"
 echo "############  Running $XF"

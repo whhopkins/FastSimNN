@@ -59,7 +59,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			input.push_back((float)ptT);
 			input.push_back((float)etaT);
 			input.push_back((float)phiT);
-			input.push_back( (float)massT);
+			input.push_back((float)massT);
 
 			output.push_back(pt);
 			output.push_back(eta);

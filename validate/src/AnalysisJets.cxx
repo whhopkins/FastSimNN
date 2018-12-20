@@ -333,7 +333,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 
 
-                const float btagcut=0; //  look at output of NN and find the feature peak!
+                const float btagcut=-0.2; //  look at output of NN and find the feature peak!
 		h_jetpt_nn->Fill(pt);
 
 		TLorentzVector l;
