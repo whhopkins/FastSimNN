@@ -18,7 +18,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
 		double massT =  L2.M();
-                double btagT=(double)tjet.GetType(); // get  b-quark in 100%
+                double btagT=(double)tjet.GetType(); // get  b-quark in 10x100%
 
 		for (int m=0; m<nBins-1; m++){
 			double dmin=eBins[m];
@@ -295,7 +295,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				float ptT=input2[0];
 				float etaT=input2[1];
 				float phiT=input2[2];
-                                float btagT=(float)input2[3]; // 0 - 100 
+                                float btagT=(float)input2[3]; // 0 - 1000 
                                 // outputs
 				float match=output2[0];
                                 float btag=output2[1];
@@ -312,7 +312,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					uinput[0]=ptIN;
 					uinput[1]=etaIN;
 					uinput[2]=phiIN;
-                                        uinput[3]=(float)((btagT/100.) - 1); // btag normalize  -1 - 0 
+                                        uinput[3]=(float)((btagT/500.) - 1); // btag normalize (-1,1)  
                                         if (uinput[3]>1.0f) uinput[3]=1.0f;
                                         uinput[4]=0; // reserved for charge
 

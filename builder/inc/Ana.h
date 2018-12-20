@@ -65,7 +65,7 @@ class Ana  {
    static const int MinEntries=20; // min nr of entries in pT for NN training (per bunch);
    static const int num_layers = 3;
    //number in hidden layer 1
-   static  const int num_neurons_hidden_1=20;
+   static  const int num_neurons_hidden_1=40;
 
 
    double DeltaR;  // parameter used to match true jets with reco
@@ -88,6 +88,11 @@ class Ana  {
    static const int num_output_eff=2;
    static const int num_layers_eff=3;
    static const int num_neurons_hidden_eff=20;
+
+   // dR cone for b-tag and isolation
+   float dRbtag;
+   float dRisolation;
+   float btag_frac;
 
    bool firstTime[nBins-1]; // if false, continue training;
    // if ANN is found, we will read the old one. 

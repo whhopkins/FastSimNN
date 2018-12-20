@@ -44,7 +44,10 @@ Int_t Ana::Finish() {
    nn.add("number_of_threads", Setting::TypeInt) = num_threads;
    nn.add("number_of_inputs_eff", Setting::TypeInt) = num_input_eff;
    nn.add("number_of_outputs_eff", Setting::TypeInt) = num_output_eff;
-
+   nn.add("dR_btag", Setting::TypeFloat) = dRbtag;
+   nn.add("dR_isolation", Setting::TypeFloat) = dRisolation;
+   nn.add("bquark_frac", Setting::TypeFloat) =  btag_frac;
+ 
    // configuration for jets
    Setting &njet = root.add("Jets", Setting::TypeGroup);
    njet.add("MinPT", Setting::TypeFloat) = minPT;
@@ -142,7 +145,7 @@ Int_t Ana::Finish() {
 
    // for other samples save only small RMS NN
    if (firstTime[m] == false) { 
-       if (mse>0 && mse < 0.01) {
+       if (mse>0 && mse < 0.1) {
               fann_save(ann1_jets[m],  ann1_jets_name[m].c_str());
               fann_save(ann2_jets[m],  ann2_jets_name[m].c_str());
               fann_save(ann3_jets[m],  ann3_jets_name[m].c_str());

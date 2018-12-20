@@ -67,6 +67,10 @@ class Ana  {
 
    TTree* m_ntuple;
 
+  // dR cone for b-tag and isolation
+   float dRbtag;
+   float dRisolation;
+   float btag_frac;
  
   // NN structure 
    unsigned int num_layers = 3;

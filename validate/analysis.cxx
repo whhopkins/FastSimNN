@@ -218,7 +218,7 @@ int main(int argc, char *argv[])
                                         if (abs(dphi)>PI) dphi=PI2-abs(dphi);
                                         double dR=sqrt(deta*deta + dphi*dphi);
                                         double rat=(ph->PT / jet->PT);      
-                                        if (dR<0.4 && rat>0.3) btag_fracmom= 100 * rat;
+                                         if (dR<ana.dRbtag && rat>ana.btag_frac) btag_fracmom= 1000 * rat;
                                 }
 
 
@@ -252,7 +252,7 @@ int main(int argc, char *argv[])
                                         double dphi=gen->Phi  - ph->Phi;
                                         if (abs(dphi)>PI) dphi=PI2-abs(dphi);
                                         double dR=sqrt(deta*deta + dphi*dphi);
-                                        if (dR<0.2) ptsum=ptsum+(gen->PT);
+                                        if (dR<ana.dRisolation) ptsum=ptsum+(gen->PT);
                                 }
 
                                double isofrac= (ph->PT/ptsum);

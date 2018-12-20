@@ -20,7 +20,7 @@ from module_functions import *
 import ROOT
 
 Ymin=0.0 
-Ymax=1
+Ymax=0.5
 Xmin=0  
 Xmax=500
 

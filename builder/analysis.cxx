@@ -214,7 +214,7 @@ int main(int argc, char *argv[])
 					if (abs(dphi)>PI) dphi=PI2-abs(dphi);
 					double dR=sqrt(deta*deta + dphi*dphi);
 					double rat=(ph->PT / jet->PT);
-					if (dR<0.4 && rat>0.3) btag_fracmom= 100 * rat;
+					if (dR<ana.dRbtag && rat>ana.btag_frac) btag_fracmom= 1000 * rat;
 				}
 
 				//if (btag_fracmom>0) cout << btag_fracmom << endl;
@@ -265,7 +265,7 @@ int main(int argc, char *argv[])
                                 if (status  != 1) continue;
                                 if (pdgCode  != 13 && pdgCode != 11 && pdgCode != 22) continue; 
 
-                                // get fraction of energy in the cone 0.2 around the candidate 
+                                // get fraction of energy in the cone 0.3 around the candidate 
                                 double ptsum=0;
                                 for(int i1 = 0; i1 < branchParticle->GetEntriesFast(); ++i1) {
                                         GenParticle *gen = (GenParticle*) branchParticle->At(i1);
@@ -275,7 +275,7 @@ int main(int argc, char *argv[])
                                         double dphi=gen->Phi  - ph->Phi;
                                         if (abs(dphi)>PI) dphi=PI2-abs(dphi);
                                         double dR=sqrt(deta*deta + dphi*dphi);
-                                        if (dR<0.2) ptsum=ptsum+(gen->PT);  
+                                        if (dR<ana.dRisolation) ptsum=ptsum+(gen->PT);  
                                 }
 
                                double isofrac= (ph->PT/ptsum); 

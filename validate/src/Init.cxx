@@ -20,6 +20,9 @@ Int_t Ana::Init() {
 	jet_escale=0;
 	jet_mscale=0;
 	jet_etascale=0;
+        dRbtag=0.4;       //for b-tagging 
+        dRisolation=0.4; // for EM isolations 
+        btag_frac=0.2;  // fraction of b-quark
 
 	static const char *conf_file = "out_ann/config.cfg";
 	Config cfg;
@@ -46,6 +49,9 @@ Int_t Ana::Init() {
 	// ML
 	Setting &mL = root["DelphesML"];
 	if (!(mL.lookupValue("pileup_mu", MuPileup)
+                        && mL.lookupValue("dR_btag", dRbtag)
+                        && mL.lookupValue("dR_isolation", dRisolation)
+                        && mL.lookupValue("bquark_frac", btag_frac)
 	                && mL.lookupValue("number_of_inputs",   num_input)
                         && mL.lookupValue("number_of_kinematics",   num_kin)
                         && mL.lookupValue("number_of_outputs",   num_output)
@@ -311,9 +317,9 @@ Int_t Ana::Init() {
         h_rout3_mu = new TH1D("rout3_mu", "out3 mu random bin", nBinsNN, 0, nBinsNN);
         h_rout4_mu = new TH1D("rout4_mu", "out4 mu random bin", nBinsNN, 0, nBinsNN);
 
-        h_out5_mu_eff = new TH1D("out5_mu_eff", "out5 mu efficiency", nBinsNN, -1., 1.);
-        h_out5_el_eff = new TH1D("out5_el_eff", "out5 el efficiency", nBinsNN, -1., 1.);
-        h_out5_ph_eff = new TH1D("out5_ph_eff", "out5 ph efficiency", nBinsNN, -1., 1.);
+        h_out5_mu_eff = new TH1D("out5_mu_eff", "out5 mu efficiency", nBinsNN, -1.1, 1.1);
+        h_out5_el_eff = new TH1D("out5_el_eff", "out5 el efficiency", nBinsNN, -1.1, 1.1);
+        h_out5_ph_eff = new TH1D("out5_ph_eff", "out5 ph efficiency", nBinsNN, -1.1, 1.1);
 
 
 	// create ntuple

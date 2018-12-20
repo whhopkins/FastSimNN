@@ -36,7 +36,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
-	const double intmove=100000; // number for converting to integer frequencies
+	const double intmove=10000; // number for converting to integer frequencies
 	const double delta=2.0/nBinsNN;
 	const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta
 	const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi
@@ -72,15 +72,15 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
 		double massT =  L2.M();
-		double btagT =  (double)tjet.GetType(); // fraction of b-quark momenta in 100%
+		double btagT =  (double)tjet.GetType(); // fraction of b-quark momenta in 10*100%
 
 		if (ptT>minPT && abs(etaT)<maxEta) {
 			m_gjetpt.push_back(ptT);
 			m_gjeteta.push_back(etaT);
 			m_gjetphi.push_back( phiT );
 			m_gjetm.push_back( massT );
-			if (btagT>50) m_gjetbtag.push_back( 1 );
-			else          m_gjetbtag.push_back( 0 );
+			if (btagT>300) m_gjetbtag.push_back( 1 ); // assume 30% fraction for b-tagging 
+			else           m_gjetbtag.push_back( 0 );
 		}
 
 		h_jetcutflow->Fill(1);
@@ -223,7 +223,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					double d1=-1.0+jjj*delta;
                                         if (isnan(output1[jjj])) {
                                            cout << "ANN1: found NAN in bin " << jjj << endl;
-                                           for (int m1=0; m1<num_input; m1++) cout << "  " << m1<< " input " << uinput[m1] << endl;    
+                                           for (unsigned int m1=0; m1<num_input; m1++) cout << "  " << m1<< " input " << uinput[m1] << endl;    
                                     }
 					h_out1_jet->Fill( d1+0.5*delta,output1[jjj]);
 				}
@@ -314,7 +314,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
                                  uinput[1]=etaIN;
                                  uinput[2]=phiIN;
                                 // structure of input the same but mass is replaced with b-tagging
-                                 uinput[3] = (float)((btagT/100.) - 1); // normalize  -1 - 0
+                                 uinput[3] = (float)((btagT/500.) - 1); // normalize to (-1,1)
                                  if (uinput[3]>1.0f)  uinput[3]=1.0f;
                                  uinput[4]=0; // used to be charge 
 
@@ -332,13 +332,15 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		}
 
 
+
+                const float btagcut=0; //  look at output of NN and find the feature peak!
 		h_jetpt_nn->Fill(pt);
 
 		TLorentzVector l;
 		l.SetPtEtaPhiM(pt,eta,phi,mass);
 		LParticle p;
 		p.SetP(l);
-		if (btagFound > 0) p.SetType(1);
+		if (btagFound > btagcut) p.SetType(1);
 		else p.SetType(0);
 
 		JetsFastNN.push_back(p);
@@ -351,7 +353,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			m_nnjetphi.push_back(phi);
 			m_nnjetm.push_back(mass);
                         int bt=0;
-			if (btagFound > 0)  bt=1;
+			if (btagFound > btagcut)  bt=1;
 			m_nnjetbtag.push_back(bt);
                         // cout << btagFound << " " << bt << endl;
 		}
