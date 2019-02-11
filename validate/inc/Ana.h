@@ -240,6 +240,13 @@ protected:
    std::vector<Double32_t> m_matchedjetphi; //!
    std::vector<Double32_t> m_matchedjetm; //!
    std::vector<Int_t>      m_matchedjetbtag; //!
+	
+   // matched jets
+   std::vector<Double32_t> m_matchedtruthjetpt; //!
+   std::vector<Double32_t> m_matchedtruthjeteta; //!
+   std::vector<Double32_t> m_matchedtruthjetphi; //!
+   std::vector<Double32_t> m_matchedtruthjetm; //!
+   std::vector<Int_t>      m_matchedtruthjetbtag; //!
 
    // truth jets
    std::vector<Double32_t> m_gjetpt; //!

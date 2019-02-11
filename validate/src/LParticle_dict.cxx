@@ -342,7 +342,7 @@ namespace {
     };
     static const char* includePaths[] = {
 "/users/admin/share/sl7/root_v6.12.06_gcc485/include",
-"/users/chekanov/work/FastSim4ATLAS/delphes/FastSimNN/validate/",
+"/users/whopkins/FastSimNN/validate/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(

@@ -8,8 +8,8 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
 	const double delta=2.0/(nBinsNN);                // slices for resolution 
-        const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta  
-        const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi  
+	const double slicesEta=(2*EtaMax)/slices_etaphi; // slices in eta  
+	const double slicesPhi=(2*PhiMax)/slices_etaphi; // slices in phi  
 
 	for(unsigned int j = 0; j<JetsTrue.size(); j++){
 		LParticle tjet = (LParticle)JetsTrue.at(j);
@@ -18,7 +18,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		double ptT =  L2.Perp();
 		double etaT = L2.PseudoRapidity();
 		double massT =  L2.M();
-                double btagT=(double)tjet.GetType(); // get  b-quark in 10x100%
+		double btagT=(double)tjet.GetType(); // get  b-quark in 10x100%
 
 		for (int m=0; m<nBins-1; m++){
 			double dmin=eBins[m];
@@ -44,7 +44,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			if (dR<DeltaR) indexMatch=i;
 		}
 
-                float btag=0;
+		float btag=0;
 		if (indexMatch>-1){
 			LParticle rjet = (LParticle)JetsReco.at(indexMatch);
 			TLorentzVector L1 = rjet.GetP();
@@ -52,7 +52,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			float pt  = L1.Perp();
 			float eta = L1.PseudoRapidity();
 			float mass  = L1.M();
-                        btag  = (float)rjet.GetType();
+			btag  = (float)rjet.GetType();
 
 			vector<float> input;
 			vector<float> output;
@@ -77,15 +77,15 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 		input2.push_back((float)ptT);
 		input2.push_back((float)etaT);
 		input2.push_back((float)phiT);
-                input2.push_back((float)btagT); // fraction of b-quark momenta in % (100-0) 
+		input2.push_back((float)btagT); // fraction of b-quark momenta in % (100-0) 
 
-                float ibb=-1.0f;
+		float ibb=-1.0f;
 		float iout=-1.0f; // no match
 		if (indexMatch>-1)  iout=1.0f;
-                if (btag>0)         ibb=1.0f;  // b-tagged and matched
+		if (btag>0)         ibb=1.0f;  // b-tagged and matched
 
-                output2.push_back(iout);
-                output2.push_back(ibb);
+		output2.push_back(iout);
+		output2.push_back(ibb);
 
 		finput_jets_eff.push_back(input2);
 		foutput_jets_eff.push_back(output2);
@@ -95,7 +95,7 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 
 	if (nevv%nBatch == 0  && nevv>0) {
-                cout << "\033[1;31m Training of jets \033[0m\n";
+		cout << "\033[1;31m Training of jets \033[0m\n";
 		cout << "Jets: ### Reset MSE after =" << nevv << " training " << nEpoch << " epoches " << endl;
 
 		for (int m=0; m<nBins-1; m++){
@@ -107,9 +107,9 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 			// empty data
 			fann_train_data *  dataset1=  fann_create_train(eventsJetBins[m], num_input, num_output);
-                        fann_train_data *  dataset2=  fann_create_train(eventsJetBins[m], num_input, num_output);
-                        fann_train_data *  dataset3=  fann_create_train(eventsJetBins[m], num_input, num_output);
-                        fann_train_data *  dataset4=  fann_create_train(eventsJetBins[m], num_input, num_output);
+			fann_train_data *  dataset2=  fann_create_train(eventsJetBins[m], num_input, num_output);
+			fann_train_data *  dataset3=  fann_create_train(eventsJetBins[m], num_input, num_output);
+			fann_train_data *  dataset4=  fann_create_train(eventsJetBins[m], num_input, num_output);
 
 			// create a dataset for a given bin
 			int nn=0;
@@ -126,37 +126,36 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				float phi=output[2];
 				float mass=output[3];
 
-
 				if (ptT>dmin && ptT<=dmax) {
 
-                                        float dminmax=dmin+0.5*width;
+					float dminmax=dmin+0.5*width;
 					float ptIN=((ptT-dminmax)/(0.5*width));
 					float etaIN=etaT/EtaMax; // range -1 -1
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
 					float massIN=-1+(massT/(0.5*dmin));
 
-                                        // sliced input for NN
-                                        float etaINSlice[slices_etaphi-1];
-                                        // bin the resolution plots
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                float d1=-EtaMax+jjj*slicesEta;
-                                                float d2=d1+slicesEta;
-                                                //float dmm=d1+0.5*slicesEta;
-                                                if (etaT>d1  && etaT<=d2) etaINSlice[jjj]=1.0f; //    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
-                                                else etaINSlice[jjj]=0;
-                                        }
+					// sliced input for NN
+					float etaINSlice[slices_etaphi-1];
+					// bin the resolution plots
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						float d1=-EtaMax+jjj*slicesEta;
+						float d2=d1+slicesEta;
+						//float dmm=d1+0.5*slicesEta;
+						if (etaT>d1  && etaT<=d2) etaINSlice[jjj]=1.0f; //    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
+						else etaINSlice[jjj]=0;
+					}
 
-                                        float phiINSlice[slices_etaphi-1];
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                float d1=-PhiMax+jjj*slicesPhi;
-                                                float d2=d1+slicesPhi;
-                                                //float dmm=d1+0.5*slicesPhi;
-                                                if (phiT>d1  && phiT<=d2) phiINSlice[jjj]=1.0f; //    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
-                                                else phiINSlice[jjj]=0;
-                                        }
+					float phiINSlice[slices_etaphi-1];
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						float d1=-PhiMax+jjj*slicesPhi;
+						float d2=d1+slicesPhi;
+						//float dmm=d1+0.5*slicesPhi;
+						if (phiT>d1  && phiT<=d2) phiINSlice[jjj]=1.0f; //    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
+						else phiINSlice[jjj]=0;
+					}
 
 
-	                   		// assume -1 - 1 range.
+					// assume -1 - 1 range.
 					// scale to avoid sharp behaviour near 0
 					// for pileup we make the distribution narrower and shift to -0.5 to fit to [-1,1]
 					float ptOUT= jet_escale*((pt/ptT)-1) + jet_eshift;
@@ -174,46 +173,46 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					//if (ee-eeT>0) shiftOUT=1.0f; // gain or positive shift
 
 					fann_type uinput[num_input];
-                                        // outputs
+					// outputs
 					fann_type uoutput1[num_output];
-                                        fann_type uoutput2[num_output];
-                                        fann_type uoutput3[num_output];
-                                        fann_type uoutput4[num_output];
+					fann_type uoutput2[num_output];
+					fann_type uoutput3[num_output];
+					fann_type uoutput4[num_output];
  
 					uinput[0] = ptIN;
-                                        uinput[1] = massIN;
-                                        uinput[2] = etaIN;
-                                        uinput[3] = phiIN;
-                                        uinput[4] = 0.0f; // not used 
+					uinput[1] = massIN;
+					uinput[2] = etaIN;
+					uinput[3] = phiIN;
+					uinput[4] = 0.0f; // not used 
 
-                                        // eta and phi are sliced for ANN
-                                        // this is needed to reproduce spacial defects 
-                                        int shift=num_kin; 
-                                        int kshift=0; 
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                uinput[shift+kshift] =  etaINSlice[jjj];
-                                                kshift++;
-                                        }
-                                        shift=shift+slices_etaphi-1;
-                                        kshift=0;
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                uinput[shift+kshift] =  phiINSlice[jjj];
-                                                kshift++;
-                                        }
+					// eta and phi are sliced for ANN
+					// this is needed to reproduce spacial defects 
+					int shift=num_kin; 
+					int kshift=0; 
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						uinput[shift+kshift] =  etaINSlice[jjj];
+						kshift++;
+					}
+					shift=shift+slices_etaphi-1;
+					kshift=0;
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						uinput[shift+kshift] =  phiINSlice[jjj];
+						kshift++;
+					}
 
 
-                                        // debug input
-                                        for (int jjj=0; jjj<num_input; jjj++) {
-                                           if (isnan(uinput[jjj])) {
-                                           cout << "NaN was dedected on input " << jjj << endl;
-                                           }
-                                         } 
+					// debug input
+					for (int jjj=0; jjj<num_input; jjj++) {
+						if (isnan(uinput[jjj])) {
+							cout << "NaN was dedected on input " << jjj << endl;
+						}
+					} 
 
 
 					for (int jjj=0; jjj<num_output; jjj++) {uoutput1[jjj]=0; 
-                                                                                uoutput2[jjj]=0; 
-                                                                                uoutput3[jjj]=0; 
-                                                                                uoutput4[jjj]=0; } 
+						uoutput2[jjj]=0; 
+						uoutput3[jjj]=0; 
+						uoutput4[jjj]=0; } 
 
 					// bin the resolution plots
 					for (int jjj=0; jjj<nBinsNN-1; jjj++) {
@@ -226,24 +225,24 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					}
 
 					for (int kk=0; kk<num_input; kk++)  {
-                                                       dataset1->input[nn][kk] =uinput[kk];
-                                                       dataset2->input[nn][kk] =uinput[kk];
-                                                       dataset3->input[nn][kk] =uinput[kk];
-                                                       dataset4->input[nn][kk] =uinput[kk];
-                                        }
+						dataset1->input[nn][kk] =uinput[kk];
+						dataset2->input[nn][kk] =uinput[kk];
+						dataset3->input[nn][kk] =uinput[kk];
+						dataset4->input[nn][kk] =uinput[kk];
+					}
 
  
 					for (int kk=0; kk<num_output; kk++) {
-                                                        dataset1->output[nn][kk] =uoutput1[kk];
-                                                        dataset2->output[nn][kk] =uoutput2[kk];
-                                                        dataset3->output[nn][kk] =uoutput3[kk];
-                                                        dataset4->output[nn][kk] =uoutput4[kk];
-                                        }
+						dataset1->output[nn][kk] =uoutput1[kk];
+						dataset2->output[nn][kk] =uoutput2[kk];
+						dataset3->output[nn][kk] =uoutput3[kk];
+						dataset4->output[nn][kk] =uoutput4[kk];
+					}
 
-                                        // debug output 
-                                        //cout <<  " " << endl;
-                                        //for (int jjj=0; jjj<nBinsNN-1; jjj++) {cout << uoutput1[jjj] << " ";}
-                                        //cout <<  " " << endl;
+					// debug output 
+					//cout <<  " " << endl;
+					//for (int jjj=0; jjj<nBinsNN-1; jjj++) {cout << uoutput1[jjj] << " ";}
+					//cout <<  " " << endl;
 
 					h_in1->Fill(ptIN);
 					h_in2->Fill(etaIN);
@@ -261,33 +260,33 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 
 			} // end over data
 
-                        double mse=0;
+			double mse=0;
 			double mse1=0;
-                        double mse2=0; 
-                        double mse3=0;
-                        double mse4=0;
+			double mse2=0; 
+			double mse3=0;
+			double mse4=0;
 			for (int e=0; e<nEpoch; e++) {
-                          mse1 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann1_jets[m], dataset1, num_threads) : fann_train_epoch(ann1_jets[m], dataset1);
-                          mse2 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann2_jets[m], dataset2, num_threads) : fann_train_epoch(ann2_jets[m], dataset2);
-                          mse3 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann3_jets[m], dataset3, num_threads) : fann_train_epoch(ann3_jets[m], dataset3);
-                          mse4 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann4_jets[m], dataset4, num_threads) : fann_train_epoch(ann4_jets[m], dataset4);
+				mse1 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann1_jets[m], dataset1, num_threads) : fann_train_epoch(ann1_jets[m], dataset1);
+				mse2 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann2_jets[m], dataset2, num_threads) : fann_train_epoch(ann2_jets[m], dataset2);
+				mse3 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann3_jets[m], dataset3, num_threads) : fann_train_epoch(ann3_jets[m], dataset3);
+				mse4 = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann4_jets[m], dataset4, num_threads) : fann_train_epoch(ann4_jets[m], dataset4);
 
-                          mse=mse1+mse2+mse3+mse4;  
-    			  if (e%100==0 ||  (e<10) || (e%20==0)) cout << " epoch=" << e << " MSE=" << std::fixed << std::setw( 11 ) << std::setprecision( 6 ) << mse1 << ", " <<  mse2 << ", " << mse3 << ", " << mse4 << " tot=" << mse << endl;
-			  if (mse<MSESTOP) break;
+				mse=mse1+mse2+mse3+mse4;  
+				if (e%100==0 ||  (e<10) || (e%20==0)) cout << " epoch=" << e << " MSE=" << std::fixed << std::setw( 11 ) << std::setprecision( 6 ) << mse1 << ", " <<  mse2 << ", " << mse3 << ", " << mse4 << " tot=" << mse << endl;
+				if (mse<MSESTOP) break;
 			}
 			cout << "  Bin=" << m << " with " << eventsJetBins[m] << " events has total MSE=" <<  mse  << " after epoch Nr=" << nEpoch << endl;
 
 
 			fann_destroy_train(dataset1) ; // clear
-                        fann_destroy_train(dataset2) ; // clear
-                        fann_destroy_train(dataset3) ; // clear
-                        fann_destroy_train(dataset4) ; // clear
+			fann_destroy_train(dataset2) ; // clear
+			fann_destroy_train(dataset3) ; // clear
+			fann_destroy_train(dataset4) ; // clear
 
 			// empty data for feature NN 
 			fann_train_data *  dataset_eff=  fann_create_train(eventsJetBins[m], num_input_eff, num_output_eff);
 			nn=0;
-    			cout << "\n  -> Jets: Training for features  = " << m << " sample size=" << finput_jets_eff.size() << endl;
+			cout << "\n  -> Jets: Training for features  = " << m << " sample size=" << finput_jets_eff.size() << endl;
 			for (unsigned int i=0; i<finput_jets_eff.size(); i++){
 				//cout << i << endl;
 				vector<float> input2 = finput_jets_eff[i];
@@ -295,16 +294,16 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				float ptT=input2[0];
 				float etaT=input2[1];
 				float phiT=input2[2];
-                                float btagT=(float)input2[3]; // 0 - 1000 
-                                // outputs
+				float btagT=(float)input2[3]; // 0 - 1000 
+				// outputs
 				float match=output2[0];
-                                float btag=output2[1];
+				float btag=output2[1];
 				h_out5->Fill(match);
-                                h_out6->Fill(btag); // -1 or 1 
+				h_out6->Fill(btag); // -1 or 1 
 
 				if (ptT>dmin && ptT<dmax) {
-				        float dminmax=dmin+0.5*width;
-                                        float ptIN=((ptT-dminmax)/(0.5*width));
+					float dminmax=dmin+0.5*width;
+					float ptIN=((ptT-dminmax)/(0.5*width));
 					float etaIN=etaT/EtaMax; // range -1 -1
 					float phiIN=phiT/PhiMax; // range -1-1 from -pi - pi
 					fann_type uinput[num_input_eff];
@@ -312,59 +311,59 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 					uinput[0]=ptIN;
 					uinput[1]=etaIN;
 					uinput[2]=phiIN;
-                                        uinput[3]=(float)((btagT/500.) - 1); // btag normalize (-1,1)  
-                                        if (uinput[3]>1.0f) uinput[3]=1.0f;
-                                        uinput[4]=0; // reserved for charge
+					uinput[3]=(float)((btagT/500.) - 1); // btag normalize (-1,1)  
+					if (uinput[3]>1.0f) uinput[3]=1.0f;
+					uinput[4]=0; // reserved for charge
 
-                                       // sliced input for NN
-                                        float etaINSlice[slices_etaphi-1];
-                                        // bin the resolution plots
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                float d1=-EtaMax+jjj*slicesEta;
-                                                float d2=d1+slicesEta;
-                                                //float dmm=d1+0.5*slicesEta;
-                                                if (etaT>d1  && etaT<=d2) etaINSlice[jjj]=1.0f; //    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
-                                                else etaINSlice[jjj]=0;
-                                        }
+					// sliced input for NN
+					float etaINSlice[slices_etaphi-1];
+					// bin the resolution plots
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						float d1=-EtaMax+jjj*slicesEta;
+						float d2=d1+slicesEta;
+						//float dmm=d1+0.5*slicesEta;
+						if (etaT>d1  && etaT<=d2) etaINSlice[jjj]=1.0f; //    etaINSlice[jjj]=(etaT-dmm)/(0.5*dmm);
+						else etaINSlice[jjj]=0;
+					}
 
-                                        float phiINSlice[slices_etaphi-1];
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                float d1=-PhiMax+jjj*slicesPhi;
-                                                float d2=d1+slicesPhi;
-                                                //float dmm=d1+0.5*slicesPhi;
-                                                if (phiT>d1  && phiT<=d2) phiINSlice[jjj]=1.0f; //    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
-                                                else phiINSlice[jjj]=0;
-                                        }
-
-
-                                        // eta and phi are sliced for ANN
-                                        // this is needed to reproduce spacial defects 
-                                        int shift=num_kin;
-                                        int kshift=0;
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                uinput[shift+kshift] =  etaINSlice[jjj];
-                                                kshift++;
-                                        }
-                                        shift=shift+slices_etaphi-1;
-                                        kshift=0;
-                                        for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
-                                                uinput[shift+kshift] =  phiINSlice[jjj];
-                                                kshift++;
-                                        }
+					float phiINSlice[slices_etaphi-1];
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						float d1=-PhiMax+jjj*slicesPhi;
+						float d2=d1+slicesPhi;
+						//float dmm=d1+0.5*slicesPhi;
+						if (phiT>d1  && phiT<=d2) phiINSlice[jjj]=1.0f; //    phiINSlice[jjj]=(phiT-dmm)/(0.5*dmm);
+						else phiINSlice[jjj]=0;
+					}
 
 
-                                        //debug input 
-                                        //cout <<  " " << endl;
-                                        //for (int jjj=0; jjj<num_input_eff; jjj++) {cout << uinput[jjj] << " ";}
-                                        //cout <<  " " << endl;
+					// eta and phi are sliced for ANN
+					// this is needed to reproduce spacial defects 
+					int shift=num_kin;
+					int kshift=0;
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						uinput[shift+kshift] =  etaINSlice[jjj];
+						kshift++;
+					}
+					shift=shift+slices_etaphi-1;
+					kshift=0;
+					for (int jjj=0; jjj<slices_etaphi-1; jjj++) {
+						uinput[shift+kshift] =  phiINSlice[jjj];
+						kshift++;
+					}
 
 
-                                        // outputs
+					//debug input 
+					//cout <<  " " << endl;
+					//for (int jjj=0; jjj<num_input_eff; jjj++) {cout << uinput[jjj] << " ";}
+					//cout <<  " " << endl;
+
+
+					// outputs
 					uoutput[0]=(float)match;
-                                        uoutput[1]=(float)btag;
+					uoutput[1]=(float)btag;
 
-                                        // debug
-                                        //if (uoutput[0]>0 && btag>0) cout << "In " << uinput[3]  << "  out=" << uoutput[1] << endl;
+					// debug
+					//if (uoutput[0]>0 && btag>0) cout << "In " << uinput[3]  << "  out=" << uoutput[1] << endl;
 
 					for (unsigned int kk=0; kk<num_input_eff; kk++)  dataset_eff->input[nn][kk] =uinput[kk];
 					for (unsigned int kk=0; kk<num_output_eff; kk++)  dataset_eff->output[nn][kk] =uoutput[kk];
@@ -374,10 +373,10 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 			}// end of dataset
 
 			for (int e=0; e<nEpoch*2; e++) {
-                            float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann5_jets[m], dataset_eff, num_threads) : fann_train_epoch(ann5_jets[m], dataset_eff);
+				float mmse = num_threads > 1 ? fann_train_epoch_irpropm_parallel(ann5_jets[m], dataset_eff, num_threads) : fann_train_epoch(ann5_jets[m], dataset_eff);
 
-			     if (e%100==0 || (e<10)) cout << "jet: bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;
-		             if (mse<MSESTOP) break;
+				if (e%100==0 || (e<10)) cout << "jet: bin=" << m << " epoch=" << e << " MSE=" << mmse << endl;
+				if (mse<MSESTOP) break;
 			}
 			fann_destroy_train(dataset_eff) ; // clear
 

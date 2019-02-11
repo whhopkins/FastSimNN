@@ -34,6 +34,13 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 	m_matchedjetm.clear();
 	m_matchedjetbtag.clear();
 
+	// matched truth jets
+	m_matchedtruthjetpt.clear();
+	m_matchedtruthjeteta.clear();
+	m_matchedtruthjetphi.clear();
+	m_matchedtruthjetm.clear();
+	m_matchedtruthjetbtag.clear();
+
 	const double EtaMax=maxEta;
 	const double PhiMax=PI;
 	const double intmove=10000; // number for converting to integer frequencies
@@ -111,6 +118,14 @@ Int_t Ana::AnalysisJets(vector<LParticle> JetsTrue, vector<LParticle> JetsReco) 
 				m_matchedjetphi.push_back( L1.Phi()  );
 				m_matchedjetm.push_back(  L1.M()  );
 				m_matchedjetbtag.push_back( rjet.GetType() );
+
+				// matched truth jets
+				m_matchedtruthjetpt.push_back(  ptT );
+				m_matchedtruthjeteta.push_back( etaT );
+				m_matchedtruthjetphi.push_back( phiT  );
+				m_matchedtruthjetm.push_back( massT   );
+				if (btagT>50) m_matchedtruthjetbtag.push_back( 1 );
+				else          m_matchedtruthjetbtag.push_back( 0 );
 			}
 
 		} // end cut on pT and Eta
